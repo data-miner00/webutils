@@ -36,6 +36,11 @@
 - [ ] Fibonacci sequence
 - [ ] Prime number checker
 - [ ] Word count & Reading mins
+- [ ] Clock
+  - Copy Timestamp
+  - Copy Full Date
+  - Copy Date
+  - Copy Time
 - Crontab.guru
 - Search engine
 - Emoji/Flag emoji picker
@@ -76,3 +81,5 @@
 - pomofocus.io
 - windy.com
 - excalidraw.com
+- notes
+- todos
