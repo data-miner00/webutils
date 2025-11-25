@@ -1,0 +1,78 @@
+## Todo
+
+- [ ] Implement One Time Pad encryption and decryption
+
+## References
+
+- https://www.youtube.com/watch?v=VEmJpJVtiG8
+
+- https://platform.openai.com/tokenizer
+- https://regex101.com/
+- https://www.ilovepdf.com/
+- https://www.freeformatter.com/
+- https://www.baoboxs.com/
+- https://barcode.tec-it.com/en/QRCode
+- generate random/lorem ipsum text
+- generate UUID
+- trailing space remover
+- text compare
+- [x] Text case converter
+- JWT.io
+- https://omnitools.app/
+- Fun - IsPalindrome, Anagram, Pangram, Acronym, FizzBuzz, Roman Numerals
+- [x] Hash generator
+- [ ] One Time Pad
+- [ ] Sort a list
+- [ ] PDF Utils
+- [ ] Image to Base64
+- [ ] Base64 to Image
+- [ ] Image utils
+- [ ] Video utils
+- [ ] Audio utils
+- [ ] Color converter (HEX, RGB, HSL, CMYK, HSV)
+- [ ] Unit converter
+- [x] QR Code generator
+- [ ] Factorial
+- [ ] Fibonacci sequence
+- [ ] Prime number checker
+- [ ] Word count & Reading mins
+- Crontab.guru
+- Search engine
+- Emoji/Flag emoji picker
+- Password generator
+- Encryption/Decryption (Caesar cipher, Vigenère cipher, AES)
+- Markdown to HTML
+- JSON formatter/validator
+- Code to Image
+- XML formatter/validator
+- Sudoku solver/generator
+- Simple API tester
+- Symbolab
+- Luhn algorithm
+- General web URL navigation tool
+- Number base converter (binary, octal, decimal, hexadecimal)
+- Time zone converter
+- Minify/Beautify (JavaScript, CSS, HTML)
+- Screen record to GIF
+- https://devutils.com/
+- Text to speech
+- Email/Phone validator
+- Internet speed test/online indicator
+- Word counter/ Character counter
+- Date calculator (add/subtract days, weeks, months, years)
+- https://jam.dev/utilities
+- https://www.toptal.com/utilities-tools
+- News aggregator (low priority)
+- Weather app (low priority)
+- Currency converter (low priority)
+- Translation tool
+- Chinese calendar
+- Show IP address and location
+- Show user agent details
+- Estimate article read time
+- Startswith, endswith, contains, isnumeric, isalpha, isalnum, islower, isupper
+- Ascii art generator
+- https://webutils.io/tool/ascii-art-generator
+- pomofocus.io
+- windy.com
+- excalidraw.com
