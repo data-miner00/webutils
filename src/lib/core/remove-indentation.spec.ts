@@ -25,4 +25,11 @@ describe('removeIndentation', () => {
 
 		expect(result).toBe(expected);
 	});
+
+	['', '    ', '\n\n'].forEach((input) => {
+		it(`should handle input: "${input.replace(/\n/g, '\\n')}" correctly`, () => {
+			const result = removeIndentation(input, true);
+			expect(result).toBe('');
+		});
+	});
 });

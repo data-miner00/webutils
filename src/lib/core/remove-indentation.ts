@@ -5,6 +5,10 @@
  * @returns The cleansed string.
  */
 export function removeIndentation(input: string, smartMode: boolean = false): string {
+	if (!input.trim()) {
+		return '';
+	}
+
 	const lines = input.split('\n');
 
 	const minIndent = Math.min(
