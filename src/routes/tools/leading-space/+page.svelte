@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { removeIndentation } from '$lib/core/remove-indentation';
+	import { Switch } from '$lib/components/ui/switch/index.js';
 
 	let smartMode = $state(true);
 
@@ -8,6 +9,16 @@
 </script>
 
 <h1 class="text-3xl font-bold mb-4">Remove Leading Spaces</h1>
+
+<div class="flex items-center mb-4 gap-4 bg-gray-100 rounded-lg p-2 w-fit">
+	<!-- <p>Smart mode removes the minimum leading spaces from all lines.</p> -->
+
+	<div class="">
+		<p>Smart mode:</p>
+	</div>
+
+	<Switch bind:checked={smartMode} />
+</div>
 
 <div class="mb-4">
 	<label for="input" class="block mb-2 font-medium">Input Text:</label>
