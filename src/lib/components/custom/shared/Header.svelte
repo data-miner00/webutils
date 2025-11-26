@@ -157,6 +157,26 @@
 				</NavigationMenu.Content>
 			</NavigationMenu.Item>
 			<NavigationMenu.Item>
+				<NavigationMenu.Trigger>Internal</NavigationMenu.Trigger>
+				<NavigationMenu.Content>
+					<ul class="grid w-[200px] gap-4 p-2">
+						<li>
+							<NavigationMenu.Link target="_blank" href="/clock.html">Clock</NavigationMenu.Link>
+							<NavigationMenu.Link target="_blank" href="/color.html">Color</NavigationMenu.Link>
+							<NavigationMenu.Link target="_blank" href="/hasing.html">Hashing</NavigationMenu.Link>
+							<NavigationMenu.Link target="_blank" href="/qrbar.html">QR Codes</NavigationMenu.Link>
+							<NavigationMenu.Link href="/tools/leading-space"
+								>Remove leading space</NavigationMenu.Link
+							>
+							<NavigationMenu.Link target="_blank" href="/strutils.html"
+								>Strings</NavigationMenu.Link
+							>
+							<NavigationMenu.Link target="_blank" href="/uuid.html">UUID</NavigationMenu.Link>
+						</li>
+					</ul>
+				</NavigationMenu.Content>
+			</NavigationMenu.Item>
+			<NavigationMenu.Item>
 				<NavigationMenu.Trigger>Simple</NavigationMenu.Trigger>
 				<NavigationMenu.Content>
 					<ul class="grid w-[200px] gap-4 p-2">
