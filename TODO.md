@@ -83,3 +83,5 @@
 - excalidraw.com
 - notes
 - todos
+- Code highlighting
+- Textarea line numbers

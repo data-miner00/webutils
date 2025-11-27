@@ -168,9 +168,7 @@
 							<NavigationMenu.Link href="/tools/leading-space"
 								>Remove leading space</NavigationMenu.Link
 							>
-							<NavigationMenu.Link target="_blank" href="/strutils.html"
-								>Strings</NavigationMenu.Link
-							>
+							<NavigationMenu.Link href="/tools/strings">Strings</NavigationMenu.Link>
 							<NavigationMenu.Link target="_blank" href="/uuid.html">UUID</NavigationMenu.Link>
 						</li>
 					</ul>
@@ -188,8 +186,7 @@
 							<NavigationMenu.Link target="_blank" href="/rmlspace.html"
 								>Remove leading space</NavigationMenu.Link
 							>
-							<NavigationMenu.Link target="_blank" href="/strutils.html"
-								>Strings</NavigationMenu.Link
+							<NavigationMenu.Link target="_blank" href="/strutil.html">Strings</NavigationMenu.Link
 							>
 							<NavigationMenu.Link target="_blank" href="/uuid.html">UUID</NavigationMenu.Link>
 						</li>
