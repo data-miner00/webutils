@@ -89,3 +89,4 @@
 - samltool.io
 - https://www.seoptimer.com/free-tools
 - https://quickref.me/
+- https://tailwindcss.com/docs/colors

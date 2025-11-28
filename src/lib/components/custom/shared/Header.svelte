@@ -136,21 +136,21 @@
 				</NavigationMenu.Link>
 			</NavigationMenu.Item>
 			<NavigationMenu.Item>
-				<NavigationMenu.Trigger>List</NavigationMenu.Trigger>
+				<NavigationMenu.Trigger>Management</NavigationMenu.Trigger>
 				<NavigationMenu.Content>
 					<ul class="grid w-[300px] gap-4 p-2">
 						<li>
 							<NavigationMenu.Link href="##">
-								<div class="font-medium">Components</div>
-								<div class="text-muted-foreground">Browse all components in the library.</div>
+								<div class="font-medium">Notes</div>
+								<div class="text-muted-foreground">Organizes personal notes stored locally.</div>
 							</NavigationMenu.Link>
 							<NavigationMenu.Link href="##">
-								<div class="font-medium">Documentation</div>
-								<div class="text-muted-foreground">Learn how to use the library.</div>
+								<div class="font-medium">Pomodoro Timer</div>
+								<div class="text-muted-foreground">Focus on what you do at the moment.</div>
 							</NavigationMenu.Link>
 							<NavigationMenu.Link href="##">
-								<div class="font-medium">Blog</div>
-								<div class="text-muted-foreground">Read our latest blog posts.</div>
+								<div class="font-medium">Kanban</div>
+								<div class="text-muted-foreground">Simple kanban board to visualize tasks.</div>
 							</NavigationMenu.Link>
 						</li>
 					</ul>
