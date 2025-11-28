@@ -5,7 +5,7 @@
 ## References
 
 - https://www.youtube.com/watch?v=VEmJpJVtiG8
-
+- https://www.timeanddate.com/
 - https://platform.openai.com/tokenizer
 - https://regex101.com/
 - https://www.ilovepdf.com/
@@ -70,6 +70,7 @@
 - News aggregator (low priority)
 - Weather app (low priority)
 - Currency converter (low priority)
+- ChatGPT
 - Translation tool
 - Chinese calendar
 - Show IP address and location
@@ -85,3 +86,6 @@
 - todos
 - Code highlighting
 - Textarea line numbers
+- samltool.io
+- https://www.seoptimer.com/free-tools
+- https://quickref.me/
