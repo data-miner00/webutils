@@ -161,6 +161,7 @@
 				<NavigationMenu.Content>
 					<ul class="grid w-[200px] gap-4 p-2">
 						<li>
+							<NavigationMenu.Link href="/tools/lorem">Lorem Ipsum</NavigationMenu.Link>
 							<NavigationMenu.Link target="_blank" href="/clock.html">Clock</NavigationMenu.Link>
 							<NavigationMenu.Link target="_blank" href="/color.html">Color</NavigationMenu.Link>
 							<NavigationMenu.Link target="_blank" href="/hasing.html">Hashing</NavigationMenu.Link>

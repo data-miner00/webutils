@@ -90,3 +90,8 @@
 - https://www.seoptimer.com/free-tools
 - https://quickref.me/
 - https://tailwindcss.com/docs/colors
+- interactive map
+- Menger Sponge
+- Mandelbrot Set explorer
+- Screenshot
+- Video recorder
