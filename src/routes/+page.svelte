@@ -1,2 +1,11 @@
-<h1 class="text-2xl font-bold">Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+	import SearchSection from '$lib/components/custom/search/search-section.svelte';
+</script>
+
+<h1 class="text-2xl font-bold mb-2">Web Search</h1>
+
+<p class="mb-4">Search the internet now!</p>
+
+<SearchSection />
+
+<!-- <img src="x" onerror={alert('XSS Attack!')} /> -->
