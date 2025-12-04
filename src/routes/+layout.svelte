@@ -5,6 +5,10 @@
 	import { Toaster } from '$lib/components/ui/sonner';
 
 	let { children } = $props();
+
+	function fetchImage(id: number): string {
+		return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+	}
 </script>
 
 <svelte:head>
@@ -19,4 +23,8 @@
 
 <div class="container mx-auto px-4 py-6">
 	{@render children()}
+</div>
+
+<div class="fixed bottom-2 right-2 text-xs text-muted-foreground">
+	<img src={fetchImage(151)} alt="Showing a pokemon" />
 </div>
