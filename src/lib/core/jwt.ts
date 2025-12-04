@@ -59,13 +59,17 @@ export async function decodeJwt(token: string, secret?: string): Promise<Respons
 		};
 	}
 
+	const algorithm = decodedHeader.alg;
 	const encoder = new TextEncoder();
 	const keyData = encoder.encode(secret);
 
 	const cryptoKey = await crypto.subtle.importKey(
 		'raw',
 		keyData,
-		{ name: 'HMAC', hash: 'SHA-256' },
+		{
+			name: 'HMAC',
+			hash: algorithm === 'HS256' ? 'SHA-256' : algorithm === 'HS384' ? 'SHA-384' : 'SHA-512'
+		},
 		false,
 		['sign']
 	);
