@@ -1,5 +1,8 @@
 <script lang="ts">
 	import * as lorem from '$lib/core/lorem-ipsum-generator';
+	import { clickToCopy } from '$lib/core/copy-to-clipboard';
+	import { Button } from '$lib/components/ui/button';
+	import ClipboardIcon from '@lucide/svelte/icons/clipboard';
 
 	let wordCount = $state(100);
 	let paragraphCount = $state(3);
@@ -25,7 +28,16 @@
 			bind:value={wordCount}
 			class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
 		/>
-		<p class="text-sm text-gray-600">{loremByWordCount}</p>
+		<p class="text-sm text-gray-600" id="loremByWordCount">{loremByWordCount}</p>
+
+		<Button
+			variant="outline"
+			size="sm"
+			{@attach (node: HTMLElement) => clickToCopy(node, '#loremByWordCount')}
+		>
+			<ClipboardIcon />
+			Copy
+		</Button>
 
 		<div class="bg-gray-100 px-2 py-1 rounded">
 			Characters: {loremByWordCount.length} Words: {wordCount} Lines: {loremByWordCount.split('\n')
@@ -42,11 +54,19 @@
 			bind:value={paragraphCount}
 			class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
 		/>
-		<div class="mt-2 space-y-4">
+		<div class="mt-2 space-y-4" id="loremByParagraphCount">
 			{#each loremByParagraphCount as paragraph, index (index)}
 				<p class="text-sm text-gray-600">{paragraph}</p>
 			{/each}
 		</div>
+		<Button
+			variant="outline"
+			size="sm"
+			{@attach (node: HTMLElement) => clickToCopy(node, '#loremByParagraphCount')}
+		>
+			<ClipboardIcon />
+			Copy
+		</Button>
 
 		<div class="bg-gray-100 px-2 py-1 rounded">
 			Characters: {loremByParagraphCount.length} Words: {loremByParagraphCount.join('\n').split(' ')
@@ -63,10 +83,17 @@
 			bind:value={sentenceCount}
 			class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
 		/>
-		<p class="text-sm text-gray-600">
+		<p class="text-sm text-gray-600" id="loremBySentenceCount">
 			{loremBySentenceCount}
 		</p>
-
+		<Button
+			variant="outline"
+			size="sm"
+			{@attach (node: HTMLElement) => clickToCopy(node, '#loremBySentenceCount')}
+		>
+			<ClipboardIcon />
+			Copy
+		</Button>
 		<div class="bg-gray-100 px-2 py-1 rounded">
 			Characters: {loremBySentenceCount.length} Words: {loremBySentenceCount.split(' ').length} Lines:
 			1
