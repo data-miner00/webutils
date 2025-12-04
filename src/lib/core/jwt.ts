@@ -7,7 +7,7 @@ export type JwtData = {
 export type SuccessResponse = {
 	success: true;
 	data: JwtData;
-	message?: string;
+	verified?: boolean;
 };
 
 export type ErrorResponse = {
@@ -21,7 +21,7 @@ export function isSuccess(r: Response): r is SuccessResponse {
 	return r.success === true;
 }
 
-export function decodeJwt(token: string): Response {
+export async function decodeJwt(token: string, secret?: string): Promise<Response> {
 	if (!token) {
 		return {
 			success: false,
@@ -48,13 +48,43 @@ export function decodeJwt(token: string): Response {
 	const decodedHeader = JSON.parse(atob(base64Header));
 	const decodedPayload = JSON.parse(atob(base64Payload));
 
+	if (!secret) {
+		return {
+			success: true,
+			data: {
+				header: decodedHeader,
+				payload: decodedPayload,
+				signature: parts[2]
+			}
+		};
+	}
+
+	const encoder = new TextEncoder();
+	const keyData = encoder.encode(secret);
+
+	const cryptoKey = await crypto.subtle.importKey(
+		'raw',
+		keyData,
+		{ name: 'HMAC', hash: 'SHA-256' },
+		false,
+		['sign']
+	);
+
+	const data = encoder.encode(`${base64Header}.${base64Payload}`);
+	const newSignature = await crypto.subtle.sign('HMAC', cryptoKey, data);
+	const newSignatureB64 = btoa(String.fromCharCode(...new Uint8Array(newSignature)))
+		.replace(/\+/g, '-')
+		.replace(/\//g, '_')
+		.replace(/=+$/, '');
+
 	return {
 		success: true,
 		data: {
 			header: decodedHeader,
 			payload: decodedPayload,
 			signature: parts[2]
-		}
+		},
+		verified: newSignatureB64 === parts[2]
 	};
 }
 

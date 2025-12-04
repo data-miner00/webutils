@@ -3,7 +3,8 @@
 	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
 
 	let jwtInput = $state('');
-	let decodedResult = $derived(decodeJwt(jwtInput));
+	let secret = $state('');
+	let decodedResult = $derived(await decodeJwt(jwtInput, secret));
 </script>
 
 <h1 class="text-3xl font-bold mb-4">JSON Web Token (JWT) Debugger</h1>
@@ -11,8 +12,18 @@
 <label for="jwtInput" class="block mb-2 font-medium">Enter JWT:</label>
 <Textarea
 	id="jwtInput"
+	placeholder="JWT Token"
 	bind:value={jwtInput}
 	rows={5}
+	autocomplete="off"
+	class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
+></Textarea>
+
+<Textarea
+	id="secret"
+	bind:value={secret}
+	rows={1}
+	placeholder="Secret (optional)"
 	autocomplete="off"
 	class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
 ></Textarea>
@@ -33,6 +44,10 @@
 				null,
 				2
 			)}</pre>
+	</div>
+	<div class="mb-4">
+		<h2 class="text-2xl font-semibold mb-2">Signature Valid:</h2>
+		<div>{decodedResult.verified ? 'Yes' : 'No'}</div>
 	</div>
 {:else}
 	<div class="text-red-600 font-medium">Error: {decodedResult.message}</div>
