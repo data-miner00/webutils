@@ -163,7 +163,7 @@
 						<li>
 							<NavigationMenu.Link href="/tools/lorem">Lorem Ipsum</NavigationMenu.Link>
 							<NavigationMenu.Link href="/tools/jwt-debugger">JWT Debugger</NavigationMenu.Link>
-							<NavigationMenu.Link target="_blank" href="/clock.html">Clock</NavigationMenu.Link>
+							<NavigationMenu.Link href="/tools/clock">Clock</NavigationMenu.Link>
 							<NavigationMenu.Link target="_blank" href="/color.html">Color</NavigationMenu.Link>
 							<NavigationMenu.Link target="_blank" href="/hasing.html">Hashing</NavigationMenu.Link>
 							<NavigationMenu.Link target="_blank" href="/qrbar.html">QR Codes</NavigationMenu.Link>
