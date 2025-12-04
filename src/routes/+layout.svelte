@@ -25,6 +25,6 @@
 	{@render children()}
 </div>
 
-<div class="fixed bottom-2 right-2 text-xs text-muted-foreground">
-	<img src={fetchImage(151)} alt="Showing a pokemon" />
+<div class="fixed bottom-2 right-2">
+	<img src={fetchImage(151)} alt="Showing a pokemon" onerror={(e) => e.currentTarget.remove()} />
 </div>
