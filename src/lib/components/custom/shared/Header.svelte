@@ -140,7 +140,7 @@
 				<NavigationMenu.Content>
 					<ul class="grid w-[300px] gap-4 p-2">
 						<li>
-							<NavigationMenu.Link href="##">
+							<NavigationMenu.Link href="/manage/notes">
 								<div class="font-medium">Notes</div>
 								<div class="text-muted-foreground">Organizes personal notes stored locally.</div>
 							</NavigationMenu.Link>
