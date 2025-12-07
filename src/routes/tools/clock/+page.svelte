@@ -3,20 +3,18 @@
 		type CityTimeZone,
 		getDayNightDisplay,
 		type DayNightDisplay,
-		getTimeDifference
+		getTimeDifference,
+		cities
 	} from '$lib/core/clock-utils';
 	import { onMount } from 'svelte';
+	import * as Select from '$lib/components/ui/select';
+	import Button from '$lib/components/ui/button/button.svelte';
 
 	const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 	const cityName = localTimezone.split('/').pop()!.replace(/_/g, ' ');
 
 	let currentTimeInfo = $state(currentLocalTimeInfo());
-	let selectedCities = $state<CityTimeZone[]>([
-		{ name: 'New York', timezone: 'America/New_York', country: 'USA' },
-		{ name: 'London', timezone: 'Europe/London', country: 'UK' },
-		{ name: 'Tokyo', timezone: 'Asia/Tokyo', country: 'Japan' },
-		{ name: 'Paris', timezone: 'Europe/Paris', country: 'France' }
-	]);
+	let selectedCities = $state<CityTimeZone[]>([]);
 
 	type ClockCard = CityTimeZone & {
 		time: string;
@@ -28,6 +26,8 @@
 	let clocksToRender = $state<ClockCard[]>([]);
 
 	onMount(() => {
+		loadTimezone();
+
 		const interval = setInterval(() => {
 			currentTimeInfo = currentLocalTimeInfo();
 			updateWorldClocks();
@@ -35,6 +35,11 @@
 
 		return () => clearInterval(interval);
 	});
+
+	let value = $state('');
+	const triggerContent = $derived(
+		cities.find((f) => f.timezone === value)?.name ?? 'Select a Timezone'
+	);
 
 	type LocalTimeInfo = {
 		time: string;
@@ -74,34 +79,73 @@
 	}
 
 	function updateWorldClocks(): void {
-		clocksToRender = selectedCities.map((city, index) => {
-			const now = new Date();
+		clocksToRender = selectedCities
+			.filter((x) => !!x)
+			.map((city, index) => {
+				const now = new Date();
 
-			const time = now.toLocaleTimeString('en-US', {
-				timeZone: city.timezone,
-				hour12: false,
-				hour: '2-digit',
-				minute: '2-digit',
-				second: '2-digit'
+				const time = now.toLocaleTimeString('en-US', {
+					timeZone: city.timezone,
+					hour12: false,
+					hour: '2-digit',
+					minute: '2-digit',
+					second: '2-digit'
+				});
+
+				const date = now.toLocaleDateString('en-US', {
+					timeZone: city.timezone,
+					weekday: 'short',
+					month: 'short',
+					day: 'numeric'
+				});
+
+				const timeDiff = getTimeDifference(city.timezone);
+				const dayNight = getDayNightDisplay(city.timezone);
+
+				return {
+					...city,
+					time,
+					date,
+					timeDiff,
+					dayNight
+				};
 			});
+	}
 
-			const date = now.toLocaleDateString('en-US', {
-				timeZone: city.timezone,
-				weekday: 'short',
-				month: 'short',
-				day: 'numeric'
-			});
+	function loadTimezone() {
+		const cookies = document.cookie.split(';');
+		const loadedCities: CityTimeZone[] = [];
 
-			const timeDiff = getTimeDifference(city.timezone);
-			const dayNight = getDayNightDisplay(city.timezone);
+		cookies.forEach((cookie) => {
+			const [key, value] = cookie.trim().split('=');
+			if (key.startsWith('city_') && value.startsWith('%')) {
+				try {
+					const city = JSON.parse(decodeURIComponent(value));
+					loadedCities.push(city);
+				} catch (e) {
+					console.error('Error loading city:', e);
+				}
+			}
+		});
 
-			return {
-				...city,
-				time,
-				date,
-				timeDiff,
-				dayNight
-			};
+		if (loadedCities.length > 0) {
+			selectedCities = loadedCities;
+		} else {
+			selectedCities = [
+				{ name: 'New York', timezone: 'America/New_York', country: 'USA' },
+				{ name: 'London', timezone: 'Europe/London', country: 'UK' },
+				{ name: 'Tokyo', timezone: 'Asia/Tokyo', country: 'Japan' },
+				{ name: 'Paris', timezone: 'Europe/Paris', country: 'France' }
+			];
+		}
+	}
+
+	function addTimezone() {
+		selectedCities = [...selectedCities, cities.find((x) => x.timezone === value)!];
+
+		selectedCities.forEach((city, index) => {
+			const data = JSON.stringify(city);
+			document.cookie = `city_${index}=${encodeURIComponent(data)}; path=/; max-age=31536000`;
 		});
 	}
 </script>
@@ -118,6 +162,17 @@
 	<p>({currentTimeInfo.timezone})</p>
 	<p>{currentTimeInfo.dayNight.icon} {currentTimeInfo.dayNight.text}</p>
 </section>
+
+<Select.Root type="single" bind:value>
+	<Select.Trigger class="w-[180px]">{triggerContent}</Select.Trigger>
+	<Select.Content>
+		{#each cities as city, index (index)}
+			<Select.Item value={city.timezone}>{city.name}</Select.Item>
+		{/each}
+	</Select.Content>
+</Select.Root>
+
+<Button onclick={addTimezone}>Add</Button>
 
 <section class="flex gap-4">
 	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
