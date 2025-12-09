@@ -163,16 +163,18 @@
 	<p>{currentTimeInfo.dayNight.icon} {currentTimeInfo.dayNight.text}</p>
 </section>
 
-<Select.Root type="single" bind:value>
-	<Select.Trigger class="w-[180px]">{triggerContent}</Select.Trigger>
-	<Select.Content>
-		{#each cities as city, index (index)}
-			<Select.Item value={city.timezone}>{city.name}</Select.Item>
-		{/each}
-	</Select.Content>
-</Select.Root>
+<div class="flex items-center justify-end gap-2 mb-6 p-4 border border-gray-200 rounded-md">
+	<Select.Root type="single" bind:value>
+		<Select.Trigger class="w-[180px]">{triggerContent}</Select.Trigger>
+		<Select.Content>
+			{#each cities as city, index (index)}
+				<Select.Item value={city.timezone}>{city.name}</Select.Item>
+			{/each}
+		</Select.Content>
+	</Select.Root>
 
-<Button onclick={addTimezone}>Add</Button>
+	<Button onclick={addTimezone}>Add City</Button>
+</div>
 
 <section class="flex gap-4">
 	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
