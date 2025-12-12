@@ -11,7 +11,12 @@
 - https://www.ilovepdf.com/
 - https://www.freeformatter.com/
 - https://www.baoboxs.com/
+- https://aiiiii.com.cn/dev
+- https://c.p2hp.com/?ref=aiiiii.com.cn
+- https://truedevtools.com
 - https://barcode.tec-it.com/en/QRCode
+- https://www.codeit.kr/articles/productivityTools
+- 확장 프로그램
 - generate random/lorem ipsum text
 - generate UUID
 - trailing space remover
@@ -95,3 +100,4 @@
 - Mandelbrot Set explorer
 - Screenshot
 - Video recorder
+- PWA offline
