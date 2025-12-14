@@ -3,22 +3,30 @@
 	import { clickToCopy } from '$lib/core/copy-to-clipboard';
 	import { Button } from '$lib/components/ui/button';
 	import ClipboardIcon from '@lucide/svelte/icons/clipboard';
+	import Checkbox from '$lib/components/ui/checkbox/checkbox.svelte';
 
 	let wordCount = $state(100);
 	let paragraphCount = $state(3);
 	let sentenceCount = $state(5);
+	let useStartingLorem = $state(true);
 
-	let loremByWordCount = $derived(lorem.generateWords(wordCount));
-	let loremByParagraphCount = $derived(lorem.generateParagraphs(paragraphCount).split('\n'));
-	let loremBySentenceCount = $derived(lorem.generateSentences(sentenceCount));
-
-	const starting =
-		'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+	let loremByWordCount = $derived(lorem.generateWords(wordCount, useStartingLorem));
+	let loremByParagraphCount = $derived(
+		lorem.generateParagraphs(paragraphCount, useStartingLorem).split('\n')
+	);
+	let loremBySentenceCount = $derived(lorem.generateSentences(sentenceCount, useStartingLorem));
 </script>
 
 <h1 class="text-3xl font-bold mb-4">Lorem Ipsum Generator</h1>
 
 <div class="space-y-6">
+	<div class="space-y-2 bg-gray-50 rounded p-2 flex items-center gap-2">
+		<Checkbox bind:checked={useStartingLorem} id="useStartingLorem" />
+		<label for="useStartingLorem" class="font-medium block"
+			>Start with standard "Lorem ipsum dolor sit amet..."</label
+		>
+	</div>
+
 	<div class="space-y-2">
 		<label for="wordCount" class="block font-medium">Number of Words:</label>
 		<input
