@@ -172,6 +172,7 @@
 							>
 							<NavigationMenu.Link href="/tools/strings">Strings</NavigationMenu.Link>
 							<NavigationMenu.Link target="_blank" href="/uuid.html">UUID</NavigationMenu.Link>
+							<NavigationMenu.Link href="/tools/emoji">Emoji</NavigationMenu.Link>
 						</li>
 					</ul>
 				</NavigationMenu.Content>

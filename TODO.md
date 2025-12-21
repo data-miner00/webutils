@@ -50,6 +50,7 @@
 - Search engine
 - Emoji/Flag emoji picker
 - Password generator
+- Encrypted Password vault
 - Encryption/Decryption (Caesar cipher, Vigenère cipher, AES)
 - Markdown to HTML
 - JSON formatter/validator

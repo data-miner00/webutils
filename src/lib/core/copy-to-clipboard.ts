@@ -1,6 +1,6 @@
 import { toast } from 'svelte-sonner';
 
-export function clickToCopy(node: HTMLElement, target: string) {
+export function clickToCopy(node: HTMLElement, target?: string) {
 	async function copyText() {
 		let text = target ? (document.querySelector(target)! as any).innerText : node.innerText;
 
