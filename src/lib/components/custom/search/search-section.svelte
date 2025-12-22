@@ -11,7 +11,9 @@
 		searchEngines.find((engine) => engine.id === currentSearchEngine2) || searchEngines[0]
 	);
 	let searchUrl = $derived<string>(
-		`${currentSearchEngine.searchUrl}${encodeURIComponent(query.trim())}`
+		query.startsWith('http://') || query.startsWith('https://')
+			? query.trim()
+			: `${currentSearchEngine.searchUrl}${encodeURIComponent(query.trim())}`
 	);
 
 	function performSearch(e: KeyboardEvent) {
@@ -23,7 +25,11 @@
 
 <div class="flex items-center">
 	<InputGroup.Root>
-		<InputGroup.Input placeholder="Search..." bind:value={query} onkeydown={performSearch} />
+		<InputGroup.Input
+			placeholder="Search the internet or type a URL..."
+			bind:value={query}
+			onkeydown={performSearch}
+		/>
 		<InputGroup.Addon>
 			<SearchIcon />
 		</InputGroup.Addon>
