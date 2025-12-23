@@ -1,6 +1,22 @@
 <script lang="ts">
+	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import * as NavigationMenu from '$lib/components/ui/navigation-menu/index.js';
 	import { navigationMenuTriggerStyle } from '$lib/components/ui/navigation-menu/navigation-menu-trigger.svelte';
+	import { onMount } from 'svelte';
+
+	let username = $state('');
+	let email = $state('');
+	let avatarUrl = $state('');
+
+	onMount(() => {
+		const savedUsername = localStorage.getItem('settings_username');
+		const savedEmail = localStorage.getItem('settings_email');
+		const savedAvatarUrl = localStorage.getItem('settings_avatarUrl');
+
+		if (savedUsername) username = savedUsername;
+		if (savedEmail) email = savedEmail;
+		if (savedAvatarUrl) avatarUrl = savedAvatarUrl;
+	});
 </script>
 
 <header class="flex w-full items-center justify-between bg-background p-4">
@@ -80,6 +96,17 @@
 	</NavigationMenu.Root>
 
 	<div>
-		<p>right</p>
+		<a class="flex items-center space-x-4" href="/settings">
+			<Avatar.Root>
+				<Avatar.Image src={avatarUrl} alt="User Avatar" />
+				<Avatar.Fallback class="bg-black text-white"
+					>{username ? username.charAt(0).toUpperCase() : 'U'}</Avatar.Fallback
+				>
+			</Avatar.Root>
+			<div>
+				<div>{username}</div>
+				<div class="text-sm text-muted-foreground">{email}</div>
+			</div>
+		</a>
 	</div>
 </header>
