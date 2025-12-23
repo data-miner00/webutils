@@ -26,6 +26,8 @@
 <div class="flex items-center">
 	<InputGroup.Root>
 		<InputGroup.Input
+			id="search-input"
+			autofocus
 			placeholder="Search the internet or type a URL..."
 			bind:value={query}
 			onkeydown={performSearch}
