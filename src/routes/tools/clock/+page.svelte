@@ -4,13 +4,14 @@
 		getDayNightDisplay,
 		type DayNightDisplay,
 		getTimeDifference,
-		cities
+		cities,
+		currentLocalTimeInfo,
+		localTimezone
 	} from '$lib/core/clock-utils';
 	import { onMount } from 'svelte';
 	import * as Select from '$lib/components/ui/select';
 	import Button from '$lib/components/ui/button/button.svelte';
 
-	const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 	const cityName = localTimezone.split('/').pop()!.replace(/_/g, ' ');
 
 	let currentTimeInfo = $state(currentLocalTimeInfo());
@@ -40,43 +41,6 @@
 	const triggerContent = $derived(
 		cities.find((f) => f.timezone === value)?.name ?? 'Select a Timezone'
 	);
-
-	type LocalTimeInfo = {
-		time: string;
-		date: string;
-		city: string;
-		timezone: string;
-		dayNight: DayNightDisplay;
-	};
-
-	function currentLocalTimeInfo(): LocalTimeInfo {
-		const now = new Date();
-
-		const time = now.toLocaleTimeString('en-US', {
-			hour12: false,
-			hour: '2-digit',
-			minute: '2-digit',
-			second: '2-digit'
-		});
-
-		const date = now.toLocaleDateString('en-US', {
-			weekday: 'long',
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric'
-		});
-
-		const cityName = localTimezone.split('/').pop()!.replace(/_/g, ' ');
-		const dayNight = getDayNightDisplay(localTimezone);
-
-		return {
-			time,
-			date,
-			city: cityName,
-			timezone: localTimezone,
-			dayNight
-		};
-	}
 
 	function updateWorldClocks(): void {
 		clocksToRender = selectedCities

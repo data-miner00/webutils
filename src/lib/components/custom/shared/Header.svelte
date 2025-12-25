@@ -3,10 +3,12 @@
 	import * as NavigationMenu from '$lib/components/ui/navigation-menu/index.js';
 	import { navigationMenuTriggerStyle } from '$lib/components/ui/navigation-menu/navigation-menu-trigger.svelte';
 	import { onMount } from 'svelte';
+	import { currentLocalTimeInfo } from '$lib/core/clock-utils';
 
 	let username = $state('');
 	let email = $state('');
 	let avatarUrl = $state('');
+	let currentTime = $state(currentLocalTimeInfo(true));
 
 	onMount(() => {
 		const savedUsername = localStorage.getItem('settings_username');
@@ -16,6 +18,12 @@
 		if (savedUsername) username = savedUsername;
 		if (savedEmail) email = savedEmail;
 		if (savedAvatarUrl) avatarUrl = savedAvatarUrl;
+
+		const interval = setInterval(() => {
+			currentTime = currentLocalTimeInfo(true);
+		}, 1000);
+
+		return () => clearInterval(interval);
 	});
 </script>
 
@@ -95,7 +103,16 @@
 		</NavigationMenu.List>
 	</NavigationMenu.Root>
 
-	<div>
+	<div class="flex gap-4 items-center">
+		<time datetime={currentTime.date} class="text-right">
+			<div class="font-bold">
+				{currentTime.date}
+			</div>
+
+			<div>
+				{currentTime.time}
+			</div>
+		</time>
 		<a class="flex items-center space-x-4" href="/settings">
 			<Avatar.Root>
 				<Avatar.Image src={avatarUrl} alt="User Avatar" />

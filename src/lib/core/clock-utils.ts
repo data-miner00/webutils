@@ -77,3 +77,42 @@ export function getTimeDifference(targetTimezone: string): string {
 	const sign = diffHours > 0 ? '+' : '';
 	return `${sign}${diffHours} hours`;
 }
+
+export type LocalTimeInfo = {
+	time: string;
+	date: string;
+	city: string;
+	timezone: string;
+	dayNight: DayNightDisplay;
+};
+
+export const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+export function currentLocalTimeInfo(hour12 = false): LocalTimeInfo {
+	const now = new Date();
+
+	const time = now.toLocaleTimeString('en-US', {
+		hour12,
+		hour: '2-digit',
+		minute: '2-digit',
+		second: '2-digit'
+	});
+
+	const date = now.toLocaleDateString('en-US', {
+		weekday: 'long',
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric'
+	});
+
+	const cityName = localTimezone.split('/').pop()!.replace(/_/g, ' ');
+	const dayNight = getDayNightDisplay(localTimezone);
+
+	return {
+		time,
+		date,
+		city: cityName,
+		timezone: localTimezone,
+		dayNight
+	};
+}
