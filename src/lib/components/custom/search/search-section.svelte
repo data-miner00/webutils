@@ -31,6 +31,7 @@
 			placeholder="Search the internet or type a URL..."
 			bind:value={query}
 			onkeydown={performSearch}
+			class="w-60"
 		/>
 		<InputGroup.Addon>
 			<SearchIcon />

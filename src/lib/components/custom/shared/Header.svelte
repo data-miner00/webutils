@@ -4,6 +4,7 @@
 	import { navigationMenuTriggerStyle } from '$lib/components/ui/navigation-menu/navigation-menu-trigger.svelte';
 	import { onMount } from 'svelte';
 	import { currentLocalTimeInfo } from '$lib/core/clock-utils';
+	import SearchSection from '../search/search-section.svelte';
 
 	let username = $state('');
 	let email = $state('');
@@ -102,6 +103,8 @@
 			</NavigationMenu.Item>
 		</NavigationMenu.List>
 	</NavigationMenu.Root>
+
+	<SearchSection />
 
 	<div class="flex gap-4 items-center">
 		<time datetime={currentTime.date} class="text-right">
