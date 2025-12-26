@@ -9,7 +9,29 @@
 	function fetchImage(id: number): string {
 		return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 	}
+
+	function focusSearch() {
+		const searchInput = document.getElementById('search-input');
+		searchInput?.focus();
+	}
+
+	function onKeyDown(event: KeyboardEvent) {
+		if (event.repeat) return;
+
+		switch (event.key) {
+			case 'k':
+				if (event.ctrlKey) {
+					event.preventDefault();
+					focusSearch();
+				}
+				break;
+			default:
+				break;
+		}
+	}
 </script>
+
+<svelte:window onkeydown={onKeyDown} />
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
