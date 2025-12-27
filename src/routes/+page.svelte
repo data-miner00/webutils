@@ -1,29 +1,36 @@
 <script>
-	async function fetchTodayWeather() {
-		const now = new Intl.DateTimeFormat('en-US').format(new Date());
-		const todayFromLocal = localStorage.getItem(now);
+	import { getLocalTimeZone, today } from '@internationalized/date';
+	import { Calendar } from '$lib/components/ui/calendar/index.js';
+	import Timer from '$lib/components/custom/timer/timer.svelte';
 
-		if (todayFromLocal) {
-			return todayFromLocal;
-		}
+	let value = today(getLocalTimeZone());
 
-		const res = await fetch('https://wttr.in');
-		const html = await res.text();
-
-		localStorage.setItem(now, html);
-
-		return html;
-	}
+	import { defaultLinks } from '$lib/core/links';
+	import Link from '$lib/components/custom/link/link.svelte';
 </script>
 
+<div class="flex gap-4">
+	<div>
+		<Calendar
+			type="single"
+			bind:value
+			class="rounded-md border shadow-sm w-fit"
+			captionLayout="dropdown"
+		/>
+
+		<div class="my-2"></div>
+
+		<Timer />
+	</div>
+
+	<div>
+		<h2 class="text-xl font-bold mb-4">Links</h2>
+		<div class="flex gap-4 flex-wrap">
+			{#each defaultLinks as link (link.id)}
+				<Link url={link.url} title={link.title} language={link.language} />
+			{/each}
+		</div>
+	</div>
+</div>
+
 <!-- <img src="x" onerror={alert('XSS Attack!')} /> -->
-
-<h1 class="text-2xl font-bold mb-2 mt-5">Weather</h1>
-
-{#await fetchTodayWeather()}
-	<p>Fetching weather info...</p>
-{:then content}
-	{@html content}
-{:catch error}
-	<p class="text-red-500">Error fetching weather info: {error.message}</p>
-{/await}
