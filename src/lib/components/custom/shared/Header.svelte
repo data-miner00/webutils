@@ -56,6 +56,12 @@
 								<div class="font-medium">Kanban</div>
 								<div class="text-muted-foreground">Simple kanban board to visualize tasks.</div>
 							</NavigationMenu.Link>
+							<NavigationMenu.Link href="/manage/links">
+								<div class="font-medium">Links</div>
+								<div class="text-muted-foreground">
+									Collections of useful URLs for personal use.
+								</div>
+							</NavigationMenu.Link>
 						</li>
 					</ul>
 				</NavigationMenu.Content>
