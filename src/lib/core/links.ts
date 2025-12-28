@@ -55,7 +55,15 @@ export const defaultLinks: Link[] = [
 	}
 ];
 
+/**
+ * Extract domain from a URL. Regex implementation: `:\/\/([^\/\n]+)`
+ * @param url The url to extract.
+ * @returns The extracted domain.
+ */
 export function extractDomain(url: string): string {
-	const [_, domain] = /:\/\/(.*?)\//.exec(url) || ['', 'example.com'];
-	return domain;
+	try {
+		return new URL(url).host;
+	} catch {
+		return 'example.com';
+	}
 }
