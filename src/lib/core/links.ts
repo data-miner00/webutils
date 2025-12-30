@@ -1,57 +1,65 @@
 export type Link = {
-	id: number;
+	id?: number;
 	category: string;
 	title: string;
 	description?: string;
 	url: string;
 	language?: string;
 	favicon?: string;
+	displayOrder?: number;
 	createdAt: string;
 };
 
+const today = new Date();
+
 export const defaultLinks: Link[] = [
 	{
-		id: 1,
 		title: 'ChatGPT',
 		category: 'Tools',
 		url: 'https://chatgpt.com',
-		favicon: '',
-		createdAt: new Date().toDateString()
+		createdAt: today.toISOString()
 	},
 	{
-		id: 2,
 		title: 'GitHub',
 		category: 'Social',
 		url: 'https://github.com/',
-		createdAt: new Date().toDateString()
+		createdAt: today.toISOString()
 	},
 	{
-		id: 3,
 		title: 'YouTube',
 		category: 'Social',
 		url: 'https://youtube.com/',
-		createdAt: new Date().toDateString()
+		createdAt: today.toISOString()
 	},
 	{
-		id: 4,
 		title: 'Wikipedia',
 		category: 'Articles',
 		url: 'https://wikipedia.org/',
-		createdAt: new Date().toDateString()
+		createdAt: today.toISOString()
 	},
 	{
-		id: 5,
 		title: 'Hackernews',
 		category: 'Articles',
 		url: 'https://news.ycombinator.com/',
-		createdAt: new Date().toDateString()
+		createdAt: today.toISOString()
 	},
 	{
-		id: 6,
 		title: 'Gmail',
 		category: 'Tools',
 		url: 'https://mail.google.com/',
-		createdAt: new Date().toDateString()
+		createdAt: today.toISOString()
+	},
+	{
+		title: 'Regex101',
+		category: 'Tools',
+		url: 'https://regex101.com/',
+		createdAt: today.toISOString()
+	},
+	{
+		title: 'Diff Checker',
+		category: 'Tools',
+		url: 'https://www.diffchecker.com/',
+		createdAt: today.toISOString()
 	}
 ];
 
@@ -66,4 +74,80 @@ export function extractDomain(url: string): string {
 	} catch {
 		return 'example.com';
 	}
+}
+
+const DATABASE_NAME = 'webutils';
+const DATABASE_VERSION = 1;
+const TABLE_NAME = 'links';
+
+function openDB(): Promise<IDBDatabase> {
+	return new Promise((resolve, reject) => {
+		const request = indexedDB.open(DATABASE_NAME, DATABASE_VERSION);
+
+		request.onupgradeneeded = () => {
+			const db = request.result;
+
+			if (!db.objectStoreNames.contains(TABLE_NAME)) {
+				const store = db.createObjectStore(TABLE_NAME, {
+					keyPath: 'id',
+					autoIncrement: true
+				});
+
+				store.createIndex('urlIdx', 'url', { unique: true });
+				store.createIndex('titleIdx', 'title');
+				store.createIndex('createdAtIdx', 'createdAt');
+			}
+		};
+
+		request.onsuccess = () => resolve(request.result);
+		request.onerror = () => reject(request.error);
+	});
+}
+
+export async function addLink(link: Omit<Link, 'id'>): Promise<void> {
+	const db = await openDB();
+	const tx = db.transaction(TABLE_NAME, 'readwrite');
+	const store = tx.objectStore(TABLE_NAME);
+
+	store.put(link);
+
+	tx.oncomplete = function () {
+		db.close();
+	};
+}
+
+export async function getLink(id: number): Promise<Link | undefined> {
+	const db = await openDB();
+	const tx = db.transaction(TABLE_NAME, 'readonly');
+	const store = tx.objectStore(TABLE_NAME);
+
+	return new Promise((resolve, reject) => {
+		const request = store.get(id);
+		request.onsuccess = () => resolve(request.result);
+		request.onerror = () => reject(request.error);
+	});
+}
+
+export async function getAllLinks(): Promise<Link[]> {
+	const db = await openDB();
+	const tx = db.transaction(TABLE_NAME, 'readonly');
+	const store = tx.objectStore(TABLE_NAME);
+
+	return new Promise((resolve, reject) => {
+		const request = store.getAll();
+		request.onsuccess = () => resolve(request.result);
+		request.onerror = () => reject(request.error);
+	});
+}
+
+export async function deleteLink(id: number): Promise<void> {
+	const db = await openDB();
+	const tx = db.transaction(TABLE_NAME, 'readwrite');
+	const store = tx.objectStore(TABLE_NAME);
+
+	store.delete(id);
+
+	tx.oncomplete = function () {
+		db.close();
+	};
 }
