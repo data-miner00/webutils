@@ -3,18 +3,29 @@
 	import { Calendar } from '$lib/components/ui/calendar/index.js';
 	import Timer from '$lib/components/custom/timer/timer.svelte';
 
-	let value = today(getLocalTimeZone());
+	let value = $state(today(getLocalTimeZone()));
 
-	import { defaultLinks } from '$lib/core/links';
-	import Link from '$lib/components/custom/link/link.svelte';
+	import { defaultLinks, type Link, getAllLinks, addLink } from '$lib/core/links';
+	import LinkComponent from '$lib/components/custom/link/link.svelte';
 	import { fetchIpInfo, type IpInfo } from '$lib/core/ip-address';
 	import { onMount } from 'svelte';
 	import { MapPin } from '@lucide/svelte';
 
 	let ipState = $state<IpInfo>();
+	let links = $state<Link[]>([]);
+	const MAX_LINKS_COUNT = 8;
 
 	onMount(async () => {
 		ipState = await fetchIpInfo();
+		links = await getAllLinks(MAX_LINKS_COUNT);
+
+		if (!links.length) {
+			links = defaultLinks;
+			links.forEach(async (link) => {
+				const nonProxyLink = $state.snapshot(link);
+				await addLink(nonProxyLink);
+			});
+		}
 	});
 </script>
 
@@ -35,8 +46,8 @@
 	<div>
 		<h2 class="text-xl font-bold mb-4">Links</h2>
 		<div class="flex gap-4 flex-wrap mb-5">
-			{#each defaultLinks as link (link.id)}
-				<Link url={link.url} title={link.title} language={link.language} />
+			{#each links as link, index (index)}
+				<LinkComponent url={link.url} title={link.title} language={link.language} />
 			{/each}
 		</div>
 

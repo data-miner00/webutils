@@ -128,13 +128,13 @@ export async function getLink(id: number): Promise<Link | undefined> {
 	});
 }
 
-export async function getAllLinks(): Promise<Link[]> {
+export async function getAllLinks(count?: number): Promise<Link[]> {
 	const db = await openDB();
 	const tx = db.transaction(TABLE_NAME, 'readonly');
 	const store = tx.objectStore(TABLE_NAME);
 
 	return new Promise((resolve, reject) => {
-		const request = store.getAll();
+		const request = store.getAll(null, count);
 		request.onsuccess = () => resolve(request.result);
 		request.onerror = () => reject(request.error);
 	});
