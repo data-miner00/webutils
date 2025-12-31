@@ -16,6 +16,7 @@
 - https://truedevtools.com
 - https://barcode.tec-it.com/en/QRCode
 - https://www.codeit.kr/articles/productivityTools
+- https://tool.p2hp.com/tool-format-json
 - 확장 프로그램
 - generate random/lorem ipsum text
 - generate UUID
@@ -53,6 +54,8 @@
 - Encrypted Password vault
 - Encryption/Decryption (Caesar cipher, Vigenère cipher, AES)
 - Markdown to HTML
+- Preview Markdown
+- Preview HTML/CSS
 - JSON formatter/validator
 - Code to Image
 - XML formatter/validator
@@ -79,6 +82,7 @@
 - ChatGPT
 - Translation tool
 - Chinese calendar
+- Morse code
 - Show IP address and location
 - Show user agent details
 - Estimate article read time
@@ -88,6 +92,7 @@
 - pomofocus.io
 - windy.com
 - excalidraw.com
+- Drawing Canvas
 - notes
 - todos
 - Code highlighting
@@ -102,3 +107,9 @@
 - Screenshot
 - Video recorder
 - PWA offline
+- Timer
+- Countdown (beep sound)
+- i18n
+- action history stack (click can repeat action)
+- containerize with Docker
+- https://dnschecker.org/
