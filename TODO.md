@@ -113,3 +113,9 @@
 - action history stack (click can repeat action)
 - containerize with Docker
 - https://dnschecker.org/
+- https://www.w3schools.com/
+- https://developer.mozilla.org/en-US/
+- https://css-tricks.com/
+- CTRL + P to bring up command pallete
+  - Able to search
+  - Search if link goto link in new tab

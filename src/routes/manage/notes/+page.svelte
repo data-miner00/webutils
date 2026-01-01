@@ -7,9 +7,11 @@
 	import Input from '$lib/components/ui/input/input.svelte';
 	import { onMount } from 'svelte';
 	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
+	import { Trash } from '@lucide/svelte';
 
 	let isDialogOpen = $state(false);
 
+	// Migrate to use indexDB
 	type Note = {
 		id: string;
 		title: string;
@@ -54,6 +56,11 @@
 
 		isDialogOpen = false;
 	}
+
+	function deleteNote(id: string) {
+		notes = notes.filter((note) => note.id !== id);
+		localStorage.setItem('notes', JSON.stringify(notes));
+	}
 </script>
 
 <h1 class="text-2xl font-bold mb-2">My Notes</h1>
@@ -75,6 +82,9 @@
 						isDialogOpen = true;
 					}}>Edit</button
 				>
+				<button onclick={() => deleteNote(note.id)}>
+					<Trash />
+				</button>
 			</div>
 		{/each}
 	</div>
