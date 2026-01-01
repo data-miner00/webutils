@@ -19,6 +19,15 @@
 		createdAt: new Date().toISOString()
 	});
 
+	let filteredLinks = $derived(
+		links.filter(
+			(x) =>
+				x.title.includes(searchQuery) ||
+				x.category.includes(searchQuery) ||
+				x.url.includes(searchQuery)
+		)
+	);
+
 	let isDialogOpen = $state(false);
 
 	onMount(async () => {
@@ -111,7 +120,7 @@
 </div>
 
 <div class="flex gap-4 flex-wrap">
-	{#each links as link}
+	{#each filteredLinks as link}
 		<LinkComponent url={link.url} title={link.title} language={link.language} />
 	{/each}
 </div>
