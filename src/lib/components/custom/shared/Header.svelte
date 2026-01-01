@@ -77,7 +77,7 @@
 							<NavigationMenu.Link href="/tools/clock">Clock</NavigationMenu.Link>
 							<NavigationMenu.Link target="_blank" href="/color.html">Color</NavigationMenu.Link>
 							<NavigationMenu.Link href="/tools/hash">Hash</NavigationMenu.Link>
-							<NavigationMenu.Link target="_blank" href="/qrbar.html">QR Codes</NavigationMenu.Link>
+							<NavigationMenu.Link href="/tools/qr-code">QR Codes</NavigationMenu.Link>
 							<NavigationMenu.Link href="/tools/leading-space"
 								>Remove leading space</NavigationMenu.Link
 							>
