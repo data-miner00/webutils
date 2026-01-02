@@ -6,7 +6,7 @@
 	import { SearchIcon } from '@lucide/svelte';
 
 	let query = $state('');
-	let currentSearchEngine2 = $state<string>('google');
+	let currentSearchEngine2 = $state<string>(localStorage.getItem('searchEngine') || 'google');
 	let currentSearchEngine = $derived<SearchEngine>(
 		searchEngines.find((engine) => engine.id === currentSearchEngine2) || searchEngines[0]
 	);
@@ -15,6 +15,11 @@
 			? query.trim()
 			: `${currentSearchEngine.searchUrl}${encodeURIComponent(query.trim())}`
 	);
+
+	$effect(() => {
+		localStorage.setItem('searchEngine', currentSearchEngine2);
+		document.getElementById('search-input')?.focus();
+	});
 
 	function performSearch(e: KeyboardEvent) {
 		if (e.key !== 'Enter') return;
