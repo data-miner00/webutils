@@ -11,6 +11,7 @@
 	import { onMount } from 'svelte';
 	import * as Select from '$lib/components/ui/select';
 	import Button from '$lib/components/ui/button/button.svelte';
+	import { Trash } from '@lucide/svelte';
 
 	const cityName = localTimezone.split('/').pop()!.replace(/_/g, ' ');
 
@@ -92,6 +93,7 @@
 			}
 		});
 
+		// instead of this, add it into cookies on load
 		if (loadedCities.length > 0) {
 			selectedCities = loadedCities;
 		} else {
@@ -111,6 +113,16 @@
 			const data = JSON.stringify(city);
 			document.cookie = `city_${index}=${encodeURIComponent(data)}; path=/; max-age=31536000`;
 		});
+	}
+
+	function removeTimezone(targetIndex: number) {
+		selectedCities = selectedCities.filter((_, index) => index !== targetIndex);
+		selectedCities.forEach((city, index) => {
+			const data = JSON.stringify(city);
+			document.cookie = `city_${index}=${encodeURIComponent(data)}; path=/; max-age=31536000`;
+		});
+		// Remove the last one
+		document.cookie = `city_${selectedCities.length}=; path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
 	}
 </script>
 
@@ -141,16 +153,21 @@
 </div>
 
 <section class="flex gap-4">
-	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-		{#each clocksToRender as clock}
-			<div class="border rounded-lg p-4 text-center">
+	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+		{#each clocksToRender as clock, index}
+			<div class="border rounded-lg p-4 text-center relative">
 				<h2 class="text-xl font-semibold mb-2">{clock.name}, {clock.country}</h2>
 				<p class="text-4xl mb-2">{clock.time}</p>
 				<p class="mb-2">{clock.date}</p>
 				<p class="mb-2">({clock.timezone})</p>
 				<p>{clock.dayNight.icon} {clock.dayNight.text}</p>
 				<p class="mt-2">{clock.timeDiff}</p>
+				<Button class="absolute right-2 bottom-2" onclick={() => removeTimezone(index)}>
+					<Trash />
+				</Button>
 			</div>
 		{/each}
 	</div>
 </section>
+
+<a href="https://time.is/">Time.is</a>
