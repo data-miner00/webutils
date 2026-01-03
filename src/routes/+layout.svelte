@@ -3,6 +3,8 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import Header from '$lib/components/custom/shared/Header.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
+	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+	import AppSidebar from '$lib/components/custom/app-sidebar/app-sidebar.svelte';
 
 	let { children } = $props();
 
@@ -41,11 +43,18 @@
 
 <Toaster position="top-center" />
 
-<Header />
+<Sidebar.Provider>
+	<AppSidebar />
 
-<div class="container mx-auto px-4 py-6">
-	{@render children()}
-</div>
+	<main>
+		<Header />
+
+		<div class="px-4 py-6">
+			<!-- <Sidebar.Trigger /> -->
+			{@render children()}
+		</div>
+	</main>
+</Sidebar.Provider>
 
 <div class="fixed bottom-2 right-2">
 	<img src={fetchImage(151)} alt="Showing a pokemon" onerror={(e) => e.currentTarget.remove()} />
