@@ -21,7 +21,7 @@
 
 	async function ping() {
 		try {
-			const response = await fetch(urlStatus, {
+			const response = await fetch(localhostUrl, {
 				method: 'head'
 			});
 
@@ -38,6 +38,10 @@
 	function copyUrl() {
 		return copyText(localhostUrl);
 	}
+
+	function openInNewTab() {
+		window.open(localhostUrl, '_blank');
+	}
 </script>
 
 <div class="border border-solid border-black p-4">
@@ -52,7 +56,7 @@
 	<div>
 		<Button variant="outline" onclick={ping}>Ping</Button>
 		<Button variant="outline" onclick={copyUrl}>Copy</Button>
-		<Button variant="outline" href={localhostUrl} target="_blank">Visit</Button>
+		<Button variant="outline" onclick={openInNewTab}>Visit</Button>
 	</div>
 
 	<div class="flex items-center gap-3">
