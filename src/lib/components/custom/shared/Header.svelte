@@ -90,6 +90,7 @@
 							<NavigationMenu.Link target="_blank" href="/uuid.html">UUID</NavigationMenu.Link>
 							<NavigationMenu.Link href="/tools/emoji">Emoji</NavigationMenu.Link>
 							<NavigationMenu.Link href="/tools/verify">Verify</NavigationMenu.Link>
+							<NavigationMenu.Link href="/tools/conversion">Conversion</NavigationMenu.Link>
 						</li>
 					</ul>
 				</NavigationMenu.Content>
