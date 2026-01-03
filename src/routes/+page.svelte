@@ -10,6 +10,7 @@
 	import { fetchIpInfo, type IpInfo } from '$lib/core/ip-address';
 	import { onMount } from 'svelte';
 	import { MapPin } from '@lucide/svelte';
+	import Localhost from '$lib/components/custom/localhost/localhost.svelte';
 
 	let ipState = $state<IpInfo>();
 	let links = $state<Link[]>([]);
@@ -59,6 +60,10 @@
 				<p class="font-bold">{ipState?.ip}</p>
 				<p>{ipState?.city}, {ipState?.country}</p>
 			</div>
+		</div>
+
+		<div>
+			<Localhost />
 		</div>
 	</div>
 </div>
