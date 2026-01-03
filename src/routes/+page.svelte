@@ -7,17 +7,13 @@
 
 	import { defaultLinks, type Link, getAllLinks, addLink } from '$lib/core/links';
 	import LinkComponent from '$lib/components/custom/link/link.svelte';
-	import { fetchIpInfo, type IpInfo } from '$lib/core/ip-address';
 	import { onMount } from 'svelte';
-	import { MapPin } from '@lucide/svelte';
 	import Localhost from '$lib/components/custom/localhost/localhost.svelte';
 
-	let ipState = $state<IpInfo>();
 	let links = $state<Link[]>([]);
 	const MAX_LINKS_COUNT = 8;
 
 	onMount(async () => {
-		ipState = await fetchIpInfo();
 		links = await getAllLinks(MAX_LINKS_COUNT);
 
 		if (!links.length) {
@@ -50,16 +46,6 @@
 			{#each links as link, index (index)}
 				<LinkComponent url={link.url} title={link.title} language={link.language} />
 			{/each}
-		</div>
-
-		<div class="p-4 rounded border border-solid border-black flex gap-4 items-center">
-			<div>
-				<MapPin />
-			</div>
-			<div>
-				<p class="font-bold">{ipState?.ip}</p>
-				<p>{ipState?.city}, {ipState?.country}</p>
-			</div>
 		</div>
 
 		<div>

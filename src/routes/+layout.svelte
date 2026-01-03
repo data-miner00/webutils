@@ -46,9 +46,8 @@
 <Sidebar.Provider>
 	<AppSidebar />
 
-	<main>
+	<main class="w-full">
 		<Header />
-
 		<div class="px-4 py-6">
 			<!-- <Sidebar.Trigger /> -->
 			{@render children()}

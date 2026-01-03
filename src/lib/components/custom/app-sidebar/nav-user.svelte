@@ -72,7 +72,7 @@
 				<DropdownMenu.Group>
 					<DropdownMenu.Item>
 						<BadgeCheckIcon />
-						Account
+						<a href="/settings">Account</a>
 					</DropdownMenu.Item>
 					<DropdownMenu.Item>
 						<CreditCardIcon />

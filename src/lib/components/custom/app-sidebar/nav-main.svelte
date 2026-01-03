@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+	import { House } from '@lucide/svelte';
 	import ChevronRightIcon from '@lucide/svelte/icons/chevron-right';
 	let {
 		items
@@ -23,6 +24,16 @@
 <Sidebar.Group>
 	<Sidebar.GroupLabel>Platform</Sidebar.GroupLabel>
 	<Sidebar.Menu>
+		<Sidebar.MenuItem>
+			<Sidebar.MenuButton>
+				{#snippet child({ props })}
+					<a href="/" {...props}>
+						<House />
+						<span>Home</span>
+					</a>
+				{/snippet}
+			</Sidebar.MenuButton>
+		</Sidebar.MenuItem>
 		{#each items as item (item.title)}
 			<Collapsible.Root open={item.isActive} class="group/collapsible">
 				{#snippet child({ props })}

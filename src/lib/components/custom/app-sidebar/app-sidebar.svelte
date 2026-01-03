@@ -38,37 +38,54 @@
 		],
 		navMain: [
 			{
-				title: 'Playground',
+				title: 'General',
 				url: '#',
 				icon: SquareTerminalIcon,
 				isActive: true,
 				items: [
 					{
-						title: 'History',
-						url: '#'
+						title: 'Lorem Ipsum',
+						url: '/tools/lorem'
 					},
 					{
-						title: 'Starred',
-						url: '#'
+						title: 'JWT Debugger',
+						url: '/tools/jwt-debugger'
 					},
 					{
-						title: 'Settings',
-						url: '#'
+						title: 'Space Trimmer',
+						url: '/tools/leading-space'
+					},
+					{
+						title: 'Hashing',
+						url: '/tools/hash'
+					},
+					{
+						title: 'QR Code',
+						url: '/tools/qr-code'
+					},
+					{
+						title: 'Transformation',
+						url: '/tools/strings'
+					},
+					{
+						title: 'Verify',
+						url: '/tools/verify'
+					},
+					{
+						title: 'Conversion',
+						url: '/tools/conversion'
 					}
 				]
 			},
 			{
-				title: 'Models',
+				title: 'Lookup',
 				url: '#',
 				icon: BotIcon,
 				items: [
+					{ title: 'Clock', url: '/tools/clock' },
 					{
-						title: 'Genesis',
-						url: '#'
-					},
-					{
-						title: 'Explorer',
-						url: '#'
+						title: 'Emoji',
+						url: '/tools/emoji'
 					},
 					{
 						title: 'Quantum',
@@ -77,25 +94,25 @@
 				]
 			},
 			{
-				title: 'Documentation',
+				title: 'Management',
 				url: '#',
 				icon: BookOpenIcon,
 				items: [
 					{
-						title: 'Introduction',
+						title: 'Notes',
+						url: '/manage/notes'
+					},
+					{
+						title: 'Pomodoro Timer',
 						url: '#'
 					},
 					{
-						title: 'Get Started',
+						title: 'Kanban',
 						url: '#'
 					},
 					{
-						title: 'Tutorials',
-						url: '#'
-					},
-					{
-						title: 'Changelog',
-						url: '#'
+						title: 'Links',
+						url: '/manage/links'
 					}
 				]
 			},
