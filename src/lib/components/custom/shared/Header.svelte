@@ -37,18 +37,22 @@
 </script>
 
 <header class="flex w-full items-center justify-between bg-background p-4">
-	<div class="flex items-center gap-2">
-		<MapPin size="20" />
-		<div>{ipState?.city}, {ipState?.country} ({ipState?.ip})</div>
-		<Button
-			variant="outline"
-			size="icon"
-			aria-label="Submit"
-			onclick={() => copyText(ipState?.ip || '0.0.0.0')}
-		>
-			<Clipboard />
-		</Button>
-	</div>
+	{#if ipState}
+		<div class="flex items-center gap-2 text-sm">
+			<MapPin size="20" />
+			<div>{ipState.city}, {ipState.country} ({ipState.ip})</div>
+			<Button
+				variant="outline"
+				size="icon"
+				aria-label="Submit"
+				onclick={() => copyText(ipState?.ip || '0.0.0.0')}
+			>
+				<Clipboard />
+			</Button>
+		</div>
+	{:else}
+		<!-- No internet connection -->
+	{/if}
 
 	<SearchSection />
 
@@ -60,7 +64,7 @@
 				<WifiOff class="text-red-500" />
 			{/if}
 		</div>
-		<time datetime={currentTime.date} class="text-right">
+		<time datetime={currentTime.date} class="text-right text-sm">
 			<div class="font-bold">
 				{currentTime.date}
 			</div>
