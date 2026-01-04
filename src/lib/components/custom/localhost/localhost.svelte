@@ -4,6 +4,7 @@
 	import { Input } from '$lib/components/ui/input';
 	import Label from '$lib/components/ui/label/label.svelte';
 	import { copyText } from '$lib/core/copy-to-clipboard';
+	import { ArrowDownUp, Copy, SquareArrowOutUpRight } from '@lucide/svelte';
 
 	let port = $state(3000);
 	let isHttps = $state(true);
@@ -44,24 +45,33 @@
 	}
 </script>
 
-<div class="border border-solid border-black p-4">
+<div class="shadow p-4 max-w-md rounded-lg">
 	<!-- preview -->
-	<div class="bg-gray-100 rounded">
+	<div class="mb-1 font-bold">Preview</div>
+	<div class="bg-gray-100 rounded-lg px-4 py-2 font-mono mb-4">
 		{isHttps ? 'https' : 'http'}://{LOCALHOST}:{port}
 	</div>
 
-	<Label for="port">Port</Label>
-	<Input name="port" placeholder="e.g. 3000" min={1} max={65535} bind:value={port} />
+	<Label class="mb-1 font-bold text-base" for="port">Port</Label>
+	<Input name="port" placeholder="e.g. 3000" min={1} max={65535} bind:value={port} class="mb-4" />
 
-	<div>
-		<Button variant="outline" onclick={ping}>Ping</Button>
-		<Button variant="outline" onclick={copyUrl}>Copy</Button>
-		<Button variant="outline" onclick={openInNewTab}>Visit</Button>
-	</div>
-
-	<div class="flex items-center gap-3">
+	<div class="mb-1 font-bold">Options</div>
+	<div class="flex items-center gap-3 mb-4">
 		<Checkbox id="https" bind:checked={isHttps} />
 		<Label for="https">Using HTTPS protocol</Label>
+	</div>
+
+	<div class="mb-1 font-bold">Actions</div>
+	<div>
+		<Button class="cursor-pointer" variant="outline" size="icon" onclick={ping}>
+			<ArrowDownUp />
+		</Button>
+		<Button class="cursor-pointer" variant="outline" size="icon" onclick={copyUrl}>
+			<Copy />
+		</Button>
+		<Button class="cursor-pointer" variant="outline" size="icon" onclick={openInNewTab}>
+			<SquareArrowOutUpRight />
+		</Button>
 	</div>
 
 	<div>Status: {urlStatus}</div>
