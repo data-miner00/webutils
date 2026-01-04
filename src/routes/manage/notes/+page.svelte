@@ -7,7 +7,9 @@
 	import Input from '$lib/components/ui/input/input.svelte';
 	import { onMount } from 'svelte';
 	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
-	import { Trash } from '@lucide/svelte';
+	import { EllipsisVertical, Trash } from '@lucide/svelte';
+	import * as InputGroup from '$lib/components/ui/input-group/index.js';
+	import { Plus, SearchIcon } from '@lucide/svelte';
 
 	let isDialogOpen = $state(false);
 
@@ -61,17 +63,44 @@
 		notes = notes.filter((note) => note.id !== id);
 		localStorage.setItem('notes', JSON.stringify(notes));
 	}
+
+	let searchQuery = $state('');
+
+	let filteredNotes = $derived(
+		notes.filter((x) => x.title.toLowerCase().includes(searchQuery.toLowerCase()))
+	);
 </script>
 
 <h1 class="text-2xl font-bold mb-2">My Notes</h1>
 
+<div class="flex gap-4 items-center mb-5">
+	<InputGroup.Root>
+		<InputGroup.Input bind:value={searchQuery} placeholder="Search..." />
+		<InputGroup.Addon>
+			<SearchIcon />
+		</InputGroup.Addon>
+		{#if searchQuery}
+			<InputGroup.Addon align="inline-end">
+				<InputGroup.Button>{filteredNotes.length} results</InputGroup.Button>
+			</InputGroup.Addon>
+		{/if}
+	</InputGroup.Root>
+
+	<div class="flex gap-2">
+		<Button onclick={addNewNote}>
+			<Plus /> Create Note
+		</Button>
+		<Button variant="outline" size="icon">
+			<EllipsisVertical />
+			<!-- Clear All -->
+			<!-- Export to Json -->
+		</Button>
+	</div>
+</div>
+
 {#if notes.length > 0}
 	<div class="flex gap-4 flex-wrap">
-		<button class="border border-solid border-gray-200 p-2 rounded" onclick={addNewNote}
-			>Create Note</button
-		>
-
-		{#each notes as note (note.id)}
+		{#each filteredNotes as note (note.id)}
 			<div class="border border-solid border-gray-200 p-2 rounded">
 				<p>{note.title}</p>
 				<p class="text-sm text-gray-500">{new Date(note.createdAt).toLocaleDateString()}</p>
