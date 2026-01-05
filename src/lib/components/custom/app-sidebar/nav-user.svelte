@@ -4,11 +4,12 @@
 	import ChevronsUpDownIcon from '@lucide/svelte/icons/chevrons-up-down';
 	import CreditCardIcon from '@lucide/svelte/icons/credit-card';
 	import LogOutIcon from '@lucide/svelte/icons/log-out';
-	import SparklesIcon from '@lucide/svelte/icons/sparkles';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import { useSidebar } from '$lib/components/ui/sidebar/index.js';
+	import { getEmailProviderUrlFromEmail } from '$lib/core/email';
+	import { Mail } from '@lucide/svelte';
 	let {
 		user
 	}: {
@@ -19,6 +20,10 @@
 		};
 	} = $props();
 	const sidebar = useSidebar();
+
+	let emailProviderUrl = $derived(
+		getEmailProviderUrlFromEmail(user.email) || 'https://mail.google.com/'
+	);
 </script>
 
 <Sidebar.Menu>
@@ -50,7 +55,11 @@
 				sideOffset={4}
 			>
 				<DropdownMenu.Label class="p-0 font-normal">
-					<div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
+					<a
+						class="flex items-center gap-2 px-1 py-1.5 text-start text-sm"
+						href={emailProviderUrl}
+						target="_blank"
+					>
 						<Avatar.Root class="size-8 rounded-lg">
 							<Avatar.Image src={user.avatar} alt={user.name} />
 							<Avatar.Fallback class="rounded-lg">CN</Avatar.Fallback>
@@ -59,13 +68,20 @@
 							<span class="truncate font-medium">{user.name}</span>
 							<span class="truncate text-xs">{user.email}</span>
 						</div>
-					</div>
+					</a>
 				</DropdownMenu.Label>
 				<DropdownMenu.Separator />
 				<DropdownMenu.Group>
 					<DropdownMenu.Item>
-						<SparklesIcon />
-						Upgrade to Pro
+						<!-- issue: It still didn't take full width and height of the parent -->
+						<a
+							href={emailProviderUrl}
+							target="_blank"
+							class="flex w-full h-full items-center gap-2"
+						>
+							<Mail />
+							<div>Email Inbox</div>
+						</a>
 					</DropdownMenu.Item>
 				</DropdownMenu.Group>
 				<DropdownMenu.Separator />
