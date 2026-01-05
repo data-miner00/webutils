@@ -2,10 +2,11 @@
 	import { onMount } from 'svelte';
 	import { currentLocalTimeInfo } from '$lib/core/clock-utils';
 	import SearchSection from '../search/search-section.svelte';
-	import { Clipboard, MapPin, Wifi, WifiOff } from '@lucide/svelte';
+	import { Clipboard, MapPin, RefreshCcw, Wifi, WifiOff } from '@lucide/svelte';
 	import { fetchIpInfo, type IpInfo } from '$lib/core/ip-address';
 	import { Button } from '$lib/components/ui/button';
 	import { copyText } from '$lib/core/copy-to-clipboard';
+	import { toast } from 'svelte-sonner';
 
 	let username = $state('');
 	let email = $state('');
@@ -32,6 +33,13 @@
 		return () => clearInterval(interval);
 	});
 
+	function forceRefreshIp() {
+		fetchIpInfo(true).then((info) => {
+			ipState = info;
+			toast.info('IP successfully refreshed.');
+		});
+	}
+
 	window.addEventListener('online', () => (isOnline = true));
 	window.addEventListener('offline', () => (isOnline = false));
 </script>
@@ -49,9 +57,22 @@
 			>
 				<Clipboard />
 			</Button>
+			<Button variant="outline" size="icon" aria-label="Refresh" onclick={forceRefreshIp}>
+				<RefreshCcw />
+			</Button>
 		</div>
 	{:else}
 		<!-- No internet connection -->
+		<div class="flex items-center gap-2 text-sm" title="Wow, you're on Uranus!">
+			<MapPin size="20" />
+			<div>Uranus (0.0.0.0)</div>
+			<Button variant="outline" size="icon" aria-label="Submit" onclick={() => copyText('0.0.0.0')}>
+				<Clipboard />
+			</Button>
+			<Button variant="outline" size="icon" aria-label="Refresh" onclick={forceRefreshIp}>
+				<RefreshCcw />
+			</Button>
+		</div>
 	{/if}
 
 	<SearchSection />

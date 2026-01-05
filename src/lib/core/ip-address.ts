@@ -16,12 +16,12 @@ type IpInfoResponse = {
 	readme: string;
 };
 
-export async function fetchIpInfo(): Promise<IpInfo> {
+export async function fetchIpInfo(forceRefresh = false): Promise<IpInfo> {
 	const COOKIE_NAME = 'ipinfo_cache_v1';
 	const MAX_AGE_SECONDS = 24 * 60 * 60; // 1 day
 
 	const raw = getCookie(COOKIE_NAME);
-	if (raw) {
+	if (!forceRefresh && raw) {
 		try {
 			const parsed = JSON.parse(decodeURIComponent(raw));
 			if (parsed && typeof parsed.ts === 'number' && parsed.data) {

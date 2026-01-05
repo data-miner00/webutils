@@ -64,8 +64,13 @@
 - Symbolab
 - Luhn algorithm
 - General web URL navigation tool
+- https://retool.com/utilities
+- https://developertoolskit.com/
 - Number base converter (binary, octal, decimal, hexadecimal)
 - Time zone converter
+- Symbol list copier
+- Localhost ping, open, copy
+- Dark/light mode
 - Minify/Beautify (JavaScript, CSS, HTML)
 - Screen record to GIF
 - https://devutils.com/
