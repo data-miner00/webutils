@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { decodeJwt } from '$lib/core/jwt.js';
 	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
+	import References from '$lib/components/custom/references/references.svelte';
 
 	let jwtInput = $state('');
 	let secret = $state('');
@@ -53,4 +54,11 @@
 	<div class="text-red-600 font-medium">Error: {decodedResult.message}</div>
 {/if}
 
-<a href="https://www.jwt.io/" target="_blank">Original Jwt Debugger</a>
+<References
+	references={[
+		{
+			title: 'JWT.io',
+			url: 'https://www.jwt.io/'
+		}
+	]}
+/>

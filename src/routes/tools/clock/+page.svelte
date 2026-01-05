@@ -12,6 +12,7 @@
 	import * as Select from '$lib/components/ui/select';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Trash } from '@lucide/svelte';
+	import References from '$lib/components/custom/references/references.svelte';
 
 	const cityName = localTimezone.split('/').pop()!.replace(/_/g, ' ');
 
@@ -170,4 +171,11 @@
 	</div>
 </section>
 
-<a href="https://time.is/">Time.is</a>
+<References
+	references={[
+		{
+			title: 'Time.is',
+			url: 'https://time.is/'
+		}
+	]}
+/>
