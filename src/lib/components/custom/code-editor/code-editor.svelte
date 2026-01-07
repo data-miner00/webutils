@@ -7,10 +7,15 @@
 		language?: string;
 		readonly?: boolean;
 		value?: string;
-		className?: string;
+		class?: string;
 	}
 
-	let { language, readonly, value = $bindable(undefined), className }: ICodeEditorProps = $props();
+	let {
+		language,
+		readonly,
+		value = $bindable(undefined),
+		class: className
+	}: ICodeEditorProps = $props();
 
 	let editorRef: HTMLDivElement;
 	let editor: monaco.editor.IStandaloneCodeEditor;
@@ -76,5 +81,5 @@
 
 <div
 	bind:this={editorRef}
-	class={`border border-solid border-gray-300 h-full min-h-[250px] ${className}`}
+	class={`border border-solid border-gray-300 h-full min-h-[250px] max-h-screen ${className}`}
 ></div>
