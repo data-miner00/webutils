@@ -31,4 +31,11 @@ describe('removeIndentation', () => {
 			expect(result).toBe('');
 		});
 	});
+
+	[true, false].forEach((smartMode) => {
+		it('should handle string without space correctly', () => {
+			const result = removeIndentation('hello world', smartMode);
+			expect(result).toBe('hello world');
+		});
+	});
 });

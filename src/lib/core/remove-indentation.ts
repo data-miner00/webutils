@@ -18,6 +18,11 @@ export function removeIndentation(input: string, smartMode: boolean = false): st
 			.map((line) => line.match(/^(\s*)/)![0].length)
 	);
 
+	// Don't have lines with leading space
+	if (minIndent == Infinity) {
+		return input;
+	}
+
 	return lines
 		.map((line) => (line.startsWith(' '.repeat(minIndent)) ? line.slice(minIndent) : line))
 		.join('\n');
