@@ -39,6 +39,7 @@
 		"monaco-editor": "^0.55.1",
 		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",
+		"reading-time-estimator": "^2.0.4",
 		"svelte": "^5.45.0",
 		"svelte-check": "^4.3.4",
 		"svelte-sonner": "^1.0.7",
