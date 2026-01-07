@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { removeIndentation } from '$lib/core/remove-indentation';
+	import { removeIndentation, example, example2, example3 } from '$lib/core/remove-indentation';
 	import { Switch } from '$lib/components/ui/switch/index.js';
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
 	import { copyText } from '$lib/core/copy-to-clipboard';
@@ -33,7 +33,7 @@
 				</div>
 				<ButtonGroup.Root>
 					<ButtonGroup.Root>
-						<Button variant="outline">Example 1</Button>
+						<Button variant="outline" onclick={() => (input = example)}>Example 1</Button>
 						<DropdownMenu.Root>
 							<DropdownMenu.Trigger>
 								{#snippet child({ props })}
@@ -44,11 +44,11 @@
 							</DropdownMenu.Trigger>
 							<DropdownMenu.Content align="end" class="w-52">
 								<DropdownMenu.Group>
-									<DropdownMenu.Item>
+									<DropdownMenu.Item onclick={() => (input = example2)}>
 										<Album />
 										Example 2
 									</DropdownMenu.Item>
-									<DropdownMenu.Item>
+									<DropdownMenu.Item onclick={() => (input = example3)}>
 										<Album />
 										Example 3
 									</DropdownMenu.Item>

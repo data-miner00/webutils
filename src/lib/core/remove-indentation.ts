@@ -27,3 +27,20 @@ export function removeIndentation(input: string, smartMode: boolean = false): st
 		.map((line) => (line.startsWith(' '.repeat(minIndent)) ? line.slice(minIndent) : line))
 		.join('\n');
 }
+
+export const example = `  <ButtonGroup.Root class="hidden sm:flex">
+    <Button variant="outline" size="icon" aria-label="Go Back">
+      <ArrowLeft />
+    </Button>
+  </ButtonGroup.Root>`;
+
+export const example2 = `  function doSomething() {
+    return "doing something";
+  }`;
+
+export const example3 = `<!-- This requires smart mode -->
+<ButtonGroup.Root class="hidden sm:flex">
+    <Button variant="outline" size="icon" aria-label="Go Back">
+      <ArrowLeft />
+    </Button>
+  </ButtonGroup.Root>`;
