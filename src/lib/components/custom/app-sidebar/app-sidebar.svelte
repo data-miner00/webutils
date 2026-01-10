@@ -1,6 +1,5 @@
 <script lang="ts" module>
 	import AudioWaveformIcon from '@lucide/svelte/icons/audio-waveform';
-	import BookOpenIcon from '@lucide/svelte/icons/book-open';
 	import BotIcon from '@lucide/svelte/icons/bot';
 	import ChartPieIcon from '@lucide/svelte/icons/chart-pie';
 	import CommandIcon from '@lucide/svelte/icons/command';
@@ -9,6 +8,7 @@
 	import MapIcon from '@lucide/svelte/icons/map';
 	import Settings2Icon from '@lucide/svelte/icons/settings-2';
 	import SquareTerminalIcon from '@lucide/svelte/icons/square-terminal';
+	import { LockIcon, ListIcon } from '@lucide/svelte';
 
 	const savedUsername = localStorage.getItem('settings_username') ?? 'User';
 	const savedEmail = localStorage.getItem('settings_email') ?? 'me@gmail.com';
@@ -102,29 +102,10 @@
 					{
 						title: 'Unicode',
 						url: '/tools/unicode'
-					}
-				]
-			},
-			{
-				title: 'Management',
-				url: '#',
-				icon: BookOpenIcon,
-				items: [
-					{
-						title: 'Notes',
-						url: '/manage/notes'
 					},
 					{
-						title: 'Pomodoro Timer',
-						url: '#'
-					},
-					{
-						title: 'Kanban',
-						url: '#'
-					},
-					{
-						title: 'Links',
-						url: '/manage/links'
+						title: 'Country',
+						url: '/tools/country'
 					}
 				]
 			},
@@ -154,19 +135,29 @@
 		],
 		projects: [
 			{
-				name: 'Design Engineering',
-				url: '#',
+				name: 'Notes',
+				url: '/manage/notes',
 				icon: FrameIcon
 			},
 			{
-				name: 'Sales & Marketing',
-				url: '#',
+				name: 'Links',
+				url: '/manage/links',
 				icon: ChartPieIcon
 			},
 			{
-				name: 'Travel',
+				name: 'Kanban',
 				url: '#',
 				icon: MapIcon
+			},
+			{
+				name: 'Secrets',
+				url: '#',
+				icon: LockIcon
+			},
+			{
+				name: 'Todo List',
+				url: '/manage/todo',
+				icon: ListIcon
 			}
 		]
 	};

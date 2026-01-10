@@ -21,7 +21,7 @@
 </script>
 
 <Sidebar.Group class="group-data-[collapsible=icon]:hidden">
-	<Sidebar.GroupLabel>Projects</Sidebar.GroupLabel>
+	<Sidebar.GroupLabel>Management</Sidebar.GroupLabel>
 	<Sidebar.Menu>
 		{#each projects as item (item.name)}
 			<Sidebar.MenuItem>
