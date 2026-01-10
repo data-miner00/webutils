@@ -82,6 +82,10 @@
 					{
 						title: 'Text Diff',
 						url: '/tools/text-diff'
+					},
+					{
+						title: 'Sort list',
+						url: '/tools/sort-list'
 					}
 				]
 			},
