@@ -55,17 +55,32 @@
 		inputLink.category = '';
 		inputLink.url = '';
 	}
+
+	function goToFirstMatchInNewTab(e: KeyboardEvent) {
+		if (e.key !== 'Enter') return;
+		if (filteredLinks.length > 0) {
+			const firstLink = filteredLinks[0];
+			window.open(firstLink.url, '_blank');
+		}
+	}
 </script>
 
 <div class="flex gap-4 items-center mb-5">
 	<InputGroup.Root>
-		<InputGroup.Input bind:value={searchQuery} placeholder="Search..." />
+		<InputGroup.Input
+			bind:value={searchQuery}
+			placeholder="Search..."
+			onkeyup={goToFirstMatchInNewTab}
+		/>
 		<InputGroup.Addon>
 			<SearchIcon />
 		</InputGroup.Addon>
-		<InputGroup.Addon align="inline-end">
-			<InputGroup.Button>Search</InputGroup.Button>
-		</InputGroup.Addon>
+
+		{#if searchQuery}
+			<InputGroup.Addon align="inline-end">
+				<InputGroup.Button>{filteredLinks.length} results</InputGroup.Button>
+			</InputGroup.Addon>
+		{/if}
 	</InputGroup.Root>
 
 	<Dialog.Root bind:open={isDialogOpen}>
