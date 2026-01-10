@@ -100,8 +100,8 @@
 						url: '/tools/emoji'
 					},
 					{
-						title: 'Quantum',
-						url: '#'
+						title: 'Unicode',
+						url: '/tools/unicode'
 					}
 				]
 			},
