@@ -78,6 +78,10 @@
 					{
 						title: 'Text Stats',
 						url: '/tools/text-stats'
+					},
+					{
+						title: 'Text Diff',
+						url: '/tools/text-diff'
 					}
 				]
 			},
