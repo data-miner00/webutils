@@ -74,6 +74,10 @@
 					{
 						title: 'Conversion',
 						url: '/tools/conversion'
+					},
+					{
+						title: 'Text Stats',
+						url: '/tools/text-stats'
 					}
 				]
 			},
