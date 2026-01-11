@@ -1,5 +1,11 @@
 <script lang="ts">
 	import * as sutil from '$lib/core/string-utils';
+	import Output from '$lib/components/custom/output/output.svelte';
+	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
+	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
+	import { EllipsisVertical, Trash2, Album } from '@lucide/svelte';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
 
 	let input = $state('');
 	let output = $derived({
@@ -15,10 +21,7 @@
 		toSentenceCase: sutil.toSentenceCase(input),
 		toBase64: safeToBase64Encode(input),
 		capitalize: input.charAt(0).toUpperCase() + input.slice(1).toLowerCase(),
-		reverse: sutil.reverseString(input),
-		wordCount: input.trim() ? input.trim().split(/\s+/).length : 0,
-		charCount: input.length,
-		lineCount: input.split('\n').length
+		reverse: sutil.reverseString(input)
 	});
 
 	function safeBase64Decode(str: string): string {
@@ -36,49 +39,82 @@
 			return 'Error encoding to Base64';
 		}
 	}
+
+	function clearInput() {
+		input = '';
+	}
+
+	function loadExample() {
+		input = sutil.example;
+	}
 </script>
 
-<h1 class="text-3xl font-bold mb-4">String Utils</h1>
-
-<div class="mb-4">
-	<label for="input" class="block mb-2 font-medium">Input Text:</label>
-	<textarea
-		id="input"
-		bind:value={input}
-		rows="6"
-		autocomplete="off"
-		class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-	></textarea>
-</div>
-
-<div class="mb-4 flex space-x-4">
-	<div class="bg-gray-100 p-4 rounded-md flex-1">
-		<h2 class="text-xl font-semibold mb-2">Statistics</h2>
-		<ul class="list-disc list-inside space-y-1">
-			<li><strong>Word Count:</strong> {output.wordCount}</li>
-			<li><strong>Character Count:</strong> {output.charCount}</li>
-			<li><strong>Line Count:</strong> {output.lineCount}</li>
-		</ul>
+<header class="flex justify-between mb-6">
+	<h1 class="text-xl font-bold block">String Transformations</h1>
+	<div class="flex items-center gap-4">
+		<ButtonGroup.Root>
+			<ButtonGroup.Root>
+				<Button variant="outline" onclick={loadExample}>Example 1</Button>
+				<DropdownMenu.Root>
+					<DropdownMenu.Trigger>
+						{#snippet child({ props })}
+							<Button {...props} variant="outline" aria-label="More Options">
+								<EllipsisVertical />
+							</Button>
+						{/snippet}
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content align="end" class="w-52">
+						<DropdownMenu.Group>
+							<DropdownMenu.Item onclick={() => (input = '')}>
+								<Album />
+								Example 2
+							</DropdownMenu.Item>
+						</DropdownMenu.Group>
+					</DropdownMenu.Content>
+				</DropdownMenu.Root>
+			</ButtonGroup.Root>
+			<ButtonGroup.Root>
+				<Button size="icon" variant="destructive" onclick={clearInput}><Trash2 /></Button>
+			</ButtonGroup.Root>
+		</ButtonGroup.Root>
 	</div>
-</div>
+</header>
+<Textarea
+	bind:value={input}
+	placeholder="Enter text to transform..."
+	rows={10}
+	class="w-full mb-4"
+	autocomplete="off"
+/>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-	<div class="bg-gray-100 p-4 rounded-md">
-		<h2 class="text-xl font-semibold mb-2">Transformations</h2>
-		<ul class="list-disc list-inside space-y-1">
-			<li><strong>Trimmed:</strong> {output.trim}</li>
-			<li><strong>Uppercase:</strong> {output.toUpperCase}</li>
-			<li><strong>Lowercase:</strong> {output.toLowerCase}</li>
-			<li><strong>Snake Case:</strong> {output.toSnakeCase}</li>
-			<li><strong>Kebab Case:</strong> {output.toKebabCase}</li>
-			<li><strong>Camel Case:</strong> {output.toCamelCase}</li>
-			<li><strong>Title Case:</strong> {output.toTitleCase}</li>
-			<li><strong>Constant Case:</strong> {output.toConstantCase}</li>
-			<li><strong>Dot Case:</strong> {output.toDotCase}</li>
-			<li><strong>Sentence Case:</strong> {output.toSentenceCase}</li>
-			<li><strong>Base64 Encoded:</strong> {output.toBase64}</li>
-			<li><strong>Capitalized:</strong> {output.capitalize}</li>
-			<li><strong>Reversed:</strong> {output.reverse}</li>
-		</ul>
-	</div>
+<div class="grid grid-cols-3 gap-2">
+	<Output title="Trimmed" bind:value={output.trim} subtitle="Whitespace removed from both ends" />
+	<Output
+		title="Uppercase"
+		bind:value={output.toUpperCase}
+		subtitle="All characters in uppercase"
+	/>
+	<Output
+		title="Lowercase"
+		bind:value={output.toLowerCase}
+		subtitle="All characters in lowercase"
+	/>
+	<Output title="Snake case" bind:value={output.toSnakeCase} subtitle="snake_case format" />
+	<Output title="Kebab case" bind:value={output.toKebabCase} subtitle="kebab-case format" />
+	<Output title="Camel case" bind:value={output.toCamelCase} subtitle="camelCase format" />
+	<Output title="Title case" bind:value={output.toTitleCase} subtitle="Title Case Format" />
+	<Output
+		title="Constant case"
+		bind:value={output.toConstantCase}
+		subtitle="CONSTANT_CASE format"
+	/>
+	<Output title="Dot case" bind:value={output.toDotCase} subtitle="dot.case format" />
+	<Output
+		title="Sentence case"
+		bind:value={output.toSentenceCase}
+		subtitle="Sentence case format"
+	/>
+	<Output title="Base64 Encoded" bind:value={output.toBase64} subtitle="Base64 Encoded String" />
+	<Output title="Capitalized" bind:value={output.capitalize} subtitle="First letter capitalized" />
+	<Output title="Reversed" bind:value={output.reverse} subtitle="Characters reversed" />
 </div>

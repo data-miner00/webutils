@@ -51,3 +51,5 @@ export function toSentenceCase(str: string): string {
 export function reverseString(str: string): string {
 	return str.split('').reverse().join('');
 }
+
+export const example = 'Lorem ipsum dolor sit amet.';
