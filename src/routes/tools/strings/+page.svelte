@@ -6,6 +6,7 @@
 	import { EllipsisVertical, Trash2, Album } from '@lucide/svelte';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { safeToBase64Encode } from '$lib/core/base64';
 
 	let input = $state('');
 	let output = $derived({
@@ -23,22 +24,6 @@
 		capitalize: input.charAt(0).toUpperCase() + input.slice(1).toLowerCase(),
 		reverse: sutil.reverseString(input)
 	});
-
-	function safeBase64Decode(str: string): string {
-		try {
-			return atob(str);
-		} catch {
-			return 'Invalid Base64 string';
-		}
-	}
-
-	function safeToBase64Encode(str: string): string {
-		try {
-			return btoa(str);
-		} catch {
-			return 'Error encoding to Base64';
-		}
-	}
 
 	function clearInput() {
 		input = '';

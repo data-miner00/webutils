@@ -86,6 +86,10 @@
 					{
 						title: 'Sort list',
 						url: '/tools/sort-list'
+					},
+					{
+						title: 'Base64',
+						url: '/tools/base64'
 					}
 				]
 			},
