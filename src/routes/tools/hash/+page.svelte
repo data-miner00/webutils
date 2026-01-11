@@ -7,6 +7,10 @@
 	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
 	import * as hashing from '$lib/core/hashing';
 	import Output from '$lib/components/custom/output/output.svelte';
+	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
+	import { EllipsisVertical, Trash2, Album } from '@lucide/svelte';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
 
 	let inputText = $state('');
 
@@ -20,9 +24,46 @@
 		hex: inputText ? hashing.hex(inputText) : '',
 		urlEncode: inputText ? encodeURIComponent(inputText) : ''
 	});
+
+	function clearInput() {
+		inputText = '';
+	}
+
+	function loadExample() {
+		inputText = 'Hello, World!';
+	}
 </script>
 
-<h1 class="text-2xl font-bold mb-2">String Hashing & Digest</h1>
+<header class="flex justify-between mb-6">
+	<h1 class="text-xl font-bold block">String Hashing & Digest</h1>
+	<div class="flex items-center gap-4">
+		<ButtonGroup.Root>
+			<ButtonGroup.Root>
+				<Button variant="outline" onclick={loadExample}>Example 1</Button>
+				<DropdownMenu.Root>
+					<DropdownMenu.Trigger>
+						{#snippet child({ props })}
+							<Button {...props} variant="outline" aria-label="More Options">
+								<EllipsisVertical />
+							</Button>
+						{/snippet}
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content align="end" class="w-52">
+						<DropdownMenu.Group>
+							<DropdownMenu.Item onclick={() => (inputText = '')}>
+								<Album />
+								Example 2
+							</DropdownMenu.Item>
+						</DropdownMenu.Group>
+					</DropdownMenu.Content>
+				</DropdownMenu.Root>
+			</ButtonGroup.Root>
+			<ButtonGroup.Root>
+				<Button size="icon" variant="destructive" onclick={clearInput}><Trash2 /></Button>
+			</ButtonGroup.Root>
+		</ButtonGroup.Root>
+	</div>
+</header>
 
 <Textarea
 	bind:value={inputText}
