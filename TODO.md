@@ -124,3 +124,4 @@
 - CTRL + P to bring up command pallete
   - Able to search
   - Search if link goto link in new tab
+- Roulette Wheel

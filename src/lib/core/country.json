@@ -1,0 +1,2402 @@
+[
+	{
+		"emoji": "",
+		"name": "Afghanistan",
+		"iso2": "AF",
+		"iso3": "AFG",
+		"countryCode": "93",
+		"population": "29,121,286",
+		"areaKm2": "647,500",
+		"href": "https://countrycode.org/afghanistan"
+	},
+	{
+		"emoji": "",
+		"name": "Albania",
+		"iso2": "AL",
+		"iso3": "ALB",
+		"countryCode": "355",
+		"population": "2,986,952",
+		"areaKm2": "28,748",
+		"href": "https://countrycode.org/albania"
+	},
+	{
+		"emoji": "",
+		"name": "Algeria",
+		"iso2": "DZ",
+		"iso3": "DZA",
+		"countryCode": "213",
+		"population": "34,586,184",
+		"areaKm2": "2,381,740",
+		"href": "https://countrycode.org/algeria"
+	},
+	{
+		"emoji": "",
+		"name": "American Samoa",
+		"iso2": "AS",
+		"iso3": "ASM",
+		"countryCode": "1-684",
+		"population": "57,881",
+		"areaKm2": "199",
+		"href": "https://countrycode.org/americansamoa"
+	},
+	{
+		"emoji": "",
+		"name": "Andorra",
+		"iso2": "AD",
+		"iso3": "AND",
+		"countryCode": "376",
+		"population": "84,000",
+		"areaKm2": "468",
+		"href": "https://countrycode.org/andorra"
+	},
+	{
+		"emoji": "",
+		"name": "Angola",
+		"iso2": "AO",
+		"iso3": "AGO",
+		"countryCode": "244",
+		"population": "13,068,161",
+		"areaKm2": "1,246,700",
+		"href": "https://countrycode.org/angola"
+	},
+	{
+		"emoji": "",
+		"name": "Anguilla",
+		"iso2": "AI",
+		"iso3": "AIA",
+		"countryCode": "1-264",
+		"population": "13,254",
+		"areaKm2": "102",
+		"href": "https://countrycode.org/anguilla"
+	},
+	{
+		"emoji": "",
+		"name": "Antarctica",
+		"iso2": "AQ",
+		"iso3": "ATA",
+		"countryCode": "672",
+		"population": "0",
+		"areaKm2": "14,000,000",
+		"href": "https://countrycode.org/antarctica"
+	},
+	{
+		"emoji": "",
+		"name": "Antigua and Barbuda",
+		"iso2": "AG",
+		"iso3": "ATG",
+		"countryCode": "1-268",
+		"population": "86,754",
+		"areaKm2": "443",
+		"href": "https://countrycode.org/antiguaandbarbuda"
+	},
+	{
+		"emoji": "",
+		"name": "Argentina",
+		"iso2": "AR",
+		"iso3": "ARG",
+		"countryCode": "54",
+		"population": "41,343,201",
+		"areaKm2": "2,766,890",
+		"href": "https://countrycode.org/argentina"
+	},
+	{
+		"emoji": "",
+		"name": "Armenia",
+		"iso2": "AM",
+		"iso3": "ARM",
+		"countryCode": "374",
+		"population": "2,968,000",
+		"areaKm2": "29,800",
+		"href": "https://countrycode.org/armenia"
+	},
+	{
+		"emoji": "",
+		"name": "Aruba",
+		"iso2": "AW",
+		"iso3": "ABW",
+		"countryCode": "297",
+		"population": "71,566",
+		"areaKm2": "193",
+		"href": "https://countrycode.org/aruba"
+	},
+	{
+		"emoji": "",
+		"name": "Australia",
+		"iso2": "AU",
+		"iso3": "AUS",
+		"countryCode": "61",
+		"population": "21,515,754",
+		"areaKm2": "7,686,850",
+		"href": "https://countrycode.org/australia"
+	},
+	{
+		"emoji": "",
+		"name": "Austria",
+		"iso2": "AT",
+		"iso3": "AUT",
+		"countryCode": "43",
+		"population": "8,205,000",
+		"areaKm2": "83,858",
+		"href": "https://countrycode.org/austria"
+	},
+	{
+		"emoji": "",
+		"name": "Azerbaijan",
+		"iso2": "AZ",
+		"iso3": "AZE",
+		"countryCode": "994",
+		"population": "8,303,512",
+		"areaKm2": "86,600",
+		"href": "https://countrycode.org/azerbaijan"
+	},
+	{
+		"emoji": "",
+		"name": "Bahamas",
+		"iso2": "BS",
+		"iso3": "BHS",
+		"countryCode": "1-242",
+		"population": "301,790",
+		"areaKm2": "13,940",
+		"href": "https://countrycode.org/bahamas"
+	},
+	{
+		"emoji": "",
+		"name": "Bahrain",
+		"iso2": "BH",
+		"iso3": "BHR",
+		"countryCode": "973",
+		"population": "738,004",
+		"areaKm2": "665",
+		"href": "https://countrycode.org/bahrain"
+	},
+	{
+		"emoji": "",
+		"name": "Bangladesh",
+		"iso2": "BD",
+		"iso3": "BGD",
+		"countryCode": "880",
+		"population": "156,118,464",
+		"areaKm2": "144,000",
+		"href": "https://countrycode.org/bangladesh"
+	},
+	{
+		"emoji": "",
+		"name": "Barbados",
+		"iso2": "BB",
+		"iso3": "BRB",
+		"countryCode": "1-246",
+		"population": "285,653",
+		"areaKm2": "431",
+		"href": "https://countrycode.org/barbados"
+	},
+	{
+		"emoji": "",
+		"name": "Belarus",
+		"iso2": "BY",
+		"iso3": "BLR",
+		"countryCode": "375",
+		"population": "9,685,000",
+		"areaKm2": "207,600",
+		"href": "https://countrycode.org/belarus"
+	},
+	{
+		"emoji": "",
+		"name": "Belgium",
+		"iso2": "BE",
+		"iso3": "BEL",
+		"countryCode": "32",
+		"population": "10,403,000",
+		"areaKm2": "30,510",
+		"href": "https://countrycode.org/belgium"
+	},
+	{
+		"emoji": "",
+		"name": "Belize",
+		"iso2": "BZ",
+		"iso3": "BLZ",
+		"countryCode": "501",
+		"population": "314,522",
+		"areaKm2": "22,966",
+		"href": "https://countrycode.org/belize"
+	},
+	{
+		"emoji": "",
+		"name": "Benin",
+		"iso2": "BJ",
+		"iso3": "BEN",
+		"countryCode": "229",
+		"population": "9,056,010",
+		"areaKm2": "112,620",
+		"href": "https://countrycode.org/benin"
+	},
+	{
+		"emoji": "",
+		"name": "Bermuda",
+		"iso2": "BM",
+		"iso3": "BMU",
+		"countryCode": "1-441",
+		"population": "65,365",
+		"areaKm2": "53",
+		"href": "https://countrycode.org/bermuda"
+	},
+	{
+		"emoji": "",
+		"name": "Bhutan",
+		"iso2": "BT",
+		"iso3": "BTN",
+		"countryCode": "975",
+		"population": "699,847",
+		"areaKm2": "47,000",
+		"href": "https://countrycode.org/bhutan"
+	},
+	{
+		"emoji": "",
+		"name": "Bolivia",
+		"iso2": "BO",
+		"iso3": "BOL",
+		"countryCode": "591",
+		"population": "9,947,418",
+		"areaKm2": "1,098,580",
+		"href": "https://countrycode.org/bolivia"
+	},
+	{
+		"emoji": "",
+		"name": "Bosnia and Herzegovina",
+		"iso2": "BA",
+		"iso3": "BIH",
+		"countryCode": "387",
+		"population": "4,590,000",
+		"areaKm2": "51,129",
+		"href": "https://countrycode.org/bosnia"
+	},
+	{
+		"emoji": "",
+		"name": "Botswana",
+		"iso2": "BW",
+		"iso3": "BWA",
+		"countryCode": "267",
+		"population": "2,029,307",
+		"areaKm2": "600,370",
+		"href": "https://countrycode.org/botswana"
+	},
+	{
+		"emoji": "",
+		"name": "Brazil",
+		"iso2": "BR",
+		"iso3": "BRA",
+		"countryCode": "55",
+		"population": "201,103,330",
+		"areaKm2": "8,511,965",
+		"href": "https://countrycode.org/brazil"
+	},
+	{
+		"emoji": "",
+		"name": "British Indian Ocean Territory",
+		"iso2": "IO",
+		"iso3": "IOT",
+		"countryCode": "246",
+		"population": "4,000",
+		"areaKm2": "60",
+		"href": "https://countrycode.org/britishindianoceanterritory"
+	},
+	{
+		"emoji": "",
+		"name": "British Virgin Islands",
+		"iso2": "VG",
+		"iso3": "VGB",
+		"countryCode": "1-284",
+		"population": "21,730",
+		"areaKm2": "153",
+		"href": "https://countrycode.org/britishvirginislands"
+	},
+	{
+		"emoji": "",
+		"name": "Brunei",
+		"iso2": "BN",
+		"iso3": "BRN",
+		"countryCode": "673",
+		"population": "395,027",
+		"areaKm2": "5,770",
+		"href": "https://countrycode.org/brunei"
+	},
+	{
+		"emoji": "",
+		"name": "Bulgaria",
+		"iso2": "BG",
+		"iso3": "BGR",
+		"countryCode": "359",
+		"population": "7,148,785",
+		"areaKm2": "110,910",
+		"href": "https://countrycode.org/bulgaria"
+	},
+	{
+		"emoji": "",
+		"name": "Burkina Faso",
+		"iso2": "BF",
+		"iso3": "BFA",
+		"countryCode": "226",
+		"population": "16,241,811",
+		"areaKm2": "274,200",
+		"href": "https://countrycode.org/burkinafaso"
+	},
+	{
+		"emoji": "",
+		"name": "Burundi",
+		"iso2": "BI",
+		"iso3": "BDI",
+		"countryCode": "257",
+		"population": "9,863,117",
+		"areaKm2": "27,830",
+		"href": "https://countrycode.org/burundi"
+	},
+	{
+		"emoji": "",
+		"name": "Cambodia",
+		"iso2": "KH",
+		"iso3": "KHM",
+		"countryCode": "855",
+		"population": "14,453,680",
+		"areaKm2": "181,040",
+		"href": "https://countrycode.org/cambodia"
+	},
+	{
+		"emoji": "",
+		"name": "Cameroon",
+		"iso2": "CM",
+		"iso3": "CMR",
+		"countryCode": "237",
+		"population": "19,294,149",
+		"areaKm2": "475,440",
+		"href": "https://countrycode.org/cameroon"
+	},
+	{
+		"emoji": "",
+		"name": "Canada",
+		"iso2": "CA",
+		"iso3": "CAN",
+		"countryCode": "1",
+		"population": "33,679,000",
+		"areaKm2": "9,984,670",
+		"href": "https://countrycode.org/canada"
+	},
+	{
+		"emoji": "",
+		"name": "Cape Verde",
+		"iso2": "CV",
+		"iso3": "CPV",
+		"countryCode": "238",
+		"population": "508,659",
+		"areaKm2": "4,033",
+		"href": "https://countrycode.org/capeverde"
+	},
+	{
+		"emoji": "",
+		"name": "Cayman Islands",
+		"iso2": "KY",
+		"iso3": "CYM",
+		"countryCode": "1-345",
+		"population": "44,270",
+		"areaKm2": "262",
+		"href": "https://countrycode.org/caymanislands"
+	},
+	{
+		"emoji": "",
+		"name": "Central African Republic",
+		"iso2": "CF",
+		"iso3": "CAF",
+		"countryCode": "236",
+		"population": "4,844,927",
+		"areaKm2": "622,984",
+		"href": "https://countrycode.org/centralafricanrepublic"
+	},
+	{
+		"emoji": "",
+		"name": "Chad",
+		"iso2": "TD",
+		"iso3": "TCD",
+		"countryCode": "235",
+		"population": "10,543,464",
+		"areaKm2": "1,284,000",
+		"href": "https://countrycode.org/chad"
+	},
+	{
+		"emoji": "",
+		"name": "Chile",
+		"iso2": "CL",
+		"iso3": "CHL",
+		"countryCode": "56",
+		"population": "16,746,491",
+		"areaKm2": "756,950",
+		"href": "https://countrycode.org/chile"
+	},
+	{
+		"emoji": "",
+		"name": "China",
+		"iso2": "CN",
+		"iso3": "CHN",
+		"countryCode": "86",
+		"population": "1,330,044,000",
+		"areaKm2": "9,596,960",
+		"href": "https://countrycode.org/china"
+	},
+	{
+		"emoji": "",
+		"name": "Christmas Island",
+		"iso2": "CX",
+		"iso3": "CXR",
+		"countryCode": "61",
+		"population": "1,500",
+		"areaKm2": "135",
+		"href": "https://countrycode.org/christmasisland"
+	},
+	{
+		"emoji": "",
+		"name": "Cocos Islands",
+		"iso2": "CC",
+		"iso3": "CCK",
+		"countryCode": "61",
+		"population": "628",
+		"areaKm2": "14",
+		"href": "https://countrycode.org/cocoskeelingislands"
+	},
+	{
+		"emoji": "",
+		"name": "Colombia",
+		"iso2": "CO",
+		"iso3": "COL",
+		"countryCode": "57",
+		"population": "47,790,000",
+		"areaKm2": "1,138,910",
+		"href": "https://countrycode.org/colombia"
+	},
+	{
+		"emoji": "",
+		"name": "Comoros",
+		"iso2": "KM",
+		"iso3": "COM",
+		"countryCode": "269",
+		"population": "773,407",
+		"areaKm2": "2,170",
+		"href": "https://countrycode.org/comoros"
+	},
+	{
+		"emoji": "",
+		"name": "Cook Islands",
+		"iso2": "CK",
+		"iso3": "COK",
+		"countryCode": "682",
+		"population": "21,388",
+		"areaKm2": "240",
+		"href": "https://countrycode.org/cookislands"
+	},
+	{
+		"emoji": "",
+		"name": "Costa Rica",
+		"iso2": "CR",
+		"iso3": "CRI",
+		"countryCode": "506",
+		"population": "4,516,220",
+		"areaKm2": "51,100",
+		"href": "https://countrycode.org/costarica"
+	},
+	{
+		"emoji": "",
+		"name": "Croatia",
+		"iso2": "HR",
+		"iso3": "HRV",
+		"countryCode": "385",
+		"population": "4,491,000",
+		"areaKm2": "56,542",
+		"href": "https://countrycode.org/croatia"
+	},
+	{
+		"emoji": "",
+		"name": "Cuba",
+		"iso2": "CU",
+		"iso3": "CUB",
+		"countryCode": "53",
+		"population": "11,423,000",
+		"areaKm2": "110,860",
+		"href": "https://countrycode.org/cuba"
+	},
+	{
+		"emoji": "",
+		"name": "Curacao",
+		"iso2": "CW",
+		"iso3": "CUW",
+		"countryCode": "599",
+		"population": "141,766",
+		"areaKm2": "444",
+		"href": "https://countrycode.org/curacao"
+	},
+	{
+		"emoji": "",
+		"name": "Cyprus",
+		"iso2": "CY",
+		"iso3": "CYP",
+		"countryCode": "357",
+		"population": "1,102,677",
+		"areaKm2": "9,250",
+		"href": "https://countrycode.org/cyprus"
+	},
+	{
+		"emoji": "",
+		"name": "Czech Republic",
+		"iso2": "CZ",
+		"iso3": "CZE",
+		"countryCode": "420",
+		"population": "10,476,000",
+		"areaKm2": "78,866",
+		"href": "https://countrycode.org/czechrepublic"
+	},
+	{
+		"emoji": "",
+		"name": "Democratic Republic of the Congo",
+		"iso2": "CD",
+		"iso3": "COD",
+		"countryCode": "243",
+		"population": "70,916,439",
+		"areaKm2": "2,345,410",
+		"href": "https://countrycode.org/congodemocraticrepublic"
+	},
+	{
+		"emoji": "",
+		"name": "Denmark",
+		"iso2": "DK",
+		"iso3": "DNK",
+		"countryCode": "45",
+		"population": "5,484,000",
+		"areaKm2": "43,094",
+		"href": "https://countrycode.org/denmark"
+	},
+	{
+		"emoji": "",
+		"name": "Djibouti",
+		"iso2": "DJ",
+		"iso3": "DJI",
+		"countryCode": "253",
+		"population": "740,528",
+		"areaKm2": "23,000",
+		"href": "https://countrycode.org/djibouti"
+	},
+	{
+		"emoji": "",
+		"name": "Dominica",
+		"iso2": "DM",
+		"iso3": "DMA",
+		"countryCode": "1-767",
+		"population": "72,813",
+		"areaKm2": "754",
+		"href": "https://countrycode.org/dominica"
+	},
+	{
+		"emoji": "",
+		"name": "Dominican Republic",
+		"iso2": "DO",
+		"iso3": "DOM",
+		"countryCode": "1-809, 1-829, 1-849",
+		"population": "9,823,821",
+		"areaKm2": "48,730",
+		"href": "https://countrycode.org/dominicanrepublic"
+	},
+	{
+		"emoji": "",
+		"name": "East Timor",
+		"iso2": "TL",
+		"iso3": "TLS",
+		"countryCode": "670",
+		"population": "1,154,625",
+		"areaKm2": "15,007",
+		"href": "https://countrycode.org/easttimor"
+	},
+	{
+		"emoji": "",
+		"name": "Ecuador",
+		"iso2": "EC",
+		"iso3": "ECU",
+		"countryCode": "593",
+		"population": "14,790,608",
+		"areaKm2": "283,560",
+		"href": "https://countrycode.org/ecuador"
+	},
+	{
+		"emoji": "",
+		"name": "Egypt",
+		"iso2": "EG",
+		"iso3": "EGY",
+		"countryCode": "20",
+		"population": "80,471,869",
+		"areaKm2": "1,001,450",
+		"href": "https://countrycode.org/egypt"
+	},
+	{
+		"emoji": "",
+		"name": "El Salvador",
+		"iso2": "SV",
+		"iso3": "SLV",
+		"countryCode": "503",
+		"population": "6,052,064",
+		"areaKm2": "21,040",
+		"href": "https://countrycode.org/elsalvador"
+	},
+	{
+		"emoji": "",
+		"name": "Equatorial Guinea",
+		"iso2": "GQ",
+		"iso3": "GNQ",
+		"countryCode": "240",
+		"population": "1,014,999",
+		"areaKm2": "28,051",
+		"href": "https://countrycode.org/equatorialguinea"
+	},
+	{
+		"emoji": "",
+		"name": "Eritrea",
+		"iso2": "ER",
+		"iso3": "ERI",
+		"countryCode": "291",
+		"population": "5,792,984",
+		"areaKm2": "121,320",
+		"href": "https://countrycode.org/eritrea"
+	},
+	{
+		"emoji": "",
+		"name": "Estonia",
+		"iso2": "EE",
+		"iso3": "EST",
+		"countryCode": "372",
+		"population": "1,291,170",
+		"areaKm2": "45,226",
+		"href": "https://countrycode.org/estonia"
+	},
+	{
+		"emoji": "",
+		"name": "Ethiopia",
+		"iso2": "ET",
+		"iso3": "ETH",
+		"countryCode": "251",
+		"population": "88,013,491",
+		"areaKm2": "1,127,127",
+		"href": "https://countrycode.org/ethiopia"
+	},
+	{
+		"emoji": "",
+		"name": "Falkland Islands",
+		"iso2": "FK",
+		"iso3": "FLK",
+		"countryCode": "500",
+		"population": "2,638",
+		"areaKm2": "12,173",
+		"href": "https://countrycode.org/falklands"
+	},
+	{
+		"emoji": "",
+		"name": "Faroe Islands",
+		"iso2": "FO",
+		"iso3": "FRO",
+		"countryCode": "298",
+		"population": "48,228",
+		"areaKm2": "1,399",
+		"href": "https://countrycode.org/faroeislands"
+	},
+	{
+		"emoji": "",
+		"name": "Fiji",
+		"iso2": "FJ",
+		"iso3": "FJI",
+		"countryCode": "679",
+		"population": "875,983",
+		"areaKm2": "18,270",
+		"href": "https://countrycode.org/fiji"
+	},
+	{
+		"emoji": "",
+		"name": "Finland",
+		"iso2": "FI",
+		"iso3": "FIN",
+		"countryCode": "358",
+		"population": "5,244,000",
+		"areaKm2": "337,030",
+		"href": "https://countrycode.org/finland"
+	},
+	{
+		"emoji": "",
+		"name": "France",
+		"iso2": "FR",
+		"iso3": "FRA",
+		"countryCode": "33",
+		"population": "64,768,389",
+		"areaKm2": "547,030",
+		"href": "https://countrycode.org/france"
+	},
+	{
+		"emoji": "",
+		"name": "French Polynesia",
+		"iso2": "PF",
+		"iso3": "PYF",
+		"countryCode": "689",
+		"population": "270,485",
+		"areaKm2": "4,167",
+		"href": "https://countrycode.org/frenchpolynesia"
+	},
+	{
+		"emoji": "",
+		"name": "Gabon",
+		"iso2": "GA",
+		"iso3": "GAB",
+		"countryCode": "241",
+		"population": "1,545,255",
+		"areaKm2": "267,667",
+		"href": "https://countrycode.org/gabon"
+	},
+	{
+		"emoji": "",
+		"name": "Gambia",
+		"iso2": "GM",
+		"iso3": "GMB",
+		"countryCode": "220",
+		"population": "1,593,256",
+		"areaKm2": "11,300",
+		"href": "https://countrycode.org/gambia"
+	},
+	{
+		"emoji": "",
+		"name": "Georgia",
+		"iso2": "GE",
+		"iso3": "GEO",
+		"countryCode": "995",
+		"population": "4,630,000",
+		"areaKm2": "69,700",
+		"href": "https://countrycode.org/georgia"
+	},
+	{
+		"emoji": "",
+		"name": "Germany",
+		"iso2": "DE",
+		"iso3": "DEU",
+		"countryCode": "49",
+		"population": "81,802,257",
+		"areaKm2": "357,021",
+		"href": "https://countrycode.org/germany"
+	},
+	{
+		"emoji": "",
+		"name": "Ghana",
+		"iso2": "GH",
+		"iso3": "GHA",
+		"countryCode": "233",
+		"population": "24,339,838",
+		"areaKm2": "239,460",
+		"href": "https://countrycode.org/ghana"
+	},
+	{
+		"emoji": "",
+		"name": "Gibraltar",
+		"iso2": "GI",
+		"iso3": "GIB",
+		"countryCode": "350",
+		"population": "27,884",
+		"areaKm2": "7",
+		"href": "https://countrycode.org/gibraltar"
+	},
+	{
+		"emoji": "",
+		"name": "Greece",
+		"iso2": "GR",
+		"iso3": "GRC",
+		"countryCode": "30",
+		"population": "11,000,000",
+		"areaKm2": "131,940",
+		"href": "https://countrycode.org/greece"
+	},
+	{
+		"emoji": "",
+		"name": "Greenland",
+		"iso2": "GL",
+		"iso3": "GRL",
+		"countryCode": "299",
+		"population": "56,375",
+		"areaKm2": "2,166,086",
+		"href": "https://countrycode.org/greenland"
+	},
+	{
+		"emoji": "",
+		"name": "Grenada",
+		"iso2": "GD",
+		"iso3": "GRD",
+		"countryCode": "1-473",
+		"population": "107,818",
+		"areaKm2": "344",
+		"href": "https://countrycode.org/grenada"
+	},
+	{
+		"emoji": "",
+		"name": "Guam",
+		"iso2": "GU",
+		"iso3": "GUM",
+		"countryCode": "1-671",
+		"population": "159,358",
+		"areaKm2": "549",
+		"href": "https://countrycode.org/guam"
+	},
+	{
+		"emoji": "",
+		"name": "Guatemala",
+		"iso2": "GT",
+		"iso3": "GTM",
+		"countryCode": "502",
+		"population": "13,550,440",
+		"areaKm2": "108,890",
+		"href": "https://countrycode.org/guatemala"
+	},
+	{
+		"emoji": "",
+		"name": "Guernsey",
+		"iso2": "GG",
+		"iso3": "GGY",
+		"countryCode": "44-1481",
+		"population": "65,228",
+		"areaKm2": "78",
+		"href": "https://countrycode.org/guernsey"
+	},
+	{
+		"emoji": "",
+		"name": "Guinea",
+		"iso2": "GN",
+		"iso3": "GIN",
+		"countryCode": "224",
+		"population": "10,324,025",
+		"areaKm2": "245,857",
+		"href": "https://countrycode.org/guinea"
+	},
+	{
+		"emoji": "",
+		"name": "Guinea-Bissau",
+		"iso2": "GW",
+		"iso3": "GNB",
+		"countryCode": "245",
+		"population": "1,565,126",
+		"areaKm2": "36,120",
+		"href": "https://countrycode.org/guineabissau"
+	},
+	{
+		"emoji": "",
+		"name": "Guyana",
+		"iso2": "GY",
+		"iso3": "GUY",
+		"countryCode": "592",
+		"population": "748,486",
+		"areaKm2": "214,970",
+		"href": "https://countrycode.org/guyana"
+	},
+	{
+		"emoji": "",
+		"name": "Haiti",
+		"iso2": "HT",
+		"iso3": "HTI",
+		"countryCode": "509",
+		"population": "9,648,924",
+		"areaKm2": "27,750",
+		"href": "https://countrycode.org/haiti"
+	},
+	{
+		"emoji": "",
+		"name": "Honduras",
+		"iso2": "HN",
+		"iso3": "HND",
+		"countryCode": "504",
+		"population": "7,989,415",
+		"areaKm2": "112,090",
+		"href": "https://countrycode.org/honduras"
+	},
+	{
+		"emoji": "",
+		"name": "Hong Kong",
+		"iso2": "HK",
+		"iso3": "HKG",
+		"countryCode": "852",
+		"population": "6,898,686",
+		"areaKm2": "1,092",
+		"href": "https://countrycode.org/hongkong"
+	},
+	{
+		"emoji": "",
+		"name": "Hungary",
+		"iso2": "HU",
+		"iso3": "HUN",
+		"countryCode": "36",
+		"population": "9,982,000",
+		"areaKm2": "93,030",
+		"href": "https://countrycode.org/hungary"
+	},
+	{
+		"emoji": "",
+		"name": "Iceland",
+		"iso2": "IS",
+		"iso3": "ISL",
+		"countryCode": "354",
+		"population": "308,910",
+		"areaKm2": "103,000",
+		"href": "https://countrycode.org/iceland"
+	},
+	{
+		"emoji": "",
+		"name": "India",
+		"iso2": "IN",
+		"iso3": "IND",
+		"countryCode": "91",
+		"population": "1,173,108,018",
+		"areaKm2": "3,287,590",
+		"href": "https://countrycode.org/india"
+	},
+	{
+		"emoji": "",
+		"name": "Indonesia",
+		"iso2": "ID",
+		"iso3": "IDN",
+		"countryCode": "62",
+		"population": "242,968,342",
+		"areaKm2": "1,919,440",
+		"href": "https://countrycode.org/indonesia"
+	},
+	{
+		"emoji": "",
+		"name": "Iran",
+		"iso2": "IR",
+		"iso3": "IRN",
+		"countryCode": "98",
+		"population": "76,923,300",
+		"areaKm2": "1,648,000",
+		"href": "https://countrycode.org/iran"
+	},
+	{
+		"emoji": "",
+		"name": "Iraq",
+		"iso2": "IQ",
+		"iso3": "IRQ",
+		"countryCode": "964",
+		"population": "29,671,605",
+		"areaKm2": "437,072",
+		"href": "https://countrycode.org/iraq"
+	},
+	{
+		"emoji": "",
+		"name": "Ireland",
+		"iso2": "IE",
+		"iso3": "IRL",
+		"countryCode": "353",
+		"population": "4,622,917",
+		"areaKm2": "70,280",
+		"href": "https://countrycode.org/ireland"
+	},
+	{
+		"emoji": "",
+		"name": "Isle of Man",
+		"iso2": "IM",
+		"iso3": "IMN",
+		"countryCode": "44-1624",
+		"population": "75,049",
+		"areaKm2": "572",
+		"href": "https://countrycode.org/isleofman"
+	},
+	{
+		"emoji": "",
+		"name": "Israel",
+		"iso2": "IL",
+		"iso3": "ISR",
+		"countryCode": "972",
+		"population": "7,353,985",
+		"areaKm2": "20,770",
+		"href": "https://countrycode.org/israel"
+	},
+	{
+		"emoji": "",
+		"name": "Italy",
+		"iso2": "IT",
+		"iso3": "ITA",
+		"countryCode": "39",
+		"population": "60,340,328",
+		"areaKm2": "301,230",
+		"href": "https://countrycode.org/italy"
+	},
+	{
+		"emoji": "",
+		"name": "Ivory Coast",
+		"iso2": "CI",
+		"iso3": "CIV",
+		"countryCode": "225",
+		"population": "21,058,798",
+		"areaKm2": "322,460",
+		"href": "https://countrycode.org/ivorycoast"
+	},
+	{
+		"emoji": "",
+		"name": "Jamaica",
+		"iso2": "JM",
+		"iso3": "JAM",
+		"countryCode": "1-876",
+		"population": "2,847,232",
+		"areaKm2": "10,991",
+		"href": "https://countrycode.org/jamaica"
+	},
+	{
+		"emoji": "",
+		"name": "Japan",
+		"iso2": "JP",
+		"iso3": "JPN",
+		"countryCode": "81",
+		"population": "127,288,000",
+		"areaKm2": "377,835",
+		"href": "https://countrycode.org/japan"
+	},
+	{
+		"emoji": "",
+		"name": "Jersey",
+		"iso2": "JE",
+		"iso3": "JEY",
+		"countryCode": "44-1534",
+		"population": "90,812",
+		"areaKm2": "116",
+		"href": "https://countrycode.org/jersey"
+	},
+	{
+		"emoji": "",
+		"name": "Jordan",
+		"iso2": "JO",
+		"iso3": "JOR",
+		"countryCode": "962",
+		"population": "6,407,085",
+		"areaKm2": "92,300",
+		"href": "https://countrycode.org/jordan"
+	},
+	{
+		"emoji": "",
+		"name": "Kazakhstan",
+		"iso2": "KZ",
+		"iso3": "KAZ",
+		"countryCode": "7",
+		"population": "15,340,000",
+		"areaKm2": "2,717,300",
+		"href": "https://countrycode.org/kazakhstan"
+	},
+	{
+		"emoji": "",
+		"name": "Kenya",
+		"iso2": "KE",
+		"iso3": "KEN",
+		"countryCode": "254",
+		"population": "40,046,566",
+		"areaKm2": "582,650",
+		"href": "https://countrycode.org/kenya"
+	},
+	{
+		"emoji": "",
+		"name": "Kiribati",
+		"iso2": "KI",
+		"iso3": "KIR",
+		"countryCode": "686",
+		"population": "92,533",
+		"areaKm2": "811",
+		"href": "https://countrycode.org/kiribati"
+	},
+	{
+		"emoji": "",
+		"name": "Kosovo",
+		"iso2": "XK",
+		"iso3": "XKX",
+		"countryCode": "383",
+		"population": "1,800,000",
+		"areaKm2": "10,887",
+		"href": "https://countrycode.org/kosovo"
+	},
+	{
+		"emoji": "",
+		"name": "Kuwait",
+		"iso2": "KW",
+		"iso3": "KWT",
+		"countryCode": "965",
+		"population": "2,789,132",
+		"areaKm2": "17,820",
+		"href": "https://countrycode.org/kuwait"
+	},
+	{
+		"emoji": "",
+		"name": "Kyrgyzstan",
+		"iso2": "KG",
+		"iso3": "KGZ",
+		"countryCode": "996",
+		"population": "5,508,626",
+		"areaKm2": "198,500",
+		"href": "https://countrycode.org/kyrgyzstan"
+	},
+	{
+		"emoji": "",
+		"name": "Laos",
+		"iso2": "LA",
+		"iso3": "LAO",
+		"countryCode": "856",
+		"population": "6,368,162",
+		"areaKm2": "236,800",
+		"href": "https://countrycode.org/laos"
+	},
+	{
+		"emoji": "",
+		"name": "Latvia",
+		"iso2": "LV",
+		"iso3": "LVA",
+		"countryCode": "371",
+		"population": "2,217,969",
+		"areaKm2": "64,589",
+		"href": "https://countrycode.org/latvia"
+	},
+	{
+		"emoji": "",
+		"name": "Lebanon",
+		"iso2": "LB",
+		"iso3": "LBN",
+		"countryCode": "961",
+		"population": "4,125,247",
+		"areaKm2": "10,400",
+		"href": "https://countrycode.org/lebanon"
+	},
+	{
+		"emoji": "",
+		"name": "Lesotho",
+		"iso2": "LS",
+		"iso3": "LSO",
+		"countryCode": "266",
+		"population": "1,919,552",
+		"areaKm2": "30,355",
+		"href": "https://countrycode.org/lesotho"
+	},
+	{
+		"emoji": "",
+		"name": "Liberia",
+		"iso2": "LR",
+		"iso3": "LBR",
+		"countryCode": "231",
+		"population": "3,685,076",
+		"areaKm2": "111,370",
+		"href": "https://countrycode.org/liberia"
+	},
+	{
+		"emoji": "",
+		"name": "Libya",
+		"iso2": "LY",
+		"iso3": "LBY",
+		"countryCode": "218",
+		"population": "6,461,454",
+		"areaKm2": "1,759,540",
+		"href": "https://countrycode.org/libya"
+	},
+	{
+		"emoji": "",
+		"name": "Liechtenstein",
+		"iso2": "LI",
+		"iso3": "LIE",
+		"countryCode": "423",
+		"population": "35,000",
+		"areaKm2": "160",
+		"href": "https://countrycode.org/liechtenstein"
+	},
+	{
+		"emoji": "",
+		"name": "Lithuania",
+		"iso2": "LT",
+		"iso3": "LTU",
+		"countryCode": "370",
+		"population": "2,944,459",
+		"areaKm2": "65,200",
+		"href": "https://countrycode.org/lithuania"
+	},
+	{
+		"emoji": "",
+		"name": "Luxembourg",
+		"iso2": "LU",
+		"iso3": "LUX",
+		"countryCode": "352",
+		"population": "497,538",
+		"areaKm2": "2,586",
+		"href": "https://countrycode.org/luxembourg"
+	},
+	{
+		"emoji": "",
+		"name": "Macau",
+		"iso2": "MO",
+		"iso3": "MAC",
+		"countryCode": "853",
+		"population": "449,198",
+		"areaKm2": "254",
+		"href": "https://countrycode.org/macau"
+	},
+	{
+		"emoji": "",
+		"name": "Macedonia",
+		"iso2": "MK",
+		"iso3": "MKD",
+		"countryCode": "389",
+		"population": "2,062,294",
+		"areaKm2": "25,333",
+		"href": "https://countrycode.org/macedonia"
+	},
+	{
+		"emoji": "",
+		"name": "Madagascar",
+		"iso2": "MG",
+		"iso3": "MDG",
+		"countryCode": "261",
+		"population": "21,281,844",
+		"areaKm2": "587,040",
+		"href": "https://countrycode.org/madagascar"
+	},
+	{
+		"emoji": "",
+		"name": "Malawi",
+		"iso2": "MW",
+		"iso3": "MWI",
+		"countryCode": "265",
+		"population": "15,447,500",
+		"areaKm2": "118,480",
+		"href": "https://countrycode.org/malawi"
+	},
+	{
+		"emoji": "",
+		"name": "Malaysia",
+		"iso2": "MY",
+		"iso3": "MYS",
+		"countryCode": "60",
+		"population": "28,274,729",
+		"areaKm2": "329,750",
+		"href": "https://countrycode.org/malaysia"
+	},
+	{
+		"emoji": "",
+		"name": "Maldives",
+		"iso2": "MV",
+		"iso3": "MDV",
+		"countryCode": "960",
+		"population": "395,650",
+		"areaKm2": "300",
+		"href": "https://countrycode.org/maldives"
+	},
+	{
+		"emoji": "",
+		"name": "Mali",
+		"iso2": "ML",
+		"iso3": "MLI",
+		"countryCode": "223",
+		"population": "13,796,354",
+		"areaKm2": "1,240,000",
+		"href": "https://countrycode.org/mali"
+	},
+	{
+		"emoji": "",
+		"name": "Malta",
+		"iso2": "MT",
+		"iso3": "MLT",
+		"countryCode": "356",
+		"population": "403,000",
+		"areaKm2": "316",
+		"href": "https://countrycode.org/malta"
+	},
+	{
+		"emoji": "",
+		"name": "Marshall Islands",
+		"iso2": "MH",
+		"iso3": "MHL",
+		"countryCode": "692",
+		"population": "65,859",
+		"areaKm2": "181",
+		"href": "https://countrycode.org/marshallislands"
+	},
+	{
+		"emoji": "",
+		"name": "Mauritania",
+		"iso2": "MR",
+		"iso3": "MRT",
+		"countryCode": "222",
+		"population": "3,205,060",
+		"areaKm2": "1,030,700",
+		"href": "https://countrycode.org/mauritania"
+	},
+	{
+		"emoji": "",
+		"name": "Mauritius",
+		"iso2": "MU",
+		"iso3": "MUS",
+		"countryCode": "230",
+		"population": "1,294,104",
+		"areaKm2": "2,040",
+		"href": "https://countrycode.org/mauritius"
+	},
+	{
+		"emoji": "",
+		"name": "Mayotte",
+		"iso2": "YT",
+		"iso3": "MYT",
+		"countryCode": "262",
+		"population": "159,042",
+		"areaKm2": "374",
+		"href": "https://countrycode.org/mayotte"
+	},
+	{
+		"emoji": "",
+		"name": "Mexico",
+		"iso2": "MX",
+		"iso3": "MEX",
+		"countryCode": "52",
+		"population": "112,468,855",
+		"areaKm2": "1,972,550",
+		"href": "https://countrycode.org/mexico"
+	},
+	{
+		"emoji": "",
+		"name": "Micronesia",
+		"iso2": "FM",
+		"iso3": "FSM",
+		"countryCode": "691",
+		"population": "107,708",
+		"areaKm2": "702",
+		"href": "https://countrycode.org/micronesia"
+	},
+	{
+		"emoji": "",
+		"name": "Moldova",
+		"iso2": "MD",
+		"iso3": "MDA",
+		"countryCode": "373",
+		"population": "4,324,000",
+		"areaKm2": "33,843",
+		"href": "https://countrycode.org/moldova"
+	},
+	{
+		"emoji": "",
+		"name": "Monaco",
+		"iso2": "MC",
+		"iso3": "MCO",
+		"countryCode": "377",
+		"population": "32,965",
+		"areaKm2": "2",
+		"href": "https://countrycode.org/monaco"
+	},
+	{
+		"emoji": "",
+		"name": "Mongolia",
+		"iso2": "MN",
+		"iso3": "MNG",
+		"countryCode": "976",
+		"population": "3,086,918",
+		"areaKm2": "1,565,000",
+		"href": "https://countrycode.org/mongolia"
+	},
+	{
+		"emoji": "",
+		"name": "Montenegro",
+		"iso2": "ME",
+		"iso3": "MNE",
+		"countryCode": "382",
+		"population": "666,730",
+		"areaKm2": "14,026",
+		"href": "https://countrycode.org/montenegro"
+	},
+	{
+		"emoji": "",
+		"name": "Montserrat",
+		"iso2": "MS",
+		"iso3": "MSR",
+		"countryCode": "1-664",
+		"population": "9,341",
+		"areaKm2": "102",
+		"href": "https://countrycode.org/montserrat"
+	},
+	{
+		"emoji": "",
+		"name": "Morocco",
+		"iso2": "MA",
+		"iso3": "MAR",
+		"countryCode": "212",
+		"population": "31,627,428",
+		"areaKm2": "446,550",
+		"href": "https://countrycode.org/morocco"
+	},
+	{
+		"emoji": "",
+		"name": "Mozambique",
+		"iso2": "MZ",
+		"iso3": "MOZ",
+		"countryCode": "258",
+		"population": "22,061,451",
+		"areaKm2": "801,590",
+		"href": "https://countrycode.org/mozambique"
+	},
+	{
+		"emoji": "",
+		"name": "Myanmar",
+		"iso2": "MM",
+		"iso3": "MMR",
+		"countryCode": "95",
+		"population": "53,414,374",
+		"areaKm2": "678,500",
+		"href": "https://countrycode.org/burma"
+	},
+	{
+		"emoji": "",
+		"name": "Namibia",
+		"iso2": "NA",
+		"iso3": "NAM",
+		"countryCode": "264",
+		"population": "2,128,471",
+		"areaKm2": "825,418",
+		"href": "https://countrycode.org/namibia"
+	},
+	{
+		"emoji": "",
+		"name": "Nauru",
+		"iso2": "NR",
+		"iso3": "NRU",
+		"countryCode": "674",
+		"population": "10,065",
+		"areaKm2": "21",
+		"href": "https://countrycode.org/nauru"
+	},
+	{
+		"emoji": "",
+		"name": "Nepal",
+		"iso2": "NP",
+		"iso3": "NPL",
+		"countryCode": "977",
+		"population": "28,951,852",
+		"areaKm2": "140,800",
+		"href": "https://countrycode.org/nepal"
+	},
+	{
+		"emoji": "",
+		"name": "Netherlands",
+		"iso2": "NL",
+		"iso3": "NLD",
+		"countryCode": "31",
+		"population": "16,645,000",
+		"areaKm2": "41,526",
+		"href": "https://countrycode.org/netherlands"
+	},
+	{
+		"emoji": "",
+		"name": "Netherlands Antilles",
+		"iso2": "AN",
+		"iso3": "ANT",
+		"countryCode": "599",
+		"population": "136,197",
+		"areaKm2": "960",
+		"href": "https://countrycode.org/netherlandsantilles"
+	},
+	{
+		"emoji": "",
+		"name": "New Caledonia",
+		"iso2": "NC",
+		"iso3": "NCL",
+		"countryCode": "687",
+		"population": "216,494",
+		"areaKm2": "19,060",
+		"href": "https://countrycode.org/newcaledonia"
+	},
+	{
+		"emoji": "",
+		"name": "New Zealand",
+		"iso2": "NZ",
+		"iso3": "NZL",
+		"countryCode": "64",
+		"population": "4,252,277",
+		"areaKm2": "268,680",
+		"href": "https://countrycode.org/newzealand"
+	},
+	{
+		"emoji": "",
+		"name": "Nicaragua",
+		"iso2": "NI",
+		"iso3": "NIC",
+		"countryCode": "505",
+		"population": "5,995,928",
+		"areaKm2": "129,494",
+		"href": "https://countrycode.org/nicaragua"
+	},
+	{
+		"emoji": "",
+		"name": "Niger",
+		"iso2": "NE",
+		"iso3": "NER",
+		"countryCode": "227",
+		"population": "15,878,271",
+		"areaKm2": "1,267,000",
+		"href": "https://countrycode.org/niger"
+	},
+	{
+		"emoji": "",
+		"name": "Nigeria",
+		"iso2": "NG",
+		"iso3": "NGA",
+		"countryCode": "234",
+		"population": "154,000,000",
+		"areaKm2": "923,768",
+		"href": "https://countrycode.org/nigeria"
+	},
+	{
+		"emoji": "",
+		"name": "Niue",
+		"iso2": "NU",
+		"iso3": "NIU",
+		"countryCode": "683",
+		"population": "2,166",
+		"areaKm2": "260",
+		"href": "https://countrycode.org/niue"
+	},
+	{
+		"emoji": "",
+		"name": "North Korea",
+		"iso2": "KP",
+		"iso3": "PRK",
+		"countryCode": "850",
+		"population": "22,912,177",
+		"areaKm2": "120,540",
+		"href": "https://countrycode.org/northkorea"
+	},
+	{
+		"emoji": "",
+		"name": "Northern Mariana Islands",
+		"iso2": "MP",
+		"iso3": "MNP",
+		"countryCode": "1-670",
+		"population": "53,883",
+		"areaKm2": "477",
+		"href": "https://countrycode.org/northernmarianaislands"
+	},
+	{
+		"emoji": "",
+		"name": "Norway",
+		"iso2": "NO",
+		"iso3": "NOR",
+		"countryCode": "47",
+		"population": "5,009,150",
+		"areaKm2": "324,220",
+		"href": "https://countrycode.org/norway"
+	},
+	{
+		"emoji": "",
+		"name": "Oman",
+		"iso2": "OM",
+		"iso3": "OMN",
+		"countryCode": "968",
+		"population": "2,967,717",
+		"areaKm2": "212,460",
+		"href": "https://countrycode.org/oman"
+	},
+	{
+		"emoji": "",
+		"name": "Pakistan",
+		"iso2": "PK",
+		"iso3": "PAK",
+		"countryCode": "92",
+		"population": "184,404,791",
+		"areaKm2": "803,940",
+		"href": "https://countrycode.org/pakistan"
+	},
+	{
+		"emoji": "",
+		"name": "Palau",
+		"iso2": "PW",
+		"iso3": "PLW",
+		"countryCode": "680",
+		"population": "19,907",
+		"areaKm2": "458",
+		"href": "https://countrycode.org/palau"
+	},
+	{
+		"emoji": "",
+		"name": "Palestine",
+		"iso2": "PS",
+		"iso3": "PSE",
+		"countryCode": "970",
+		"population": "3,800,000",
+		"areaKm2": "5,970",
+		"href": "https://countrycode.org/palestine"
+	},
+	{
+		"emoji": "",
+		"name": "Panama",
+		"iso2": "PA",
+		"iso3": "PAN",
+		"countryCode": "507",
+		"population": "3,410,676",
+		"areaKm2": "78,200",
+		"href": "https://countrycode.org/panama"
+	},
+	{
+		"emoji": "",
+		"name": "Papua New Guinea",
+		"iso2": "PG",
+		"iso3": "PNG",
+		"countryCode": "675",
+		"population": "6,064,515",
+		"areaKm2": "462,840",
+		"href": "https://countrycode.org/papuanewguinea"
+	},
+	{
+		"emoji": "",
+		"name": "Paraguay",
+		"iso2": "PY",
+		"iso3": "PRY",
+		"countryCode": "595",
+		"population": "6,375,830",
+		"areaKm2": "406,750",
+		"href": "https://countrycode.org/paraguay"
+	},
+	{
+		"emoji": "",
+		"name": "Peru",
+		"iso2": "PE",
+		"iso3": "PER",
+		"countryCode": "51",
+		"population": "29,907,003",
+		"areaKm2": "1,285,220",
+		"href": "https://countrycode.org/peru"
+	},
+	{
+		"emoji": "",
+		"name": "Philippines",
+		"iso2": "PH",
+		"iso3": "PHL",
+		"countryCode": "63",
+		"population": "99,900,177",
+		"areaKm2": "300,000",
+		"href": "https://countrycode.org/philippines"
+	},
+	{
+		"emoji": "",
+		"name": "Pitcairn",
+		"iso2": "PN",
+		"iso3": "PCN",
+		"countryCode": "64",
+		"population": "46",
+		"areaKm2": "47",
+		"href": "https://countrycode.org/pitcairnislands"
+	},
+	{
+		"emoji": "",
+		"name": "Poland",
+		"iso2": "PL",
+		"iso3": "POL",
+		"countryCode": "48",
+		"population": "38,500,000",
+		"areaKm2": "312,685",
+		"href": "https://countrycode.org/poland"
+	},
+	{
+		"emoji": "",
+		"name": "Portugal",
+		"iso2": "PT",
+		"iso3": "PRT",
+		"countryCode": "351",
+		"population": "10,676,000",
+		"areaKm2": "92,391",
+		"href": "https://countrycode.org/portugal"
+	},
+	{
+		"emoji": "",
+		"name": "Puerto Rico",
+		"iso2": "PR",
+		"iso3": "PRI",
+		"countryCode": "1-787, 1-939",
+		"population": "3,916,632",
+		"areaKm2": "9,104",
+		"href": "https://countrycode.org/puertorico"
+	},
+	{
+		"emoji": "",
+		"name": "Qatar",
+		"iso2": "QA",
+		"iso3": "QAT",
+		"countryCode": "974",
+		"population": "840,926",
+		"areaKm2": "11,437",
+		"href": "https://countrycode.org/qatar"
+	},
+	{
+		"emoji": "",
+		"name": "Republic of the Congo",
+		"iso2": "CG",
+		"iso3": "COG",
+		"countryCode": "242",
+		"population": "3,039,126",
+		"areaKm2": "342,000",
+		"href": "https://countrycode.org/congo"
+	},
+	{
+		"emoji": "",
+		"name": "Reunion",
+		"iso2": "RE",
+		"iso3": "REU",
+		"countryCode": "262",
+		"population": "776,948",
+		"areaKm2": "2,517",
+		"href": "https://countrycode.org/reunion"
+	},
+	{
+		"emoji": "",
+		"name": "Romania",
+		"iso2": "RO",
+		"iso3": "ROU",
+		"countryCode": "40",
+		"population": "21,959,278",
+		"areaKm2": "237,500",
+		"href": "https://countrycode.org/romania"
+	},
+	{
+		"emoji": "",
+		"name": "Russia",
+		"iso2": "RU",
+		"iso3": "RUS",
+		"countryCode": "7",
+		"population": "140,702,000",
+		"areaKm2": "17,100,000",
+		"href": "https://countrycode.org/russia"
+	},
+	{
+		"emoji": "",
+		"name": "Rwanda",
+		"iso2": "RW",
+		"iso3": "RWA",
+		"countryCode": "250",
+		"population": "11,055,976",
+		"areaKm2": "26,338",
+		"href": "https://countrycode.org/rwanda"
+	},
+	{
+		"emoji": "",
+		"name": "Saint Barthelemy",
+		"iso2": "BL",
+		"iso3": "BLM",
+		"countryCode": "590",
+		"population": "8,450",
+		"areaKm2": "21",
+		"href": "https://countrycode.org/saintbarthelemy"
+	},
+	{
+		"emoji": "",
+		"name": "Saint Helena",
+		"iso2": "SH",
+		"iso3": "SHN",
+		"countryCode": "290",
+		"population": "7,460",
+		"areaKm2": "410",
+		"href": "https://countrycode.org/sthelena"
+	},
+	{
+		"emoji": "",
+		"name": "Saint Kitts and Nevis",
+		"iso2": "KN",
+		"iso3": "KNA",
+		"countryCode": "1-869",
+		"population": "51,134",
+		"areaKm2": "261",
+		"href": "https://countrycode.org/stkitts"
+	},
+	{
+		"emoji": "",
+		"name": "Saint Lucia",
+		"iso2": "LC",
+		"iso3": "LCA",
+		"countryCode": "1-758",
+		"population": "160,922",
+		"areaKm2": "616",
+		"href": "https://countrycode.org/stlucia"
+	},
+	{
+		"emoji": "",
+		"name": "Saint Martin",
+		"iso2": "MF",
+		"iso3": "MAF",
+		"countryCode": "590",
+		"population": "35,925",
+		"areaKm2": "53",
+		"href": "https://countrycode.org/stmartin"
+	},
+	{
+		"emoji": "",
+		"name": "Saint Pierre and Miquelon",
+		"iso2": "PM",
+		"iso3": "SPM",
+		"countryCode": "508",
+		"population": "7,012",
+		"areaKm2": "242",
+		"href": "https://countrycode.org/stpierre"
+	},
+	{
+		"emoji": "",
+		"name": "Saint Vincent and the Grenadines",
+		"iso2": "VC",
+		"iso3": "VCT",
+		"countryCode": "1-784",
+		"population": "104,217",
+		"areaKm2": "389",
+		"href": "https://countrycode.org/stvincent"
+	},
+	{
+		"emoji": "",
+		"name": "Samoa",
+		"iso2": "WS",
+		"iso3": "WSM",
+		"countryCode": "685",
+		"population": "192,001",
+		"areaKm2": "2,944",
+		"href": "https://countrycode.org/samoa"
+	},
+	{
+		"emoji": "",
+		"name": "San Marino",
+		"iso2": "SM",
+		"iso3": "SMR",
+		"countryCode": "378",
+		"population": "31,477",
+		"areaKm2": "61",
+		"href": "https://countrycode.org/sanmarino"
+	},
+	{
+		"emoji": "",
+		"name": "Sao Tome and Principe",
+		"iso2": "ST",
+		"iso3": "STP",
+		"countryCode": "239",
+		"population": "175,808",
+		"areaKm2": "1,001",
+		"href": "https://countrycode.org/saotomeandprincipe"
+	},
+	{
+		"emoji": "",
+		"name": "Saudi Arabia",
+		"iso2": "SA",
+		"iso3": "SAU",
+		"countryCode": "966",
+		"population": "25,731,776",
+		"areaKm2": "1,960,582",
+		"href": "https://countrycode.org/saudiarabia"
+	},
+	{
+		"emoji": "",
+		"name": "Senegal",
+		"iso2": "SN",
+		"iso3": "SEN",
+		"countryCode": "221",
+		"population": "12,323,252",
+		"areaKm2": "196,190",
+		"href": "https://countrycode.org/senegal"
+	},
+	{
+		"emoji": "",
+		"name": "Serbia",
+		"iso2": "RS",
+		"iso3": "SRB",
+		"countryCode": "381",
+		"population": "7,344,847",
+		"areaKm2": "88,361",
+		"href": "https://countrycode.org/serbia"
+	},
+	{
+		"emoji": "",
+		"name": "Seychelles",
+		"iso2": "SC",
+		"iso3": "SYC",
+		"countryCode": "248",
+		"population": "88,340",
+		"areaKm2": "455",
+		"href": "https://countrycode.org/seychelles"
+	},
+	{
+		"emoji": "",
+		"name": "Sierra Leone",
+		"iso2": "SL",
+		"iso3": "SLE",
+		"countryCode": "232",
+		"population": "5,245,695",
+		"areaKm2": "71,740",
+		"href": "https://countrycode.org/sierraleone"
+	},
+	{
+		"emoji": "",
+		"name": "Singapore",
+		"iso2": "SG",
+		"iso3": "SGP",
+		"countryCode": "65",
+		"population": "4,701,069",
+		"areaKm2": "693",
+		"href": "https://countrycode.org/singapore"
+	},
+	{
+		"emoji": "",
+		"name": "Sint Maarten",
+		"iso2": "SX",
+		"iso3": "SXM",
+		"countryCode": "1-721",
+		"population": "37,429",
+		"areaKm2": "34",
+		"href": "https://countrycode.org/sintmaarten"
+	},
+	{
+		"emoji": "",
+		"name": "Slovakia",
+		"iso2": "SK",
+		"iso3": "SVK",
+		"countryCode": "421",
+		"population": "5,455,000",
+		"areaKm2": "48,845",
+		"href": "https://countrycode.org/slovakia"
+	},
+	{
+		"emoji": "",
+		"name": "Slovenia",
+		"iso2": "SI",
+		"iso3": "SVN",
+		"countryCode": "386",
+		"population": "2,007,000",
+		"areaKm2": "20,273",
+		"href": "https://countrycode.org/slovenia"
+	},
+	{
+		"emoji": "",
+		"name": "Solomon Islands",
+		"iso2": "SB",
+		"iso3": "SLB",
+		"countryCode": "677",
+		"population": "559,198",
+		"areaKm2": "28,450",
+		"href": "https://countrycode.org/solomonislands"
+	},
+	{
+		"emoji": "",
+		"name": "Somalia",
+		"iso2": "SO",
+		"iso3": "SOM",
+		"countryCode": "252",
+		"population": "10,112,453",
+		"areaKm2": "637,657",
+		"href": "https://countrycode.org/somalia"
+	},
+	{
+		"emoji": "",
+		"name": "South Africa",
+		"iso2": "ZA",
+		"iso3": "ZAF",
+		"countryCode": "27",
+		"population": "49,000,000",
+		"areaKm2": "1,219,912",
+		"href": "https://countrycode.org/southafrica"
+	},
+	{
+		"emoji": "",
+		"name": "South Korea",
+		"iso2": "KR",
+		"iso3": "KOR",
+		"countryCode": "82",
+		"population": "48,422,644",
+		"areaKm2": "98,480",
+		"href": "https://countrycode.org/southkorea"
+	},
+	{
+		"emoji": "",
+		"name": "South Sudan",
+		"iso2": "SS",
+		"iso3": "SSD",
+		"countryCode": "211",
+		"population": "8,260,490",
+		"areaKm2": "644,329",
+		"href": "https://countrycode.org/southsudan"
+	},
+	{
+		"emoji": "",
+		"name": "Spain",
+		"iso2": "ES",
+		"iso3": "ESP",
+		"countryCode": "34",
+		"population": "46,505,963",
+		"areaKm2": "504,782",
+		"href": "https://countrycode.org/spain"
+	},
+	{
+		"emoji": "",
+		"name": "Sri Lanka",
+		"iso2": "LK",
+		"iso3": "LKA",
+		"countryCode": "94",
+		"population": "21,513,990",
+		"areaKm2": "65,610",
+		"href": "https://countrycode.org/srilanka"
+	},
+	{
+		"emoji": "",
+		"name": "Sudan",
+		"iso2": "SD",
+		"iso3": "SDN",
+		"countryCode": "249",
+		"population": "35,000,000",
+		"areaKm2": "1,861,484",
+		"href": "https://countrycode.org/sudan"
+	},
+	{
+		"emoji": "",
+		"name": "Suriname",
+		"iso2": "SR",
+		"iso3": "SUR",
+		"countryCode": "597",
+		"population": "492,829",
+		"areaKm2": "163,270",
+		"href": "https://countrycode.org/suriname"
+	},
+	{
+		"emoji": "",
+		"name": "Svalbard and Jan Mayen",
+		"iso2": "SJ",
+		"iso3": "SJM",
+		"countryCode": "47",
+		"population": "2,550",
+		"areaKm2": "62,049",
+		"href": "https://countrycode.org/svalbard"
+	},
+	{
+		"emoji": "",
+		"name": "Swaziland",
+		"iso2": "SZ",
+		"iso3": "SWZ",
+		"countryCode": "268",
+		"population": "1,354,051",
+		"areaKm2": "17,363",
+		"href": "https://countrycode.org/swaziland"
+	},
+	{
+		"emoji": "",
+		"name": "Sweden",
+		"iso2": "SE",
+		"iso3": "SWE",
+		"countryCode": "46",
+		"population": "9,555,893",
+		"areaKm2": "449,964",
+		"href": "https://countrycode.org/sweden"
+	},
+	{
+		"emoji": "",
+		"name": "Switzerland",
+		"iso2": "CH",
+		"iso3": "CHE",
+		"countryCode": "41",
+		"population": "7,581,000",
+		"areaKm2": "41,290",
+		"href": "https://countrycode.org/switzerland"
+	},
+	{
+		"emoji": "",
+		"name": "Syria",
+		"iso2": "SY",
+		"iso3": "SYR",
+		"countryCode": "963",
+		"population": "22,198,110",
+		"areaKm2": "185,180",
+		"href": "https://countrycode.org/syria"
+	},
+	{
+		"emoji": "",
+		"name": "Taiwan",
+		"iso2": "TW",
+		"iso3": "TWN",
+		"countryCode": "886",
+		"population": "22,894,384",
+		"areaKm2": "35,980",
+		"href": "https://countrycode.org/taiwan"
+	},
+	{
+		"emoji": "",
+		"name": "Tajikistan",
+		"iso2": "TJ",
+		"iso3": "TJK",
+		"countryCode": "992",
+		"population": "7,487,489",
+		"areaKm2": "143,100",
+		"href": "https://countrycode.org/tajikistan"
+	},
+	{
+		"emoji": "",
+		"name": "Tanzania",
+		"iso2": "TZ",
+		"iso3": "TZA",
+		"countryCode": "255",
+		"population": "41,892,895",
+		"areaKm2": "945,087",
+		"href": "https://countrycode.org/tanzania"
+	},
+	{
+		"emoji": "",
+		"name": "Thailand",
+		"iso2": "TH",
+		"iso3": "THA",
+		"countryCode": "66",
+		"population": "67,089,500",
+		"areaKm2": "514,000",
+		"href": "https://countrycode.org/thailand"
+	},
+	{
+		"emoji": "",
+		"name": "Togo",
+		"iso2": "TG",
+		"iso3": "TGO",
+		"countryCode": "228",
+		"population": "6,587,239",
+		"areaKm2": "56,785",
+		"href": "https://countrycode.org/togo"
+	},
+	{
+		"emoji": "",
+		"name": "Tokelau",
+		"iso2": "TK",
+		"iso3": "TKL",
+		"countryCode": "690",
+		"population": "1,466",
+		"areaKm2": "10",
+		"href": "https://countrycode.org/tokelau"
+	},
+	{
+		"emoji": "",
+		"name": "Tonga",
+		"iso2": "TO",
+		"iso3": "TON",
+		"countryCode": "676",
+		"population": "122,580",
+		"areaKm2": "748",
+		"href": "https://countrycode.org/tonga"
+	},
+	{
+		"emoji": "",
+		"name": "Trinidad and Tobago",
+		"iso2": "TT",
+		"iso3": "TTO",
+		"countryCode": "1-868",
+		"population": "1,228,691",
+		"areaKm2": "5,128",
+		"href": "https://countrycode.org/trinidadandtobago"
+	},
+	{
+		"emoji": "",
+		"name": "Tunisia",
+		"iso2": "TN",
+		"iso3": "TUN",
+		"countryCode": "216",
+		"population": "10,589,025",
+		"areaKm2": "163,610",
+		"href": "https://countrycode.org/tunisia"
+	},
+	{
+		"emoji": "",
+		"name": "Turkey",
+		"iso2": "TR",
+		"iso3": "TUR",
+		"countryCode": "90",
+		"population": "77,804,122",
+		"areaKm2": "780,580",
+		"href": "https://countrycode.org/turkey"
+	},
+	{
+		"emoji": "",
+		"name": "Turkmenistan",
+		"iso2": "TM",
+		"iso3": "TKM",
+		"countryCode": "993",
+		"population": "4,940,916",
+		"areaKm2": "488,100",
+		"href": "https://countrycode.org/turkmenistan"
+	},
+	{
+		"emoji": "",
+		"name": "Turks and Caicos Islands",
+		"iso2": "TC",
+		"iso3": "TCA",
+		"countryCode": "1-649",
+		"population": "20,556",
+		"areaKm2": "430",
+		"href": "https://countrycode.org/turksandcaicos"
+	},
+	{
+		"emoji": "",
+		"name": "Tuvalu",
+		"iso2": "TV",
+		"iso3": "TUV",
+		"countryCode": "688",
+		"population": "10,472",
+		"areaKm2": "26",
+		"href": "https://countrycode.org/tuvalu"
+	},
+	{
+		"emoji": "",
+		"name": "U.S. Virgin Islands",
+		"iso2": "VI",
+		"iso3": "VIR",
+		"countryCode": "1-340",
+		"population": "108,708",
+		"areaKm2": "352",
+		"href": "https://countrycode.org/virginislands"
+	},
+	{
+		"emoji": "",
+		"name": "Uganda",
+		"iso2": "UG",
+		"iso3": "UGA",
+		"countryCode": "256",
+		"population": "33,398,682",
+		"areaKm2": "236,040",
+		"href": "https://countrycode.org/uganda"
+	},
+	{
+		"emoji": "",
+		"name": "Ukraine",
+		"iso2": "UA",
+		"iso3": "UKR",
+		"countryCode": "380",
+		"population": "45,415,596",
+		"areaKm2": "603,700",
+		"href": "https://countrycode.org/ukraine"
+	},
+	{
+		"emoji": "",
+		"name": "United Arab Emirates",
+		"iso2": "AE",
+		"iso3": "ARE",
+		"countryCode": "971",
+		"population": "4,975,593",
+		"areaKm2": "82,880",
+		"href": "https://countrycode.org/uae"
+	},
+	{
+		"emoji": "",
+		"name": "United Kingdom",
+		"iso2": "GB",
+		"iso3": "GBR",
+		"countryCode": "44",
+		"population": "62,348,447",
+		"areaKm2": "244,820",
+		"href": "https://countrycode.org/uk"
+	},
+	{
+		"emoji": "",
+		"name": "United States",
+		"iso2": "US",
+		"iso3": "USA",
+		"countryCode": "1",
+		"population": "310,232,863",
+		"areaKm2": "9,629,091",
+		"href": "https://countrycode.org/usa"
+	},
+	{
+		"emoji": "",
+		"name": "Uruguay",
+		"iso2": "UY",
+		"iso3": "URY",
+		"countryCode": "598",
+		"population": "3,477,000",
+		"areaKm2": "176,220",
+		"href": "https://countrycode.org/uruguay"
+	},
+	{
+		"emoji": "",
+		"name": "Uzbekistan",
+		"iso2": "UZ",
+		"iso3": "UZB",
+		"countryCode": "998",
+		"population": "27,865,738",
+		"areaKm2": "447,400",
+		"href": "https://countrycode.org/uzbekistan"
+	},
+	{
+		"emoji": "",
+		"name": "Vanuatu",
+		"iso2": "VU",
+		"iso3": "VUT",
+		"countryCode": "678",
+		"population": "221,552",
+		"areaKm2": "12,200",
+		"href": "https://countrycode.org/vanuatu"
+	},
+	{
+		"emoji": "",
+		"name": "Vatican",
+		"iso2": "VA",
+		"iso3": "VAT",
+		"countryCode": "379",
+		"population": "921",
+		"areaKm2": "0",
+		"href": "https://countrycode.org/vatican"
+	},
+	{
+		"emoji": "",
+		"name": "Venezuela",
+		"iso2": "VE",
+		"iso3": "VEN",
+		"countryCode": "58",
+		"population": "27,223,228",
+		"areaKm2": "912,050",
+		"href": "https://countrycode.org/venezuela"
+	},
+	{
+		"emoji": "",
+		"name": "Vietnam",
+		"iso2": "VN",
+		"iso3": "VNM",
+		"countryCode": "84",
+		"population": "89,571,130",
+		"areaKm2": "329,560",
+		"href": "https://countrycode.org/vietnam"
+	},
+	{
+		"emoji": "",
+		"name": "Wallis and Futuna",
+		"iso2": "WF",
+		"iso3": "WLF",
+		"countryCode": "681",
+		"population": "16,025",
+		"areaKm2": "274",
+		"href": "https://countrycode.org/wallisandfutuna"
+	},
+	{
+		"emoji": "",
+		"name": "Western Sahara",
+		"iso2": "EH",
+		"iso3": "ESH",
+		"countryCode": "212",
+		"population": "273,008",
+		"areaKm2": "266,000",
+		"href": "https://countrycode.org/westernsahara"
+	},
+	{
+		"emoji": "",
+		"name": "Yemen",
+		"iso2": "YE",
+		"iso3": "YEM",
+		"countryCode": "967",
+		"population": "23,495,361",
+		"areaKm2": "527,970",
+		"href": "https://countrycode.org/yemen"
+	},
+	{
+		"emoji": "",
+		"name": "Zambia",
+		"iso2": "ZM",
+		"iso3": "ZMB",
+		"countryCode": "260",
+		"population": "13,460,305",
+		"areaKm2": "752,614",
+		"href": "https://countrycode.org/zambia"
+	},
+	{
+		"emoji": "",
+		"name": "Zimbabwe",
+		"iso2": "ZW",
+		"iso3": "ZWE",
+		"countryCode": "263",
+		"population": "11,651,858",
+		"areaKm2": "390,580",
+		"href": "https://countrycode.org/zimbabwe"
+	}
+]
