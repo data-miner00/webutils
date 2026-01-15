@@ -7,11 +7,11 @@ export class IndexedDBRepository<T extends Entity> implements IRepository<T> {
 		private storeName: string
 	) {}
 
-	getAll(): Promise<T[]> {
+	getAll(count?: number): Promise<T[]> {
 		return new Promise((resolve, reject) => {
 			const transaction = this.db.getDb().transaction(this.storeName, 'readonly');
 			const store = transaction.objectStore(this.storeName);
-			const request = store.getAll();
+			const request = store.getAll(null, count);
 
 			request.onsuccess = () => resolve(request.result);
 			request.onerror = () => reject(request.error);
