@@ -1,7 +1,7 @@
 export const DATABASE_NAME = 'webutils';
-export const DATABASE_VERSION = 2;
+export const DATABASE_VERSION = 3;
 
-export const STORE_NAMES = ['links', 'notes'];
+export const STORE_NAMES = ['links', 'notes', 'todo_items'];
 
 export class Database {
 	private dbName: string;
