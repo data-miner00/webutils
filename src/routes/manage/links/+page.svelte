@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { defaultLinks, type Link, getAllLinks, addLink } from '$lib/core/links';
+	import { defaultLinks, STORE_NAME, type Link } from '$lib/core/links';
 	import { onMount } from 'svelte';
 	import LinkComponent from '$lib/components/custom/link/link.svelte';
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
@@ -8,11 +8,14 @@
 	import * as Dialog from '$lib/components/ui/dialog/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
+	import { db, initializeDatabase } from '$lib/core/Database';
+	import { IndexedDBRepository } from '$lib/core/IndexedDbRepository';
 
 	let links = $state<Link[]>([]);
 	let searchQuery = $state('');
 
 	let inputLink = $state<Link>({
+		id: crypto.randomUUID(),
 		title: '',
 		category: '',
 		url: '',
@@ -29,15 +32,20 @@
 	);
 
 	let isDialogOpen = $state(false);
+	const repository = new IndexedDBRepository<Link>(db, STORE_NAME);
 
 	onMount(async () => {
-		links = await getAllLinks();
+		if (!db.isDbInitialized) {
+			await initializeDatabase();
+		}
+
+		links = await repository.getAll();
 
 		if (!links.length) {
 			links = defaultLinks;
 			links.forEach(async (link) => {
 				const nonProxyLink = $state.snapshot(link);
-				await addLink(nonProxyLink);
+				await repository.create(nonProxyLink);
 			});
 		}
 	});
@@ -46,7 +54,7 @@
 		inputLink.createdAt = new Date().toISOString();
 
 		const link = $state.snapshot(inputLink);
-		await addLink(link);
+		await repository.create(link);
 
 		links.push(link);
 

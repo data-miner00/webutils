@@ -5,24 +5,31 @@
 
 	let value = $state(today(getLocalTimeZone()));
 
-	import { defaultLinks, type Link, getAllLinks, addLink } from '$lib/core/links';
+	import { defaultLinks, type Link, STORE_NAME } from '$lib/core/links';
 	import LinkComponent from '$lib/components/custom/link/link.svelte';
 	import { onMount } from 'svelte';
 	import Localhost from '$lib/components/custom/localhost/localhost.svelte';
 	import * as wasm from '../../rust-pkg/pkg/rust_pkg.js';
 	import { toast } from 'svelte-sonner';
+	import { db, initializeDatabase } from '$lib/core/Database';
+	import { IndexedDBRepository } from '$lib/core/IndexedDbRepository';
 
 	let links = $state<Link[]>([]);
 	const MAX_LINKS_COUNT = 8;
 
 	onMount(async () => {
-		links = await getAllLinks(MAX_LINKS_COUNT);
+		if (!db.isDbInitialized) {
+			await initializeDatabase();
+		}
+
+		const repository = new IndexedDBRepository<Link>(db, STORE_NAME);
+		links = await repository.getAll();
 
 		if (!links.length) {
 			links = defaultLinks;
 			links.forEach(async (link) => {
 				const nonProxyLink = $state.snapshot(link);
-				await addLink(nonProxyLink);
+				await repository.create(nonProxyLink);
 			});
 		}
 
