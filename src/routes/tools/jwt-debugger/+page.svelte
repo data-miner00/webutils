@@ -1,58 +1,240 @@
 <script lang="ts">
-	import { decodeJwt } from '$lib/core/jwt.js';
+	import {
+		decodeJwt,
+		type Response,
+		exampleDecodeJwt,
+		exampleDecodeJwt2,
+		exampleDecodeJwt3
+	} from '$lib/core/jwt.js';
 	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
 	import References from '$lib/components/custom/references/references.svelte';
+	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
+	import {
+		Album,
+		ArrowBigRight,
+		Check,
+		Clipboard,
+		EllipsisVertical,
+		Trash2,
+		X
+	} from '@lucide/svelte';
+	import { copyText } from '$lib/core/copy-to-clipboard';
 
 	let jwtInput = $state('');
 	let secret = $state('');
-	let decodedResult = $derived(await decodeJwt(jwtInput, secret));
+	let decodedResult = $state<Response>({
+		success: false,
+		message: 'No JWT decoded yet.'
+	});
+	let headerJson = $derived(
+		decodedResult.success ? JSON.stringify(decodedResult.data.header, null, 2) : ''
+	);
+	let payloadJson = $derived(
+		decodedResult.success ? JSON.stringify(decodedResult.data.payload, null, 2) : ''
+	);
+	let verified = $derived(decodedResult.success && decodedResult.verified);
+
+	async function decodeJwtInput() {
+		decodedResult = await decodeJwt(jwtInput, secret);
+	}
+
+	function clearInput() {
+		jwtInput = '';
+		secret = '';
+		decodedResult = {
+			success: false,
+			message: 'No JWT decoded yet.'
+		};
+	}
+
+	function copyEncodedInput() {
+		copyText(jwtInput);
+	}
+
+	function clearEncodedInput() {
+		jwtInput = '';
+	}
+
+	function copySecret() {
+		copyText(secret);
+	}
+
+	function clearSecret() {
+		secret = '';
+	}
+
+	function copyHeader() {
+		copyText(headerJson);
+	}
+	function copyPayload() {
+		copyText(payloadJson);
+	}
+
+	function loadExample1() {
+		jwtInput = exampleDecodeJwt.jwtToken;
+		secret = exampleDecodeJwt.secret ?? '';
+		decodeJwtInput();
+	}
+
+	function loadExample2() {
+		jwtInput = exampleDecodeJwt2.jwtToken;
+		secret = exampleDecodeJwt2.secret ?? '';
+		decodeJwtInput();
+	}
+
+	function loadExample3() {
+		jwtInput = exampleDecodeJwt3.jwtToken;
+		secret = exampleDecodeJwt3.secret ?? '';
+		decodeJwtInput();
+	}
 </script>
 
-<h1 class="text-3xl font-bold mb-4">JSON Web Token (JWT) Debugger</h1>
+<div class="mb-8 flex">
+	<section class="flex-1 pr-4">
+		<header class="flex justify-between mb-6">
+			<h2 class="text-xl font-bold block">JWT Decoder</h2>
+			<div class="flex items-center gap-4">
+				<ButtonGroup.Root>
+					<ButtonGroup.Root>
+						<Button variant="outline" onclick={loadExample1}>Example 1</Button>
+						<DropdownMenu.Root>
+							<DropdownMenu.Trigger>
+								{#snippet child({ props })}
+									<Button {...props} variant="outline" aria-label="More Options">
+										<EllipsisVertical />
+									</Button>
+								{/snippet}
+							</DropdownMenu.Trigger>
+							<DropdownMenu.Content align="end" class="w-52">
+								<DropdownMenu.Group>
+									<DropdownMenu.Item onclick={loadExample2}>
+										<Album />
+										Example 2
+									</DropdownMenu.Item>
+									<DropdownMenu.Item onclick={loadExample3}>
+										<Album />
+										Example 3
+									</DropdownMenu.Item>
+								</DropdownMenu.Group>
+							</DropdownMenu.Content>
+						</DropdownMenu.Root>
+					</ButtonGroup.Root>
+					<ButtonGroup.Root>
+						<Button size="icon" variant="destructive" onclick={clearInput}><Trash2 /></Button>
+					</ButtonGroup.Root>
+					<ButtonGroup.Root>
+						<Button size="icon" onclick={decodeJwtInput}><ArrowBigRight /></Button>
+					</ButtonGroup.Root>
+				</ButtonGroup.Root>
+			</div>
+		</header>
 
-<label for="jwtInput" class="block mb-2 font-medium">Enter JWT:</label>
-<Textarea
-	id="jwtInput"
-	placeholder="JWT Token"
-	bind:value={jwtInput}
-	rows={5}
-	autocomplete="off"
-	class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-></Textarea>
+		<div class="border border-solid border-gray-300 rounded-lg mb-4">
+			<div class="flex justify-between p-2 items-center">
+				<h2 class="font-semibold">JWT Token</h2>
 
-<Textarea
-	id="secret"
-	bind:value={secret}
-	rows={1}
-	placeholder="Secret (optional)"
-	autocomplete="off"
-	class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-></Textarea>
+				<div class="flex items-center gap-2">
+					<div class="flex items-center">
+						{#if decodedResult.success}
+							<span class="text-green-600">
+								<Check />
+							</span>
+							<span class="text-sm font-medium text-green-600"> Verified</span>
+						{:else}
+							<span class="text-red-600">
+								<X />
+							</span>
+							<span class="text-sm font-medium text-red-600">{decodedResult.message}</span>
+						{/if}
+					</div>
+					<ButtonGroup.Root>
+						<Button variant="outline" size="sm" onclick={copyEncodedInput}
+							><Clipboard /> Copy</Button
+						>
+						<Button variant="destructive" size="icon-sm" onclick={clearEncodedInput}
+							><Trash2 /></Button
+						>
+					</ButtonGroup.Root>
+				</div>
+			</div>
+			<Textarea
+				id="jwtInput"
+				placeholder="JWT Token"
+				bind:value={jwtInput}
+				rows={5}
+				autocomplete="off"
+				class="w-full p-2 h-64 border-l-0 border-r-0 border-b-0 border-gray-300 rounded-none focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 shadow-none resize-none"
+			></Textarea>
+		</div>
+		<div class="border border-solid border-gray-300 rounded-lg">
+			<div class="flex justify-between p-2 items-center">
+				<h2 class="font-semibold">Secret</h2>
+				<div class="flex items-center gap-2">
+					{#if decodedResult.success}
+						<div class="flex items-center">
+							{#if verified}
+								<span class="text-green-600">
+									<Check />
+								</span>
+								<span class="text-sm font-medium text-green-600"> Verified</span>
+							{:else}
+								<span class="text-red-600">
+									<X />
+								</span>
+								<span class="text-sm font-medium text-red-600"> Not Verified </span>
+							{/if}
+						</div>
+					{/if}
+					<ButtonGroup.Root>
+						<Button variant="outline" size="sm" onclick={copySecret}><Clipboard /> Copy</Button>
+						<Button variant="destructive" size="icon-sm" onclick={clearSecret}><Trash2 /></Button>
+					</ButtonGroup.Root>
+				</div>
+			</div>
+			<Textarea
+				id="secret"
+				placeholder="Secret (optional)"
+				bind:value={secret}
+				rows={1}
+				autocomplete="off"
+				class="w-full p-2 h-32 border-l-0 border-r-0 border-b-0 border-gray-300 rounded-none focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 shadow-none resize-none"
+			></Textarea>
+		</div>
+	</section>
 
-{#if decodedResult.success}
-	<div class="mb-4">
-		<h2 class="text-2xl font-semibold mb-2">Decoded Header:</h2>
-		<pre class="bg-gray-100 p-4 rounded-md overflow-x-auto">{JSON.stringify(
-				decodedResult.data.header,
-				null,
-				2
-			)}</pre>
-	</div>
-	<div class="mb-4">
-		<h2 class="text-2xl font-semibold mb-2">Decoded Payload:</h2>
-		<pre class="bg-gray-100 p-4 rounded-md overflow-x-auto">{JSON.stringify(
-				decodedResult.data.payload,
-				null,
-				2
-			)}</pre>
-	</div>
-	<div class="mb-4">
-		<h2 class="text-2xl font-semibold mb-2">Signature Valid:</h2>
-		<div>{decodedResult.verified ? 'Yes' : 'No'}</div>
-	</div>
-{:else}
-	<div class="text-red-600 font-medium">Error: {decodedResult.message}</div>
-{/if}
+	<section class="flex-1 pl-4">
+		<header class="flex justify-between mb-6">
+			<h2 class="text-xl font-bold block">Results</h2>
+
+			<ButtonGroup.Root>
+				<Button variant="outline" onclick={copyPayload}><Clipboard /> Copy output</Button>
+			</ButtonGroup.Root>
+		</header>
+
+		<div class="border border-solid border-gray-300 rounded-lg overflow-hidden mb-4">
+			<div class="flex justify-between p-2 items-center">
+				<h2 class="font-semibold">Decoded Header</h2>
+				<ButtonGroup.Root>
+					<Button variant="outline" size="sm" onclick={copyHeader}><Clipboard /> Copy</Button>
+				</ButtonGroup.Root>
+			</div>
+			<CodeEditor language="json" class="h-64 border-x-0 border-b-0" value={headerJson} />
+		</div>
+
+		<div class="border border-solid border-gray-300 rounded-lg overflow-hidden">
+			<div class="flex justify-between p-2 items-center">
+				<h2 class="font-semibold">Decoded Payload</h2>
+				<ButtonGroup.Root>
+					<Button variant="outline" size="sm" onclick={copyPayload}><Clipboard /> Copy</Button>
+				</ButtonGroup.Root>
+			</div>
+			<CodeEditor language="json" class="h-64 border-x-0 border-b-0" value={payloadJson} />
+		</div>
+	</section>
+</div>
 
 <References
 	references={[
