@@ -30,7 +30,11 @@
 	}
 
 	function loadExample() {
-		input = sutil.example;
+		input = sutil.example1;
+	}
+
+	function loadExample2() {
+		input = sutil.example2;
 	}
 </script>
 
@@ -50,7 +54,7 @@
 					</DropdownMenu.Trigger>
 					<DropdownMenu.Content align="end" class="w-52">
 						<DropdownMenu.Group>
-							<DropdownMenu.Item onclick={() => (input = '')}>
+							<DropdownMenu.Item onclick={loadExample2}>
 								<Album />
 								Example 2
 							</DropdownMenu.Item>

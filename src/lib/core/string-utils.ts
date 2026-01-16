@@ -52,4 +52,6 @@ export function reverseString(str: string): string {
 	return str.split('').reverse().join('');
 }
 
-export const example = 'Lorem ipsum dolor sit amet.';
+export const example1 = 'Lorem ipsum dolor sit amet.';
+
+export const example2 = 'Dicionário inglês-português e busca em milhões de traduções.';
