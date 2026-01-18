@@ -1,112 +1,77 @@
 <script lang="ts">
 	import * as lorem from '$lib/core/lorem-ipsum-generator';
-	import { clickToCopy } from '$lib/core/copy-to-clipboard';
+	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { Button } from '$lib/components/ui/button';
-	import ClipboardIcon from '@lucide/svelte/icons/clipboard';
-	import Checkbox from '$lib/components/ui/checkbox/checkbox.svelte';
+	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
+	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
+	import { Clipboard, ArrowBigRight } from '@lucide/svelte';
+	import { Label } from '$lib/components/ui/label/index.js';
+	import { Switch } from '$lib/components/ui/switch';
+	import Input from '$lib/components/ui/input/input.svelte';
+	import * as NativeSelect from '$lib/components/ui/native-select/index.js';
+	import References from '$lib/components/custom/references/references.svelte';
 
-	let wordCount = $state(100);
-	let paragraphCount = $state(3);
-	let sentenceCount = $state(5);
+	let count = $state(5);
 	let useStartingLorem = $state(true);
+	let output = $state('');
+	let selectedMethod = $state<'paragraph' | 'sentence' | 'word'>('paragraph');
 
-	let loremByWordCount = $derived(lorem.generateWords(wordCount, useStartingLorem));
-	let loremByParagraphCount = $derived(
-		lorem.generateParagraphs(paragraphCount, useStartingLorem).split('\n')
-	);
-	let loremBySentenceCount = $derived(lorem.generateSentences(sentenceCount, useStartingLorem));
+	function copyOutput() {
+		copyText(output);
+	}
+
+	function generateIpsum() {
+		switch (selectedMethod) {
+			case 'paragraph':
+				output = lorem.generateParagraphs(count, useStartingLorem);
+				break;
+			case 'sentence':
+				output = lorem.generateSentences(count, useStartingLorem);
+				break;
+			default:
+				output = lorem.generateWords(count, useStartingLorem);
+		}
+	}
 </script>
 
-<h1 class="text-3xl font-bold mb-4">Lorem Ipsum Generator</h1>
+<div class="mb-4 flex">
+	<section class="flex-1 pr-4">
+		<header class="flex justify-between mb-6">
+			<h1 class="text-xl font-bold block">Lorem Ipsum</h1>
 
-<div class="space-y-6">
-	<div class="space-y-2 bg-gray-50 rounded p-2 flex items-center gap-2">
-		<Checkbox bind:checked={useStartingLorem} id="useStartingLorem" />
-		<label for="useStartingLorem" class="font-medium block"
-			>Start with standard "Lorem ipsum dolor sit amet..."</label
-		>
-	</div>
+			<Button onclick={generateIpsum}><ArrowBigRight /></Button>
+		</header>
+		<div>
+			<div class="mb-6">
+				<Label for="input" class="mb-2">How long do you want to generate?</Label>
 
-	<div class="space-y-2">
-		<label for="wordCount" class="block font-medium">Number of Words:</label>
-		<input
-			id="wordCount"
-			type="number"
-			min="1"
-			bind:value={wordCount}
-			class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-		/>
-		<p class="text-sm text-gray-600" id="loremByWordCount">{loremByWordCount}</p>
+				<div class="flex gap-4 items-center">
+					<Input bind:value={count} type="number" name="input" class="flex-1" />
+					<NativeSelect.Root class=" basis-1/6" bind:value={selectedMethod}>
+						<NativeSelect.Option value="paragraph">Paragraph</NativeSelect.Option>
+						<NativeSelect.Option value="sentence">Sentence</NativeSelect.Option>
+						<NativeSelect.Option value="wors">Word</NativeSelect.Option>
+					</NativeSelect.Root>
+				</div>
+			</div>
 
-		<Button
-			variant="outline"
-			size="sm"
-			{@attach (node: HTMLElement) => clickToCopy(node, '#loremByWordCount')}
-		>
-			<ClipboardIcon />
-			Copy
-		</Button>
-
-		<div class="bg-gray-100 px-2 py-1 rounded">
-			Characters: {loremByWordCount.length} Words: {wordCount} Lines: {loremByWordCount.split('\n')
-				.length}
+			<div class="flex items-center space-x-2">
+				<Switch bind:checked={useStartingLorem} />
+				<Label for="smart-mode">Start with "Lorem ipsum dolor sit amet.."</Label>
+			</div>
 		</div>
-	</div>
+	</section>
 
-	<div class="space-y-2">
-		<label for="paragraphCount" class="block font-medium">Number of Paragraphs:</label>
-		<input
-			id="paragraphCount"
-			type="number"
-			min="1"
-			bind:value={paragraphCount}
-			class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-		/>
-		<div class="mt-2 space-y-4" id="loremByParagraphCount">
-			{#each loremByParagraphCount as paragraph, index (index)}
-				<p class="text-sm text-gray-600">{paragraph}</p>
-			{/each}
-		</div>
-		<Button
-			variant="outline"
-			size="sm"
-			{@attach (node: HTMLElement) => clickToCopy(node, '#loremByParagraphCount')}
-		>
-			<ClipboardIcon />
-			Copy
-		</Button>
+	<section class="flex-1 pl-4">
+		<header class="flex justify-between mb-6">
+			<h2 class="text-xl font-bold block">Output</h2>
 
-		<div class="bg-gray-100 px-2 py-1 rounded">
-			Characters: {loremByParagraphCount.length} Words: {loremByParagraphCount.join('\n').split(' ')
-				.length} Lines: {paragraphCount + paragraphCount - 1}
-		</div>
-	</div>
-
-	<div class="space-y-2">
-		<label for="sentenceCount" class="block font-medium">Number of Sentences:</label>
-		<input
-			id="sentenceCount"
-			type="number"
-			min="1"
-			bind:value={sentenceCount}
-			class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-		/>
-		<p class="text-sm text-gray-600" id="loremBySentenceCount">
-			{loremBySentenceCount}
-		</p>
-		<Button
-			variant="outline"
-			size="sm"
-			{@attach (node: HTMLElement) => clickToCopy(node, '#loremBySentenceCount')}
-		>
-			<ClipboardIcon />
-			Copy
-		</Button>
-		<div class="bg-gray-100 px-2 py-1 rounded">
-			Characters: {loremBySentenceCount.length} Words: {loremBySentenceCount.split(' ').length} Lines:
-			1
-		</div>
-	</div>
+			<ButtonGroup.Root>
+				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy output</Button>
+			</ButtonGroup.Root>
+		</header>
+		<CodeEditor class="h-[500px]!" language="text" value={output} readonly />
+	</section>
 </div>
 
-<a href="https://www.lipsum.com/" target="_blank" class="underline font-bold">Lorem Ipsum</a>
+<References references={[{ title: 'Lorem Ipsum', url: 'https://www.lipsum.com/' }]} />
