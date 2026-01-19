@@ -53,15 +53,17 @@
 			</Button>
 		{/if}
 		{#if onClickDelete}
-			<button
+			<Button
 				onclick={(e) => {
 					e.preventDefault();
 					onClickDelete?.();
 				}}
-				class="ml-auto text-red-500"
+				class="ml-auto cursor-pointer"
+				size="icon-sm"
+				variant="ghost"
 			>
 				<Trash2 size={16} />
-			</button>
+			</Button>
 		{/if}
 	</div>
 </a>

@@ -95,7 +95,37 @@
 		inputLink = { ...link };
 		isDialogOpen = true;
 	}
+
+	async function deleteLink(id: string) {
+		links = links.filter((link) => link.id !== id);
+		await repository.delete(id);
+	}
+
+	let isDeleteDialogOpen = $state(false);
+	let linkToDelete = $state<Link | null>(null);
 </script>
+
+<AlertDialog.Root bind:open={isDeleteDialogOpen}>
+	<AlertDialog.Content>
+		<AlertDialog.Header>
+			<AlertDialog.Title>Are you absolutely sure?</AlertDialog.Title>
+			<AlertDialog.Description>
+				This action cannot be undone. This will permanently delete the link from the browser.
+			</AlertDialog.Description>
+		</AlertDialog.Header>
+		<AlertDialog.Footer>
+			<AlertDialog.Cancel onclick={() => (isDeleteDialogOpen = false)}>Cancel</AlertDialog.Cancel>
+			<AlertDialog.Action
+				onclick={() => {
+					if (linkToDelete) {
+						deleteLink(linkToDelete.id);
+						isDeleteDialogOpen = false;
+					}
+				}}>Delete</AlertDialog.Action
+			>
+		</AlertDialog.Footer>
+	</AlertDialog.Content>
+</AlertDialog.Root>
 
 <div class="flex gap-4 items-center mb-5">
 	<InputGroup.Root>
@@ -180,6 +210,10 @@
 			title={link.title}
 			language={link.language}
 			onClickEdit={() => openEditDialog(link)}
+			onClickDelete={() => {
+				linkToDelete = link;
+				isDeleteDialogOpen = true;
+			}}
 		/>
 	{/each}
 </div>
