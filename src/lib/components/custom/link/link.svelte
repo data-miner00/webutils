@@ -1,15 +1,22 @@
 <script lang="ts">
+	import { Button } from '$lib/components/ui/button';
 	import { extractDomain } from '$lib/core/links';
+	import { Settings, Trash2 } from '@lucide/svelte';
 
 	type Props = {
 		url: string;
 		title: string;
 		language?: string;
+		onClickEdit?: () => void;
+		onClickDelete?: () => void;
 	};
 
-	let { url, title, language }: Props = $props();
+	let { url, title, language, onClickEdit, onClickDelete }: Props = $props();
 
 	let domain = $derived(extractDomain(url));
+
+	// `https://icons.duckduckgo.com/ip3/${extractDomain(url)}.ico`
+	// https://blog.jim-nielsen.com/2021/displaying-favicons-for-any-domain/
 </script>
 
 <a
@@ -28,11 +35,33 @@
 	</div>
 	<div class="ml-4 w-[200px]">
 		<p>{title}</p>
-		<p class="text-xs text-muted-foreground lowercase">{domain}</p>
+		<p class="text-xs text-muted-foreground lowercase">{domain} · {language || 'En'}</p>
 	</div>
-	<div
-		class="absolute top-1/2 right-4 -translate-y-1/2 border border-solid border-gray-500 text-gray-500 px-1 rounded uppercase text-xs"
-	>
-		{language || 'En'}
+
+	<div class="flex gap-2 ml-auto">
+		{#if onClickEdit}
+			<Button
+				onclick={(e) => {
+					e.preventDefault();
+					onClickEdit?.();
+				}}
+				class="ml-auto cursor-pointer"
+				size="icon-sm"
+				variant="ghost"
+			>
+				<Settings size={16} />
+			</Button>
+		{/if}
+		{#if onClickDelete}
+			<button
+				onclick={(e) => {
+					e.preventDefault();
+					onClickDelete?.();
+				}}
+				class="ml-auto text-red-500"
+			>
+				<Trash2 size={16} />
+			</button>
+		{/if}
 	</div>
 </a>

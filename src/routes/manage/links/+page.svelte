@@ -10,9 +10,11 @@
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { db, initializeDatabase } from '$lib/core/Database';
 	import { IndexedDBRepository } from '$lib/core/IndexedDbRepository';
+	import * as AlertDialog from '$lib/components/ui/alert-dialog/index.js';
 
 	let links = $state<Link[]>([]);
 	let searchQuery = $state('');
+	let isEditMode = $state(false);
 
 	let inputLink = $state<Link>({
 		id: crypto.randomUUID(),
@@ -33,6 +35,14 @@
 
 	let isDialogOpen = $state(false);
 	const repository = new IndexedDBRepository<Link>(db, STORE_NAME);
+
+	$effect(() => {
+		if (isDialogOpen && !isEditMode) {
+			inputLink.title = '';
+			inputLink.category = '';
+			inputLink.url = '';
+		}
+	});
 
 	onMount(async () => {
 		if (!db.isDbInitialized) {
@@ -59,9 +69,6 @@
 		links.push(link);
 
 		isDialogOpen = false;
-		inputLink.title = '';
-		inputLink.category = '';
-		inputLink.url = '';
 	}
 
 	function goToFirstMatchInNewTab(e: KeyboardEvent) {
@@ -70,6 +77,23 @@
 			const firstLink = filteredLinks[0];
 			window.open(firstLink.url, '_blank');
 		}
+	}
+
+	async function updateLink() {
+		const input = $state.snapshot(inputLink);
+		await repository.update(inputLink.id, input);
+
+		const index = links.findIndex((link) => link.id === inputLink.id);
+		links.splice(index, 1, input);
+		links = links;
+
+		isDialogOpen = false;
+	}
+
+	function openEditDialog(link: Link) {
+		isEditMode = true;
+		inputLink = { ...link };
+		isDialogOpen = true;
 	}
 </script>
 
@@ -93,15 +117,20 @@
 
 	<Dialog.Root bind:open={isDialogOpen}>
 		<form>
-			<Dialog.Trigger class={buttonVariants({ variant: 'default' })}>
+			<Dialog.Trigger
+				class={buttonVariants({ variant: 'default' })}
+				onclick={() => (isEditMode = false)}
+			>
 				<Plus />
 				Add Link
 			</Dialog.Trigger>
 			<Dialog.Content class="sm:max-w-[425px]">
 				<Dialog.Header>
-					<Dialog.Title>Add New Link</Dialog.Title>
+					<Dialog.Title>{isEditMode ? 'Edit Link' : 'Add New Link'}</Dialog.Title>
 					<Dialog.Description>
-						Fill in the details for the new link. Click save when you&apos;re done.
+						{isEditMode
+							? "Edit the details for the link. Click save when you're done."
+							: "Fill in the details for the new link. Click save when you're done."}
 					</Dialog.Description>
 				</Dialog.Header>
 				<div class="grid gap-4">
@@ -135,7 +164,9 @@
 				</div>
 				<Dialog.Footer>
 					<Dialog.Close class={buttonVariants({ variant: 'outline' })}>Cancel</Dialog.Close>
-					<Button type="submit" onclick={addLinkToDb}>Save</Button>
+					<Button type="submit" onclick={() => (isEditMode ? updateLink() : addLinkToDb())}
+						>Save</Button
+					>
 				</Dialog.Footer>
 			</Dialog.Content>
 		</form>
@@ -144,6 +175,11 @@
 
 <div class="flex gap-4 flex-wrap">
 	{#each filteredLinks as link}
-		<LinkComponent url={link.url} title={link.title} language={link.language} />
+		<LinkComponent
+			url={link.url}
+			title={link.title}
+			language={link.language}
+			onClickEdit={() => openEditDialog(link)}
+		/>
 	{/each}
 </div>
