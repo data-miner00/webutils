@@ -24,14 +24,27 @@
 		createdAt: new Date().toISOString()
 	});
 
+	let categories = $derived(
+		Array.from(new Set(links.map((link) => link.category))).filter((cat) => cat)
+	);
+
+	let selectedCategory = $state('All');
+
 	let filteredLinks = $derived(
-		links.filter(
+		filterByCategory(selectedCategory).filter(
 			(x) =>
 				x.title.includes(searchQuery) ||
 				x.category.includes(searchQuery) ||
 				x.url.includes(searchQuery)
 		)
 	);
+
+	function filterByCategory(category: string) {
+		if (category === 'All') {
+			return links;
+		}
+		return links.filter((link) => link.category === category);
+	}
 
 	let isDialogOpen = $state(false);
 	const repository = new IndexedDBRepository<Link>(db, STORE_NAME);
@@ -201,6 +214,26 @@
 			</Dialog.Content>
 		</form>
 	</Dialog.Root>
+</div>
+
+<div
+	class="mb-6 w-full overflow-x-scroll flex gap-2 items-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+>
+	<Button
+		size="sm"
+		variant={selectedCategory === 'All' ? 'default' : 'secondary'}
+		onclick={() => (selectedCategory = 'All')}
+		class="cursor-pointer">All</Button
+	>
+
+	{#each categories as category}
+		<Button
+			size="sm"
+			variant={selectedCategory === category ? 'default' : 'secondary'}
+			onclick={() => (selectedCategory = category)}
+			class="cursor-pointer">{category}</Button
+		>
+	{/each}
 </div>
 
 <div class="flex gap-4 flex-wrap">
