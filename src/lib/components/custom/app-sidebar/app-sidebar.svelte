@@ -98,6 +98,10 @@
 					{
 						title: 'HTML Formatter',
 						url: '/tools/html'
+					},
+					{
+						title: 'JavaScript Formatter',
+						url: '/tools/js'
 					}
 				]
 			},
