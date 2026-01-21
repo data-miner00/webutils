@@ -90,6 +90,10 @@
 					{
 						title: 'Base64',
 						url: '/tools/base64'
+					},
+					{
+						title: 'CSS Formatter',
+						url: '/tools/css'
 					}
 				]
 			},
