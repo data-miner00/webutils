@@ -102,6 +102,10 @@
 					{
 						title: 'JavaScript Formatter',
 						url: '/tools/js'
+					},
+					{
+						title: 'JSON Formatter',
+						url: '/tools/json'
 					}
 				]
 			},
