@@ -94,6 +94,10 @@
 					{
 						title: 'CSS Formatter',
 						url: '/tools/css'
+					},
+					{
+						title: 'HTML Formatter',
+						url: '/tools/html'
 					}
 				]
 			},
