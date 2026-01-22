@@ -106,6 +106,10 @@
 					{
 						title: 'JSON Formatter',
 						url: '/tools/json'
+					},
+					{
+						title: 'YAML to JSON',
+						url: '/tools/yaml'
 					}
 				]
 			},
