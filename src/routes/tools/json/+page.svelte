@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { formatJson, exampleFormatJson, exampleFormatJson2 } from '$lib/core/format-json';
+	import {
+		formatJson,
+		exampleFormatJson,
+		exampleFormatJson2,
+		minifyJson,
+		exampleMinifyJson
+	} from '$lib/core/format-json';
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -10,7 +16,11 @@
 
 	let input = $state('');
 	let indentSize = $state('2');
-	let output = $derived(formatJson(input, { indentSize: Number(indentSize) }));
+	let mode = $state<'format' | 'minify'>('format');
+	let output = $derived(
+		mode == 'format' ? formatJson(input, { indentSize: Number(indentSize) }) : minifyJson(input)
+	);
+	let modeTriggerContent = $derived(mode === 'format' ? 'Format' : 'Minify');
 
 	function clearInput() {
 		input = '';
@@ -21,11 +31,18 @@
 	}
 
 	function loadExample1() {
-		input = exampleFormatJson;
+		input = exampleFormatJson.json;
+		mode = exampleFormatJson.mode;
 	}
 
 	function loadExample2() {
-		input = exampleFormatJson2;
+		input = exampleFormatJson2.json;
+		mode = exampleFormatJson2.mode;
+	}
+
+	function loadExample3() {
+		input = exampleMinifyJson.json;
+		mode = exampleMinifyJson.mode;
 	}
 </script>
 
@@ -35,6 +52,18 @@
 			<h1 class="text-xl font-bold block">Format JSON</h1>
 			<div class="flex items-center gap-4">
 				<Select.Root type="single" name="encodingMode" bind:value={indentSize}>
+					<Select.Trigger>
+						{modeTriggerContent}
+					</Select.Trigger>
+					<Select.Content>
+						<Select.Group>
+							<Select.Label>Mode</Select.Label>
+							<Select.Item value="format" label="format">Format</Select.Item>
+							<Select.Item value="minify" label="minify">Minify</Select.Item>
+						</Select.Group>
+					</Select.Content>
+				</Select.Root>
+				<Select.Root type="single" name="indentSize" bind:value={indentSize}>
 					<Select.Trigger>
 						{indentSize}
 					</Select.Trigger>
@@ -62,6 +91,10 @@
 									<DropdownMenu.Item onclick={loadExample2}>
 										<Album />
 										Example 2
+									</DropdownMenu.Item>
+									<DropdownMenu.Item onclick={loadExample3}>
+										<Album />
+										Example 3
 									</DropdownMenu.Item>
 								</DropdownMenu.Group>
 							</DropdownMenu.Content>
