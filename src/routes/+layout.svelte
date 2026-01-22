@@ -1,7 +1,7 @@
 <script lang="ts">
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
-	import Header from '$lib/components/custom/shared/Header.svelte';
+	import Header from '$lib/components/custom/shared/header.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import AppSidebar from '$lib/components/custom/app-sidebar/app-sidebar.svelte';
