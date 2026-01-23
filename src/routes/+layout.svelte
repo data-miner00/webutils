@@ -7,6 +7,14 @@
 	import AppSidebar from '$lib/components/custom/app-sidebar/app-sidebar.svelte';
 
 	let { children } = $props();
+	let isCommandOpen = $state(false);
+	import CalculatorIcon from '@lucide/svelte/icons/calculator';
+	import CalendarIcon from '@lucide/svelte/icons/calendar';
+	import CreditCardIcon from '@lucide/svelte/icons/credit-card';
+	import SettingsIcon from '@lucide/svelte/icons/settings';
+	import SmileIcon from '@lucide/svelte/icons/smile';
+	import UserIcon from '@lucide/svelte/icons/user';
+	import * as Command from '$lib/components/ui/command/index.js';
 
 	function fetchImage(id: number): string {
 		return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
@@ -27,6 +35,11 @@
 					focusSearch();
 				}
 				break;
+			case 'j':
+				if (event.ctrlKey) {
+					event.preventDefault();
+					isCommandOpen = true;
+				}
 			default:
 				break;
 		}
@@ -49,7 +62,6 @@
 	<main class="w-full">
 		<Header />
 		<div class="px-4 py-6">
-			<!-- <Sidebar.Trigger /> -->
 			{@render children()}
 		</div>
 	</main>
@@ -58,3 +70,42 @@
 <div class="fixed bottom-2 right-2">
 	<img src={fetchImage(151)} alt="Showing a pokemon" onerror={(e) => e.currentTarget.remove()} />
 </div>
+
+<Command.Dialog bind:open={isCommandOpen}>
+	<Command.Input placeholder="Type a command or search..." />
+	<Command.List>
+		<Command.Empty>No results found.</Command.Empty>
+		<Command.Group heading="Suggestions">
+			<Command.Item>
+				<CalendarIcon class="me-2 size-4" />
+				<span>Calendar</span>
+			</Command.Item>
+			<Command.Item>
+				<SmileIcon class="me-2 size-4" />
+				<span>Search Emoji</span>
+			</Command.Item>
+			<Command.Item>
+				<CalculatorIcon class="me-2 size-4" />
+				<span>Calculator</span>
+			</Command.Item>
+		</Command.Group>
+		<Command.Separator />
+		<Command.Group heading="Settings">
+			<Command.Item>
+				<UserIcon class="me-2 size-4" />
+				<span>Profile</span>
+				<Command.Shortcut>⌘P</Command.Shortcut>
+			</Command.Item>
+			<Command.Item>
+				<CreditCardIcon class="me-2 size-4" />
+				<span>Billing</span>
+				<Command.Shortcut>⌘B</Command.Shortcut>
+			</Command.Item>
+			<Command.Item>
+				<SettingsIcon class="me-2 size-4" />
+				<span>Settings</span>
+				<Command.Shortcut>⌘S</Command.Shortcut>
+			</Command.Item>
+		</Command.Group>
+	</Command.List>
+</Command.Dialog>
