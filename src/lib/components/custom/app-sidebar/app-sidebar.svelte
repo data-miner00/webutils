@@ -110,6 +110,10 @@
 					{
 						title: 'YAML to JSON',
 						url: '/tools/yaml'
+					},
+					{
+						title: 'Timer / Stopwatch',
+						url: '/tools/timer'
 					}
 				]
 			},
