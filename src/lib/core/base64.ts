@@ -28,3 +28,14 @@ export function safeToBase64Encode(str: string): string {
 		return 'Error encoding to Base64';
 	}
 }
+
+export function imageToBase64(image: File): Promise<string> {
+	return new Promise((resolve) => {
+		const reader = new FileReader();
+		reader.onloadend = () => {
+			resolve(reader.result as string);
+		};
+
+		reader.readAsDataURL(image);
+	});
+}

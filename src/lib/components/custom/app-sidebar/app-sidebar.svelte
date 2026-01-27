@@ -114,6 +114,10 @@
 					{
 						title: 'Timer / Stopwatch',
 						url: '/tools/timer'
+					},
+					{
+						title: 'Base64 Image Converter',
+						url: '/tools/base64-image'
 					}
 				]
 			},
