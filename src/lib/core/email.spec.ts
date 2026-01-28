@@ -1,4 +1,4 @@
-import { extractEmailDomain, getEmailProviderUrlFromEmail } from './email';
+import { extractEmailDomain, getEmailProviderUrlFromEmail, verifyEmailAddress } from './email';
 
 describe('Email Provider Utils', () => {
 	describe('extractEmailDomain', () => {
@@ -99,6 +99,18 @@ describe('Email Provider Utils', () => {
 			testCases.forEach(({ email, expected }) => {
 				expect(getEmailProviderUrlFromEmail(email)).toBe(expected);
 			});
+		});
+	});
+
+	describe('verify email', () => {
+		it('is a valid email', () => {
+			const actual = verifyEmailAddress('abc@gmail.com');
+			expect(actual).toBe(true);
+		});
+
+		it('is an invalid email', () => {
+			const actual = verifyEmailAddress('abc^gmail.com');
+			expect(actual).toBe(false);
 		});
 	});
 });
