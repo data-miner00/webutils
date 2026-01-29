@@ -1,31 +1,35 @@
 <script lang="ts">
-	import { imageToBase64 } from '$lib/core/base64';
+	import {
+		BASE64_IDENTIFIER,
+		base64Decode,
+		exampleImageBase64,
+		imageToBase64
+	} from '$lib/core/base64';
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { EllipsisVertical, Trash2, Clipboard, Album } from '@lucide/svelte';
+	import {
+		EllipsisVertical,
+		Trash2,
+		Clipboard,
+		Album,
+		ArrowBigRight,
+		Download
+	} from '@lucide/svelte';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Select from '$lib/components/ui/select';
 	import { Input } from '$lib/components/ui/input/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
 	import { toPascalCase } from '$lib/core/string-utils';
 
-	let fileInput = $state<HTMLInputElement>();
 	let input = $state('');
 	let mode = $state<'encode' | 'decode'>('encode');
 	let output = $state('');
+	let imageOutput = $state('');
 
-	async function onInputChange() {
-		const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-		const selectedFile: File | undefined = fileInput.files?.[0];
-
-		if (selectedFile) {
-			output = await imageToBase64(selectedFile);
-		} else {
-			output = '';
-		}
-	}
+	$effect(() => {
+		$inspect(input);
+	});
 
 	function clearInput() {
 		input = '';
@@ -37,12 +41,38 @@
 	}
 
 	function loadExample1() {
-		input = '';
+		input = exampleImageBase64;
+		mode = 'encode';
 	}
 
 	function loadExample2() {
-		input = '';
+		input = exampleImageBase64;
+		mode = 'decode';
 	}
+
+	async function convert() {
+		switch (mode) {
+			case 'encode':
+				const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+				const selectedFile: File | undefined = fileInput.files?.[0];
+
+				if (selectedFile) {
+					output = await imageToBase64(selectedFile);
+				} else {
+					output = '';
+				}
+
+				break;
+			case 'decode':
+				if (!input.includes(BASE64_IDENTIFIER)) {
+					imageOutput = 'data:image/png;base64,' + input;
+				} else {
+					imageOutput = input;
+				}
+		}
+	}
+
+	function download() {}
 </script>
 
 <div class="mb-4 flex h-screen">
@@ -86,12 +116,23 @@
 					<ButtonGroup.Root>
 						<Button size="icon" variant="destructive" onclick={clearInput}><Trash2 /></Button>
 					</ButtonGroup.Root>
+					<ButtonGroup.Root>
+						<Button size="icon" onclick={convert}><ArrowBigRight /></Button>
+					</ButtonGroup.Root>
 				</ButtonGroup.Root>
 			</div>
 		</header>
-		<div>
-			<Input id="fileInput" type="file" bind:value={input} onchange={onInputChange} />
-		</div>
+		{#if mode == 'encode'}
+			<div>
+				<Input id="fileInput" type="file" bind:value={input} />
+
+				{#if output}
+					<img src={output} alt="User uploaded" />
+				{/if}
+			</div>
+		{:else}
+			<CodeEditor class="h-[500px]!" language="text" bind:value={input} />
+		{/if}
 	</section>
 
 	<section class="flex-1 pl-4">
@@ -99,9 +140,22 @@
 			<h2 class="text-xl font-bold block">Output</h2>
 
 			<ButtonGroup.Root>
-				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy output</Button>
+				{#if mode === 'encode'}
+					<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy output</Button>
+				{:else}
+					<Button variant="outline" onclick={download}><Download /> Download</Button>
+				{/if}
 			</ButtonGroup.Root>
 		</header>
-		<CodeEditor class="h-[500px]!" language="text" value={output} readonly />
+
+		{#if mode == 'encode'}
+			<CodeEditor class="h-[500px]!" language="text" value={output} readonly />
+		{:else}
+			<div
+				class="flex items-center justify-center p-5 border border-solid border-gray-300 rounded-lg"
+			>
+				<img src={imageOutput} class="block" alt="Decoded base64 output" />
+			</div>
+		{/if}
 	</section>
 </div>

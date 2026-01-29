@@ -41,8 +41,8 @@
 - [ ] Factorial
 - [ ] Fibonacci sequence
 - [ ] Prime number checker
-- [ ] Word count & Reading mins
-- [ ] Clock
+- [x] Word count & Reading mins
+- [x] Clock
   - Copy Timestamp
   - Copy Full Date
   - Copy Date
@@ -125,3 +125,5 @@
   - Able to search
   - Search if link goto link in new tab
 - Roulette Wheel
+- https://nihongodera.com/
+- https://www.epochconverter.com/
