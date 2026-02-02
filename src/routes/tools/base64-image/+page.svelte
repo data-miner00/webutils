@@ -25,10 +25,21 @@
 	let input = $state('');
 	let mode = $state<'encode' | 'decode'>('encode');
 	let output = $state('');
+	let inputImage = $state('');
 	let imageOutput = $state('');
 
 	$effect(() => {
-		$inspect(input);
+		const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+		const selectedFile: File | undefined = fileInput.files?.[0];
+
+		if (input && selectedFile) {
+			imageToBase64(selectedFile).then((res) => {
+				console.log(res);
+				inputImage = res;
+			});
+		} else {
+			inputImage = '';
+		}
 	});
 
 	function clearInput() {
@@ -126,8 +137,8 @@
 			<div>
 				<Input id="fileInput" type="file" bind:value={input} />
 
-				{#if output}
-					<img src={output} alt="User uploaded" />
+				{#if inputImage}
+					<img src={inputImage} alt="User uploaded" />
 				{/if}
 			</div>
 		{:else}
