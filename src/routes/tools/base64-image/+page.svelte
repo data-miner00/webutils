@@ -138,7 +138,11 @@
 				<Input id="fileInput" type="file" bind:value={input} />
 
 				{#if inputImage}
-					<img src={inputImage} alt="User uploaded" />
+					<div
+						class="flex items-center justify-center mt-10 border border-solid border-gray-300 rounded p-8"
+					>
+						<img src={inputImage} alt="User uploaded" class="block" />
+					</div>
 				{/if}
 			</div>
 		{:else}
