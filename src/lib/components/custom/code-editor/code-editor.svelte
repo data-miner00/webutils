@@ -11,7 +11,7 @@
 	}
 
 	let {
-		language,
+		language = $bindable('text'),
 		readonly,
 		value = $bindable(undefined),
 		class: className
@@ -76,6 +76,10 @@
 		if (value !== editor.getValue()) {
 			editor.setValue(value || '');
 		}
+	});
+
+	$effect(() => {
+		monaco.editor.setModelLanguage(monaco.editor.getModels()[0], language);
 	});
 </script>
 

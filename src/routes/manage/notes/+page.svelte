@@ -1,17 +1,18 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { onMount } from 'svelte';
-	import { EllipsisVertical, FileText } from '@lucide/svelte';
-	import * as InputGroup from '$lib/components/ui/input-group/index.js';
-	import { Plus, SearchIcon } from '@lucide/svelte';
+	import { FileText } from '@lucide/svelte';
+	import { Plus } from '@lucide/svelte';
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
 	import { type Note, STORE_NAME, defaultNotes } from '$lib/core/notes';
 	import { db, initializeDatabase } from '$lib/core/Database';
 	import { IndexedDBRepository } from '$lib/core/IndexedDbRepository';
+	import * as NativeSelect from '$lib/components/ui/native-select/index.js';
 
 	let notes = $state<Note[]>([]);
 	let currentId = $state<string | null>(null);
 	let content = $state<string>('');
+	let currentLanguage = $state('text');
 
 	const repository = new IndexedDBRepository<Note>(db, STORE_NAME);
 
@@ -30,21 +31,16 @@
 
 		currentId = notes[0].id;
 		content = notes[0].content;
+		currentLanguage = notes[0].language;
 	});
-
-	let searchQuery = $state('');
-
-	let filteredNotes = $derived(
-		notes
-			.filter((x) => x.title.toLowerCase().includes(searchQuery.toLowerCase()))
-			.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-	);
 
 	function createNewNote() {
 		const newNote: Note = {
 			id: crypto.randomUUID(),
 			title: 'Untitled Note',
 			content: '',
+			language: 'text',
+			isOpen: true,
 			createdAt: new Date().toISOString()
 		};
 		notes = [...notes, newNote];
@@ -54,7 +50,20 @@
 
 	function selectNote(id: string) {
 		currentId = id;
-		content = notes.find((note) => note.id === currentId)?.content || '';
+		const foundNote = notes.find((note) => note.id === currentId);
+		content = foundNote?.content || '';
+		currentLanguage = foundNote?.language || 'text';
+	}
+
+	function selectLanguage(language: string) {
+		if (currentId != null) {
+			const noteIndex = notes.findIndex((note) => note.id === currentId);
+			if (noteIndex !== -1) {
+				console.log('updated language');
+				notes[noteIndex].content = content;
+				repository.update(currentId, { ...notes[noteIndex], language });
+			}
+		}
 	}
 
 	$effect(() => {
@@ -66,6 +75,30 @@
 			}
 		}
 	});
+
+	type SupportedLanguage = {
+		title: string;
+		value: string;
+	};
+
+	const supportedLanguages: SupportedLanguage[] = [
+		{
+			title: 'Text',
+			value: 'text'
+		},
+		{
+			title: 'CSS',
+			value: 'css'
+		},
+		{
+			title: 'HTML',
+			value: 'html'
+		},
+		{
+			title: 'JavaScript',
+			value: 'js'
+		}
+	];
 </script>
 
 <div class="mb-4 h-[calc(100vh-300px)]">
@@ -82,6 +115,13 @@
 		<Button variant="ghost" class="mr-2 p-2" onclick={createNewNote}>
 			<Plus size="16" />
 		</Button>
+		<NativeSelect.Root bind:value={currentLanguage}>
+			{#each supportedLanguages as option}
+				<NativeSelect.Option value={option.value} onclick={() => selectLanguage(option.value)}
+					>{option.title}</NativeSelect.Option
+				>
+			{/each}
+		</NativeSelect.Root>
 	</div>
-	<CodeEditor language="text" bind:value={content} class="h-full" />
+	<CodeEditor bind:language={currentLanguage} bind:value={content} class="h-full" />
 </div>
