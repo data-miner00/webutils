@@ -1,12 +1,9 @@
 <script lang="ts">
-	import { Switch } from '$lib/components/ui/switch/index.js';
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { EllipsisVertical, Trash2, Clipboard, Album } from '@lucide/svelte';
-	import { Label } from '$lib/components/ui/label/index.js';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import { Trash2, Clipboard } from '@lucide/svelte';
 	import * as Select from '$lib/components/ui/select';
 	import {
 		countCharacters,
@@ -19,7 +16,6 @@
 		sampleText
 	} from '$lib/core/word-counter';
 
-	let smartMode = $state(true);
 	let input = $state('');
 	let characterOutput = $derived(countCharacters(input));
 	let lineOutput = $derived(countLines(input));
@@ -35,7 +31,20 @@
 
 	function copyOutput() {
 		// copy as JSON
-		copyText('');
+		copyText(
+			JSON.stringify({
+				input,
+				stats: {
+					characterCount: characterOutput,
+					lineCount: lineOutput,
+					wordCount: wordOutput,
+					paragraphCount: paragraphOutput,
+					readingTimeInMins: readingTimeOutput,
+					sizeInKB: sizeInKBOutput
+				},
+				wordDistribution: Object.fromEntries(wordDistributionOutput)
+			})
+		);
 	}
 
 	let language = $state('en');
@@ -105,7 +114,7 @@
 			<h2 class="text-xl font-bold block">Output</h2>
 
 			<ButtonGroup.Root>
-				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy output</Button>
+				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy JSON output</Button>
 			</ButtonGroup.Root>
 		</header>
 
