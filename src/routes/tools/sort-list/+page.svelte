@@ -60,6 +60,20 @@ Grapes
 Mango
 Pineapple`;
 
+	const example2 = `83
+32
+45
+2
+59
+1`; // introduce a number mode to sort numerically
+
+	const example3 = `20210132
+20191112
+20270404
+20040623
+20050701
+20110911`;
+
 	function copyOutput() {
 		copyText(outputText);
 	}
@@ -83,11 +97,11 @@ Pineapple`;
 							</DropdownMenu.Trigger>
 							<DropdownMenu.Content align="end" class="w-52">
 								<DropdownMenu.Group>
-									<DropdownMenu.Item onclick={() => (inputText = '')}>
+									<DropdownMenu.Item onclick={() => (inputText = example2)}>
 										<Album />
 										Example 2
 									</DropdownMenu.Item>
-									<DropdownMenu.Item onclick={() => (inputText = '')}>
+									<DropdownMenu.Item onclick={() => (inputText = example3)}>
 										<Album />
 										Example 3
 									</DropdownMenu.Item>

@@ -32,6 +32,10 @@
 	function loadExample() {
 		inputText = 'Hello, World!';
 	}
+
+	function loadExample2() {
+		inputText = 'https://www.google.com?q=what is this?';
+	}
 </script>
 
 <header class="flex justify-between mb-6">
@@ -50,7 +54,7 @@
 					</DropdownMenu.Trigger>
 					<DropdownMenu.Content align="end" class="w-52">
 						<DropdownMenu.Group>
-							<DropdownMenu.Item onclick={() => (inputText = '')}>
+							<DropdownMenu.Item onclick={loadExample2}>
 								<Album />
 								Example 2
 							</DropdownMenu.Item>

@@ -56,7 +56,7 @@
 						url: '/tools/leading-space'
 					},
 					{
-						title: 'Hashing',
+						title: 'Hash String',
 						url: '/tools/hash'
 					},
 					{
@@ -64,7 +64,7 @@
 						url: '/tools/qr-code'
 					},
 					{
-						title: 'Transformation',
+						title: 'String Transform',
 						url: '/tools/strings'
 					},
 					{
@@ -72,7 +72,7 @@
 						url: '/tools/verify'
 					},
 					{
-						title: 'Conversion',
+						title: 'Unit Conversion',
 						url: '/tools/conversion'
 					},
 					{

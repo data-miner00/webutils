@@ -69,10 +69,10 @@
 		<header class="flex justify-between mb-6">
 			<h1 class="text-xl font-bold block">QR Code</h1>
 			<div class="flex items-center gap-4">
-				<div class="flex items-center space-x-2">
+				<!-- <div class="flex items-center space-x-2">
 					<Switch bind:checked={smartMode} />
 					<Label for="smart-mode">Smart Mode</Label>
-				</div>
+				</div> -->
 				<ButtonGroup.Root>
 					<ButtonGroup.Root>
 						<Button variant="outline" onclick={() => (input = example1)}>Example 1</Button>

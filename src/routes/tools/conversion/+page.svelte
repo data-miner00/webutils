@@ -9,7 +9,7 @@
 	let kelvinInput = $state(weather.convertCelciusToKelvin(ROOM_TEMP));
 </script>
 
-<h1 class="text-2xl font-bold">Conversion</h1>
+<h1 class="text-2xl font-bold">Unit Conversion</h1>
 
 <div>
 	<h2>Formula</h2>
