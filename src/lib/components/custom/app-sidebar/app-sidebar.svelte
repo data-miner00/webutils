@@ -118,6 +118,10 @@
 					{
 						title: 'Base64 Image Converter',
 						url: '/tools/base64-image'
+					},
+					{
+						title: 'Draw',
+						url: '/tools/draw'
 					}
 				]
 			},
