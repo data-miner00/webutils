@@ -44,7 +44,9 @@
 	window.addEventListener('offline', () => (isOnline = false));
 </script>
 
-<header class="flex w-full items-center justify-between bg-background p-4">
+<header
+	class="flex w-full items-center justify-between p-4 border-b border-solid border-gray-300 sticky top-0 right-0 bg-sidebar"
+>
 	{#if ipState}
 		<div class="flex items-center gap-2 text-sm">
 			<MapPin size="20" />
