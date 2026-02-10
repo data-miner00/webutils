@@ -1,6 +1,11 @@
 import beautify from 'js-beautify';
 import { minify } from 'terser';
 
+type Example = {
+	input: string;
+	mode: 'format' | 'minify';
+};
+
 type JsFormatOptions = {
 	indentSize: number;
 };
@@ -15,12 +20,18 @@ export function formatJs(js: string, options: JsFormatOptions) {
 	return formattedJs;
 }
 
-export const exampleFormatJs = `function helloWorld(   name,age)
+export const exampleFormatJs: Example = {
+	input: `function helloWorld(   name,age)
 {
 	return \`Hello \${name}, you are \${age} years old.\`;
-}`;
+}`,
+	mode: 'format'
+};
 
-export const exampleFormatJs2 = `console.log('hello'); var age = 32; function getAge(age) { return age; }`;
+export const exampleFormatJs2: Example = {
+	input: `console.log('hello'); var age = 32; function getAge(age) { return age; }`,
+	mode: 'format'
+};
 
 export async function minifyJs(js: string) {
 	try {
@@ -30,3 +41,11 @@ export async function minifyJs(js: string) {
 		return js;
 	}
 }
+
+export const exampleMinifyJs: Example = {
+	input: `function add(a, b) {
+	return a + b;
+}
+console.log(add(2, 3));`,
+	mode: 'minify'
+};

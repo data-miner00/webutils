@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { formatJs, exampleFormatJs, exampleFormatJs2, minifyJs } from '$lib/core/format-js';
+	import {
+		formatJs,
+		exampleFormatJs,
+		exampleFormatJs2,
+		minifyJs,
+		exampleMinifyJs
+	} from '$lib/core/format-js';
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -31,11 +37,18 @@
 	}
 
 	function loadExample1() {
-		input = exampleFormatJs;
+		input = exampleFormatJs.input;
+		mode = exampleFormatJs.mode;
 	}
 
 	function loadExample2() {
-		input = exampleFormatJs2;
+		input = exampleFormatJs2.input;
+		mode = exampleFormatJs2.mode;
+	}
+
+	function loadExample3() {
+		input = exampleMinifyJs.input;
+		mode = exampleMinifyJs.mode;
 	}
 </script>
 
@@ -84,6 +97,10 @@
 									<DropdownMenu.Item onclick={loadExample2}>
 										<Album />
 										Example 2
+									</DropdownMenu.Item>
+									<DropdownMenu.Item onclick={loadExample3}>
+										<Album />
+										Example 3
 									</DropdownMenu.Item>
 								</DropdownMenu.Group>
 							</DropdownMenu.Content>
