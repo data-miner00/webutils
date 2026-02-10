@@ -51,7 +51,7 @@
 		<header class="flex justify-between mb-6">
 			<h1 class="text-xl font-bold block">Format JSON</h1>
 			<div class="flex items-center gap-4">
-				<Select.Root type="single" name="encodingMode" bind:value={indentSize}>
+				<Select.Root type="single" name="encodingMode" bind:value={mode}>
 					<Select.Trigger>
 						{modeTriggerContent}
 					</Select.Trigger>

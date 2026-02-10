@@ -1,4 +1,4 @@
-import { exampleFormatJs, formatJs } from './format-js';
+import { exampleFormatJs, formatJs, minifyJs } from './format-js';
 
 describe('format JS', () => {
 	[
@@ -21,5 +21,27 @@ describe('format JS', () => {
 			const actual = formatJs(input, { indentSize: scenario.spacing });
 			expect(actual).toBe(scenario.expected);
 		});
+	});
+});
+
+describe('minifyJs', () => {
+	it('should minify JavaScript code', async () => {
+		const js = `
+            function add(a, b) {
+                return a + b;
+            }
+            console.log(add(2, 3));
+        `;
+		const minified = await minifyJs(js);
+		expect(minified).toBe('function add(d,n){return d+n}console.log(add(2,3));');
+	});
+
+	it('should return original code if minification fails', async () => {
+		const js = `
+            function add(a, b) {
+                return a + b
+        `; // Missing closing brace to induce error
+		const minified = await minifyJs(js);
+		expect(minified).toBe(js);
 	});
 });

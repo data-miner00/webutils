@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatJs, exampleFormatJs, exampleFormatJs2 } from '$lib/core/format-js';
+	import { formatJs, exampleFormatJs, exampleFormatJs2, minifyJs } from '$lib/core/format-js';
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -10,7 +10,17 @@
 
 	let input = $state('');
 	let indentSize = $state('2');
-	let output = $derived(formatJs(input, { indentSize: Number(indentSize) }));
+	let mode = $state<'format' | 'minify'>('format');
+	let output = $state('');
+	let modeTriggerContent = $derived(mode === 'format' ? 'Format' : 'Minify');
+
+	$effect(() => {
+		if (mode === 'minify') {
+			minifyJs(input).then((res) => (output = res));
+		} else {
+			output = formatJs(input, { indentSize: Number(indentSize) });
+		}
+	});
 
 	function clearInput() {
 		input = '';
@@ -34,6 +44,18 @@
 		<header class="flex justify-between mb-6">
 			<h1 class="text-xl font-bold block">Format JavaScript</h1>
 			<div class="flex items-center gap-4">
+				<Select.Root type="single" name="encodingMode" bind:value={mode}>
+					<Select.Trigger>
+						{modeTriggerContent}
+					</Select.Trigger>
+					<Select.Content>
+						<Select.Group>
+							<Select.Label>Mode</Select.Label>
+							<Select.Item value="format" label="Format">Format</Select.Item>
+							<Select.Item value="minify" label="Minify">Minify</Select.Item>
+						</Select.Group>
+					</Select.Content>
+				</Select.Root>
 				<Select.Root type="single" name="encodingMode" bind:value={indentSize}>
 					<Select.Trigger>
 						{indentSize}
