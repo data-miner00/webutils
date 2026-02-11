@@ -13,6 +13,9 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Trash } from '@lucide/svelte';
 	import References from '$lib/components/custom/references/references.svelte';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import { EllipsisVertical, Trash2, Clipboard, Album } from '@lucide/svelte';
+	import { toast } from 'svelte-sonner';
 
 	const cityName = localTimezone.split('/').pop()!.replace(/_/g, ' ');
 
@@ -125,6 +128,29 @@
 		// Remove the last one
 		document.cookie = `city_${selectedCities.length}=; path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
 	}
+
+	function copyIso8601() {
+		const now = new Date();
+		const isoString = now.toISOString();
+		navigator.clipboard.writeText(isoString);
+		toast.success('ISO-8601 time copied to clipboard!');
+	}
+
+	function copyUnixEpoch() {
+		const now = new Date();
+		const unixEpoch = Math.floor(now.getTime() / 1000).toString();
+		navigator.clipboard.writeText(unixEpoch);
+		toast.success('Unix Epoch time copied to clipboard!');
+	}
+
+	function copyDotNetEpoch() {
+		const date0001 = new Date('0001-01-01T00:00:00Z');
+		const currentDate = new Date();
+		const millisecondsSince0001 = currentDate.getTime() - date0001.getTime();
+		const secondsSince0001 = Math.floor(millisecondsSince0001 / 1000);
+		navigator.clipboard.writeText(secondsSince0001.toString());
+		toast.success('DotNet Epoch time copied to clipboard!');
+	}
 </script>
 
 <h1 class="text-2xl font-bold mb-2">World Clock</h1>
@@ -141,6 +167,31 @@
 </section>
 
 <div class="flex items-center justify-end gap-2 mb-6 p-4 border border-gray-200 rounded-md">
+	<DropdownMenu.Root>
+		<DropdownMenu.Trigger>
+			{#snippet child({ props })}
+				<Button {...props} variant="outline" aria-label="Copy to Clipboard">
+					<Clipboard />
+				</Button>
+			{/snippet}
+		</DropdownMenu.Trigger>
+		<DropdownMenu.Content align="end" class="w-52">
+			<DropdownMenu.Group>
+				<DropdownMenu.Item onclick={copyIso8601}>
+					<Album />
+					ISO-8601
+				</DropdownMenu.Item>
+				<DropdownMenu.Item onclick={copyUnixEpoch}>
+					<Album />
+					Unix Epoch
+				</DropdownMenu.Item>
+				<DropdownMenu.Item onclick={copyDotNetEpoch}>
+					<Album />
+					.NET Epoch
+				</DropdownMenu.Item>
+			</DropdownMenu.Group>
+		</DropdownMenu.Content>
+	</DropdownMenu.Root>
 	<Select.Root type="single" bind:value>
 		<Select.Trigger class="w-[180px]">{triggerContent}</Select.Trigger>
 		<Select.Content>
@@ -176,6 +227,10 @@
 		{
 			title: 'Time.is',
 			url: 'https://time.is/'
+		},
+		{
+			title: 'Epoch Converter',
+			url: 'https://www.epochconverter.com/'
 		}
 	]}
 />
