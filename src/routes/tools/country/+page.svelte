@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { countries, type Country } from '$lib/core/country';
-	import * as Table from '$lib/components/ui/table/index.js';
+	import { countries } from '$lib/core/country';
+	import DataTable from './data-table.svelte';
+	import { columns } from './columns.js';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Download from '@lucide/svelte/icons/download';
@@ -28,41 +29,21 @@
 	</div>
 </header>
 
-<!-- TODO: Make this into data table -->
-
-<Table.Root>
-	<Table.Caption>A list of countries.</Table.Caption>
-	<Table.Header>
-		<Table.Row class="bg-gray-50">
-			<Table.Head class="w-[100px]">Name</Table.Head>
-			<Table.Head>ISO2</Table.Head>
-			<Table.Head>ISO3</Table.Head>
-			<Table.Head>Country Code</Table.Head>
-			<Table.Head>Area (km²)</Table.Head>
-			<Table.Head class="text-end">Population</Table.Head>
-		</Table.Row>
-	</Table.Header>
-	<Table.Body>
-		{#each countries as country (country.iso2)}
-			<Table.Row>
-				<Table.Cell class="font-medium">
-					<a href={country.href} target="_blank">{country.name}</a>
-				</Table.Cell>
-				<Table.Cell>{country.iso2}</Table.Cell>
-				<Table.Cell>{country.iso3}</Table.Cell>
-				<Table.Cell>{country.countryCode}</Table.Cell>
-				<Table.Cell>{country.areaKm2}</Table.Cell>
-				<Table.Cell class="text-end">{country.population}</Table.Cell>
-			</Table.Row>
-		{/each}
-	</Table.Body>
-</Table.Root>
+<DataTable data={countries} {columns} />
 
 <References
 	references={[
 		{
 			title: 'CountryCode.org',
 			url: 'https://countrycode.org/'
+		},
+		{
+			title: 'ISO 3166 Country Codes - ISO.org',
+			url: 'https://www.iso.org/iso-3166-country-codes.html'
+		},
+		{
+			title: 'Flag Match',
+			url: 'https://flagmatch.com/'
 		}
 	]}
 />
