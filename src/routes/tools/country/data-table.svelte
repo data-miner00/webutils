@@ -1,7 +1,9 @@
 <script lang="ts" generics="TData, TValue">
 	import {
 		type ColumnDef,
+		type ColumnFiltersState,
 		getCoreRowModel,
+		getFilteredRowModel,
 		getPaginationRowModel,
 		getSortedRowModel,
 		type PaginationState,
@@ -10,6 +12,7 @@
 	import { createSvelteTable, FlexRender } from '$lib/components/ui/data-table/index.js';
 	import * as Table from '$lib/components/ui/table/index.js';
 	import { Button } from '$lib/components/ui/button';
+	import { Input } from '$lib/components/ui/input';
 
 	type DataTableProps<TData, TValue> = {
 		columns: ColumnDef<TData, TValue>[];
@@ -19,6 +22,7 @@
 	let { data, columns }: DataTableProps<TData, TValue> = $props();
 	let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 20 });
 	let sorting = $state<SortingState>([]);
+	let columnFilters = $state<ColumnFiltersState>([]);
 
 	const table = createSvelteTable({
 		get data() {
@@ -28,6 +32,7 @@
 		getCoreRowModel: getCoreRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
 		getSortedRowModel: getSortedRowModel(),
+		getFilteredRowModel: getFilteredRowModel(),
 		onSortingChange: (updater) => {
 			if (typeof updater === 'function') {
 				sorting = updater(sorting);
@@ -42,16 +47,40 @@
 				pagination = updater;
 			}
 		},
+		onColumnFiltersChange: (updater) => {
+			if (typeof updater === 'function') {
+				columnFilters = updater(columnFilters);
+			} else {
+				columnFilters = updater;
+			}
+		},
 		state: {
 			get pagination() {
 				return pagination;
 			},
 			get sorting() {
 				return sorting;
+			},
+			get columnFilters() {
+				return columnFilters;
 			}
 		}
 	});
 </script>
+
+<div class="flex items-center py-4">
+	<Input
+		placeholder="Filter countries..."
+		value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
+		onchange={(e) => {
+			table.getColumn('name')?.setFilterValue(e.currentTarget.value);
+		}}
+		oninput={(e) => {
+			table.getColumn('name')?.setFilterValue(e.currentTarget.value);
+		}}
+		class="max-w-sm"
+	/>
+</div>
 
 <div class="rounded-md border">
 	<Table.Root>
