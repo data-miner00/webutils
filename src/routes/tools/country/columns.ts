@@ -2,6 +2,7 @@ import { renderComponent } from '$lib/components/ui/data-table';
 import type { Country } from '$lib/core/country';
 import type { ColumnDef } from '@tanstack/table-core';
 import DataTableActions from './data-table-actions.svelte';
+import DataTableNameButton from './data-table-name-button.svelte';
 
 export const columns: ColumnDef<Country>[] = [
 	{
@@ -10,7 +11,10 @@ export const columns: ColumnDef<Country>[] = [
 	},
 	{
 		accessorKey: 'name',
-		header: 'Name'
+		header: ({ column }) =>
+			renderComponent(DataTableNameButton, {
+				onclick: column.getToggleSortingHandler()
+			})
 	},
 	{
 		accessorKey: 'iso2',

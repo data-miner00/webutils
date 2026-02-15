@@ -3,7 +3,9 @@
 		type ColumnDef,
 		getCoreRowModel,
 		getPaginationRowModel,
-		type PaginationState
+		getSortedRowModel,
+		type PaginationState,
+		type SortingState
 	} from '@tanstack/table-core';
 	import { createSvelteTable, FlexRender } from '$lib/components/ui/data-table/index.js';
 	import * as Table from '$lib/components/ui/table/index.js';
@@ -16,15 +18,21 @@
 
 	let { data, columns }: DataTableProps<TData, TValue> = $props();
 	let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 20 });
+	let sorting = $state<SortingState>([]);
 
 	const table = createSvelteTable({
 		get data() {
 			return data;
 		},
 		columns,
-		state: {
-			get pagination() {
-				return pagination;
+		getCoreRowModel: getCoreRowModel(),
+		getPaginationRowModel: getPaginationRowModel(),
+		getSortedRowModel: getSortedRowModel(),
+		onSortingChange: (updater) => {
+			if (typeof updater === 'function') {
+				sorting = updater(sorting);
+			} else {
+				sorting = updater;
 			}
 		},
 		onPaginationChange: (updater) => {
@@ -34,8 +42,14 @@
 				pagination = updater;
 			}
 		},
-		getCoreRowModel: getCoreRowModel(),
-		getPaginationRowModel: getPaginationRowModel()
+		state: {
+			get pagination() {
+				return pagination;
+			},
+			get sorting() {
+				return sorting;
+			}
+		}
 	});
 </script>
 
