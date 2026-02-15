@@ -7,12 +7,14 @@
 		getPaginationRowModel,
 		getSortedRowModel,
 		type PaginationState,
-		type SortingState
+		type SortingState,
+		type VisibilityState
 	} from '@tanstack/table-core';
 	import { createSvelteTable, FlexRender } from '$lib/components/ui/data-table/index.js';
 	import * as Table from '$lib/components/ui/table/index.js';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 
 	type DataTableProps<TData, TValue> = {
 		columns: ColumnDef<TData, TValue>[];
@@ -23,6 +25,7 @@
 	let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 20 });
 	let sorting = $state<SortingState>([]);
 	let columnFilters = $state<ColumnFiltersState>([]);
+	let columnVisibility = $state<VisibilityState>({});
 
 	const table = createSvelteTable({
 		get data() {
@@ -54,6 +57,13 @@
 				columnFilters = updater;
 			}
 		},
+		onColumnVisibilityChange: (updater) => {
+			if (typeof updater === 'function') {
+				columnVisibility = updater(columnVisibility);
+			} else {
+				columnVisibility = updater;
+			}
+		},
 		state: {
 			get pagination() {
 				return pagination;
@@ -63,6 +73,9 @@
 			},
 			get columnFilters() {
 				return columnFilters;
+			},
+			get columnVisibility() {
+				return columnVisibility;
 			}
 		}
 	});
@@ -80,6 +93,24 @@
 		}}
 		class="max-w-sm"
 	/>
+
+	<DropdownMenu.Root>
+		<DropdownMenu.Trigger>
+			{#snippet child({ props })}
+				<Button {...props} variant="outline" class="ms-auto">Columns</Button>
+			{/snippet}
+		</DropdownMenu.Trigger>
+		<DropdownMenu.Content align="end">
+			{#each table.getAllColumns().filter((col) => col.getCanHide()) as column (column.id)}
+				<DropdownMenu.CheckboxItem
+					class="capitalize"
+					bind:checked={() => column.getIsVisible(), (v) => column.toggleVisibility(!!v)}
+				>
+					{column.id}
+				</DropdownMenu.CheckboxItem>
+			{/each}
+		</DropdownMenu.Content>
+	</DropdownMenu.Root>
 </div>
 
 <div class="rounded-md border">
