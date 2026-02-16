@@ -122,6 +122,10 @@
 					{
 						title: 'Draw',
 						url: '/tools/draw'
+					},
+					{
+						title: 'URL Parser',
+						url: '/tools/url-parser'
 					}
 				]
 			},
