@@ -126,6 +126,10 @@
 					{
 						title: 'URL Parser',
 						url: '/tools/url-parser'
+					},
+					{
+						title: 'XML Converter',
+						url: '/tools/xml'
 					}
 				]
 			},
