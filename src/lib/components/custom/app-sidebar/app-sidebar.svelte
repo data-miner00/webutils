@@ -154,6 +154,10 @@
 					{
 						title: 'Country',
 						url: '/tools/country'
+					},
+					{
+						title: 'Calendar',
+						url: '/tools/calendar'
 					}
 				]
 			},
