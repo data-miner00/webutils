@@ -5,6 +5,7 @@
 	import { Toaster } from '$lib/components/ui/sonner';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import AppSidebar from '$lib/components/custom/app-sidebar/app-sidebar.svelte';
+	import { goto } from '$app/navigation';
 
 	let { children } = $props();
 	let isCommandOpen = $state(false);
@@ -15,6 +16,7 @@
 	import SmileIcon from '@lucide/svelte/icons/smile';
 	import UserIcon from '@lucide/svelte/icons/user';
 	import * as Command from '$lib/components/ui/command/index.js';
+	import { Clock10 } from '@lucide/svelte';
 
 	function fetchImage(id: number): string {
 		return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
@@ -43,6 +45,21 @@
 			default:
 				break;
 		}
+	}
+
+	function onSelectCalendar() {
+		goto('/tools/calendar');
+		isCommandOpen = false;
+	}
+
+	function onSelectEmoji() {
+		goto('/tools/emoji');
+		isCommandOpen = false;
+	}
+
+	function onSelectClock() {
+		goto('/tools/clock');
+		isCommandOpen = false;
 	}
 </script>
 
@@ -76,13 +93,17 @@
 	<Command.List>
 		<Command.Empty>No results found.</Command.Empty>
 		<Command.Group heading="Suggestions">
-			<Command.Item>
+			<Command.Item onSelect={onSelectCalendar}>
 				<CalendarIcon class="me-2 size-4" />
 				<span>Calendar</span>
 			</Command.Item>
-			<Command.Item>
+			<Command.Item onSelect={onSelectEmoji}>
 				<SmileIcon class="me-2 size-4" />
 				<span>Search Emoji</span>
+			</Command.Item>
+			<Command.Item onSelect={onSelectClock}>
+				<Clock10 class="me-2 size-4" />
+				<span>Clock</span>
 			</Command.Item>
 			<Command.Item>
 				<CalculatorIcon class="me-2 size-4" />
