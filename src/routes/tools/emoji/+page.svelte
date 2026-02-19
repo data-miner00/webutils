@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { emojis } from '$lib/core/emoji';
-	import Input from '$lib/components/ui/input/input.svelte';
 	import { clickToCopy } from '$lib/core/copy-to-clipboard';
+	import References from '$lib/components/custom/references/references.svelte';
+	import * as InputGroup from '$lib/components/ui/input-group/index.js';
+	import { X } from '@lucide/svelte';
 
 	let searchTerm = $state('');
 
@@ -13,11 +15,16 @@
 				e.metadata.includes(searchTerm)
 		)
 	);
+
+	// Todo: implement category and history mechanism
 </script>
 
-<h1 class="text-3xl font-bold mb-4">Emoji List</h1>
-
-<Input placeholder="Search emojis..." bind:value={searchTerm} class="mb-4 w-full" />
+<InputGroup.Root class="mb-4">
+	<InputGroup.Input placeholder="Search emojis..." name="search" required bind:value={searchTerm} />
+	<InputGroup.Addon align="inline-end">
+		<InputGroup.Button variant="ghost" onclick={() => (searchTerm = '')}><X /></InputGroup.Button>
+	</InputGroup.Addon>
+</InputGroup.Root>
 
 <div class="grid grid-cols-8 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-16 gap-2">
 	{#each filteredEmojis as emoji}
@@ -31,4 +38,11 @@
 	{/each}
 </div>
 
-<a href="https://emojibase.dev/" target="_blank">Emojibase</a>
+<References
+	references={[
+		{
+			title: 'Emojibase',
+			url: 'https://emojibase.dev/'
+		}
+	]}
+/>
