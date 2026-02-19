@@ -3,7 +3,8 @@
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { EllipsisVertical, Trash2, Clipboard, Album, ArrowBigRight } from '@lucide/svelte';
+	import { EllipsisVertical, Clipboard, Album, ArrowBigRight, RotateCcw, X } from '@lucide/svelte';
+	import * as InputGroup from '$lib/components/ui/input-group/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Select from '$lib/components/ui/select';
 	import {
@@ -110,7 +111,7 @@
 						</DropdownMenu.Root>
 					</ButtonGroup.Root>
 					<ButtonGroup.Root>
-						<Button size="icon" variant="destructive" onclick={clearInput}><Trash2 /></Button>
+						<Button size="icon" variant="outline" onclick={clearInput}><RotateCcw /></Button>
 					</ButtonGroup.Root>
 					<ButtonGroup.Root>
 						<Button size="icon" onclick={generate}><ArrowBigRight /></Button>
@@ -141,11 +142,30 @@
 			{#if version === '3' || version === '5'}
 				<div class="mb-4">
 					<Label for="namespace" class="font-bold mb-3">Namespace</Label>
-					<Input placeholder="Namespace" name="namespace" required bind:value={namespace} />
+					<InputGroup.Root>
+						<InputGroup.Input
+							placeholder="Namespace"
+							name="namespace"
+							required
+							bind:value={namespace}
+						/>
+						<InputGroup.Addon align="inline-end">
+							<InputGroup.Button variant="ghost" onclick={() => (namespace = '')}
+								><X /></InputGroup.Button
+							>
+						</InputGroup.Addon>
+					</InputGroup.Root>
 				</div>
 				<div class="mb-4">
 					<Label for="name" class="font-bold mb-3">Name</Label>
-					<Input placeholder="Name" name="name" bind:value={name} required />
+					<InputGroup.Root>
+						<InputGroup.Input placeholder="Name" name="name" required bind:value={name} />
+						<InputGroup.Addon align="inline-end">
+							<InputGroup.Button variant="ghost" onclick={() => (name = '')}
+								><X /></InputGroup.Button
+							>
+						</InputGroup.Addon>
+					</InputGroup.Root>
 				</div>
 			{:else}
 				<div class="mb-4">
