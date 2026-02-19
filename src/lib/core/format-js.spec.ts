@@ -15,8 +15,8 @@ describe('format JS', () => {
 }`
 		}
 	].forEach((scenario) => {
-		it('should format CSS correctly', () => {
-			const input = exampleFormatJs;
+		it('should format JavaScript correctly', () => {
+			const input = exampleFormatJs.input;
 
 			const actual = formatJs(input, { indentSize: scenario.spacing });
 			expect(actual).toBe(scenario.expected);
