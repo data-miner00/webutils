@@ -130,6 +130,10 @@
 					{
 						title: 'XML Converter',
 						url: '/tools/xml'
+					},
+					{
+						title: 'UUID Generator',
+						url: '/tools/uuid'
 					}
 				]
 			},
