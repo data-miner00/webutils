@@ -134,6 +134,10 @@
 					{
 						title: 'UUID Generator',
 						url: '/tools/uuid'
+					},
+					{
+						title: 'HTML Viewer',
+						url: '/tools/html-viewer'
 					}
 				]
 			},
