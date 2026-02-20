@@ -138,6 +138,10 @@
 					{
 						title: 'HTML Viewer',
 						url: '/tools/html-viewer'
+					},
+					{
+						title: 'Timestamp',
+						url: '/tools/timestamp'
 					}
 				]
 			},
@@ -226,6 +230,7 @@
 	import TeamSwitcher from './team-switcher.svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import type { ComponentProps } from 'svelte';
+
 	let {
 		ref = $bindable(null),
 		collapsible = 'icon',
