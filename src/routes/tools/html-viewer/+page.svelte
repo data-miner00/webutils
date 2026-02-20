@@ -2,10 +2,9 @@
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { EllipsisVertical, Trash2, Album } from '@lucide/svelte';
+	import { EllipsisVertical, Trash2, Album, FileTextIcon, ArrowUpRightIcon } from '@lucide/svelte';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
-	import * as Select from '$lib/components/ui/select';
-	import Empty from '$lib/components/ui/empty/empty.svelte';
+	import * as Empty from '$lib/components/ui/empty/index.js';
 	import { exampleHtml, exampleHtml2 } from './examples';
 
 	let input = $state('');
@@ -64,7 +63,28 @@
 		</header>
 
 		{#if input.trim() === ''}
-			<Empty />
+			<Empty.Root class="border border-solid border-gray-300">
+				<Empty.Header>
+					<Empty.Media variant="icon">
+						<FileTextIcon />
+					</Empty.Media>
+					<Empty.Title>No HTML Input</Empty.Title>
+					<Empty.Description>
+						You haven't entered any HTML yet. Get started by entering some HTML code.
+					</Empty.Description>
+				</Empty.Header>
+				<Empty.Content>
+					<div class="flex gap-2">
+						<Button onclick={loadExample1}>Load Example 1</Button>
+						<Button variant="outline" onclick={loadExample2}>Load Example 2</Button>
+					</div>
+				</Empty.Content>
+				<Button variant="link" class="text-muted-foreground" size="sm">
+					<a href="#/">
+						Learn More <ArrowUpRightIcon class="inline" />
+					</a>
+				</Button>
+			</Empty.Root>
 		{:else}
 			<iframe
 				title="View for HTML input"

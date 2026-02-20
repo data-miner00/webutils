@@ -3,7 +3,7 @@
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { Trash2, Clipboard } from '@lucide/svelte';
+	import { Trash2, Clipboard, FileTextIcon, ArrowUpRightIcon } from '@lucide/svelte';
 	import * as Select from '$lib/components/ui/select';
 	import {
 		countCharacters,
@@ -15,6 +15,7 @@
 		calculateReadingTimeInMins,
 		sampleText
 	} from '$lib/core/word-counter';
+	import * as Empty from '$lib/components/ui/empty/index.js';
 
 	let input = $state('');
 	let characterOutput = $derived(countCharacters(input));
@@ -129,22 +130,47 @@
 
 		<h2 class="text-xl font-bold mb-4">Word Distribution</h2>
 
-		<div
-			class="border border-solid border-gray-300 rounded p-4 min-h-[300px] max-h-[500px] overflow-y-scroll"
-		>
-			{#each [...wordDistributionOutput.entries()].sort((a, b) => b[1] - a[1]) as [word, count]}
-				<div class="flex justify-between mb-2">
-					<div class="font-mono bg-gray-200 rounded border border-solid border-gray-300 px-2">
-						{word}
+		{#if wordDistributionOutput.size === 0}
+			<Empty.Root class="border border-solid border-gray-300">
+				<Empty.Header>
+					<Empty.Media variant="icon">
+						<FileTextIcon />
+					</Empty.Media>
+					<Empty.Title>Input Empty</Empty.Title>
+					<Empty.Description>
+						You haven't entered any text yet. Please enter some text to see word distribution.
+					</Empty.Description>
+				</Empty.Header>
+				<Empty.Content>
+					<div class="flex gap-2">
+						<Button onclick={() => (input = 'Hello World!')}>Use Example 1</Button>
+						<Button variant="outline" onclick={() => (input = sampleText)}>Use Example 2</Button>
 					</div>
-					<div>
-						<span class="inline-block h-4 bg-blue-500 rounded" style="width: {count * 10}px;"
-						></span>
+				</Empty.Content>
+				<Button variant="link" class="text-muted-foreground" size="sm">
+					<a href="#/">
+						Learn More <ArrowUpRightIcon class="inline" />
+					</a>
+				</Button>
+			</Empty.Root>
+		{:else}
+			<div
+				class="border border-solid border-gray-300 rounded p-4 min-h-[300px] max-h-[500px] overflow-y-scroll"
+			>
+				{#each [...wordDistributionOutput.entries()].sort((a, b) => b[1] - a[1]) as [word, count]}
+					<div class="flex justify-between mb-2">
+						<div class="font-mono bg-gray-200 rounded border border-solid border-gray-300 px-2">
+							{word}
+						</div>
+						<div>
+							<span class="inline-block h-4 bg-blue-500 rounded" style="width: {count * 10}px;"
+							></span>
 
-						x{count}
+							x{count}
+						</div>
 					</div>
-				</div>
-			{/each}
-		</div>
+				{/each}
+			</div>
+		{/if}
 	</section>
 </div>
