@@ -13,6 +13,7 @@
 	const savedUsername = localStorage.getItem('settings_username') ?? 'User';
 	const savedEmail = localStorage.getItem('settings_email') ?? 'me@gmail.com';
 	const savedAvatarUrl = localStorage.getItem('settings_avatarUrl') ?? 'notexist.jpg';
+	const savedCompanyName = localStorage.getItem('settings_companyName') ?? 'Acme Inc.';
 	const data = {
 		user: {
 			name: savedUsername,
@@ -21,17 +22,17 @@
 		},
 		teams: [
 			{
-				name: 'Acme Inc',
+				name: savedCompanyName,
 				logo: GalleryVerticalEndIcon,
 				plan: 'Enterprise'
 			},
 			{
-				name: 'Acme Corp.',
+				name: savedCompanyName,
 				logo: AudioWaveformIcon,
 				plan: 'Startup'
 			},
 			{
-				name: 'Evil Corp.',
+				name: savedCompanyName,
 				logo: CommandIcon,
 				plan: 'Free'
 			}
@@ -176,7 +177,7 @@
 				items: [
 					{
 						title: 'General',
-						url: '#'
+						url: '/settings'
 					},
 					{
 						title: 'Team',

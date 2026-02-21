@@ -61,6 +61,13 @@
 		goto('/tools/clock');
 		isCommandOpen = false;
 	}
+
+	function onSelectSettings() {
+		goto('/settings');
+		isCommandOpen = false;
+	}
+
+	const showPokemon = (localStorage.getItem('settings_pokemon') || 'true') === 'true';
 </script>
 
 <svelte:window onkeydown={onKeyDown} />
@@ -84,9 +91,11 @@
 	</main>
 </Sidebar.Provider>
 
-<div class="fixed bottom-2 right-2">
-	<img src={fetchImage(151)} alt="Showing a pokemon" onerror={(e) => e.currentTarget.remove()} />
-</div>
+{#if showPokemon}
+	<div class="fixed bottom-2 right-2">
+		<img src={fetchImage(151)} alt="Showing a pokemon" onerror={(e) => e.currentTarget.remove()} />
+	</div>
+{/if}
 
 <Command.Dialog bind:open={isCommandOpen}>
 	<Command.Input placeholder="Type a command or search..." />
@@ -122,7 +131,7 @@
 				<span>Billing</span>
 				<Command.Shortcut>⌘B</Command.Shortcut>
 			</Command.Item>
-			<Command.Item>
+			<Command.Item onSelect={onSelectSettings}>
 				<SettingsIcon class="me-2 size-4" />
 				<span>Settings</span>
 				<Command.Shortcut>⌘S</Command.Shortcut>
