@@ -1,24 +1,27 @@
 import { json2xml } from 'xml-js';
 import buffer from 'buffer';
 
-window.Buffer = buffer.Buffer;
-
-type JsonToXmlOptions = {
-	indentSize: number
+try {
+	window.Buffer = buffer.Buffer;
+} catch (error) {
+	// Node.js environment
 }
 
+type JsonToXmlOptions = {
+	indentSize: number;
+};
+
 export function jsonToXml(json: string, options?: JsonToXmlOptions): string {
- if (!json) return '<error>Input is empty</error>'
+	if (!json) return '<error>Input is empty</error>';
 
- try {
-  return json2xml(json, {
-    spaces: options?.indentSize ?? 2,
-    compact: true,
-  });
-
- } catch (error) {
-    return `<error>Failed to convert JSON to XML: ${(error as Error).message}</error>`;
- }
+	try {
+		return json2xml(json, {
+			spaces: options?.indentSize ?? 2,
+			compact: true
+		});
+	} catch (error) {
+		return `<error>Failed to convert JSON to XML: ${(error as Error).message}</error>`;
+	}
 }
 
 export const exampleJson = `{
@@ -34,4 +37,4 @@ export const exampleJson = `{
     "street": "123 Main St",
     "city": "Anytown"
   }
-}`
+}`;
