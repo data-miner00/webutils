@@ -143,6 +143,10 @@
 					{
 						title: 'Timestamp',
 						url: '/tools/timestamp'
+					},
+					{
+						title: 'Markdown Viewer',
+						url: '/tools/markdown-viewer'
 					}
 				]
 			},
