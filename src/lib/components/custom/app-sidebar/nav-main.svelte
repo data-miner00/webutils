@@ -3,6 +3,7 @@
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import { House } from '@lucide/svelte';
 	import ChevronRightIcon from '@lucide/svelte/icons/chevron-right';
+	import { page } from '$app/state';
 	let {
 		items
 	}: {
@@ -57,7 +58,12 @@
 									<Sidebar.MenuSubItem>
 										<Sidebar.MenuSubButton>
 											{#snippet child({ props })}
-												<a href={subItem.url} {...props}>
+												<a
+													href={subItem.url}
+													{...props}
+													class:active={page.url.pathname === subItem.url}
+													aria-current={page.url.pathname === subItem.url}
+												>
 													<span>{subItem.title}</span>
 												</a>
 											{/snippet}
@@ -72,3 +78,9 @@
 		{/each}
 	</Sidebar.Menu>
 </Sidebar.Group>
+
+<style>
+	.active {
+		background-color: #eee;
+	}
+</style>
