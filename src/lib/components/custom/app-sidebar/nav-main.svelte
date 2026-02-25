@@ -4,6 +4,7 @@
 	import { House } from '@lucide/svelte';
 	import ChevronRightIcon from '@lucide/svelte/icons/chevron-right';
 	import { page } from '$app/state';
+	import Badge from '$lib/components/ui/badge/badge.svelte';
 	let {
 		items
 	}: {
@@ -17,6 +18,7 @@
 			items?: {
 				title: string;
 				url: string;
+				badge?: string;
 			}[];
 		}[];
 	} = $props();
@@ -65,6 +67,9 @@
 													aria-current={page.url.pathname === subItem.url}
 												>
 													<span>{subItem.title}</span>
+													{#if subItem.badge}
+														<Badge variant="default">{subItem.badge}</Badge>
+													{/if}
 												</a>
 											{/snippet}
 										</Sidebar.MenuSubButton>

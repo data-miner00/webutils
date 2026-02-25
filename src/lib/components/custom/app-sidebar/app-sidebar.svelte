@@ -70,11 +70,13 @@
 					},
 					{
 						title: 'Verify',
-						url: '/tools/verify'
+						url: '/tools/verify',
+						badge: 'Beta'
 					},
 					{
 						title: 'Unit Conversion',
-						url: '/tools/conversion'
+						url: '/tools/conversion',
+						badge: 'Beta'
 					},
 					{
 						title: 'Text Stats',
