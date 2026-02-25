@@ -108,7 +108,7 @@
 					<div class="text-xs text-gray-700">Protocol</div>
 					<div>
 						{parsedUrl.protocol}
-						<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.pathname)}
+						<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.protocol)}
 							><Copy /></Button
 						>
 					</div>
@@ -119,7 +119,7 @@
 					<div class="text-xs text-gray-700">Host</div>
 					<div>
 						{parsedUrl.host}
-						<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.pathname)}
+						<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.host)}
 							><Copy /></Button
 						>
 					</div>
@@ -146,7 +146,7 @@
 					{#if parsedUrl.search}
 						<div>
 							{parsedUrl.search}
-							<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.pathname)}
+							<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.search)}
 								><Copy /></Button
 							>
 						</div>
@@ -159,7 +159,7 @@
 					{#if parsedUrl.hash}
 						<div>
 							{parsedUrl.hash}
-							<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.pathname)}
+							<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.hash)}
 								><Copy /></Button
 							>
 						</div>
