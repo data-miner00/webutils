@@ -149,6 +149,10 @@
 					{
 						title: 'Markdown Viewer',
 						url: '/tools/markdown-viewer'
+					},
+					{
+						title: 'Certificate Decoder',
+						url: '/tools/certificate'
 					}
 				]
 			},
