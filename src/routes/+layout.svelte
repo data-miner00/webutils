@@ -85,7 +85,7 @@
 
 	<main class="w-full">
 		<Header />
-		<div class="px-4 py-6">
+		<div class="px-4 py-6 h-[calc(100vh-73px)]">
 			{@render children()}
 		</div>
 	</main>
