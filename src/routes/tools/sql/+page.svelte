@@ -1,0 +1,100 @@
+<script lang="ts">
+	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
+	import { copyText } from '$lib/core/copy-to-clipboard';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
+	import { EllipsisVertical, Trash2, Clipboard, Album, ArrowBigRight } from '@lucide/svelte';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import * as Select from '$lib/components/ui/select';
+	import { formatSql, exampleSql } from '$lib/core/format-sql';
+
+	let input = $state('');
+	let indentSize = $state('2');
+	let output = $state('');
+
+	function clearInput() {
+		input = '';
+	}
+
+	function formatOutput() {
+		output = formatSql(input, { indentSize: Number(indentSize) });
+	}
+
+	function copyOutput() {
+		copyText(output);
+	}
+
+	function loadExample1() {
+		input = exampleSql;
+		indentSize = '2';
+		formatOutput();
+	}
+
+	function loadExample2() {
+		input = exampleSql;
+		indentSize = '4';
+		formatOutput();
+	}
+</script>
+
+<div class="mb-4 flex h-screen">
+	<section class="flex-1 pr-4">
+		<header class="flex justify-between mb-6">
+			<h1 class="text-xl font-bold block">Format SQL</h1>
+			<div class="flex items-center gap-4">
+				<Select.Root type="single" name="indentSize" bind:value={indentSize}>
+					<Select.Trigger>
+						{indentSize}
+					</Select.Trigger>
+					<Select.Content>
+						<Select.Group>
+							<Select.Label>Spacing</Select.Label>
+							<Select.Item value="2" label="2">2</Select.Item>
+							<Select.Item value="4" label="4">4</Select.Item>
+						</Select.Group>
+					</Select.Content>
+				</Select.Root>
+				<ButtonGroup.Root>
+					<ButtonGroup.Root>
+						<Button variant="outline" onclick={loadExample1}>Example 1</Button>
+						<DropdownMenu.Root>
+							<DropdownMenu.Trigger>
+								{#snippet child({ props })}
+									<Button {...props} variant="outline" aria-label="More Options">
+										<EllipsisVertical />
+									</Button>
+								{/snippet}
+							</DropdownMenu.Trigger>
+							<DropdownMenu.Content align="end" class="w-52">
+								<DropdownMenu.Group>
+									<DropdownMenu.Item onclick={loadExample2}>
+										<Album />
+										Example 2
+									</DropdownMenu.Item>
+								</DropdownMenu.Group>
+							</DropdownMenu.Content>
+						</DropdownMenu.Root>
+					</ButtonGroup.Root>
+					<ButtonGroup.Root>
+						<Button size="icon" variant="destructive" onclick={clearInput}><Trash2 /></Button>
+					</ButtonGroup.Root>
+					<ButtonGroup.Root>
+						<Button size="icon" onclick={formatOutput}><ArrowBigRight /></Button>
+					</ButtonGroup.Root>
+				</ButtonGroup.Root>
+			</div>
+		</header>
+		<CodeEditor class="h-[500px]!" language="sql" bind:value={input} />
+	</section>
+
+	<section class="flex-1 pl-4">
+		<header class="flex justify-between mb-6">
+			<h2 class="text-xl font-bold block">Output</h2>
+
+			<ButtonGroup.Root>
+				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy output</Button>
+			</ButtonGroup.Root>
+		</header>
+		<CodeEditor class="h-[500px]!" language="sql" value={output} readonly />
+	</section>
+</div>

@@ -153,6 +153,10 @@
 					{
 						title: 'Certificate Decoder',
 						url: '/tools/certificate'
+					},
+					{
+						title: 'SQL Formatter',
+						url: '/tools/sql'
 					}
 				]
 			},
