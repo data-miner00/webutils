@@ -83,7 +83,15 @@
 		}
 	}
 
-	function download() {}
+	function download() {
+		const link = document.createElement('a');
+		link.href = imageOutput;
+		// Todo: Extract file type from base64 string
+		link.download = 'image.png';
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+	}
 </script>
 
 <div class="mb-4 flex h-screen">
