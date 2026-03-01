@@ -157,7 +157,19 @@
 					{
 						title: 'SQL Formatter',
 						url: '/tools/sql'
+					},
+					{
+						title: 'Base Converter',
+						url: '/tools/baseN'
 					}
+					// {
+					// 	title: 'Color Converter',
+					// 	url: '/tools/color-converter'
+					// },
+					// {
+					// 	title: 'Password Generator',
+					// 	url: '/tools/password-generator'
+					// }
 				]
 			},
 			{
