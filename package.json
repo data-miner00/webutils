@@ -38,6 +38,7 @@
 		"eslint": "^9.39.1",
 		"eslint-plugin-svelte": "^3.13.0",
 		"globals": "^16.5.0",
+		"image-resize-compress": "^2.1.1",
 		"js-beautify": "^1.15.4",
 		"jsdom": "^27.2.0",
 		"lorem-ipsum": "^2.0.8",
