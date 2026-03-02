@@ -161,6 +161,10 @@
 					{
 						title: 'Base Converter',
 						url: '/tools/baseN'
+					},
+					{
+						title: 'Image Resizer',
+						url: '/tools/image-resizer'
 					}
 					// {
 					// 	title: 'Color Converter',
