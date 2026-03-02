@@ -3,19 +3,19 @@
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { EllipsisVertical, Trash2, Clipboard, Album } from '@lucide/svelte';
+	import { EllipsisVertical, Clipboard, Album, Copy, X } from '@lucide/svelte';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Select from '$lib/components/ui/select';
-	import { Input } from '$lib/components/ui/input/index.js';
 	import { toPascalCase } from '$lib/core/string-utils';
 	import Label from '$lib/components/ui/label/label.svelte';
+	import * as InputGroup from '$lib/components/ui/input-group/index.js';
 
 	const base2 = new BaseN(2);
 	const base8 = new BaseN(8);
 	const base16 = new BaseN(16);
 	const base32 = new BaseN(32);
 
-	let input = $state('');
+	let input = $state('1001');
 	let mode = $state<'binary' | 'octal' | 'decimal' | 'hexadecimal' | 'base32'>('binary');
 	let decimalInput = $derived(
 		!input
@@ -38,49 +38,44 @@
 		decimalToBase32: base32.encode(Number(decimalInput))
 	});
 
-	function clearInput() {
-		input = '';
-		mode = 'decimal';
-	}
-
 	function copyOutput() {
 		copyText(JSON.stringify(output, null, 2));
 	}
 
-	function loadExample1() {
-		input = '30';
+	function loadBinaryExample() {
+		input = '1001';
+		mode = 'binary';
+	}
+
+	function loadOctalExample() {
+		input = '154';
+		mode = 'octal';
+	}
+
+	function loadDecimalExample() {
+		input = '1234';
 		mode = 'decimal';
 	}
 
-	function loadExample2() {
-		input = '1e';
+	function loadHexadecimalExample() {
+		input = '1A3F';
 		mode = 'hexadecimal';
+	}
+
+	function loadBase32Example() {
+		input = 'JBS1F3DP';
+		mode = 'base32';
 	}
 </script>
 
 <div class="mb-4 flex h-screen">
 	<section class="flex-1 pr-4">
 		<header class="flex justify-between mb-6">
-			<h1 class="text-xl font-bold block">Image to Base64</h1>
+			<h1 class="text-xl font-bold block">Base Number Conversion</h1>
 			<div class="flex items-center gap-4">
-				<Select.Root type="single" name="baseType" bind:value={mode}>
-					<Select.Trigger>
-						{toPascalCase(mode)}
-					</Select.Trigger>
-					<Select.Content>
-						<Select.Group>
-							<Select.Label>Base</Select.Label>
-							<Select.Item value="binary" label="Binary">Binary</Select.Item>
-							<Select.Item value="octal" label="Octal">Octal</Select.Item>
-							<Select.Item value="decimal" label="Decimal">Decimal</Select.Item>
-							<Select.Item value="hexadecimal" label="Hexadecimal">Hexadecimal</Select.Item>
-							<Select.Item value="base32" label="Base32">Base32</Select.Item>
-						</Select.Group>
-					</Select.Content>
-				</Select.Root>
 				<ButtonGroup.Root>
 					<ButtonGroup.Root>
-						<Button variant="outline" onclick={loadExample1}>Example 1</Button>
+						<Button variant="outline" onclick={loadBinaryExample}>Binary Example</Button>
 						<DropdownMenu.Root>
 							<DropdownMenu.Trigger>
 								{#snippet child({ props })}
@@ -91,22 +86,63 @@
 							</DropdownMenu.Trigger>
 							<DropdownMenu.Content align="end" class="w-52">
 								<DropdownMenu.Group>
-									<DropdownMenu.Item onclick={loadExample2}>
+									<DropdownMenu.Item onclick={loadOctalExample}>
 										<Album />
-										Example 2
+										Octal Example
+									</DropdownMenu.Item>
+									<DropdownMenu.Item onclick={loadDecimalExample}>
+										<Album />
+										Decimal Example
+									</DropdownMenu.Item>
+									<DropdownMenu.Item onclick={loadHexadecimalExample}>
+										<Album />
+										Hexadecimal Example
+									</DropdownMenu.Item>
+									<DropdownMenu.Item onclick={loadBase32Example}>
+										<Album />
+										Base32 Example
 									</DropdownMenu.Item>
 								</DropdownMenu.Group>
 							</DropdownMenu.Content>
 						</DropdownMenu.Root>
 					</ButtonGroup.Root>
-					<ButtonGroup.Root>
-						<Button size="icon" variant="destructive" onclick={clearInput}><Trash2 /></Button>
-					</ButtonGroup.Root>
 				</ButtonGroup.Root>
 			</div>
 		</header>
 		<div>
-			<Input id="inputNumber" bind:value={input} />
+			<Label for="base" class="mb-2">Base</Label>
+			<Select.Root type="single" name="baseType" bind:value={mode}>
+				<Select.Trigger class="w-full mb-6">
+					{toPascalCase(mode)}
+				</Select.Trigger>
+				<Select.Content>
+					<Select.Group>
+						<Select.Label>Base</Select.Label>
+						<Select.Item value="binary" label="Binary">Binary</Select.Item>
+						<Select.Item value="octal" label="Octal">Octal</Select.Item>
+						<Select.Item value="decimal" label="Decimal">Decimal</Select.Item>
+						<Select.Item value="hexadecimal" label="Hexadecimal">Hexadecimal</Select.Item>
+						<Select.Item value="base32" label="Base32">Base32</Select.Item>
+					</Select.Group>
+				</Select.Content>
+			</Select.Root>
+
+			<Label for="inputNumber" class="mb-2">Input Number</Label>
+			<InputGroup.Root>
+				<InputGroup.Input id="inputNumber" bind:value={input} />
+				{#if input}
+					<InputGroup.Addon align="inline-end">
+						<InputGroup.Button
+							aria-label="Clear"
+							title="Clear input"
+							size="icon-xs"
+							onclick={() => (input = '')}
+						>
+							<X />
+						</InputGroup.Button>
+					</InputGroup.Addon>
+				{/if}
+			</InputGroup.Root>
 		</div>
 	</section>
 
@@ -115,25 +151,87 @@
 			<h2 class="text-xl font-bold block">Output</h2>
 
 			<ButtonGroup.Root>
-				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy output</Button>
+				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy as JSON</Button>
 			</ButtonGroup.Root>
 		</header>
 
 		<div>
 			<Label for="binaryOutput" class="mb-2">Binary</Label>
-			<Input id="binaryOutput" readonly class="mb-6" value={output.decimalToBinary} />
+
+			<InputGroup.Root class="mb-6">
+				<InputGroup.Input value={output.decimalToBinary} readonly />
+				<InputGroup.Addon align="inline-end">
+					<InputGroup.Button
+						aria-label="Copy"
+						title="Copy"
+						size="icon-xs"
+						onclick={() => copyText(output.decimalToBinary)}
+					>
+						<Copy />
+					</InputGroup.Button>
+				</InputGroup.Addon>
+			</InputGroup.Root>
 
 			<Label for="octalOutput" class="mb-2">Octal</Label>
-			<Input id="octalOutput" readonly class="mb-6" value={output.decimalToOctal} />
+
+			<InputGroup.Root class="mb-6">
+				<InputGroup.Input value={output.decimalToOctal} readonly />
+				<InputGroup.Addon align="inline-end">
+					<InputGroup.Button
+						aria-label="Copy"
+						title="Copy"
+						size="icon-xs"
+						onclick={() => copyText(output.decimalToOctal)}
+					>
+						<Copy />
+					</InputGroup.Button>
+				</InputGroup.Addon>
+			</InputGroup.Root>
 
 			<Label for="decimalOutput" class="mb-2">Decimal</Label>
-			<Input id="decimalOutput" readonly class="mb-6" value={decimalInput} />
+			<InputGroup.Root class="mb-6">
+				<InputGroup.Input value={decimalInput} readonly />
+				<InputGroup.Addon align="inline-end">
+					<InputGroup.Button
+						aria-label="Copy"
+						title="Copy"
+						size="icon-xs"
+						onclick={() => copyText(decimalInput.toString())}
+					>
+						<Copy />
+					</InputGroup.Button>
+				</InputGroup.Addon>
+			</InputGroup.Root>
 
 			<Label for="hexadecimalOutput" class="mb-2">Hexadecimal</Label>
-			<Input id="hexadecimalOutput" readonly class="mb-6" value={output.decimalToHexadecimal} />
+			<InputGroup.Root class="mb-6">
+				<InputGroup.Input value={output.decimalToHexadecimal} readonly />
+				<InputGroup.Addon align="inline-end">
+					<InputGroup.Button
+						aria-label="Copy"
+						title="Copy"
+						size="icon-xs"
+						onclick={() => copyText(output.decimalToHexadecimal)}
+					>
+						<Copy />
+					</InputGroup.Button>
+				</InputGroup.Addon>
+			</InputGroup.Root>
 
 			<Label for="base32Output" class="mb-2">Base32</Label>
-			<Input id="base32Output" readonly class="mb-6" value={output.decimalToBase32} />
+			<InputGroup.Root class="mb-6">
+				<InputGroup.Input value={output.decimalToBase32} readonly />
+				<InputGroup.Addon align="inline-end">
+					<InputGroup.Button
+						aria-label="Copy"
+						title="Copy"
+						size="icon-xs"
+						onclick={() => copyText(output.decimalToBase32)}
+					>
+						<Copy />
+					</InputGroup.Button>
+				</InputGroup.Addon>
+			</InputGroup.Root>
 		</div>
 	</section>
 </div>
