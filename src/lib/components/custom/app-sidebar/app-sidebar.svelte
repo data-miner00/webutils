@@ -165,6 +165,10 @@
 					{
 						title: 'Image Resizer',
 						url: '/tools/image-resizer'
+					},
+					{
+						title: 'Image Format Converter',
+						url: '/tools/image-converter'
 					}
 					// {
 					// 	title: 'Color Converter',

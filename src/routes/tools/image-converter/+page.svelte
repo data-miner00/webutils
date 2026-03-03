@@ -5,17 +5,13 @@
 	import { EllipsisVertical, Trash2, Album, ArrowBigRight, Download } from '@lucide/svelte';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
-	import { resizeImage } from '$lib/core/image';
-	import { Switch } from '$lib/components/ui/switch/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
-	import * as InputGroup from '$lib/components/ui/input-group/index.js';
+	import { convertImageFormat, type ImageFormat } from '$lib/core/image';
+	import * as Select from '$lib/components/ui/select';
 
 	let input = $state('');
 	let inputImage = $state('');
 	let imageOutput = $state('');
-	let height = $state<number | undefined>();
-	let width = $state<number | undefined>();
-	let maintainAspectRatio = $state(true);
+	let format: ImageFormat = $state('png');
 
 	$effect(() => {
 		const fileInput = document.getElementById('fileInput') as HTMLInputElement;
@@ -27,23 +23,6 @@
 			});
 		} else {
 			inputImage = '';
-		}
-	});
-
-	$effect(() => {
-		// Todo: This logic is pretty naive and doesn't actually maintain the aspect ratio, just forces width and height to be the same. Should be improved to actually calculate the correct dimensions based on the original image size.
-		if (maintainAspectRatio) {
-			if (width && !height) {
-				height = width;
-			} else if (height && !width) {
-				width = height;
-			} else if (height && width) {
-				if (height > width) {
-					width = height;
-				} else if (width > height) {
-					height = width;
-				}
-			}
 		}
 	});
 
@@ -63,12 +42,12 @@
 		const fileInput = document.getElementById('fileInput') as HTMLInputElement;
 		const selectedFile: File | undefined = fileInput.files?.[0];
 
-		if (!selectedFile || !width || !height) {
+		if (!selectedFile) {
 			return;
 		}
-		const input = await resizeImage(selectedFile, width, height);
+		const input = await convertImageFormat(selectedFile, format);
 		if (!input.includes(BASE64_IDENTIFIER)) {
-			imageOutput = 'data:image/png;base64,' + input;
+			imageOutput = 'data:image/' + format + ';base64,' + input;
 		} else {
 			imageOutput = input;
 		}
@@ -78,7 +57,7 @@
 		const link = document.createElement('a');
 		link.href = imageOutput;
 		// Todo: Extract file type from base64 string
-		link.download = 'image.png';
+		link.download = 'image.' + format;
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
@@ -88,12 +67,23 @@
 <div class="mb-4 flex h-screen">
 	<section class="flex-1 pr-4">
 		<header class="flex justify-between mb-6">
-			<h1 class="text-xl font-bold block">Resize Image</h1>
+			<h1 class="text-xl font-bold block">Convert Image Format</h1>
 			<div class="flex items-center gap-4">
-				<div class="flex items-center space-x-2">
-					<Switch id="maintain-aspect-ratio" bind:checked={maintainAspectRatio} />
-					<Label for="maintain-aspect-ratio">Maintain Aspect Ratio</Label>
-				</div>
+				<Select.Root type="single" name="imageFormat" bind:value={format}>
+					<Select.Trigger>
+						{format}
+					</Select.Trigger>
+					<Select.Content>
+						<Select.Group>
+							<Select.Label>Image Format</Select.Label>
+							<Select.Item value="png" label="PNG">PNG</Select.Item>
+							<Select.Item value="jpeg" label="JPEG">JPEG</Select.Item>
+							<Select.Item value="webp" label="WebP">WebP</Select.Item>
+							<Select.Item value="bmp" label="BMP">BMP</Select.Item>
+						</Select.Group>
+					</Select.Content>
+				</Select.Root>
+
 				<ButtonGroup.Root>
 					<ButtonGroup.Root>
 						<Button variant="outline" onclick={loadExample1}>Example 1</Button>
@@ -134,27 +124,6 @@
 					<img src={inputImage} alt="User uploaded" class="block" />
 				</div>
 			{/if}
-
-			<div class="mt-6 flex items-center gap-4">
-				<InputGroup.Root>
-					<InputGroup.Addon>
-						<InputGroup.Text>Width</InputGroup.Text>
-					</InputGroup.Addon>
-					<InputGroup.Input placeholder="50" bind:value={width} />
-					<InputGroup.Addon align="inline-end">
-						<InputGroup.Text>px</InputGroup.Text>
-					</InputGroup.Addon>
-				</InputGroup.Root>
-				<InputGroup.Root>
-					<InputGroup.Addon>
-						<InputGroup.Text>Height</InputGroup.Text>
-					</InputGroup.Addon>
-					<InputGroup.Input placeholder="50" bind:value={height} />
-					<InputGroup.Addon align="inline-end">
-						<InputGroup.Text>px</InputGroup.Text>
-					</InputGroup.Addon>
-				</InputGroup.Root>
-			</div>
 		</div>
 	</section>
 
