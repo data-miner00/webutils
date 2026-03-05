@@ -169,11 +169,11 @@
 					{
 						title: 'Image Format Converter',
 						url: '/tools/image-converter'
+					},
+					{
+						title: 'Color Converter',
+						url: '/tools/color-converter'
 					}
-					// {
-					// 	title: 'Color Converter',
-					// 	url: '/tools/color-converter'
-					// },
 					// {
 					// 	title: 'Password Generator',
 					// 	url: '/tools/password-generator'
