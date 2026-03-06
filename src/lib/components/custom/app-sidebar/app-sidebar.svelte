@@ -173,6 +173,10 @@
 					{
 						title: 'Color Converter',
 						url: '/tools/color-converter'
+					},
+					{
+						title: 'Image Compressor',
+						url: '/tools/image-compressor'
 					}
 					// {
 					// 	title: 'Password Generator',
