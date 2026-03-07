@@ -177,6 +177,10 @@
 					{
 						title: 'Image Compressor',
 						url: '/tools/image-compressor'
+					},
+					{
+						title: 'Unicode to Hex',
+						url: '/tools/unicode-hex'
 					}
 					// {
 					// 	title: 'Password Generator',
