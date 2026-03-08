@@ -181,6 +181,11 @@
 					{
 						title: 'Unicode to Hex',
 						url: '/tools/unicode-hex'
+					},
+					{
+						title: 'Regex Tester',
+						url: '/tools/regex',
+						isEnabled: false
 					}
 					// {
 					// 	title: 'Password Generator',

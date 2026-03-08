@@ -19,6 +19,7 @@
 				title: string;
 				url: string;
 				badge?: string;
+				isEnabled?: boolean;
 			}[];
 		}[];
 	} = $props();
@@ -57,23 +58,25 @@
 						<Collapsible.Content>
 							<Sidebar.MenuSub>
 								{#each item.items ?? [] as subItem (subItem.title)}
-									<Sidebar.MenuSubItem>
-										<Sidebar.MenuSubButton>
-											{#snippet child({ props })}
-												<a
-													href={subItem.url}
-													{...props}
-													class:active={page.url.pathname === subItem.url}
-													aria-current={page.url.pathname === subItem.url}
-												>
-													<span>{subItem.title}</span>
-													{#if subItem.badge}
-														<Badge variant="default">{subItem.badge}</Badge>
-													{/if}
-												</a>
-											{/snippet}
-										</Sidebar.MenuSubButton>
-									</Sidebar.MenuSubItem>
+									{#if subItem.isEnabled !== false}
+										<Sidebar.MenuSubItem>
+											<Sidebar.MenuSubButton>
+												{#snippet child({ props })}
+													<a
+														href={subItem.url}
+														{...props}
+														class:active={page.url.pathname === subItem.url}
+														aria-current={page.url.pathname === subItem.url}
+													>
+														<span>{subItem.title}</span>
+														{#if subItem.badge}
+															<Badge variant="default">{subItem.badge}</Badge>
+														{/if}
+													</a>
+												{/snippet}
+											</Sidebar.MenuSubButton>
+										</Sidebar.MenuSubItem>
+									{/if}
 								{/each}
 							</Sidebar.MenuSub>
 						</Collapsible.Content>
