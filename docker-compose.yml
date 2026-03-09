@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  webutils:
+    build: .
+    container_name: webutils
+    ports:
+      - '5001:80'
+    restart: unless-stopped

@@ -4,13 +4,18 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import wasm from 'vite-plugin-wasm';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const MEGABYTES = 1024 * 1024;
+
 export default defineConfig({
 	plugins: [
 		tailwindcss(),
 		sveltekit(),
 		wasm(),
 		VitePWA({
-			registerType: 'autoUpdate'
+			registerType: 'autoUpdate',
+			workbox: {
+				maximumFileSizeToCacheInBytes: 8 * MEGABYTES
+			}
 		})
 	],
 	test: {
