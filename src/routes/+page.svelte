@@ -9,8 +9,6 @@
 	import LinkComponent from '$lib/components/custom/link/link.svelte';
 	import { onMount } from 'svelte';
 	import Localhost from '$lib/components/custom/localhost/localhost.svelte';
-	import * as wasm from '../../rust-pkg/pkg/rust_pkg.js';
-	import { toast } from 'svelte-sonner';
 	import { db, initializeDatabase } from '$lib/core/Database';
 	import { IndexedDBRepository } from '$lib/core/IndexedDbRepository';
 
@@ -32,8 +30,6 @@
 				await repository.create(nonProxyLink);
 			});
 		}
-
-		toast.info(`20 + 13 = ${wasm.add(20n, 13n)}`);
 	});
 </script>
 
@@ -64,5 +60,3 @@
 		</div>
 	</div>
 </div>
-
-<!-- <img src="x" onerror={alert('XSS Attack!')} /> -->
