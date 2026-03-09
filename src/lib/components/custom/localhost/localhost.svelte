@@ -1,17 +1,29 @@
 <script lang="ts">
+	import { ArrowDownUp, Copy, SquareArrowOutUpRight } from '@lucide/svelte';
+
 	import Button from '$lib/components/ui/button/button.svelte';
 	import Checkbox from '$lib/components/ui/checkbox/checkbox.svelte';
 	import { Input } from '$lib/components/ui/input';
 	import Label from '$lib/components/ui/label/label.svelte';
+	import * as Select from '$lib/components/ui/select';
 	import { Spinner } from '$lib/components/ui/spinner';
 	import { copyText } from '$lib/core/copy-to-clipboard';
-	import { ArrowDownUp, Copy, SquareArrowOutUpRight } from '@lucide/svelte';
 
 	let port = $state(3000);
 	let isHttps = $state(true);
+	let format: 'localhost' | 'loopback' | 'ipv6' = $state('localhost');
 	const LOCALHOST = 'localhost';
+	const LOOPBACK = '172.0.0.1';
+	const IPV6 = '[::1]';
 
-	let localhostUrl = $derived((isHttps ? 'https' : 'http') + '://' + LOCALHOST + ':' + port);
+	function generateUrl(isHttpsx: boolean, formatx: string, portx: number): string {
+		const protocol = isHttpsx ? 'https' : 'http';
+		const localhost = formatx == 'loopback' ? LOOPBACK : formatx == 'ipv6' ? IPV6 : LOCALHOST;
+
+		return `${protocol}://${localhost}:${portx}`;
+	}
+
+	let localhostUrl = $derived(generateUrl(isHttps, format, port));
 	let isPinging = $state(false);
 
 	type PingStatus = 'unknown' | 'online' | 'offline';
@@ -50,14 +62,27 @@
 	}
 </script>
 
-<div class="shadow p-4 max-w-md rounded-lg">
+<div class="max-w-md rounded-lg p-4 shadow">
 	<div class="mb-1 font-bold">Preview</div>
-	<!-- ipv6, loopback or etc selection -->
-	<div class="bg-gray-100 rounded-lg px-4 py-2 font-mono mb-4">
-		{isHttps ? 'https' : 'http'}://{LOCALHOST}:{port}
-	</div>
+	<Select.Root type="single" name="imageFormat" bind:value={format}>
+		<Select.Trigger>
+			{localhostUrl}
+		</Select.Trigger>
+		<Select.Content>
+			<Select.Group>
+				<Select.Label>Format</Select.Label>
+				<Select.Item value="localhost" label="localhost"
+					>{generateUrl(isHttps, 'localhost', port)}</Select.Item
+				>
+				<Select.Item value="loopback" label="loopback"
+					>{generateUrl(isHttps, 'loopback', port)}</Select.Item
+				>
+				<Select.Item value="ipv6" label="ipv6">{generateUrl(isHttps, 'ipv6', port)}</Select.Item>
+			</Select.Group>
+		</Select.Content>
+	</Select.Root>
 
-	<Label class="mb-1 font-bold text-base" for="port">Port</Label>
+	<Label class="mb-1 text-base font-bold" for="port">Port</Label>
 	<Input
 		name="port"
 		placeholder="e.g. 3000"
@@ -69,7 +94,7 @@
 	/>
 
 	<div class="mb-1 font-bold">Options</div>
-	<div class="flex items-center gap-3 mb-4">
+	<div class="mb-4 flex items-center gap-3">
 		<Checkbox id="https" bind:checked={isHttps} />
 		<Label for="https">Using HTTPS protocol</Label>
 	</div>
