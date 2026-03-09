@@ -8,7 +8,17 @@
 	import MapIcon from '@lucide/svelte/icons/map';
 	import Settings2Icon from '@lucide/svelte/icons/settings-2';
 	import SquareTerminalIcon from '@lucide/svelte/icons/square-terminal';
-	import { LockIcon, ListIcon } from '@lucide/svelte';
+	import {
+		LockIcon,
+		ListIcon,
+		ImageIcon,
+		MessageCircleCode,
+		ShieldEllipsis,
+		MessagesSquare,
+		FileCodeCorner,
+		Palette,
+		CaseSensitive
+	} from '@lucide/svelte';
 
 	const savedUsername = localStorage.getItem('settings_username') ?? 'User';
 	const savedEmail = localStorage.getItem('settings_email') ?? 'me@gmail.com';
@@ -45,33 +55,8 @@
 				isActive: true,
 				items: [
 					{
-						title: 'Lorem Ipsum',
-						url: '/tools/lorem'
-					},
-					{
-						title: 'JWT Debugger',
-						url: '/tools/jwt-debugger'
-					},
-					{
-						title: 'Space Trimmer',
-						url: '/tools/leading-space'
-					},
-					{
-						title: 'Hash String',
-						url: '/tools/hash'
-					},
-					{
 						title: 'QR Code',
 						url: '/tools/qr-code'
-					},
-					{
-						title: 'String Transform',
-						url: '/tools/strings'
-					},
-					{
-						title: 'Verify',
-						url: '/tools/verify',
-						badge: 'Beta'
 					},
 					{
 						title: 'Unit Conversion',
@@ -79,12 +64,114 @@
 						badge: 'Beta'
 					},
 					{
-						title: 'Text Stats',
-						url: '/tools/text-stats'
+						title: 'Timer / Stopwatch',
+						url: '/tools/timer'
+					},
+					{
+						title: 'URL Parser',
+						url: '/tools/url-parser'
+					},
+					{
+						title: 'UUID Generator',
+						url: '/tools/uuid'
+					},
+					{
+						title: 'Timestamp',
+						url: '/tools/timestamp'
+					},
+					{
+						title: 'Base Converter',
+						url: '/tools/baseN'
+					},
+					{
+						title: 'Regex Tester',
+						url: '/tools/regex',
+						isEnabled: false
+					}
+					// {
+					// 	title: 'Password Generator',
+					// 	url: '/tools/password-generator'
+					// }
+				]
+			},
+			{
+				title: 'Image',
+				url: '#',
+				icon: ImageIcon,
+				items: [
+					{
+						title: 'Base64 Image Converter',
+						url: '/tools/base64-image'
+					},
+					{
+						title: 'Image Format Converter',
+						url: '/tools/image-converter'
+					},
+					{
+						title: 'Image Resizer',
+						url: '/tools/image-resizer'
+					},
+					{
+						title: 'Image Compressor',
+						url: '/tools/image-compressor'
+					}
+				]
+			},
+			{
+				title: 'Code Review',
+				url: '#',
+				icon: MessageCircleCode,
+				items: [
+					{
+						title: 'Space Trimmer',
+						url: '/tools/leading-space'
 					},
 					{
 						title: 'Text Diff',
 						url: '/tools/text-diff'
+					}
+				]
+			},
+			{
+				title: 'Security & Auth',
+				url: '#',
+				icon: ShieldEllipsis,
+				items: [
+					{
+						title: 'JWT Debugger',
+						url: '/tools/jwt-debugger'
+					},
+					{
+						title: 'Certificate Decoder',
+						url: '/tools/certificate'
+					},
+					{
+						title: 'Verify',
+						url: '/tools/verify',
+						badge: 'Beta'
+					}
+				]
+			},
+			{
+				title: 'Text',
+				url: '#',
+				icon: CaseSensitive,
+				items: [
+					{
+						title: 'String Transform',
+						url: '/tools/strings'
+					},
+					{
+						title: 'Text Stats',
+						url: '/tools/text-stats'
+					},
+					{
+						title: 'Hash String',
+						url: '/tools/hash'
+					},
+					{
+						title: 'Unicode to Hex',
+						url: '/tools/unicode-hex'
 					},
 					{
 						title: 'Sort list',
@@ -93,10 +180,32 @@
 					{
 						title: 'Base64',
 						url: '/tools/base64'
-					},
+					}
+				]
+			},
+			{
+				title: 'Discussion',
+				url: '#',
+				icon: MessagesSquare,
+				items: [
+					{
+						title: 'Draw',
+						url: '/tools/draw'
+					}
+				]
+			},
+			{
+				title: 'Web',
+				url: '#',
+				icon: FileCodeCorner,
+				items: [
 					{
 						title: 'CSS Formatter',
 						url: '/tools/css'
+					},
+					{
+						title: 'HTML Viewer',
+						url: '/tools/html-viewer'
 					},
 					{
 						title: 'HTML Formatter',
@@ -111,86 +220,36 @@
 						url: '/tools/json'
 					},
 					{
-						title: 'YAML to JSON',
-						url: '/tools/yaml'
-					},
-					{
-						title: 'Timer / Stopwatch',
-						url: '/tools/timer'
-					},
-					{
-						title: 'Base64 Image Converter',
-						url: '/tools/base64-image'
-					},
-					{
-						title: 'Draw',
-						url: '/tools/draw'
-					},
-					{
-						title: 'URL Parser',
-						url: '/tools/url-parser'
-					},
-					{
-						title: 'XML Converter',
-						url: '/tools/xml'
-					},
-					{
-						title: 'UUID Generator',
-						url: '/tools/uuid'
-					},
-					{
-						title: 'HTML Viewer',
-						url: '/tools/html-viewer'
-					},
-					{
-						title: 'Timestamp',
-						url: '/tools/timestamp'
-					},
-					{
 						title: 'Markdown Viewer',
 						url: '/tools/markdown-viewer'
-					},
-					{
-						title: 'Certificate Decoder',
-						url: '/tools/certificate'
 					},
 					{
 						title: 'SQL Formatter',
 						url: '/tools/sql'
 					},
 					{
-						title: 'Base Converter',
-						url: '/tools/baseN'
+						title: 'YAML to JSON',
+						url: '/tools/yaml'
 					},
 					{
-						title: 'Image Resizer',
-						url: '/tools/image-resizer'
-					},
+						title: 'XML Converter',
+						url: '/tools/xml'
+					}
+				]
+			},
+			{
+				title: 'Design',
+				url: '#',
+				icon: Palette,
+				items: [
 					{
-						title: 'Image Format Converter',
-						url: '/tools/image-converter'
+						title: 'Lorem Ipsum',
+						url: '/tools/lorem'
 					},
 					{
 						title: 'Color Converter',
 						url: '/tools/color-converter'
-					},
-					{
-						title: 'Image Compressor',
-						url: '/tools/image-compressor'
-					},
-					{
-						title: 'Unicode to Hex',
-						url: '/tools/unicode-hex'
-					},
-					{
-						title: 'Regex Tester',
-						url: '/tools/regex',
-						isEnabled: false
 					}
-					// {
-					// 	title: 'Password Generator',
-					// 	url: '/tools/password-generator'
-					// }
 				]
 			},
 			{
@@ -214,29 +273,6 @@
 					{
 						title: 'Calendar',
 						url: '/tools/calendar'
-					}
-				]
-			},
-			{
-				title: 'Settings',
-				url: '#',
-				icon: Settings2Icon,
-				items: [
-					{
-						title: 'General',
-						url: '/settings'
-					},
-					{
-						title: 'Team',
-						url: '#'
-					},
-					{
-						title: 'Billing',
-						url: '#'
-					},
-					{
-						title: 'Limits',
-						url: '#'
 					}
 				]
 			}
@@ -266,6 +302,11 @@
 				name: 'Todo List',
 				url: '/manage/todo',
 				icon: ListIcon
+			},
+			{
+				name: 'Settings',
+				url: '/settings',
+				icon: Settings2Icon
 			}
 		]
 	};

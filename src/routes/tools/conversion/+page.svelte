@@ -2,6 +2,7 @@
 	import * as weather from '$lib/core/weather';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
+	import References from '$lib/components/custom/references/references.svelte';
 
 	const ROOM_TEMP = 25;
 	let celciusInput = $state(ROOM_TEMP);
@@ -61,3 +62,12 @@
 		and <span class="font-bold">{weather.convertKelvinToFarenheit(kelvinInput)}°F</span>
 	</div>
 </div>
+
+<References
+	references={[
+		{
+			title: 'Unit Conversion',
+			url: 'https://www.unitconverters.net/'
+		}
+	]}
+/>
