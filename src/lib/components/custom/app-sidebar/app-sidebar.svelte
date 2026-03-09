@@ -1,4 +1,15 @@
 <script lang="ts" module>
+	import {
+		CaseSensitive,
+		FileCodeCorner,
+		ImageIcon,
+		ListIcon,
+		LockIcon,
+		MessageCircleCode,
+		MessagesSquare,
+		Palette,
+		ShieldEllipsis
+	} from '@lucide/svelte';
 	import AudioWaveformIcon from '@lucide/svelte/icons/audio-waveform';
 	import BotIcon from '@lucide/svelte/icons/bot';
 	import ChartPieIcon from '@lucide/svelte/icons/chart-pie';
@@ -8,17 +19,6 @@
 	import MapIcon from '@lucide/svelte/icons/map';
 	import Settings2Icon from '@lucide/svelte/icons/settings-2';
 	import SquareTerminalIcon from '@lucide/svelte/icons/square-terminal';
-	import {
-		LockIcon,
-		ListIcon,
-		ImageIcon,
-		MessageCircleCode,
-		ShieldEllipsis,
-		MessagesSquare,
-		FileCodeCorner,
-		Palette,
-		CaseSensitive
-	} from '@lucide/svelte';
 
 	const savedUsername = localStorage.getItem('settings_username') ?? 'User';
 	const savedEmail = localStorage.getItem('settings_email') ?? 'me@gmail.com';
@@ -52,7 +52,7 @@
 				title: 'General',
 				url: '#',
 				icon: SquareTerminalIcon,
-				isActive: true,
+				isActive: false,
 				items: [
 					{
 						title: 'QR Code',
@@ -123,8 +123,12 @@
 				icon: MessageCircleCode,
 				items: [
 					{
-						title: 'Space Trimmer',
+						title: 'Leading Space',
 						url: '/tools/leading-space'
+					},
+					{
+						title: 'Trailing Space',
+						url: '/tools/trailing-space'
 					},
 					{
 						title: 'Text Diff',
@@ -313,12 +317,14 @@
 </script>
 
 <script lang="ts">
+	import type { ComponentProps } from 'svelte';
+
+	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+
 	import NavMain from './nav-main.svelte';
 	import NavProjects from './nav-projects.svelte';
 	import NavUser from './nav-user.svelte';
 	import TeamSwitcher from './team-switcher.svelte';
-	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
-	import type { ComponentProps } from 'svelte';
 
 	let {
 		ref = $bindable(null),
