@@ -299,7 +299,7 @@
 			},
 			{
 				name: 'Secrets',
-				url: '#',
+				url: '/manage/secrets',
 				icon: LockIcon
 			},
 			{
