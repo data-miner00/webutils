@@ -1,6 +1,7 @@
 <script lang="ts" module>
 	import {
 		CaseSensitive,
+		Code,
 		FileCodeCorner,
 		ImageIcon,
 		ListIcon,
@@ -255,6 +256,12 @@
 						url: '/tools/color-converter'
 					}
 				]
+			},
+			{
+				title: 'Development',
+				url: '#',
+				icon: Code,
+				items: [{ title: 'Localhost', url: '/tools/localhost' }]
 			},
 			{
 				title: 'Lookup',
