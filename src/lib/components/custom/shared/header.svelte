@@ -1,12 +1,15 @@
 <script lang="ts">
+	import { Clipboard, Eye, EyeClosed, MapPin, RefreshCcw, Wifi, WifiOff } from '@lucide/svelte';
 	import { onMount } from 'svelte';
-	import { currentLocalTimeInfo } from '$lib/core/clock-utils';
-	import SearchSection from '../search/search-section.svelte';
-	import { Clipboard, MapPin, RefreshCcw, Wifi, WifiOff } from '@lucide/svelte';
-	import { fetchIpInfo, type IpInfo } from '$lib/core/ip-address';
-	import { Button } from '$lib/components/ui/button';
-	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { toast } from 'svelte-sonner';
+
+	import { Button } from '$lib/components/ui/button';
+	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
+	import { currentLocalTimeInfo } from '$lib/core/clock-utils';
+	import { copyText } from '$lib/core/copy-to-clipboard';
+	import { type IpInfo, fetchIpInfo } from '$lib/core/ip-address';
+
+	import SearchSection from '../search/search-section.svelte';
 
 	let username = $state('');
 	let email = $state('');
@@ -14,6 +17,7 @@
 	let currentTime = $state(currentLocalTimeInfo(true));
 	let isOnline = $state(true);
 	let ipState = $state<IpInfo>();
+	let showIp = $state(true);
 
 	onMount(() => {
 		const savedUsername = localStorage.getItem('settings_username');
@@ -45,12 +49,17 @@
 </script>
 
 <header
-	class="flex w-full items-center justify-between p-4 border-b border-solid border-gray-300 sticky top-0 right-0 bg-sidebar"
+	class="bg-sidebar sticky top-0 right-0 flex w-full items-center justify-between border-b border-solid border-gray-300 p-4"
 >
-	{#if ipState}
-		<div class="flex items-center gap-2 text-sm">
-			<MapPin size="20" />
-			<div>{ipState.city}, {ipState.country} ({ipState.ip})</div>
+	<div class="flex items-center gap-2 text-sm">
+		<MapPin size="20" />
+		{#if ipState}
+			<div>{ipState.city}, {ipState.country} ({showIp ? ipState.ip : '******'})</div>
+		{:else}
+			<!-- No internet connection -->
+			<div>Uranus (0.0.0.0)</div>
+		{/if}
+		<ButtonGroup.Root>
 			<Button
 				variant="outline"
 				size="icon"
@@ -59,27 +68,27 @@
 			>
 				<Clipboard />
 			</Button>
+			<Button
+				variant="outline"
+				size="icon"
+				aria-label="Hide/Show IP"
+				onclick={() => (showIp = !showIp)}
+			>
+				{#if showIp}
+					<Eye />
+				{:else}
+					<EyeClosed />
+				{/if}
+			</Button>
 			<Button variant="outline" size="icon" aria-label="Refresh" onclick={forceRefreshIp}>
 				<RefreshCcw />
 			</Button>
-		</div>
-	{:else}
-		<!-- No internet connection -->
-		<div class="flex items-center gap-2 text-sm" title="Wow, you're on Uranus!">
-			<MapPin size="20" />
-			<div>Uranus (0.0.0.0)</div>
-			<Button variant="outline" size="icon" aria-label="Submit" onclick={() => copyText('0.0.0.0')}>
-				<Clipboard />
-			</Button>
-			<Button variant="outline" size="icon" aria-label="Refresh" onclick={forceRefreshIp}>
-				<RefreshCcw />
-			</Button>
-		</div>
-	{/if}
+		</ButtonGroup.Root>
+	</div>
 
 	<SearchSection />
 
-	<div class="flex gap-4 items-center">
+	<div class="flex items-center gap-4">
 		<div title={isOnline ? 'Connected to internet' : 'Not connected'}>
 			{#if isOnline}
 				<Wifi class="text-green-500" />
