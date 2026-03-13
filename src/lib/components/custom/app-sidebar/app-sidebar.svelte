@@ -185,6 +185,10 @@
 					{
 						title: 'Base64',
 						url: '/tools/base64'
+					},
+					{
+						title: 'Newline Escape',
+						url: '/tools/newline-escaper'
 					}
 				]
 			},
