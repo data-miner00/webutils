@@ -288,6 +288,10 @@
 					{
 						title: 'Calendar',
 						url: '/tools/calendar'
+					},
+					{
+						title: 'HTTP Code',
+						url: '/tools/http-code'
 					}
 				]
 			}
