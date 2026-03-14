@@ -1,9 +1,16 @@
 import { LOCALHOST_STORE_NAME } from './localhost';
+import { SECRET_STORE_NAME } from './secrets';
 
 export const DATABASE_NAME = 'webutils';
-export const DATABASE_VERSION = 4;
+export const DATABASE_VERSION = 5;
 
-export const STORE_NAMES = ['links', 'notes', 'todo_items', LOCALHOST_STORE_NAME];
+export const STORE_NAMES = [
+	'links',
+	'notes',
+	'todo_items',
+	LOCALHOST_STORE_NAME,
+	SECRET_STORE_NAME
+];
 
 export class Database {
 	private dbName: string;

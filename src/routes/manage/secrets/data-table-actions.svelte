@@ -5,13 +5,12 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 
 	type Props = {
-		id: string;
-		emoji: string;
-		link: string;
+		encryptedSecret: string;
 		name: string;
+		onDelete: () => void;
 	};
 
-	let { name, link, emoji }: Props = $props();
+	let { encryptedSecret, onDelete }: Props = $props();
 </script>
 
 <DropdownMenu.Root>
@@ -26,11 +25,11 @@
 	<DropdownMenu.Content>
 		<DropdownMenu.Group>
 			<DropdownMenu.Label>Actions</DropdownMenu.Label>
-			<DropdownMenu.Item onclick={() => navigator.clipboard.writeText(emoji)}>
+			<DropdownMenu.Item onclick={() => navigator.clipboard.writeText(encryptedSecret)}>
 				Copy secret
 			</DropdownMenu.Item>
 		</DropdownMenu.Group>
 		<DropdownMenu.Separator />
-		<DropdownMenu.Item>Delete</DropdownMenu.Item>
+		<DropdownMenu.Item onclick={onDelete}>Delete</DropdownMenu.Item>
 	</DropdownMenu.Content>
 </DropdownMenu.Root>

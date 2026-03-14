@@ -132,6 +132,13 @@ export const columns: ColumnDef<Secret>[] = [
 	{
 		id: 'actions',
 		enableHiding: false,
-		cell: ({ row }) => renderComponent(DataTableActions)
+		cell: ({ row }) =>
+			renderComponent(DataTableActions, {
+				encryptedSecret: 'hello',
+				name: 'hehha',
+				onClick: () => {
+					console.log('clicked!!!!!!!!!!');
+				}
+			})
 	}
 ];
