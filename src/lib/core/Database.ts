@@ -1,7 +1,9 @@
-export const DATABASE_NAME = 'webutils';
-export const DATABASE_VERSION = 3;
+import { LOCALHOST_STORE_NAME } from './localhost';
 
-export const STORE_NAMES = ['links', 'notes', 'todo_items'];
+export const DATABASE_NAME = 'webutils';
+export const DATABASE_VERSION = 4;
+
+export const STORE_NAMES = ['links', 'notes', 'todo_items', LOCALHOST_STORE_NAME];
 
 export class Database {
 	private dbName: string;
@@ -16,7 +18,7 @@ export class Database {
 	async init(stores: string[]): Promise<void> {
 		return new Promise((resolve, reject) => {
 			const request = indexedDB.open(this.dbName, this.version);
-			console.log('Initializing database:', this.dbName, 'Version:', this.version);
+			console.debug('Initializing database:', this.dbName, 'Version:', this.version);
 
 			request.onerror = () => reject(request.error);
 			request.onsuccess = () => {
