@@ -154,6 +154,10 @@
 						title: 'Verify',
 						url: '/tools/verify',
 						badge: 'Beta'
+					},
+					{
+						title: 'Caesar Cipher',
+						url: '/tools/caesar'
 					}
 				]
 			},
