@@ -15,10 +15,13 @@
 	import { IndexedDBRepository } from '$lib/core/IndexedDbRepository';
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { SECRET_STORE_NAME, type Secret } from '$lib/core/secrets';
+	import { decryptSecret, encryptSecret, unlockVault } from '$lib/core/secrets';
 
 	const repository = new IndexedDBRepository<Secret>(db, SECRET_STORE_NAME);
 
+	let masterPassword = $state('');
 	let isDialogOpen = $state(false);
+	let isPwDialogOpen = $state(false);
 	let secrets = $state<Secret[]>([]);
 	let searchQuery = $state('');
 	let isEditMode = $state(false);
@@ -26,6 +29,7 @@
 	let inputSecret = $state<Secret>({
 		id: crypto.randomUUID(),
 		snippet: '',
+		iv: '',
 		name: '',
 		type: '',
 		encryptedSecret: '',
@@ -33,6 +37,8 @@
 		createdAt: new Date().toISOString(),
 		updatedAt: new Date().toISOString()
 	});
+
+	let selectedSecretId = $state('');
 
 	onMount(async () => {
 		if (!db.isDbInitialized) {
@@ -49,6 +55,13 @@
 		input.createdAt = now;
 		input.updatedAt = now;
 		input.snippet = input.encryptedSecret.slice(0, 3) + '*******';
+
+		const key = await unlockVault(masterPassword);
+
+		const encrypted = await encryptSecret(key, input.encryptedSecret);
+		input.encryptedSecret = encrypted.ciphertext;
+		input.iv = encrypted.iv;
+
 		await repository.create(input);
 
 		secrets.push(input);
@@ -64,6 +77,12 @@
 		input.updatedAt = new Date().toISOString();
 		input.version++;
 		input.snippet = input.encryptedSecret.slice(0, 3) + '*******';
+		const key = await unlockVault(masterPassword);
+
+		const encrypted = await encryptSecret(key, input.encryptedSecret);
+		input.encryptedSecret = encrypted.ciphertext;
+		input.iv = encrypted.iv;
+
 		await repository.update(input.id, input);
 
 		const index = secrets.findIndex((secret) => secret.id === input.id);
@@ -89,6 +108,37 @@
 		isEditMode = true;
 		inputSecret = { ...secret };
 		isDialogOpen = true;
+	}
+
+	async function copyDecryptedSecret() {
+		if (!masterPassword) {
+			return alert('Please enter the password.');
+		}
+
+		const selected = secrets.find((x) => x.id === selectedSecretId);
+
+		if (!selected) {
+			alert('The secret cannot be found.');
+			return;
+		}
+
+		try {
+			const key = await unlockVault(masterPassword);
+
+			const rawSecret = await decryptSecret(key, {
+				iv: selected.iv,
+				ciphertext: selected.encryptedSecret
+			});
+
+			copyText(rawSecret);
+			isPwDialogOpen = false;
+		} catch {
+			const pwErrorEl = document.querySelector('.error');
+
+			if (!pwErrorEl) return;
+
+			pwErrorEl.textContent = 'Your password is incorrect.';
+		}
 	}
 </script>
 
@@ -149,6 +199,16 @@
 							bind:value={inputSecret.encryptedSecret}
 						/>
 					</div>
+					<div class="grid gap-3">
+						<Label for="master-password">Password</Label>
+						<Input
+							id="master-password"
+							name="master-password"
+							type="password"
+							placeholder="e.g. dfs^hd$uf@298sfam"
+							bind:value={masterPassword}
+						/>
+					</div>
 				</div>
 				<Dialog.Footer>
 					<Dialog.Close class={buttonVariants({ variant: 'outline' })}>Cancel</Dialog.Close>
@@ -193,7 +253,13 @@
 						</Table.Cell>
 						<Table.Cell>
 							<ButtonGroup.Root>
-								<Button variant="outline" onclick={() => copyText(secret.encryptedSecret)}>
+								<Button
+									variant="outline"
+									onclick={() => {
+										selectedSecretId = secret.id;
+										isPwDialogOpen = true;
+									}}
+								>
 									<Copy />
 								</Button>
 
@@ -234,3 +300,34 @@
 		</Button>
 	</Empty.Root>
 {/if}
+
+<Dialog.Root bind:open={isPwDialogOpen}>
+	<form>
+		<Dialog.Content class="sm:max-w-[425px]">
+			<Dialog.Header>
+				<Dialog.Title>Enter Password</Dialog.Title>
+				<Dialog.Description>Insert your password to decipher the secret.</Dialog.Description>
+			</Dialog.Header>
+			<div class="grid gap-4">
+				<div class="grid gap-3">
+					<Label for="password">Password</Label>
+					<Input
+						bind:value={masterPassword}
+						id="password"
+						name="password"
+						type="password"
+						placeholder="Enter password..."
+					/>
+				</div>
+
+				<p class="error text-red-500"></p>
+			</div>
+			<Dialog.Footer>
+				<Dialog.Close type="button" class={buttonVariants({ variant: 'outline' })}>
+					Cancel
+				</Dialog.Close>
+				<Button type="submit" onclick={copyDecryptedSecret}>Decrypt</Button>
+			</Dialog.Footer>
+		</Dialog.Content>
+	</form>
+</Dialog.Root>

@@ -2,7 +2,7 @@ import { LOCALHOST_STORE_NAME } from './localhost';
 import { SECRET_STORE_NAME } from './secrets';
 
 export const DATABASE_NAME = 'webutils';
-export const DATABASE_VERSION = 5;
+export const DATABASE_VERSION = 6;
 
 export const STORE_NAMES = [
 	'links',
