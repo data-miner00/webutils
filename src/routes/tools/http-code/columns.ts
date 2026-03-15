@@ -10,5 +10,17 @@ export const columns: ColumnDef<HttpCode>[] = [
 	{
 		accessorKey: 'description',
 		header: 'Description'
+	},
+	{
+		accessorKey: 'meaning',
+		header: 'Meaning'
+	},
+	{
+		accessorKey: 'deprecated',
+		header: 'Deprecated'
+	},
+	{
+		accessorKey: 'rfc',
+		header: 'RFC'
 	}
 ];

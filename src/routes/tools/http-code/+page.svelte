@@ -1,6 +1,4 @@
 <script>
-	// https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
-	// https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
 	import Download from '@lucide/svelte/icons/download';
 
 	import References from '$lib/components/custom/references/references.svelte';
