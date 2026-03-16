@@ -36,6 +36,7 @@
 		type LocalhostAssociation,
 		type LocalhostFormat,
 		type OnlineStatus,
+		generateUrl,
 		localhostFormatDisplay
 	} from '$lib/core/localhost';
 
@@ -114,16 +115,6 @@
 	let port = $state(3000);
 	let isHttps = $state(true);
 	let format: 'localhost' | 'loopback' | 'ipv6' = $state('localhost');
-	const LOCALHOST = 'localhost';
-	const LOOPBACK = '172.0.0.1';
-	const IPV6 = '[::1]';
-
-	function generateUrl(isHttpsx: boolean, formatx: string, portx: number): string {
-		const protocol = isHttpsx ? 'https' : 'http';
-		const localhost = formatx == 'loopback' ? LOOPBACK : formatx == 'ipv6' ? IPV6 : LOCALHOST;
-
-		return `${protocol}://${localhost}:${portx}`;
-	}
 
 	let localhostUrl = $derived(generateUrl(isHttps, format, port));
 	let isPinging = $state(false);

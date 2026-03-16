@@ -19,3 +19,13 @@ export type LocalhostAssociation = {
 } & Entity;
 
 export const LOCALHOST_STORE_NAME = 'localhost';
+
+export function generateUrl(isHttps: boolean, format: LocalhostFormat, port: number): string {
+	const LOCALHOST = 'localhost';
+	const LOOPBACK = '172.0.0.1';
+	const IPV6 = '[::1]';
+	const protocol = isHttps ? 'https' : 'http';
+	const localhost = format == 'loopback' ? LOOPBACK : format == 'ipv6' ? IPV6 : LOCALHOST;
+
+	return `${protocol}://${localhost}:${port}`;
+}
