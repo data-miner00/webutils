@@ -22,6 +22,7 @@
 	const repository = new IndexedDBRepository<Secret>(db, SECRET_STORE_NAME);
 
 	let masterPassword = $state('');
+	let secret = $state('');
 	let isDialogOpen = $state(false);
 	let isPwDialogOpen = $state(false);
 	let secrets = $state<Secret[]>([]);
@@ -72,11 +73,11 @@
 		input.id = crypto.randomUUID();
 		input.createdAt = now;
 		input.updatedAt = now;
-		input.snippet = input.encryptedSecret.slice(0, 3) + '*******';
+		input.snippet = secret.slice(0, 3) + '*******';
 
 		const key = await unlockVault(masterPassword);
 
-		const encrypted = await encryptSecret(key, input.encryptedSecret);
+		const encrypted = await encryptSecret(key, secret);
 		input.encryptedSecret = encrypted.ciphertext;
 		input.iv = encrypted.iv;
 
@@ -88,6 +89,7 @@
 		toast.success('Secret added succesfully.');
 
 		masterPassword = '';
+		secret = '';
 	}
 
 	async function update() {
@@ -95,23 +97,29 @@
 
 		input.updatedAt = new Date().toISOString();
 		input.version++;
-		input.snippet = input.encryptedSecret.slice(0, 3) + '*******';
-		const key = await unlockVault(masterPassword);
+		input.snippet = secret.slice(0, 3) + '*******';
 
-		const encrypted = await encryptSecret(key, input.encryptedSecret);
-		input.encryptedSecret = encrypted.ciphertext;
-		input.iv = encrypted.iv;
+		try {
+			const key = await unlockVault(masterPassword);
 
-		await repository.update(input.id, input);
+			const encrypted = await encryptSecret(key, secret);
+			input.encryptedSecret = encrypted.ciphertext;
+			input.iv = encrypted.iv;
 
-		const index = secrets.findIndex((secret) => secret.id === input.id);
-		secrets.splice(index, 1, input);
+			await repository.update(input.id, input);
+
+			const index = secrets.findIndex((secret) => secret.id === input.id);
+			secrets.splice(index, 1, input);
+
+			toast.success('Secret updated successfully.');
+		} catch {
+			toast.error('Your password is not correct');
+			masterPassword = '';
+		}
 
 		isDialogOpen = false;
-
-		toast.success('Secret updated successfully.');
-
 		masterPassword = '';
+		secret = '';
 	}
 
 	async function remove(id: string) {
@@ -160,6 +168,8 @@
 			if (!pwErrorEl) return;
 
 			pwErrorEl.textContent = 'Your password is incorrect.';
+		} finally {
+			masterPassword = '';
 		}
 	}
 </script>
@@ -207,7 +217,7 @@
 						<Label for="type">Type</Label>
 
 						<Select.Root type="single" name="secretType" bind:value={inputSecret.type}>
-							<Select.Trigger>
+							<Select.Trigger class="w-full">
 								{toPascalCase(inputSecret.type)}
 							</Select.Trigger>
 							<Select.Content>
@@ -234,7 +244,7 @@
 							name="secret"
 							type="password"
 							placeholder="e.g. dfs^hd$uf@298sfam"
-							bind:value={inputSecret.encryptedSecret}
+							bind:value={secret}
 						/>
 					</div>
 					<div class="grid gap-3">
