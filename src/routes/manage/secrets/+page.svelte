@@ -1,5 +1,14 @@
 <script lang="ts">
-	import { ArrowUpRightIcon, Copy, Lock, Pencil, Plus, SearchIcon, Trash2 } from '@lucide/svelte';
+	import {
+		ArrowUpRightIcon,
+		Copy,
+		Lock,
+		Pencil,
+		Plus,
+		SearchIcon,
+		Trash2,
+		X
+	} from '@lucide/svelte';
 	import { onMount } from 'svelte';
 	import { toast } from 'svelte-sonner';
 
@@ -28,6 +37,7 @@
 	let secrets = $state<Secret[]>([]);
 	let searchQuery = $state('');
 	let isEditMode = $state(false);
+	let filteredSecrets = $derived(secrets.filter((x) => x.name.includes(searchQuery)));
 
 	let inputSecret = $state<Secret>({
 		id: crypto.randomUUID(),
@@ -180,9 +190,11 @@
 		<InputGroup.Addon>
 			<SearchIcon />
 		</InputGroup.Addon>
-		<InputGroup.Addon align="inline-end">
-			<InputGroup.Button>Search</InputGroup.Button>
-		</InputGroup.Addon>
+		{#if searchQuery}
+			<InputGroup.Addon align="inline-end">
+				<InputGroup.Button onclick={() => (searchQuery = '')}><X /></InputGroup.Button>
+			</InputGroup.Addon>
+		{/if}
 	</InputGroup.Root>
 
 	<Dialog.Root bind:open={isDialogOpen}>
@@ -283,7 +295,7 @@
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
-				{#each secrets as secret (secret.id)}
+				{#each filteredSecrets as secret (secret.id)}
 					<Table.Row>
 						<Table.Cell class="font-medium">{secret.name}</Table.Cell>
 						<Table.Cell>{secret.type}</Table.Cell>
@@ -319,6 +331,10 @@
 								</Button>
 							</ButtonGroup.Root>
 						</Table.Cell>
+					</Table.Row>
+				{:else}
+					<Table.Row>
+						<Table.Cell class="font-medium">No secrets found.</Table.Cell>
 					</Table.Row>
 				{/each}
 			</Table.Body>
