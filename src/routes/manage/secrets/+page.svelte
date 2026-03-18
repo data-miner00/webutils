@@ -23,6 +23,7 @@
 	import * as Table from '$lib/components/ui/table/index.js';
 	import { db, initializeDatabase } from '$lib/core/Database';
 	import { IndexedDBRepository } from '$lib/core/IndexedDbRepository';
+	import { formatDateTime, localTimezone } from '$lib/core/clock-utils';
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { SECRET_STORE_NAME, type Secret } from '$lib/core/secrets';
 	import { decryptSecret, encryptSecret, unlockVault } from '$lib/core/secrets';
@@ -76,6 +77,10 @@
 			};
 		}
 	});
+
+	function formatDate(date: string): string {
+		return formatDateTime(date, 'en-US', localTimezone);
+	}
 
 	async function addToDb() {
 		const now = new Date().toISOString();
@@ -306,10 +311,10 @@
 							{secret.version}
 						</Table.Cell>
 						<Table.Cell>
-							{secret.createdAt}
+							{formatDate(secret.createdAt)}
 						</Table.Cell>
 						<Table.Cell>
-							{secret.updatedAt}
+							{formatDate(secret.updatedAt)}
 						</Table.Cell>
 						<Table.Cell>
 							<ButtonGroup.Root>

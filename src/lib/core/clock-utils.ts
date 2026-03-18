@@ -116,3 +116,11 @@ export function currentLocalTimeInfo(hour12 = false): LocalTimeInfo {
 		dayNight
 	};
 }
+
+export function formatDateTime(date: string, locale: string, timezone: string): string {
+	return new Intl.DateTimeFormat(locale, {
+		dateStyle: 'full',
+		timeStyle: 'long',
+		timeZone: timezone
+	}).format(new Date(date));
+}
