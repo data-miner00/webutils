@@ -10,12 +10,14 @@
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
+	import * as Select from '$lib/components/ui/select';
 	import * as Table from '$lib/components/ui/table/index.js';
 	import { db, initializeDatabase } from '$lib/core/Database';
 	import { IndexedDBRepository } from '$lib/core/IndexedDbRepository';
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { SECRET_STORE_NAME, type Secret } from '$lib/core/secrets';
 	import { decryptSecret, encryptSecret, unlockVault } from '$lib/core/secrets';
+	import { toPascalCase } from '$lib/core/string-utils';
 
 	const repository = new IndexedDBRepository<Secret>(db, SECRET_STORE_NAME);
 
@@ -31,7 +33,7 @@
 		snippet: '',
 		iv: '',
 		name: '',
-		type: '',
+		type: 'password',
 		encryptedSecret: '',
 		version: 1,
 		createdAt: new Date().toISOString(),
@@ -46,6 +48,22 @@
 		}
 
 		secrets = await repository.getAll();
+	});
+
+	$effect(() => {
+		if (!isDialogOpen) {
+			inputSecret = {
+				id: crypto.randomUUID(),
+				snippet: '',
+				iv: '',
+				name: '',
+				type: 'password',
+				encryptedSecret: '',
+				version: 1,
+				createdAt: new Date().toISOString(),
+				updatedAt: new Date().toISOString()
+			};
+		}
 	});
 
 	async function addToDb() {
@@ -65,10 +83,11 @@
 		await repository.create(input);
 
 		secrets.push(input);
-		secrets = secrets;
 		isDialogOpen = false;
 
 		toast.success('Secret added succesfully.');
+
+		masterPassword = '';
 	}
 
 	async function update() {
@@ -87,11 +106,12 @@
 
 		const index = secrets.findIndex((secret) => secret.id === input.id);
 		secrets.splice(index, 1, input);
-		secrets = secrets;
 
 		isDialogOpen = false;
 
 		toast.success('Secret updated successfully.');
+
+		masterPassword = '';
 	}
 
 	async function remove(id: string) {
@@ -101,6 +121,8 @@
 			secrets = secrets.filter((secret) => secret.id != id);
 
 			toast.success('Secret deleted successfully.');
+
+			masterPassword = '';
 		}
 	}
 
@@ -183,24 +205,40 @@
 					</div>
 					<div class="grid gap-3">
 						<Label for="type">Type</Label>
-						<Input
-							id="type"
-							name="type"
-							placeholder="e.g. password"
-							bind:value={inputSecret.type}
-						/>
+
+						<Select.Root type="single" name="secretType" bind:value={inputSecret.type}>
+							<Select.Trigger>
+								{toPascalCase(inputSecret.type)}
+							</Select.Trigger>
+							<Select.Content>
+								<Select.Group>
+									<Select.Label>Type</Select.Label>
+									<Select.Item value="general" label="general">General</Select.Item>
+									<Select.Item value="key" label="key">Key</Select.Item>
+									<Select.Item value="token" label="token">Token</Select.Item>
+									<Select.Item value="username" label="username">Username</Select.Item>
+									<Select.Item value="password" label="password">Password</Select.Item>
+									<Select.Item value="connection-string" label="connection-string"
+										>Connection String</Select.Item
+									>
+									<Select.Item value="certificate" label="certificate">Certificate</Select.Item>
+									<Select.Item value="passphrase" label="passphrase">Passphrase</Select.Item>
+								</Select.Group>
+							</Select.Content>
+						</Select.Root>
 					</div>
 					<div class="grid gap-3">
 						<Label for="secret">Secret</Label>
 						<Input
 							id="secret"
 							name="secret"
+							type="password"
 							placeholder="e.g. dfs^hd$uf@298sfam"
 							bind:value={inputSecret.encryptedSecret}
 						/>
 					</div>
 					<div class="grid gap-3">
-						<Label for="master-password">Password</Label>
+						<Label for="master-password">Master Password</Label>
 						<Input
 							id="master-password"
 							name="master-password"

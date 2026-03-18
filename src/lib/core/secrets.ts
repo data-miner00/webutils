@@ -110,3 +110,13 @@ export async function unlockVault(masterPassword: string) {
 	const key = await deriveKey(masterPassword, salt);
 	return key;
 }
+
+export type SecretType =
+	| 'key'
+	| 'token'
+	| 'username'
+	| 'password'
+	| 'connection-string'
+	| 'certificate'
+	| 'passphrase'
+	| 'general';
