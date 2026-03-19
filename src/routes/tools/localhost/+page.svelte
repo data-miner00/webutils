@@ -34,13 +34,11 @@
 	import {
 		LOCALHOST_STORE_NAME,
 		type LocalhostAssociation,
-		type LocalhostFormat,
-		type OnlineStatus,
 		generateUrl,
 		localhostFormatDisplay
 	} from '$lib/core/localhost';
 
-	let localhostAssociations: LocalhostAssociation[] = $state([]);
+	let localhostAssociations = $state<LocalhostAssociation[]>([]);
 	let inputAssociation = $state<LocalhostAssociation>({
 		id: crypto.randomUUID(),
 		name: '',
@@ -143,6 +141,28 @@
 			urlStatus = 'offline';
 		} finally {
 			isPinging = false;
+		}
+	}
+
+	async function pingUrl(index: number) {
+		const association = localhostAssociations[index];
+
+		try {
+			// Subjected to CORS blocking
+			const response = await fetch(
+				generateUrl(association.isHttps, association.format, association.port),
+				{
+					method: 'head'
+				}
+			);
+
+			if (response.status === 200) {
+				association.status = 'online';
+			} else {
+				association.status = 'offline';
+			}
+		} catch {
+			association.status = 'offline';
 		}
 	}
 
@@ -331,7 +351,7 @@
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
-				{#each localhostAssociations as association (association.id)}
+				{#each localhostAssociations as association, index (association.id)}
 					{@const associationUrl = generateUrl(
 						association.isHttps,
 						association.format,
@@ -344,7 +364,14 @@
 							{associationUrl}
 						</Table.Cell>
 						<Table.Cell>
-							<span class="text-green-500">●</span> Online
+							<span
+								class={association.status == 'online'
+									? 'text-green-500'
+									: association.status == 'offline'
+										? 'text-red-500'
+										: 'text-amber-400'}>●</span
+							>
+							{association.status || 'unknown'}
 						</Table.Cell>
 						<Table.Cell>
 							<ButtonGroup.Root>
@@ -354,7 +381,7 @@
 								<Button variant="outline" onclick={() => window.open(associationUrl, '_blank')}>
 									<SquareArrowOutUpRight />
 								</Button>
-								<Button variant="outline" onclick={() => {}}>
+								<Button variant="outline" onclick={() => pingUrl(index)}>
 									<RefreshCcw />
 								</Button>
 								<Button variant="outline" onclick={() => openEditDialog(association)}>

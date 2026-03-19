@@ -8,7 +8,7 @@ export const localhostFormatDisplay = new Map([
 	['ipv6', 'IPv6']
 ]);
 
-export type OnlineStatus = 'online' | 'offline' | 'unknown';
+export type OnlineStatus = 'online' | 'offline';
 
 export type LocalhostAssociation = {
 	name: string;
@@ -16,6 +16,7 @@ export type LocalhostAssociation = {
 	port: number;
 	format: LocalhostFormat;
 	isHttps: boolean;
+	status?: OnlineStatus;
 } & Entity;
 
 export const LOCALHOST_STORE_NAME = 'localhost';
