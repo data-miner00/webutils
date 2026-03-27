@@ -1,21 +1,22 @@
 <script lang="ts">
+	import { Trash } from '@lucide/svelte';
+	import { Album, Clipboard } from '@lucide/svelte';
+	import { onMount } from 'svelte';
+	import { toast } from 'svelte-sonner';
+
+	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import * as Select from '$lib/components/ui/select';
 	import {
 		type CityTimeZone,
-		getDayNightDisplay,
 		type DayNightDisplay,
-		getTimeDifference,
 		cities,
 		currentLocalTimeInfo,
+		getDayNightDisplay,
+		getTimeDifference,
 		localTimezone
 	} from '$lib/core/clock-utils';
-	import { onMount } from 'svelte';
-	import * as Select from '$lib/components/ui/select';
-	import Button from '$lib/components/ui/button/button.svelte';
-	import { Trash } from '@lucide/svelte';
-	import References from '$lib/components/custom/references/references.svelte';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
-	import { EllipsisVertical, Trash2, Clipboard, Album } from '@lucide/svelte';
-	import { toast } from 'svelte-sonner';
 
 	const cityName = localTimezone.split('/').pop()!.replace(/_/g, ' ');
 
@@ -153,20 +154,34 @@
 	}
 </script>
 
-<h1 class="text-2xl font-bold mb-2">World Clock</h1>
+<div class="flex items-center justify-between">
+	<h1 class="mb-2 block text-2xl font-bold">World Clock</h1>
+	<ReferencesSheet
+		references={[
+			{
+				title: 'Time.is',
+				url: 'https://time.is/'
+			},
+			{
+				title: 'Epoch Converter',
+				url: 'https://www.epochconverter.com/'
+			}
+		]}
+	/>
+</div>
 
-<section class="text-center mb-12">
-	<p class="text-lg mb-4">Your Local Time</p>
-	<p class="text-2xl mb-4">
+<section class="mb-12 text-center">
+	<p class="mb-4 text-lg">Your Local Time</p>
+	<p class="mb-4 text-2xl">
 		{cityName}
 	</p>
-	<p class="text-6xl mb-4">{currentTimeInfo.time}</p>
+	<p class="mb-4 text-6xl">{currentTimeInfo.time}</p>
 	<p>{currentTimeInfo.date}</p>
 	<p>({currentTimeInfo.timezone})</p>
 	<p>{currentTimeInfo.dayNight.icon} {currentTimeInfo.dayNight.text}</p>
 </section>
 
-<div class="flex items-center justify-end gap-2 mb-6 p-4 border border-gray-200 rounded-md">
+<div class="mb-6 flex items-center justify-end gap-2 rounded-md border border-gray-200 p-4">
 	<DropdownMenu.Root>
 		<DropdownMenu.Trigger>
 			{#snippet child({ props })}
@@ -205,11 +220,11 @@
 </div>
 
 <section class="flex gap-4">
-	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+	<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
 		{#each clocksToRender as clock, index}
-			<div class="border rounded-lg p-4 text-center relative">
-				<h2 class="text-xl font-semibold mb-2">{clock.name}, {clock.country}</h2>
-				<p class="text-4xl mb-2">{clock.time}</p>
+			<div class="relative rounded-lg border p-4 text-center">
+				<h2 class="mb-2 text-xl font-semibold">{clock.name}, {clock.country}</h2>
+				<p class="mb-2 text-4xl">{clock.time}</p>
 				<p class="mb-2">{clock.date}</p>
 				<p class="mb-2">({clock.timezone})</p>
 				<p>{clock.dayNight.icon} {clock.dayNight.text}</p>
@@ -221,16 +236,3 @@
 		{/each}
 	</div>
 </section>
-
-<References
-	references={[
-		{
-			title: 'Time.is',
-			url: 'https://time.is/'
-		},
-		{
-			title: 'Epoch Converter',
-			url: 'https://www.epochconverter.com/'
-		}
-	]}
-/>
