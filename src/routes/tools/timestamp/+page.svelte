@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button';
-	import { onMount } from 'svelte';
 	import { Clipboard } from '@lucide/svelte';
-	import { copyText } from '$lib/core/copy-to-clipboard';
+	import { onMount } from 'svelte';
+
+	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
+	import { Button } from '$lib/components/ui/button';
+	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import * as NativeSelect from '$lib/components/ui/native-select/index.js';
-	import References from '$lib/components/custom/references/references.svelte';
+	import { copyText } from '$lib/core/copy-to-clipboard';
 
 	let timestamp = $state(Math.floor(Date.now() / 1000));
 	let timestampMode = $state<'second' | 'millisecond'>('second');
@@ -29,11 +31,22 @@
 	let input = $state('');
 </script>
 
-<div class="flex flex-col items-center justify-center h-40 gap-4">
+<div class="flex h-40 flex-col items-center justify-center gap-4">
 	<h1 class="text-4xl font-bold">Current Timestamp</h1>
-	<p class="text-2xl text-muted-foreground">
+	<p class="text-muted-foreground text-2xl">
 		{timestamp}
-		<Button variant="outline" size="icon" onclick={copyTimestamp}><Clipboard /></Button>
+		<ButtonGroup.Root>
+			<Button variant="outline" size="icon" onclick={copyTimestamp}><Clipboard /></Button>
+
+			<ReferencesSheet
+				references={[
+					{
+						title: 'Epoch Converter',
+						url: 'https://www.epochconverter.com/'
+					}
+				]}
+			/>
+		</ButtonGroup.Root>
 	</p>
 	<NativeSelect.Root class=" basis-1/6" bind:value={timestampMode}>
 		<NativeSelect.Option value="second">Second</NativeSelect.Option>
@@ -41,20 +54,11 @@
 	</NativeSelect.Root>
 </div>
 
-<div class="flex flex-col items-center justify-center h-40 gap-4">
+<div class="flex h-40 flex-col items-center justify-center gap-4">
 	<Input placeholder="Enter a timestamp" bind:value={input} />
-	<p class="mt-2 text-sm text-muted-foreground">
+	<p class="text-muted-foreground mt-2 text-sm">
 		{#if input}
 			{new Date(parseInt(input) * 1000).toLocaleString()}
 		{/if}
 	</p>
 </div>
-
-<References
-	references={[
-		{
-			title: 'Epoch Converter',
-			url: 'https://www.epochconverter.com/'
-		}
-	]}
-/>

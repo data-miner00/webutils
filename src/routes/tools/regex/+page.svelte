@@ -1,14 +1,15 @@
 <script lang="ts">
-	import { formatHtml, exampleFormatHtml, exampleFormatHtml2 } from '$lib/core/format-html';
+	import { Album, ChevronDownIcon, Clipboard, EllipsisVertical, Trash2 } from '@lucide/svelte';
+
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
-	import { copyText } from '$lib/core/copy-to-clipboard';
-	import { Button } from '$lib/components/ui/button/index.js';
+	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { EllipsisVertical, Trash2, Clipboard, Album, ChevronDownIcon } from '@lucide/svelte';
+	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
-	import * as Select from '$lib/components/ui/select';
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
-	import References from '$lib/components/custom/references/references.svelte';
+	import * as Select from '$lib/components/ui/select';
+	import { copyText } from '$lib/core/copy-to-clipboard';
+	import { exampleFormatHtml, exampleFormatHtml2, formatHtml } from '$lib/core/format-html';
 
 	let regexInput = $state('');
 	let textInput = $state('');
@@ -41,8 +42,8 @@
 
 <div class="mb-4 flex h-screen">
 	<section class="flex-1 pr-4">
-		<header class="flex justify-between mb-6">
-			<h1 class="text-xl font-bold block">Regex Tester</h1>
+		<header class="mb-6 flex justify-between">
+			<h1 class="block text-xl font-bold">Regex Tester</h1>
 			<div class="flex items-center gap-4">
 				<ButtonGroup.Root>
 					<ButtonGroup.Root>
@@ -64,6 +65,14 @@
 								</DropdownMenu.Group>
 							</DropdownMenu.Content>
 						</DropdownMenu.Root>
+						<ReferencesSheet
+							references={[
+								{
+									title: 'Regex 101',
+									url: 'https://regex101.com/'
+								}
+							]}
+						/>
 					</ButtonGroup.Root>
 					<ButtonGroup.Root>
 						<Button size="icon" variant="destructive" onclick={clearInput}><Trash2 /></Button>
@@ -72,7 +81,7 @@
 			</div>
 		</header>
 
-		<div class="flex items-center mb-6">
+		<div class="mb-6 flex items-center">
 			<InputGroup.Root>
 				<InputGroup.Input
 					id="search-input"
@@ -116,12 +125,3 @@
 		<CodeEditor class="h-[500px]!" language="text" bind:value={textInput} />
 	</section>
 </div>
-
-<References
-	references={[
-		{
-			title: 'Regex 101',
-			url: 'https://regex101.com/'
-		}
-	]}
-/>

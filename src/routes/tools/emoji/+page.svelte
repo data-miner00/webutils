@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { X } from '@lucide/svelte';
 
-	import References from '$lib/components/custom/references/references.svelte';
+	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
 	import { clickToCopy } from '$lib/core/copy-to-clipboard';
@@ -33,15 +33,37 @@
 	// Todo: implement history mechanism
 </script>
 
-<InputGroup.Root class="mb-4">
-	<InputGroup.Input placeholder="Search emojis..." name="search" required bind:value={searchTerm} />
+<div class="mb-4 flex gap-2">
+	<InputGroup.Root class="flex-1">
+		<InputGroup.Input
+			placeholder="Search emojis..."
+			name="search"
+			required
+			bind:value={searchTerm}
+		/>
 
-	{#if searchTerm}
-		<InputGroup.Addon align="inline-end">
-			<InputGroup.Button variant="ghost" onclick={() => (searchTerm = '')}><X /></InputGroup.Button>
-		</InputGroup.Addon>
-	{/if}
-</InputGroup.Root>
+		{#if searchTerm}
+			<InputGroup.Addon align="inline-end">
+				<InputGroup.Button variant="ghost" onclick={() => (searchTerm = '')}
+					><X /></InputGroup.Button
+				>
+			</InputGroup.Addon>
+		{/if}
+	</InputGroup.Root>
+
+	<ReferencesSheet
+		references={[
+			{
+				title: 'Emojibase',
+				url: 'https://emojibase.dev/'
+			},
+			{
+				title: 'Emojipedia',
+				url: 'https://emojipedia.org/'
+			}
+		]}
+	/>
+</div>
 
 <div
 	class="mb-6 flex w-full items-center gap-2 overflow-x-scroll [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -74,16 +96,3 @@
 		</button>
 	{/each}
 </div>
-
-<References
-	references={[
-		{
-			title: 'Emojibase',
-			url: 'https://emojibase.dev/'
-		},
-		{
-			title: 'Emojipedia',
-			url: 'https://emojipedia.org/'
-		}
-	]}
-/>

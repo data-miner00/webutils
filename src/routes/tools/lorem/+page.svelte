@@ -1,15 +1,16 @@
 <script lang="ts">
-	import * as lorem from '$lib/core/lorem-ipsum-generator';
-	import { copyText } from '$lib/core/copy-to-clipboard';
-	import { Button } from '$lib/components/ui/button';
+	import { ArrowBigRight, Clipboard } from '@lucide/svelte';
+
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
+	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
+	import { Button } from '$lib/components/ui/button';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { Clipboard, ArrowBigRight } from '@lucide/svelte';
-	import { Label } from '$lib/components/ui/label/index.js';
-	import { Switch } from '$lib/components/ui/switch';
 	import Input from '$lib/components/ui/input/input.svelte';
+	import { Label } from '$lib/components/ui/label/index.js';
 	import * as NativeSelect from '$lib/components/ui/native-select/index.js';
-	import References from '$lib/components/custom/references/references.svelte';
+	import { Switch } from '$lib/components/ui/switch';
+	import { copyText } from '$lib/core/copy-to-clipboard';
+	import * as lorem from '$lib/core/lorem-ipsum-generator';
 
 	let count = $state(5);
 	let useStartingLorem = $state(true);
@@ -36,8 +37,8 @@
 
 <div class="mb-4 flex">
 	<section class="flex-1 pr-4">
-		<header class="flex justify-between mb-6">
-			<h1 class="text-xl font-bold block">Lorem Ipsum</h1>
+		<header class="mb-6 flex justify-between">
+			<h1 class="block text-xl font-bold">Lorem Ipsum</h1>
 
 			<Button onclick={generateIpsum}><ArrowBigRight /></Button>
 		</header>
@@ -45,7 +46,7 @@
 			<div class="mb-6">
 				<Label for="input" class="mb-2">How long do you want to generate?</Label>
 
-				<div class="flex gap-4 items-center">
+				<div class="flex items-center gap-4">
 					<Input bind:value={count} type="number" name="input" class="flex-1" />
 					<NativeSelect.Root class=" basis-1/6" bind:value={selectedMethod}>
 						<NativeSelect.Option value="paragraph">Paragraph</NativeSelect.Option>
@@ -63,15 +64,15 @@
 	</section>
 
 	<section class="flex-1 pl-4">
-		<header class="flex justify-between mb-6">
-			<h2 class="text-xl font-bold block">Output</h2>
+		<header class="mb-6 flex justify-between">
+			<h2 class="block text-xl font-bold">Output</h2>
 
 			<ButtonGroup.Root>
 				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy output</Button>
+
+				<ReferencesSheet references={[{ title: 'Lorem Ipsum', url: 'https://www.lipsum.com/' }]} />
 			</ButtonGroup.Root>
 		</header>
 		<CodeEditor class="h-[500px]!" language="text" value={output} readonly />
 	</section>
 </div>
-
-<References references={[{ title: 'Lorem Ipsum', url: 'https://www.lipsum.com/' }]} />

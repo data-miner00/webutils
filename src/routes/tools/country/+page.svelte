@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { countries } from '$lib/core/country';
-	import DataTable from './data-table.svelte';
-	import { columns } from './columns.js';
+	import Download from '@lucide/svelte/icons/download';
+
+	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import Download from '@lucide/svelte/icons/download';
-	import References from '$lib/components/custom/references/references.svelte';
+	import { countries } from '$lib/core/country';
+
+	import { columns } from './columns.js';
+	import DataTable from './data-table.svelte';
 
 	function downloadCountriesJson() {
 		const dataStr = JSON.stringify(countries, null, 2);
@@ -20,30 +22,29 @@
 	}
 </script>
 
-<header class="flex justify-between mb-6">
-	<h1 class="text-xl font-bold block">Countries</h1>
+<header class="mb-6 flex justify-between">
+	<h1 class="block text-xl font-bold">Countries</h1>
 	<div class="flex items-center gap-4">
 		<ButtonGroup.Root>
 			<Button variant="outline" onclick={downloadCountriesJson}><Download /> Download JSON</Button>
+			<ReferencesSheet
+				references={[
+					{
+						title: 'CountryCode.org',
+						url: 'https://countrycode.org/'
+					},
+					{
+						title: 'ISO 3166 Country Codes - ISO.org',
+						url: 'https://www.iso.org/iso-3166-country-codes.html'
+					},
+					{
+						title: 'Flag Match',
+						url: 'https://flagmatch.com/'
+					}
+				]}
+			/>
 		</ButtonGroup.Root>
 	</div>
 </header>
 
 <DataTable data={countries} {columns} />
-
-<References
-	references={[
-		{
-			title: 'CountryCode.org',
-			url: 'https://countrycode.org/'
-		},
-		{
-			title: 'ISO 3166 Country Codes - ISO.org',
-			url: 'https://www.iso.org/iso-3166-country-codes.html'
-		},
-		{
-			title: 'Flag Match',
-			url: 'https://flagmatch.com/'
-		}
-	]}
-/>

@@ -1,18 +1,5 @@
 <script lang="ts">
 	import {
-		decodeJwt,
-		type Response,
-		exampleDecodeJwt,
-		exampleDecodeJwt2,
-		exampleDecodeJwt3
-	} from '$lib/core/jwt.js';
-	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
-	import References from '$lib/components/custom/references/references.svelte';
-	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import {
 		Album,
 		ArrowBigRight,
 		Check,
@@ -21,7 +8,21 @@
 		Trash2,
 		X
 	} from '@lucide/svelte';
+
+	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
+	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
+	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
 	import { copyText } from '$lib/core/copy-to-clipboard';
+	import {
+		type Response,
+		decodeJwt,
+		exampleDecodeJwt,
+		exampleDecodeJwt2,
+		exampleDecodeJwt3
+	} from '$lib/core/jwt.js';
 
 	let jwtInput = $state('');
 	let secret = $state('');
@@ -94,8 +95,8 @@
 
 <div class="mb-8 flex">
 	<section class="flex-1 pr-4">
-		<header class="flex justify-between mb-6">
-			<h2 class="text-xl font-bold block">JWT Decoder</h2>
+		<header class="mb-6 flex justify-between">
+			<h2 class="block text-xl font-bold">JWT Decoder</h2>
 			<div class="flex items-center gap-4">
 				<ButtonGroup.Root>
 					<ButtonGroup.Root>
@@ -132,8 +133,8 @@
 			</div>
 		</header>
 
-		<div class="border border-solid border-gray-300 rounded-lg mb-4">
-			<div class="flex justify-between p-2 items-center">
+		<div class="mb-4 rounded-lg border border-solid border-gray-300">
+			<div class="flex items-center justify-between p-2">
 				<h2 class="font-semibold">JWT Token</h2>
 
 				<div class="flex items-center gap-2">
@@ -166,11 +167,11 @@
 				bind:value={jwtInput}
 				rows={5}
 				autocomplete="off"
-				class="w-full p-2 h-64 border-l-0 border-r-0 border-b-0 border-gray-300 rounded-none focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 shadow-none resize-none"
+				class="mb-4 h-64 w-full resize-none rounded-none border-r-0 border-b-0 border-l-0 border-gray-300 p-2 shadow-none focus:ring-2 focus:ring-blue-500 focus:outline-none"
 			></Textarea>
 		</div>
-		<div class="border border-solid border-gray-300 rounded-lg">
-			<div class="flex justify-between p-2 items-center">
+		<div class="rounded-lg border border-solid border-gray-300">
+			<div class="flex items-center justify-between p-2">
 				<h2 class="font-semibold">Secret</h2>
 				<div class="flex items-center gap-2">
 					{#if decodedResult.success}
@@ -200,22 +201,31 @@
 				bind:value={secret}
 				rows={1}
 				autocomplete="off"
-				class="w-full p-2 h-32 border-l-0 border-r-0 border-b-0 border-gray-300 rounded-none focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 shadow-none resize-none"
+				class="mb-4 h-32 w-full resize-none rounded-none border-r-0 border-b-0 border-l-0 border-gray-300 p-2 shadow-none focus:ring-2 focus:ring-blue-500 focus:outline-none"
 			></Textarea>
 		</div>
 	</section>
 
 	<section class="flex-1 pl-4">
-		<header class="flex justify-between mb-6">
-			<h2 class="text-xl font-bold block">Results</h2>
+		<header class="mb-6 flex justify-between">
+			<h2 class="block text-xl font-bold">Results</h2>
 
 			<ButtonGroup.Root>
 				<Button variant="outline" onclick={copyPayload}><Clipboard /> Copy output</Button>
+
+				<ReferencesSheet
+					references={[
+						{
+							title: 'JWT.io',
+							url: 'https://www.jwt.io/'
+						}
+					]}
+				/>
 			</ButtonGroup.Root>
 		</header>
 
-		<div class="border border-solid border-gray-300 rounded-lg overflow-hidden mb-4">
-			<div class="flex justify-between p-2 items-center">
+		<div class="mb-4 overflow-hidden rounded-lg border border-solid border-gray-300">
+			<div class="flex items-center justify-between p-2">
 				<h2 class="font-semibold">Decoded Header</h2>
 				<ButtonGroup.Root>
 					<Button variant="outline" size="sm" onclick={copyHeader}><Clipboard /> Copy</Button>
@@ -224,8 +234,8 @@
 			<CodeEditor language="json" class="h-64 border-x-0 border-b-0" value={headerJson} />
 		</div>
 
-		<div class="border border-solid border-gray-300 rounded-lg overflow-hidden">
-			<div class="flex justify-between p-2 items-center">
+		<div class="overflow-hidden rounded-lg border border-solid border-gray-300">
+			<div class="flex items-center justify-between p-2">
 				<h2 class="font-semibold">Decoded Payload</h2>
 				<ButtonGroup.Root>
 					<Button variant="outline" size="sm" onclick={copyPayload}><Clipboard /> Copy</Button>
@@ -235,12 +245,3 @@
 		</div>
 	</section>
 </div>
-
-<References
-	references={[
-		{
-			title: 'JWT.io',
-			url: 'https://www.jwt.io/'
-		}
-	]}
-/>

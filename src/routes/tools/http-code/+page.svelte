@@ -1,7 +1,7 @@
 <script>
 	import Download from '@lucide/svelte/icons/download';
 
-	import References from '$lib/components/custom/references/references.svelte';
+	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { httpCodes } from '$lib/core/http-codes';
@@ -27,21 +27,21 @@
 	<div class="flex items-center gap-4">
 		<ButtonGroup.Root>
 			<Button variant="outline" onclick={downloadJson}><Download /> Download JSON</Button>
+
+			<ReferencesSheet
+				references={[
+					{
+						title: 'List of HTTP status codes',
+						url: 'https://en.wikipedia.org/wiki/List_of_HTTP_status_codes'
+					},
+					{
+						title: 'Hypertext Transfer Protocol (HTTP) Status Code Registry',
+						url: 'https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml'
+					}
+				]}
+			/>
 		</ButtonGroup.Root>
 	</div>
 </header>
 
 <DataTable data={httpCodes} {columns} />
-
-<References
-	references={[
-		{
-			title: 'List of HTTP status codes',
-			url: 'https://en.wikipedia.org/wiki/List_of_HTTP_status_codes'
-		},
-		{
-			title: 'Hypertext Transfer Protocol (HTTP) Status Code Registry',
-			url: 'https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml'
-		}
-	]}
-/>

@@ -3,10 +3,7 @@
 	import { CircleAlert } from '@lucide/svelte';
 
 	import * as Alert from '$lib/components/ui/alert/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
 	import { buttonVariants } from '$lib/components/ui/button/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
 	import type { References } from '$lib/core/references';
 

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as weather from '$lib/core/weather';
+	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
-	import References from '$lib/components/custom/references/references.svelte';
+	import * as weather from '$lib/core/weather';
 
 	const ROOM_TEMP = 25;
 	let celciusInput = $state(ROOM_TEMP);
@@ -10,7 +10,18 @@
 	let kelvinInput = $state(weather.convertCelciusToKelvin(ROOM_TEMP));
 </script>
 
-<h1 class="text-2xl font-bold">Unit Conversion</h1>
+<div class="mb-4 flex items-center justify-between">
+	<h1 class="block text-2xl font-bold">Unit Conversion</h1>
+
+	<ReferencesSheet
+		references={[
+			{
+				title: 'Unit Conversion',
+				url: 'https://www.unitconverters.net/'
+			}
+		]}
+	/>
+</div>
 
 <div>
 	<h2>Formula</h2>
@@ -23,7 +34,7 @@
 	<Button>Clear</Button>
 </div>
 
-<div class="flex items-center my-5">
+<div class="my-5 flex items-center">
 	<InputGroup.Root class="max-w-30">
 		<InputGroup.Input placeholder="0" bind:value={celciusInput} type="number" />
 		<InputGroup.Addon align="inline-end">°C</InputGroup.Addon>
@@ -37,7 +48,7 @@
 	</div>
 </div>
 
-<div class="flex items-center my-5">
+<div class="my-5 flex items-center">
 	<InputGroup.Root class="max-w-30">
 		<InputGroup.Input placeholder="0" bind:value={farenheitInput} type="number" />
 		<InputGroup.Addon align="inline-end">°F</InputGroup.Addon>
@@ -51,7 +62,7 @@
 	</div>
 </div>
 
-<div class="flex items-center my-5">
+<div class="my-5 flex items-center">
 	<InputGroup.Root class="max-w-30">
 		<InputGroup.Input placeholder="0" bind:value={kelvinInput} type="number" />
 		<InputGroup.Addon align="inline-end">K</InputGroup.Addon>
@@ -62,12 +73,3 @@
 		and <span class="font-bold">{weather.convertKelvinToFarenheit(kelvinInput)}°F</span>
 	</div>
 </div>
-
-<References
-	references={[
-		{
-			title: 'Unit Conversion',
-			url: 'https://www.unitconverters.net/'
-		}
-	]}
-/>
