@@ -1,4 +1,4 @@
-import * as lorem from './lorem-ipsum-generator';
+import * as lorem from '$lib/core/lorem-ipsum-generator';
 
 describe('lorem-ipsum-generator', () => {
 	it('should generate the correct number of words', () => {

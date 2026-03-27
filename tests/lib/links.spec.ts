@@ -1,4 +1,4 @@
-import { extractDomain } from './links';
+import { extractDomain } from '$lib/core/links';
 
 describe('Extract Domain', () => {
 	[

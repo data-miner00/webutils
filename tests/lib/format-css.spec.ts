@@ -1,4 +1,4 @@
-import { formatCss } from './format-css';
+import { formatCss } from '$lib/core/format-css';
 
 describe('format CSS', () => {
 	[

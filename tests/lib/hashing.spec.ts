@@ -1,4 +1,4 @@
-import { md5, sha1, sha256, sha384, sha512, base64Encode, hex } from './hashing';
+import { base64Encode, hex, md5, sha1, sha256, sha384, sha512 } from '$lib/core/hashing';
 
 describe('Hashing Functions', () => {
 	const testString = 'Hello, World!';

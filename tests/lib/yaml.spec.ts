@@ -1,4 +1,4 @@
-import { yamlToJson, exampleYaml } from './yaml';
+import { exampleYaml, yamlToJson } from '$lib/core/yaml';
 
 describe('YAML', () => {
 	it('should convert YAML to JSON correctly', () => {

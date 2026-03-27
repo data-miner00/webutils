@@ -1,4 +1,4 @@
-import { formatSql, exampleSql } from './format-sql';
+import { exampleSql, formatSql } from '$lib/core/format-sql';
 
 describe('formatSql', () => {
 	it('should format SQL with 2 spaces indentation', () => {

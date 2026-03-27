@@ -1,4 +1,4 @@
-import { exampleFormatJs, formatJs, minifyJs } from './format-js';
+import { exampleFormatJs, formatJs, minifyJs } from '$lib/core/format-js';
 
 describe('format JS', () => {
 	[

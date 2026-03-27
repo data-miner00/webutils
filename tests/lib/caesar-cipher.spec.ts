@@ -1,4 +1,4 @@
-import { caesarCipher } from './caesar-cipher';
+import { caesarCipher } from '$lib/core/caesar-cipher';
 
 // abcdefghijklmnopqrstuvwxyz
 

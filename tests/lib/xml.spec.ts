@@ -1,4 +1,4 @@
-import { jsonToXml } from './xml';
+import { jsonToXml } from '$lib/core/xml';
 
 describe('xml utilities', () => {
 	it('should convert JSON to XML', () => {

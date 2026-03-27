@@ -1,8 +1,9 @@
 /**
  * @vitest-environment jsdom
  */
-import { describe, it, expect, beforeEach } from 'vitest';
-import { imageToBase64 } from './base64';
+import { beforeEach, describe, expect, it } from 'vitest';
+
+import { imageToBase64 } from '$lib/core/base64';
 
 describe('imageToBase64', () => {
 	let mockFile: File;

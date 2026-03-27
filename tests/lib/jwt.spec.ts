@@ -1,4 +1,4 @@
-import { type Response, decodeJwt, isSuccess } from './jwt';
+import { type Response, decodeJwt, isSuccess } from '$lib/core/jwt';
 
 describe('decodeJwt', () => {
 	it('should return error for empty token', async () => {

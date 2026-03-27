@@ -1,4 +1,4 @@
-import { removeTrailingSpace } from './remove-trailing-space';
+import { removeTrailingSpace } from '$lib/core/remove-trailing-space';
 
 describe('remove trailing space', () => {
 	[

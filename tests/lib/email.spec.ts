@@ -1,4 +1,8 @@
-import { extractEmailDomain, getEmailProviderUrlFromEmail, verifyEmailAddress } from './email';
+import {
+	extractEmailDomain,
+	getEmailProviderUrlFromEmail,
+	verifyEmailAddress
+} from '$lib/core/email';
 
 describe('Email Provider Utils', () => {
 	describe('extractEmailDomain', () => {

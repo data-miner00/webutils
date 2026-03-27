@@ -1,12 +1,12 @@
 import {
+	calculateReadingTimeInMins,
+	calculateSizeInKB,
+	calculateWordDistribution,
 	countCharacters,
 	countLines,
 	countParagraphs,
-	countWords,
-	calculateReadingTimeInMins,
-	calculateWordDistribution,
-	calculateSizeInKB
-} from './word-counter';
+	countWords
+} from '$lib/core/word-counter';
 
 describe('Word Counter', () => {
 	const sampleText = `Hello world!

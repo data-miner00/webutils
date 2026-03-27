@@ -1,4 +1,4 @@
-import { verifyCardNumber } from './verify';
+import { verifyCardNumber } from '$lib/core/verify';
 
 describe("Luhn's Algorithm", () => {
 	['374245455400126', '533337673330686'].forEach((cardNumber) => {

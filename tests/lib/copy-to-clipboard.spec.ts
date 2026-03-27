@@ -1,9 +1,9 @@
 /**
  * @vitest-environment jsdom
  */
-
-import { clickToCopy } from './copy-to-clipboard';
 import { vi } from 'vitest';
+
+import { clickToCopy } from '$lib/core/copy-to-clipboard';
 
 // This test suite is very slow
 describe.skip('clickToCopy', () => {

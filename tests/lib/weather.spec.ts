@@ -5,7 +5,7 @@ import {
 	convertFarenheitToKelvin,
 	convertKelvinToCelcius,
 	convertKelvinToFarenheit
-} from './weather';
+} from '$lib/core/weather';
 
 describe('weather conversions', () => {
 	describe('convertCelciusToFarenheit', () => {

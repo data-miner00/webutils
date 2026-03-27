@@ -1,4 +1,4 @@
-import { removeIndentation } from './remove-indentation';
+import { removeIndentation } from '$lib/core/remove-indentation';
 
 describe('removeIndentation', () => {
 	it('should remove common leading spaces', () => {

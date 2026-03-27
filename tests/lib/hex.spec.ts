@@ -1,4 +1,4 @@
-import { unicodeToHex, hexToUnicode } from './hex';
+import { hexToUnicode, unicodeToHex } from '$lib/core/hex';
 
 describe('hex', () => {
 	it('should convert unicode to hex', () => {

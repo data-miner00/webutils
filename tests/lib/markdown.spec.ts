@@ -1,4 +1,4 @@
-import { markdownToHtml } from './markdown';
+import { markdownToHtml } from '$lib/core/markdown';
 
 describe('markdownToHtml', () => {
 	it('should convert markdown to HTML', async () => {

@@ -1,4 +1,4 @@
-import { BaseN } from './baseN';
+import { BaseN } from '$lib/core/baseN';
 
 describe('Base 2', () => {
 	const base2 = new BaseN(2);

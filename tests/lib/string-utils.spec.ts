@@ -1,4 +1,4 @@
-import * as f from './string-utils';
+import * as f from '$lib/core/string-utils';
 
 describe('toSnakeCase', () => {
 	['helloWorld', 'hello-world', 'Hello World', 'hello.world'].forEach((input) => {

@@ -1,4 +1,4 @@
-import { formatHtml } from './format-html';
+import { formatHtml } from '$lib/core/format-html';
 
 describe('format HTML', () => {
 	[

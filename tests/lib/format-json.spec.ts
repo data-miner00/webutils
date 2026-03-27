@@ -1,4 +1,9 @@
-import { exampleFormatJson, formatJson, minifyJson, exampleMinifyJson } from './format-json';
+import {
+	exampleFormatJson,
+	exampleMinifyJson,
+	formatJson,
+	minifyJson
+} from '$lib/core/format-json';
 
 describe('format JSON', () => {
 	[
