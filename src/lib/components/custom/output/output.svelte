@@ -2,19 +2,19 @@
 	import { Button } from '$lib/components/ui/button';
 	import { clickToCopy } from '$lib/core/copy-to-clipboard';
 
-	let { title, subtitle, value = $bindable('') } = $props();
+	let { title, subtitle, value } = $props();
 	const randomId = 'a' + crypto.randomUUID();
 </script>
 
-<article class="border border-solid border-gray-200 p-4 rounded-md bg-gray-50 flex flex-col">
-	<div class="flex justify-between items-center mb-2">
+<article class="flex flex-col rounded-md border border-solid border-gray-200 bg-gray-50 p-4">
+	<div class="mb-2 flex items-center justify-between">
 		<div class=" text-lg">{title}</div>
 		<Button size="sm" {@attach (node: HTMLElement) => clickToCopy(node, '#' + randomId)}
 			>Copy</Button
 		>
 	</div>
 	<div
-		class="flex-1 border border-gray-300 border-solid rounded p-2 bg-white text-sm mb-2 wrap-break-word min-h-10"
+		class="mb-2 min-h-10 flex-1 rounded border border-solid border-gray-300 bg-white p-2 text-sm wrap-break-word"
 		id={randomId}
 	>
 		{value}

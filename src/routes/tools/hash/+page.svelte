@@ -4,13 +4,14 @@
 	// 	const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
 	// 	console.log('SHA-256 Hash:', hashHex);
 	// });
-	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
-	import * as hashing from '$lib/core/hashing';
+	import { Album, EllipsisVertical, Trash2 } from '@lucide/svelte';
+
 	import Output from '$lib/components/custom/output/output.svelte';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { EllipsisVertical, Trash2, Album } from '@lucide/svelte';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
+	import * as hashing from '$lib/core/hashing';
 
 	let inputText = $state('');
 
@@ -38,8 +39,8 @@
 	}
 </script>
 
-<header class="flex justify-between mb-6">
-	<h1 class="text-xl font-bold block">String Hashing & Digest</h1>
+<header class="mb-6 flex justify-between">
+	<h1 class="block text-xl font-bold">String Hashing & Digest</h1>
 	<div class="flex items-center gap-4">
 		<ButtonGroup.Root>
 			<ButtonGroup.Root>
@@ -73,16 +74,16 @@
 	bind:value={inputText}
 	placeholder="Enter text to hash..."
 	rows={10}
-	class="w-full mb-4"
+	class="mb-4 w-full"
 />
 
 <div class="grid grid-cols-3 gap-2">
-	<Output title="MD5" bind:value={output.md5} subtitle="128-bit hash (32 hex chars)" />
-	<Output title="SHA1" bind:value={output.sha1} subtitle="160-bit hash (40 hex chars)" />
-	<Output title="SHA256" bind:value={output.sha256} subtitle="256-bit hash (64 hex chars)" />
-	<Output title="SHA384" bind:value={output.sha384} subtitle="384-bit hash (96 hex chars)" />
-	<Output title="SHA512" bind:value={output.sha512} subtitle="512-bit hash (128 hex chars)" />
-	<Output title="Base64" bind:value={output.base64} subtitle="Base64 Encoded String" />
-	<Output title="Hex" bind:value={output.hex} subtitle="Hexadecimal representation" />
-	<Output title="URL Encode" bind:value={output.urlEncode} subtitle="URL-safe encoding" />
+	<Output title="MD5" value={output.md5} subtitle="128-bit hash (32 hex chars)" />
+	<Output title="SHA1" value={output.sha1} subtitle="160-bit hash (40 hex chars)" />
+	<Output title="SHA256" value={output.sha256} subtitle="256-bit hash (64 hex chars)" />
+	<Output title="SHA384" value={output.sha384} subtitle="384-bit hash (96 hex chars)" />
+	<Output title="SHA512" value={output.sha512} subtitle="512-bit hash (128 hex chars)" />
+	<Output title="Base64" value={output.base64} subtitle="Base64 Encoded String" />
+	<Output title="Hex" value={output.hex} subtitle="Hexadecimal representation" />
+	<Output title="URL Encode" value={output.urlEncode} subtitle="URL-safe encoding" />
 </div>

@@ -1,12 +1,13 @@
 <script lang="ts">
-	import * as sutil from '$lib/core/string-utils';
+	import { Album, EllipsisVertical, Trash2 } from '@lucide/svelte';
+
 	import Output from '$lib/components/custom/output/output.svelte';
-	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { EllipsisVertical, Trash2, Album } from '@lucide/svelte';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
 	import { safeToBase64Encode } from '$lib/core/base64';
+	import * as sutil from '$lib/core/string-utils';
 
 	let input = $state('');
 	let output = $derived({
@@ -38,8 +39,8 @@
 	}
 </script>
 
-<header class="flex justify-between mb-6">
-	<h1 class="text-xl font-bold block">String Transformations</h1>
+<header class="mb-6 flex justify-between">
+	<h1 class="block text-xl font-bold">String Transformations</h1>
 	<div class="flex items-center gap-4">
 		<ButtonGroup.Root>
 			<ButtonGroup.Root>
@@ -72,38 +73,22 @@
 	bind:value={input}
 	placeholder="Enter text to transform..."
 	rows={10}
-	class="w-full mb-4"
+	class="mb-4 w-full"
 	autocomplete="off"
 />
 
 <div class="grid grid-cols-3 gap-2">
-	<Output title="Trimmed" bind:value={output.trim} subtitle="Whitespace removed from both ends" />
-	<Output
-		title="Uppercase"
-		bind:value={output.toUpperCase}
-		subtitle="All characters in uppercase"
-	/>
-	<Output
-		title="Lowercase"
-		bind:value={output.toLowerCase}
-		subtitle="All characters in lowercase"
-	/>
-	<Output title="Snake case" bind:value={output.toSnakeCase} subtitle="snake_case format" />
-	<Output title="Kebab case" bind:value={output.toKebabCase} subtitle="kebab-case format" />
-	<Output title="Camel case" bind:value={output.toCamelCase} subtitle="camelCase format" />
-	<Output title="Title case" bind:value={output.toTitleCase} subtitle="Title Case Format" />
-	<Output
-		title="Constant case"
-		bind:value={output.toConstantCase}
-		subtitle="CONSTANT_CASE format"
-	/>
-	<Output title="Dot case" bind:value={output.toDotCase} subtitle="dot.case format" />
-	<Output
-		title="Sentence case"
-		bind:value={output.toSentenceCase}
-		subtitle="Sentence case format"
-	/>
-	<Output title="Base64 Encoded" bind:value={output.toBase64} subtitle="Base64 Encoded String" />
-	<Output title="Capitalized" bind:value={output.capitalize} subtitle="First letter capitalized" />
-	<Output title="Reversed" bind:value={output.reverse} subtitle="Characters reversed" />
+	<Output title="Trimmed" value={output.trim} subtitle="Whitespace removed from both ends" />
+	<Output title="Uppercase" value={output.toUpperCase} subtitle="All characters in uppercase" />
+	<Output title="Lowercase" value={output.toLowerCase} subtitle="All characters in lowercase" />
+	<Output title="Snake case" value={output.toSnakeCase} subtitle="snake_case format" />
+	<Output title="Kebab case" value={output.toKebabCase} subtitle="kebab-case format" />
+	<Output title="Camel case" value={output.toCamelCase} subtitle="camelCase format" />
+	<Output title="Title case" value={output.toTitleCase} subtitle="Title Case Format" />
+	<Output title="Constant case" value={output.toConstantCase} subtitle="CONSTANT_CASE format" />
+	<Output title="Dot case" value={output.toDotCase} subtitle="dot.case format" />
+	<Output title="Sentence case" value={output.toSentenceCase} subtitle="Sentence case format" />
+	<Output title="Base64 Encoded" value={output.toBase64} subtitle="Base64 Encoded String" />
+	<Output title="Capitalized" value={output.capitalize} subtitle="First letter capitalized" />
+	<Output title="Reversed" value={output.reverse} subtitle="Characters reversed" />
 </div>
