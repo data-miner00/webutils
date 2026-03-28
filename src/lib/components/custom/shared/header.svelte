@@ -89,13 +89,6 @@
 	<SearchSection />
 
 	<div class="flex items-center gap-4">
-		<div title={isOnline ? 'Connected to internet' : 'Not connected'}>
-			{#if isOnline}
-				<Wifi class="text-green-500" />
-			{:else}
-				<WifiOff class="text-red-500" />
-			{/if}
-		</div>
 		<time datetime={currentTime.date} class="text-right text-sm">
 			<div class="font-bold">
 				{currentTime.date}
@@ -105,5 +98,12 @@
 				{currentTime.time}
 			</div>
 		</time>
+		<div title={isOnline ? 'Connected to internet' : 'Not connected'}>
+			{#if isOnline}
+				<Wifi class="text-green-500" />
+			{:else}
+				<WifiOff class="text-red-500" />
+			{/if}
+		</div>
 	</div>
 </header>

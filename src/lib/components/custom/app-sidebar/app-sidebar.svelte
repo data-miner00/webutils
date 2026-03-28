@@ -203,7 +203,8 @@
 				items: [
 					{
 						title: 'Draw',
-						url: '/tools/draw'
+						url: '/tools/draw',
+						badge: 'Beta'
 					}
 				]
 			},
