@@ -1,11 +1,20 @@
 <script lang="ts">
+	import {
+		Album,
+		ArrowBigRight,
+		ArrowDown,
+		ArrowLeft,
+		EllipsisVertical,
+		Trash2
+	} from '@lucide/svelte';
+
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
-	import { copyText } from '$lib/core/copy-to-clipboard';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { EllipsisVertical, Trash2, Clipboard, Album, ArrowBigRight } from '@lucide/svelte';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import DiffEditor from '$lib/components/custom/code-editor/diff-editor.svelte';
+	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
+	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import { copyText } from '$lib/core/copy-to-clipboard';
 
 	let original = $state('');
 	let modified = $state('');
@@ -17,18 +26,24 @@
 		viewDiff = false;
 	}
 
-	function copyOutput() {
-		// copyText(output);
-	}
-
 	const exampleOriginal =
 		'This line is removed on the right.\njust some text\nabcd\nefgh\nSome more text';
 	const exampleModified =
 		'just some text\nabcz\nzzzzefgh\nSome more text.\nThis line is removed on the left.';
 
+	const exampleCodeOriginal =
+		'using System;\nusing System.Text;\n\nnamespace HelloWorld;\n\npublic class Program\n{\n    public static void Main(string[] args)\n    {\n        Console.WriteLine("Hello, World");\n    }\n}';
+	const exampleCodeModified =
+		'using System;\n\nnamespace HelloWorld;\n\npublic static class Program\n{\n    static void Main(string[] args)\n    {\n        Console.WriteLine("Bye, World");\n        Console.ReadKey();\n    }\n}';
+
 	function loadExample1() {
 		original = exampleOriginal;
 		modified = exampleModified;
+	}
+
+	function loadExample2() {
+		original = exampleCodeOriginal;
+		modified = exampleCodeModified;
 	}
 
 	function scrollToBottom() {
@@ -48,8 +63,8 @@
 
 <div class="mb-8 flex">
 	<section class="flex-1 pr-4">
-		<header class="flex justify-between mb-6">
-			<h2 class="text-xl font-bold block">Original</h2>
+		<header class="mb-6 flex justify-between">
+			<h2 class="block text-xl font-bold">Original</h2>
 			<div class="flex items-center gap-4">
 				<ButtonGroup.Root>
 					<ButtonGroup.Root>
@@ -64,13 +79,9 @@
 							</DropdownMenu.Trigger>
 							<DropdownMenu.Content align="end" class="w-52">
 								<DropdownMenu.Group>
-									<DropdownMenu.Item onclick={() => (original = '')}>
+									<DropdownMenu.Item onclick={loadExample2}>
 										<Album />
 										Example 2
-									</DropdownMenu.Item>
-									<DropdownMenu.Item onclick={() => (original = '')}>
-										<Album />
-										Example 3
 									</DropdownMenu.Item>
 								</DropdownMenu.Group>
 							</DropdownMenu.Content>
@@ -89,11 +100,25 @@
 	</section>
 
 	<section class="flex-1 pl-4">
-		<header class="flex justify-between mb-6">
-			<h2 class="text-xl font-bold block">Modified</h2>
+		<header class="mb-6 flex justify-between">
+			<h2 class="block text-xl font-bold">Modified</h2>
 
 			<ButtonGroup.Root>
-				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy output</Button>
+				<Button variant="outline" onclick={() => copyText(original)}>
+					<ArrowLeft /> Copy original
+				</Button>
+				<Button variant="outline" onclick={() => copyText(modified)}>
+					<ArrowDown /> Copy modified
+				</Button>
+
+				<ReferencesSheet
+					references={[
+						{
+							title: 'Diffchecker',
+							url: 'https://www.diffchecker.com/'
+						}
+					]}
+				/>
 			</ButtonGroup.Root>
 		</header>
 		<CodeEditor class="h-[500px]!" language="text" bind:value={modified} />
@@ -101,7 +126,7 @@
 </div>
 
 {#if viewDiff}
-	<h2 class="text-xl font-bold block mb-6">Diff</h2>
+	<h2 class="mb-6 block text-xl font-bold">Diff</h2>
 	<div class="h-[500px]">
 		<DiffEditor {original} {modified} language="text/plain" class="h-full" />
 	</div>
