@@ -1,13 +1,20 @@
 <script lang="ts">
-	import { removeIndentation, example, example2, example3 } from '$lib/core/remove-indentation';
-	import { Switch } from '$lib/components/ui/switch/index.js';
+	import { Album, Clipboard, EllipsisVertical, Trash2 } from '@lucide/svelte';
+
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
-	import { copyText } from '$lib/core/copy-to-clipboard';
-	import { Button } from '$lib/components/ui/button/index.js';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { EllipsisVertical, Trash2, Clipboard, Album } from '@lucide/svelte';
-	import { Label } from '$lib/components/ui/label/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import { Label } from '$lib/components/ui/label/index.js';
+	import { Switch } from '$lib/components/ui/switch/index.js';
+	import { copyText } from '$lib/core/copy-to-clipboard';
+	import {
+		example,
+		example2,
+		example3,
+		example4,
+		removeIndentation
+	} from '$lib/core/remove-indentation';
 
 	let smartMode = $state(true);
 	let input = $state('');
@@ -24,8 +31,8 @@
 
 <div class="mb-4 flex h-screen">
 	<section class="flex-1 pr-4">
-		<header class="flex justify-between mb-6">
-			<h1 class="text-xl font-bold block">Trim Leading Spaces</h1>
+		<header class="mb-6 flex justify-between">
+			<h1 class="block text-xl font-bold">Trim Leading Spaces</h1>
 			<div class="flex items-center gap-4">
 				<div class="flex items-center space-x-2">
 					<Switch bind:checked={smartMode} />
@@ -52,6 +59,10 @@
 										<Album />
 										Example 3
 									</DropdownMenu.Item>
+									<DropdownMenu.Item onclick={() => (input = example4)}>
+										<Album />
+										Tabbed Example
+									</DropdownMenu.Item>
 								</DropdownMenu.Group>
 							</DropdownMenu.Content>
 						</DropdownMenu.Root>
@@ -66,8 +77,8 @@
 	</section>
 
 	<section class="flex-1 pl-4">
-		<header class="flex justify-between mb-6">
-			<h2 class="text-xl font-bold block">Output</h2>
+		<header class="mb-6 flex justify-between">
+			<h2 class="block text-xl font-bold">Output</h2>
 
 			<ButtonGroup.Root>
 				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy output</Button>

@@ -59,3 +59,9 @@ export const example3 = `<!-- This requires smart mode -->
       <ArrowLeft />
     </Button>
   </ButtonGroup.Root>`;
+
+export const example4 = `\t<root>
+\t\t<child>
+\t\t\t<subchild>Value</subchild>
+\t\t</child>
+\t</root>`;
