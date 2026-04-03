@@ -1,4 +1,4 @@
-<script lang="ts" module>
+<script lang="ts">
 	import {
 		CaseSensitive,
 		Code,
@@ -20,6 +20,14 @@
 	import MapIcon from '@lucide/svelte/icons/map';
 	import Settings2Icon from '@lucide/svelte/icons/settings-2';
 	import SquareTerminalIcon from '@lucide/svelte/icons/square-terminal';
+	import type { ComponentProps } from 'svelte';
+
+	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+
+	import NavMain from './nav-main.svelte';
+	import NavProjects from './nav-projects.svelte';
+	import NavUser from './nav-user.svelte';
+	import TeamSwitcher from './team-switcher.svelte';
 
 	const savedUsername = localStorage.getItem('settings_username') ?? 'User';
 	const savedEmail = localStorage.getItem('settings_email') ?? 'me@gmail.com';
@@ -334,17 +342,6 @@
 			}
 		]
 	};
-</script>
-
-<script lang="ts">
-	import type { ComponentProps } from 'svelte';
-
-	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
-
-	import NavMain from './nav-main.svelte';
-	import NavProjects from './nav-projects.svelte';
-	import NavUser from './nav-user.svelte';
-	import TeamSwitcher from './team-switcher.svelte';
 
 	let {
 		ref = $bindable(null),
