@@ -1,7 +1,7 @@
 /**
  * Remove common leading indentation from all lines in the input string.
  * @param input The string input to be cleansed.
- * @param smartMode Whether to ignore first line if it is not indented.
+ * @param smartMode Whether to ignore the first line if it is not indented.
  * @returns The cleansed string.
  */
 export function removeIndentation(input: string, smartMode: boolean = false): string {
@@ -11,20 +11,35 @@ export function removeIndentation(input: string, smartMode: boolean = false): st
 
 	const lines = input.split('\n');
 
+	const linesToMeasure = lines.filter((line, index) => {
+		if (line.trim().length === 0) {
+			return false;
+		}
+
+		if (!smartMode) {
+			return true;
+		}
+
+		if (index === 0 && !/^[ \t]/.test(line)) {
+			return false;
+		}
+
+		return true;
+	});
+
 	const minIndent = Math.min(
-		...lines
-			.filter((line) => !smartMode || line.startsWith(' ') || line.startsWith('\t'))
-			.filter((line) => line.trim().length > 0)
-			.map((line) => line.match(/^(\s*)/)![0].length)
+		...linesToMeasure.map((line) => line.match(/^[ \t]*/)?.[0].length ?? 0)
 	);
 
-	// Don't have lines with leading space
-	if (minIndent == Infinity) {
+	if (minIndent === Infinity || minIndent === 0) {
 		return input;
 	}
 
 	return lines
-		.map((line) => (line.startsWith(' '.repeat(minIndent)) ? line.slice(minIndent) : line))
+		.map((line) => {
+			const leading = line.match(/^[ \t]*/)?.[0] ?? '';
+			return leading.length >= minIndent ? line.slice(minIndent) : line;
+		})
 		.join('\n');
 }
 

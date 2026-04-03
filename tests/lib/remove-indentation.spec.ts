@@ -38,4 +38,28 @@ describe('removeIndentation', () => {
 			expect(result).toBe('hello world');
 		});
 	});
+
+	it('should remove common leading tabs', () => {
+		const input = `		function test() {
+			console.log("Hello, World!");
+		}`;
+		const expected = `function test() {
+	console.log("Hello, World!");
+}`;
+		const result = removeIndentation(input);
+
+		expect(result).toBe(expected);
+	});
+
+	it('should handle smart mode with tab indentation', () => {
+		const input = `function test() {
+			console.log("Hello, World!");
+		}`;
+		const expected = `function test() {
+	console.log("Hello, World!");
+}`;
+		const result = removeIndentation(input, true);
+
+		expect(result).toBe(expected);
+	});
 });
