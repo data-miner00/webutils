@@ -29,10 +29,10 @@
 	import NavUser from './nav-user.svelte';
 	import TeamSwitcher from './team-switcher.svelte';
 
-	const savedUsername = localStorage.getItem('settings_username') ?? 'User';
-	const savedEmail = localStorage.getItem('settings_email') ?? 'me@gmail.com';
-	const savedAvatarUrl = localStorage.getItem('settings_avatarUrl') ?? 'notexist.jpg';
-	const savedCompanyName = localStorage.getItem('settings_companyName') ?? 'Acme Inc.';
+	const savedUsername = localStorage.getItem('settings_username') || 'User';
+	const savedEmail = localStorage.getItem('settings_email') || 'me@gmail.com';
+	const savedAvatarUrl = localStorage.getItem('settings_avatarUrl') || 'notexist.jpg';
+	const savedCompanyName = localStorage.getItem('settings_companyName') || 'Acme Inc.';
 	const data = {
 		user: {
 			name: savedUsername,
@@ -142,6 +142,10 @@
 					{
 						title: 'Text Diff',
 						url: '/tools/text-diff'
+					},
+					{
+						title: 'Empty Line Remover',
+						url: '/tools/empty-line-remover'
 					}
 				]
 			},
