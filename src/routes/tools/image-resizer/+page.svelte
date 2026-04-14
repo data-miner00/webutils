@@ -1,14 +1,15 @@
 <script lang="ts">
-	import { BASE64_IDENTIFIER, exampleImageBase64, imageToBase64 } from '$lib/core/base64';
-	import { Button } from '$lib/components/ui/button/index.js';
+	import { Album, ArrowBigRight, Download, EllipsisVertical, Trash2 } from '@lucide/svelte';
+
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { EllipsisVertical, Trash2, Album, ArrowBigRight, Download } from '@lucide/svelte';
+	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
-	import { resizeImage } from '$lib/core/image';
-	import { Switch } from '$lib/components/ui/switch/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
+	import { Input } from '$lib/components/ui/input/index.js';
+	import { Label } from '$lib/components/ui/label/index.js';
+	import { Switch } from '$lib/components/ui/switch/index.js';
+	import { BASE64_IDENTIFIER, exampleImageBase64, imageToBase64 } from '$lib/core/base64';
+	import { resizeImage } from '$lib/core/image';
 
 	let input = $state('');
 	let inputImage = $state('');
@@ -85,10 +86,10 @@
 	}
 </script>
 
-<div class="mb-4 flex h-screen">
-	<section class="flex-1 pr-4">
-		<header class="flex justify-between mb-6">
-			<h1 class="text-xl font-bold block">Resize Image</h1>
+<div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<header class="mb-6 flex justify-between">
+			<h1 class="block text-xl font-bold">Resize Image</h1>
 			<div class="flex items-center gap-4">
 				<div class="flex items-center space-x-2">
 					<Switch id="maintain-aspect-ratio" bind:checked={maintainAspectRatio} />
@@ -129,7 +130,7 @@
 
 			{#if inputImage}
 				<div
-					class="flex items-center justify-center mt-10 border border-solid border-gray-300 rounded p-8"
+					class="mt-10 flex items-center justify-center rounded border border-solid border-gray-300 p-8"
 				>
 					<img src={inputImage} alt="User uploaded" class="block" />
 				</div>
@@ -158,9 +159,9 @@
 		</div>
 	</section>
 
-	<section class="flex-1 pl-4">
-		<header class="flex justify-between mb-6">
-			<h2 class="text-xl font-bold block">Output</h2>
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<header class="mb-6 flex justify-between">
+			<h2 class="block text-xl font-bold">Output</h2>
 
 			<ButtonGroup.Root>
 				<Button variant="outline" onclick={download}><Download /> Download</Button>
@@ -168,7 +169,7 @@
 		</header>
 
 		<div
-			class="flex items-center justify-center p-5 border border-solid border-gray-300 rounded-lg"
+			class="flex flex-1 items-center justify-center rounded-lg border border-solid border-gray-300 p-5"
 		>
 			<img src={imageOutput} class="block" alt="Decoded base64 output" />
 		</div>

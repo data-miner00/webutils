@@ -33,8 +33,8 @@
 	});
 </script>
 
-<div class="flex gap-4">
-	<div>
+<div class="h-full px-4 py-6">
+	<!-- <div>
 		<Calendar
 			type="single"
 			bind:value
@@ -45,7 +45,7 @@
 		<div class="my-2"></div>
 
 		<Timer />
-	</div>
+	</div> -->
 
 	<div>
 		<h2 class="mb-4 text-xl font-bold">Links</h2>
@@ -55,8 +55,8 @@
 			{/each}
 		</div>
 
-		<div>
+		<!-- <div>
 			<Localhost />
-		</div>
+		</div> -->
 	</div>
 </div>

@@ -93,8 +93,8 @@
 	}
 </script>
 
-<div class="mb-8 flex">
-	<section class="flex-1 pr-4">
+<div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
+	<section class="flex flex-1 flex-col overflow-hidden">
 		<header class="mb-6 flex justify-between">
 			<h2 class="block text-xl font-bold">JWT Decoder</h2>
 			<div class="flex items-center gap-4">
@@ -206,7 +206,7 @@
 		</div>
 	</section>
 
-	<section class="flex-1 pl-4">
+	<section class="flex flex-1 flex-col overflow-hidden">
 		<header class="mb-6 flex justify-between">
 			<h2 class="block text-xl font-bold">Results</h2>
 
@@ -224,24 +224,24 @@
 			</ButtonGroup.Root>
 		</header>
 
-		<div class="mb-4 overflow-hidden rounded-lg border border-solid border-gray-300">
+		<div class="mb-4 flex flex-col overflow-hidden rounded-lg border border-solid border-gray-300">
 			<div class="flex items-center justify-between p-2">
 				<h2 class="font-semibold">Decoded Header</h2>
 				<ButtonGroup.Root>
 					<Button variant="outline" size="sm" onclick={copyHeader}><Clipboard /> Copy</Button>
 				</ButtonGroup.Root>
 			</div>
-			<CodeEditor language="json" class="h-64 border-x-0 border-b-0" value={headerJson} />
+			<CodeEditor language="json" class="flex-1 border-x-0 border-b-0" value={headerJson} />
 		</div>
 
-		<div class="overflow-hidden rounded-lg border border-solid border-gray-300">
+		<div class="flex flex-col overflow-hidden rounded-lg border border-solid border-gray-300">
 			<div class="flex items-center justify-between p-2">
 				<h2 class="font-semibold">Decoded Payload</h2>
 				<ButtonGroup.Root>
 					<Button variant="outline" size="sm" onclick={copyPayload}><Clipboard /> Copy</Button>
 				</ButtonGroup.Root>
 			</div>
-			<CodeEditor language="json" class="h-64 border-x-0 border-b-0" value={payloadJson} />
+			<CodeEditor language="json" class="flex-1 border-x-0 border-b-0" value={payloadJson} />
 		</div>
 	</section>
 </div>

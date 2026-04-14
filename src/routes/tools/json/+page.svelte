@@ -1,18 +1,19 @@
 <script lang="ts">
-	import {
-		formatJson,
-		exampleFormatJson,
-		exampleFormatJson2,
-		minifyJson,
-		exampleMinifyJson
-	} from '$lib/core/format-json';
+	import { Album, Clipboard, EllipsisVertical, Trash2 } from '@lucide/svelte';
+
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
-	import { copyText } from '$lib/core/copy-to-clipboard';
-	import { Button } from '$lib/components/ui/button/index.js';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { EllipsisVertical, Trash2, Clipboard, Album } from '@lucide/svelte';
+	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Select from '$lib/components/ui/select';
+	import { copyText } from '$lib/core/copy-to-clipboard';
+	import {
+		exampleFormatJson,
+		exampleFormatJson2,
+		exampleMinifyJson,
+		formatJson,
+		minifyJson
+	} from '$lib/core/format-json';
 
 	let input = $state('');
 	let indentSize = $state('2');
@@ -46,10 +47,10 @@
 	}
 </script>
 
-<div class="mb-4 flex h-screen">
-	<section class="flex-1 pr-4">
-		<header class="flex justify-between mb-6">
-			<h1 class="text-xl font-bold block">Format JSON</h1>
+<div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<header class="mb-6 flex justify-between">
+			<h1 class="block text-xl font-bold">Format JSON</h1>
 			<div class="flex items-center gap-4">
 				<Select.Root type="single" name="encodingMode" bind:value={mode}>
 					<Select.Trigger>
@@ -106,17 +107,17 @@
 				</ButtonGroup.Root>
 			</div>
 		</header>
-		<CodeEditor class="h-[500px]!" language="json" bind:value={input} />
+		<CodeEditor class="flex-1" language="json" bind:value={input} />
 	</section>
 
-	<section class="flex-1 pl-4">
-		<header class="flex justify-between mb-6">
-			<h2 class="text-xl font-bold block">Output</h2>
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<header class="mb-6 flex justify-between">
+			<h2 class="block text-xl font-bold">Output</h2>
 
 			<ButtonGroup.Root>
 				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy output</Button>
 			</ButtonGroup.Root>
 		</header>
-		<CodeEditor class="h-[500px]!" language="json" value={output} readonly />
+		<CodeEditor class="flex-1" language="json" value={output} readonly />
 	</section>
 </div>

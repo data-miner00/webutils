@@ -61,8 +61,8 @@
 	});
 </script>
 
-<div class="mb-8 flex">
-	<section class="flex-1 pr-4">
+<div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
+	<section class="flex flex-1 flex-col overflow-hidden">
 		<header class="mb-6 flex justify-between">
 			<h2 class="block text-xl font-bold">Original</h2>
 			<div class="flex items-center gap-4">
@@ -96,10 +96,10 @@
 				</ButtonGroup.Root>
 			</div>
 		</header>
-		<CodeEditor class="h-[500px]!" language="text" bind:value={original} />
+		<CodeEditor class="flex-1" language="text" bind:value={original} />
 	</section>
 
-	<section class="flex-1 pl-4">
+	<section class="flex flex-1 flex-col overflow-hidden">
 		<header class="mb-6 flex justify-between">
 			<h2 class="block text-xl font-bold">Modified</h2>
 
@@ -121,13 +121,14 @@
 				/>
 			</ButtonGroup.Root>
 		</header>
-		<CodeEditor class="h-[500px]!" language="text" bind:value={modified} />
+		<CodeEditor class="flex-1" language="text" bind:value={modified} />
 	</section>
 </div>
-
 {#if viewDiff}
-	<h2 class="mb-6 block text-xl font-bold">Diff</h2>
-	<div class="h-[500px]">
-		<DiffEditor {original} {modified} language="text/plain" class="h-full" />
-	</div>
+	<section class="px-4 py-6">
+		<h2 class="mb-6 block text-xl font-bold">Diff</h2>
+		<div class="h-screen">
+			<DiffEditor {original} {modified} language="text/plain" class="h-full" />
+		</div>
+	</section>
 {/if}

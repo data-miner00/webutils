@@ -56,16 +56,20 @@
 <Sidebar.Provider>
 	<AppSidebar />
 
-	<main class="w-full">
-		<Header />
-		<div class="h-[calc(100vh-73px)] px-4 py-6">
+	<main class="relative flex w-full flex-col">
+		<!-- <Header /> -->
+		<div class="flex-1">
 			{@render children()}
 		</div>
 	</main>
 </Sidebar.Provider>
+
+<!--
 
 {#if showPokemon}
 	<div class="pointer-events-none fixed right-2 bottom-2">
 		<img src={fetchImage(151)} alt="Showing a pokemon" onerror={(e) => e.currentTarget.remove()} />
 	</div>
 {/if}
+
+-->

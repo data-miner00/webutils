@@ -189,186 +189,188 @@
 	}
 </script>
 
-<div class="mb-5 flex items-center gap-4">
-	<InputGroup.Root>
-		<InputGroup.Input bind:value={searchQuery} placeholder="Search..." />
-		<InputGroup.Addon>
-			<SearchIcon />
-		</InputGroup.Addon>
-		{#if searchQuery}
-			<InputGroup.Addon align="inline-end">
-				<InputGroup.Button onclick={() => (searchQuery = '')}><X /></InputGroup.Button>
+<div class="px-4 py-6">
+	<div class="mb-5 flex items-center gap-4">
+		<InputGroup.Root>
+			<InputGroup.Input bind:value={searchQuery} placeholder="Search..." />
+			<InputGroup.Addon>
+				<SearchIcon />
 			</InputGroup.Addon>
-		{/if}
-	</InputGroup.Root>
+			{#if searchQuery}
+				<InputGroup.Addon align="inline-end">
+					<InputGroup.Button onclick={() => (searchQuery = '')}><X /></InputGroup.Button>
+				</InputGroup.Addon>
+			{/if}
+		</InputGroup.Root>
 
-	<Dialog.Root bind:open={isDialogOpen}>
-		<form>
-			<Dialog.Trigger
-				class={buttonVariants({ variant: 'default' })}
-				onclick={() => (isEditMode = false)}
-			>
-				<Plus />
-				Add Secret
-			</Dialog.Trigger>
-			<Dialog.Content class="sm:max-w-[425px]">
-				<Dialog.Header>
-					<Dialog.Title>{isEditMode ? 'Edit Secret' : 'Add New Secret'}</Dialog.Title>
-					<Dialog.Description>
-						{isEditMode
-							? "Edit the details for the secret. Click save when you're done."
-							: "Fill in the details for the new secret. Click save when you're done."}
-					</Dialog.Description>
-				</Dialog.Header>
-				<div class="grid gap-4">
-					<div class="grid gap-3">
-						<Label for="name">Name</Label>
-						<Input
-							id="name"
-							name="name"
-							placeholder="e.g. Surfshark Password"
-							bind:value={inputSecret.name}
-						/>
-					</div>
-					<div class="grid gap-3">
-						<Label for="type">Type</Label>
+		<Dialog.Root bind:open={isDialogOpen}>
+			<form>
+				<Dialog.Trigger
+					class={buttonVariants({ variant: 'default' })}
+					onclick={() => (isEditMode = false)}
+				>
+					<Plus />
+					Add Secret
+				</Dialog.Trigger>
+				<Dialog.Content class="sm:max-w-[425px]">
+					<Dialog.Header>
+						<Dialog.Title>{isEditMode ? 'Edit Secret' : 'Add New Secret'}</Dialog.Title>
+						<Dialog.Description>
+							{isEditMode
+								? "Edit the details for the secret. Click save when you're done."
+								: "Fill in the details for the new secret. Click save when you're done."}
+						</Dialog.Description>
+					</Dialog.Header>
+					<div class="grid gap-4">
+						<div class="grid gap-3">
+							<Label for="name">Name</Label>
+							<Input
+								id="name"
+								name="name"
+								placeholder="e.g. Surfshark Password"
+								bind:value={inputSecret.name}
+							/>
+						</div>
+						<div class="grid gap-3">
+							<Label for="type">Type</Label>
 
-						<Select.Root type="single" name="secretType" bind:value={inputSecret.type}>
-							<Select.Trigger class="w-full">
-								{toPascalCase(inputSecret.type)}
-							</Select.Trigger>
-							<Select.Content>
-								<Select.Group>
-									<Select.Label>Type</Select.Label>
-									<Select.Item value="general" label="general">General</Select.Item>
-									<Select.Item value="key" label="key">Key</Select.Item>
-									<Select.Item value="token" label="token">Token</Select.Item>
-									<Select.Item value="username" label="username">Username</Select.Item>
-									<Select.Item value="password" label="password">Password</Select.Item>
-									<Select.Item value="connection-string" label="connection-string"
-										>Connection String</Select.Item
-									>
-									<Select.Item value="certificate" label="certificate">Certificate</Select.Item>
-									<Select.Item value="passphrase" label="passphrase">Passphrase</Select.Item>
-								</Select.Group>
-							</Select.Content>
-						</Select.Root>
+							<Select.Root type="single" name="secretType" bind:value={inputSecret.type}>
+								<Select.Trigger class="w-full">
+									{toPascalCase(inputSecret.type)}
+								</Select.Trigger>
+								<Select.Content>
+									<Select.Group>
+										<Select.Label>Type</Select.Label>
+										<Select.Item value="general" label="general">General</Select.Item>
+										<Select.Item value="key" label="key">Key</Select.Item>
+										<Select.Item value="token" label="token">Token</Select.Item>
+										<Select.Item value="username" label="username">Username</Select.Item>
+										<Select.Item value="password" label="password">Password</Select.Item>
+										<Select.Item value="connection-string" label="connection-string"
+											>Connection String</Select.Item
+										>
+										<Select.Item value="certificate" label="certificate">Certificate</Select.Item>
+										<Select.Item value="passphrase" label="passphrase">Passphrase</Select.Item>
+									</Select.Group>
+								</Select.Content>
+							</Select.Root>
+						</div>
+						<div class="grid gap-3">
+							<Label for="secret">Secret</Label>
+							<Input
+								id="secret"
+								name="secret"
+								type="password"
+								placeholder="e.g. dfs^hd$uf@298sfam"
+								bind:value={secret}
+							/>
+						</div>
+						<div class="grid gap-3">
+							<Label for="master-password">Master Password</Label>
+							<Input
+								id="master-password"
+								name="master-password"
+								type="password"
+								placeholder="e.g. dfs^hd$uf@298sfam"
+								bind:value={masterPassword}
+							/>
+						</div>
 					</div>
-					<div class="grid gap-3">
-						<Label for="secret">Secret</Label>
-						<Input
-							id="secret"
-							name="secret"
-							type="password"
-							placeholder="e.g. dfs^hd$uf@298sfam"
-							bind:value={secret}
-						/>
-					</div>
-					<div class="grid gap-3">
-						<Label for="master-password">Master Password</Label>
-						<Input
-							id="master-password"
-							name="master-password"
-							type="password"
-							placeholder="e.g. dfs^hd$uf@298sfam"
-							bind:value={masterPassword}
-						/>
-					</div>
-				</div>
-				<Dialog.Footer>
-					<Dialog.Close class={buttonVariants({ variant: 'outline' })}>Cancel</Dialog.Close>
-					<Button type="submit" onclick={() => (isEditMode ? update() : addToDb())}>Save</Button>
-				</Dialog.Footer>
-			</Dialog.Content>
-		</form>
-	</Dialog.Root>
-</div>
-
-{#if secrets.length > 0}
-	<div>
-		<Table.Root>
-			<Table.Caption>A list of your saved secrets.</Table.Caption>
-			<Table.Header>
-				<Table.Row>
-					<Table.Head class="w-[100px]">Name</Table.Head>
-					<Table.Head>Type</Table.Head>
-					<Table.Head>Secret</Table.Head>
-					<Table.Head>Version</Table.Head>
-					<Table.Head>Created At</Table.Head>
-					<Table.Head>Updated At</Table.Head>
-					<Table.Head></Table.Head>
-				</Table.Row>
-			</Table.Header>
-			<Table.Body>
-				{#each filteredSecrets as secret (secret.id)}
-					<Table.Row>
-						<Table.Cell class="font-medium">{secret.name}</Table.Cell>
-						<Table.Cell>{secret.type}</Table.Cell>
-						<Table.Cell>
-							{secret.snippet}
-						</Table.Cell>
-						<Table.Cell>
-							{secret.version}
-						</Table.Cell>
-						<Table.Cell>
-							{formatDate(secret.createdAt)}
-						</Table.Cell>
-						<Table.Cell>
-							{formatDate(secret.updatedAt)}
-						</Table.Cell>
-						<Table.Cell>
-							<ButtonGroup.Root>
-								<Button
-									variant="outline"
-									onclick={() => {
-										selectedSecretId = secret.id;
-										isPwDialogOpen = true;
-									}}
-								>
-									<Copy />
-								</Button>
-
-								<Button variant="outline" onclick={() => openEditDialog(secret)}>
-									<Pencil />
-								</Button>
-								<Button variant="destructive" onclick={() => remove(secret.id)}>
-									<Trash2 />
-								</Button>
-							</ButtonGroup.Root>
-						</Table.Cell>
-					</Table.Row>
-				{:else}
-					<Table.Row>
-						<Table.Cell class="font-medium">No secrets found.</Table.Cell>
-					</Table.Row>
-				{/each}
-			</Table.Body>
-		</Table.Root>
+					<Dialog.Footer>
+						<Dialog.Close class={buttonVariants({ variant: 'outline' })}>Cancel</Dialog.Close>
+						<Button type="submit" onclick={() => (isEditMode ? update() : addToDb())}>Save</Button>
+					</Dialog.Footer>
+				</Dialog.Content>
+			</form>
+		</Dialog.Root>
 	</div>
-{:else}
-	<Empty.Root class="border border-solid border-gray-300">
-		<Empty.Header>
-			<Empty.Media variant="icon">
-				<Lock />
-			</Empty.Media>
-			<Empty.Title>No Secrets Yet</Empty.Title>
-			<Empty.Description>
-				You haven't entered created any secrets yet. Get started by creating one.
-			</Empty.Description>
-		</Empty.Header>
-		<Empty.Content>
-			<div class="flex gap-2">
-				<Button onclick={() => (isDialogOpen = true)}>Create Secret</Button>
-				<Button variant="outline" onclick={() => {}}>Load Example 2</Button>
-			</div>
-		</Empty.Content>
-		<Button variant="link" class="text-muted-foreground" size="sm">
-			<a href="#/">
-				Learn More <ArrowUpRightIcon class="inline" />
-			</a>
-		</Button>
-	</Empty.Root>
-{/if}
+
+	{#if secrets.length > 0}
+		<div>
+			<Table.Root>
+				<Table.Caption>A list of your saved secrets.</Table.Caption>
+				<Table.Header>
+					<Table.Row>
+						<Table.Head class="w-[100px]">Name</Table.Head>
+						<Table.Head>Type</Table.Head>
+						<Table.Head>Secret</Table.Head>
+						<Table.Head>Version</Table.Head>
+						<Table.Head>Created At</Table.Head>
+						<Table.Head>Updated At</Table.Head>
+						<Table.Head></Table.Head>
+					</Table.Row>
+				</Table.Header>
+				<Table.Body>
+					{#each filteredSecrets as secret (secret.id)}
+						<Table.Row>
+							<Table.Cell class="font-medium">{secret.name}</Table.Cell>
+							<Table.Cell>{secret.type}</Table.Cell>
+							<Table.Cell>
+								{secret.snippet}
+							</Table.Cell>
+							<Table.Cell>
+								{secret.version}
+							</Table.Cell>
+							<Table.Cell>
+								{formatDate(secret.createdAt)}
+							</Table.Cell>
+							<Table.Cell>
+								{formatDate(secret.updatedAt)}
+							</Table.Cell>
+							<Table.Cell>
+								<ButtonGroup.Root>
+									<Button
+										variant="outline"
+										onclick={() => {
+											selectedSecretId = secret.id;
+											isPwDialogOpen = true;
+										}}
+									>
+										<Copy />
+									</Button>
+
+									<Button variant="outline" onclick={() => openEditDialog(secret)}>
+										<Pencil />
+									</Button>
+									<Button variant="destructive" onclick={() => remove(secret.id)}>
+										<Trash2 />
+									</Button>
+								</ButtonGroup.Root>
+							</Table.Cell>
+						</Table.Row>
+					{:else}
+						<Table.Row>
+							<Table.Cell class="font-medium">No secrets found.</Table.Cell>
+						</Table.Row>
+					{/each}
+				</Table.Body>
+			</Table.Root>
+		</div>
+	{:else}
+		<Empty.Root class="border border-solid border-gray-300">
+			<Empty.Header>
+				<Empty.Media variant="icon">
+					<Lock />
+				</Empty.Media>
+				<Empty.Title>No Secrets Yet</Empty.Title>
+				<Empty.Description>
+					You haven't entered created any secrets yet. Get started by creating one.
+				</Empty.Description>
+			</Empty.Header>
+			<Empty.Content>
+				<div class="flex gap-2">
+					<Button onclick={() => (isDialogOpen = true)}>Create Secret</Button>
+					<Button variant="outline" onclick={() => {}}>Load Example 2</Button>
+				</div>
+			</Empty.Content>
+			<Button variant="link" class="text-muted-foreground" size="sm">
+				<a href="#/">
+					Learn More <ArrowUpRightIcon class="inline" />
+				</a>
+			</Button>
+		</Empty.Root>
+	{/if}
+</div>
 
 <Dialog.Root bind:open={isPwDialogOpen}>
 	<form>

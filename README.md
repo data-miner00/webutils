@@ -36,4 +36,4 @@ docker-compose up -d
 
 ## Credits
 
-The primary resource is the [tool](https://truedevtools.com/) developed by [dathoangnd](https://github.com/dathoangnd/truedevtools.com)
+The project referenced a lot of code from the [tool](https://truedevtools.com/) developed by [dathoangnd](https://github.com/dathoangnd/truedevtools.com). Appreciate the great tool!

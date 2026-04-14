@@ -1,25 +1,26 @@
 <script lang="ts">
 	import {
+		Album,
+		ArrowBigRight,
+		Clipboard,
+		Download,
+		EllipsisVertical,
+		Trash2
+	} from '@lucide/svelte';
+
+	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
+	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import { Input } from '$lib/components/ui/input/index.js';
+	import * as Select from '$lib/components/ui/select';
+	import {
 		BASE64_IDENTIFIER,
 		base64Decode,
 		exampleImageBase64,
 		imageToBase64
 	} from '$lib/core/base64';
-	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
 	import { copyText } from '$lib/core/copy-to-clipboard';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import {
-		EllipsisVertical,
-		Trash2,
-		Clipboard,
-		Album,
-		ArrowBigRight,
-		Download
-	} from '@lucide/svelte';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
-	import * as Select from '$lib/components/ui/select';
-	import { Input } from '$lib/components/ui/input/index.js';
 	import { toPascalCase } from '$lib/core/string-utils';
 
 	let input = $state('');
@@ -94,10 +95,10 @@
 	}
 </script>
 
-<div class="mb-4 flex h-screen">
-	<section class="flex-1 pr-4">
-		<header class="flex justify-between mb-6">
-			<h1 class="text-xl font-bold block">Image to Base64</h1>
+<div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<header class="mb-6 flex justify-between">
+			<h1 class="block text-xl font-bold">Image to Base64</h1>
 			<div class="flex items-center gap-4">
 				<Select.Root type="single" name="encodingMode" bind:value={mode}>
 					<Select.Trigger>
@@ -147,20 +148,20 @@
 
 				{#if inputImage}
 					<div
-						class="flex items-center justify-center mt-10 border border-solid border-gray-300 rounded p-8"
+						class="mt-10 flex items-center justify-center rounded border border-solid border-gray-300 p-8"
 					>
 						<img src={inputImage} alt="User uploaded" class="block" />
 					</div>
 				{/if}
 			</div>
 		{:else}
-			<CodeEditor class="h-[500px]!" language="text" bind:value={input} />
+			<CodeEditor class="flex-1" language="text" bind:value={input} />
 		{/if}
 	</section>
 
-	<section class="flex-1 pl-4">
-		<header class="flex justify-between mb-6">
-			<h2 class="text-xl font-bold block">Output</h2>
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<header class="mb-6 flex justify-between">
+			<h2 class="block text-xl font-bold">Output</h2>
 
 			<ButtonGroup.Root>
 				{#if mode === 'encode'}
@@ -172,10 +173,10 @@
 		</header>
 
 		{#if mode == 'encode'}
-			<CodeEditor class="h-[500px]!" language="text" value={output} readonly />
+			<CodeEditor class="flex-1" language="text" value={output} readonly />
 		{:else}
 			<div
-				class="flex items-center justify-center p-5 border border-solid border-gray-300 rounded-lg"
+				class="flex items-center justify-center rounded-lg border border-solid border-gray-300 p-5"
 			>
 				<img src={imageOutput} class="block" alt="Decoded base64 output" />
 			</div>

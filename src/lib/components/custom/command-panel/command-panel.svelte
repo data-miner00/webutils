@@ -303,6 +303,13 @@
 					onSelect() {
 						gotoPage('/tools/text-diff');
 					}
+				},
+				{
+					title: 'Remove Empty Lines',
+					icon: SpaceIcon,
+					onSelect() {
+						gotoPage('/tools/remove-empty-lines');
+					}
 				}
 			]
 		},

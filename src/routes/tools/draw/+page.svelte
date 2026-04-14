@@ -1,17 +1,18 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button/index.js';
-	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
 	import {
-		Trash2,
-		Download,
-		Redo,
-		Undo,
 		Brush,
-		Eraser,
 		Circle,
+		Download,
+		Eraser,
 		PaintBucket,
-		Square
+		Redo,
+		Square,
+		Trash2,
+		Undo
 	} from '@lucide/svelte';
+
+	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
 
 	let canvas: HTMLCanvasElement | undefined;
 	let isDrawing = $state(false);
@@ -59,51 +60,53 @@
 	});
 </script>
 
-<header class="flex justify-between mb-6">
-	<h1 class="text-xl font-bold block">Drawing</h1>
-	<div class="flex items-center gap-4">
-		<ButtonGroup.Root>
+<div class="px-4 py-6">
+	<header class="mb-6 flex justify-between">
+		<h1 class="block text-xl font-bold">Drawing</h1>
+		<div class="flex items-center gap-4">
 			<ButtonGroup.Root>
-				<Button size="icon" variant="outline">
-					<Brush />
-				</Button>
-				<Button size="icon" variant="outline">
-					<Eraser />
-				</Button>
-				<Button size="icon" variant="outline">
-					<Square />
-				</Button>
-				<Button size="icon" variant="outline">
-					<Circle />
-				</Button>
-				<Button size="icon" variant="outline">
-					<PaintBucket />
-				</Button>
-			</ButtonGroup.Root>
-			<!-- <ButtonGroup.Root>
+				<ButtonGroup.Root>
+					<Button size="icon" variant="outline">
+						<Brush />
+					</Button>
+					<Button size="icon" variant="outline">
+						<Eraser />
+					</Button>
+					<Button size="icon" variant="outline">
+						<Square />
+					</Button>
+					<Button size="icon" variant="outline">
+						<Circle />
+					</Button>
+					<Button size="icon" variant="outline">
+						<PaintBucket />
+					</Button>
+				</ButtonGroup.Root>
+				<!-- <ButtonGroup.Root>
 				<Button size="icon" variant="outline" class="bg-black-400"></Button>
 				<Button size="icon" variant="outline" class="bg-red-400"></Button>
 				<Button size="icon" variant="outline" class="bg-blue-400"></Button>
 			</ButtonGroup.Root> -->
-			<ButtonGroup.Root>
-				<Button size="icon" variant="outline" onclick={() => {}}><Undo /></Button>
-				<Button size="icon" variant="outline" onclick={() => {}}><Redo /></Button>
-				<Button size="icon" variant="outline" onclick={() => {}}><Download /></Button>
+				<ButtonGroup.Root>
+					<Button size="icon" variant="outline" onclick={() => {}}><Undo /></Button>
+					<Button size="icon" variant="outline" onclick={() => {}}><Redo /></Button>
+					<Button size="icon" variant="outline" onclick={() => {}}><Download /></Button>
+				</ButtonGroup.Root>
+				<ButtonGroup.Root>
+					<Button size="icon" variant="destructive" onclick={clearCanvas}><Trash2 /></Button>
+				</ButtonGroup.Root>
 			</ButtonGroup.Root>
-			<ButtonGroup.Root>
-				<Button size="icon" variant="destructive" onclick={clearCanvas}><Trash2 /></Button>
-			</ButtonGroup.Root>
-		</ButtonGroup.Root>
-	</div>
-</header>
+		</div>
+	</header>
 
-<canvas
-	bind:this={canvas}
-	width={1400}
-	height={800}
-	class="border-2 border-solid border-gray-300 cursor-crosshair bg-white"
-	onmousedown={startDrawing}
-	onmousemove={draw}
-	onmouseup={stopDrawing}
-	onmouseleave={stopDrawing}
-></canvas>
+	<canvas
+		bind:this={canvas}
+		width={1400}
+		height={800}
+		class="cursor-crosshair border-2 border-solid border-gray-300 bg-white"
+		onmousedown={startDrawing}
+		onmousemove={draw}
+		onmouseup={stopDrawing}
+		onmouseleave={stopDrawing}
+	></canvas>
+</div>

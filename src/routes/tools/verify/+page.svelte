@@ -13,12 +13,16 @@
 	let isEmailValid = $derived(verifyEmailAddress(emailInput));
 </script>
 
-<h1 class="text-2xl font-bold">Verify</h1>
+<div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
+	<section>
+		<h1 class="text-xl font-bold">Verify</h1>
 
-<h2 class="my-4 text-xl">Verify Card Number</h2>
+		<h2 class="my-4 text-xl">Verify Card Number</h2>
 
-<Input bind:value={cardInput} placeholder="e.g. 123 456 7890" class={inputBorderColor} />
+		<Input bind:value={cardInput} placeholder="e.g. 123 456 7890" class={inputBorderColor} />
 
-<Input bind:value={emailInput} placeholder="e.g. shaun@email.com" />
+		<Input bind:value={emailInput} placeholder="e.g. shaun@email.com" />
 
-<p>Email valid: {isEmailValid}</p>
+		<p>Email valid: {isEmailValid}</p>
+	</section>
+</div>

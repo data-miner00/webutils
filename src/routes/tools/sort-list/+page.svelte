@@ -1,18 +1,19 @@
 <script lang="ts">
-	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
-	import { copyText } from '$lib/core/copy-to-clipboard';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
 	import {
-		EllipsisVertical,
-		Trash2,
-		Clipboard,
 		Album,
 		ArrowDownAZ,
 		ArrowUpAZ,
-		Shuffle
+		Clipboard,
+		EllipsisVertical,
+		Shuffle,
+		Trash2
 	} from '@lucide/svelte';
+
+	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
+	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import { copyText } from '$lib/core/copy-to-clipboard';
 
 	let inputText = $state('');
 	let outputText = $state('');
@@ -79,10 +80,10 @@ Pineapple`;
 	}
 </script>
 
-<div class="mb-4 flex h-screen">
-	<section class="flex-1 pr-4">
-		<header class="flex justify-between mb-6">
-			<h1 class="text-xl font-bold block">Sort List</h1>
+<div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<header class="mb-6 flex justify-between">
+			<h1 class="block text-xl font-bold">Sort List</h1>
 			<div class="flex items-center gap-4">
 				<ButtonGroup.Root>
 					<ButtonGroup.Root>
@@ -124,17 +125,17 @@ Pineapple`;
 				</ButtonGroup.Root>
 			</div>
 		</header>
-		<CodeEditor class="h-[500px]!" language="text" bind:value={inputText} />
+		<CodeEditor class="flex-1" language="text" bind:value={inputText} />
 	</section>
 
-	<section class="flex-1 pl-4">
-		<header class="flex justify-between mb-6">
-			<h2 class="text-xl font-bold block">Output</h2>
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<header class="mb-6 flex justify-between">
+			<h2 class="block text-xl font-bold">Output</h2>
 
 			<ButtonGroup.Root>
 				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy output</Button>
 			</ButtonGroup.Root>
 		</header>
-		<CodeEditor class="h-[500px]!" language="text" value={outputText} readonly />
+		<CodeEditor class="flex-1" language="text" value={outputText} readonly />
 	</section>
 </div>

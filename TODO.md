@@ -1,3 +1,5 @@
+reorganize this
+
 ## Implemented
 
 - generate random/lorem ipsum text
@@ -45,6 +47,7 @@
 
 ## Not Implemented
 
+- Internet Search History
 - Countdown (beep sound)
 - Factorial
 - Fibonacci sequence
@@ -128,3 +131,6 @@
 - samltool.io
 - windy.com
 - excalidraw.com
+- sitemap xml
+- og image
+- https://svgtopng.com/

@@ -1,14 +1,15 @@
 <script lang="ts">
+	import { Album, Clipboard, Copy, EllipsisVertical, X } from '@lucide/svelte';
+
+	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import * as InputGroup from '$lib/components/ui/input-group/index.js';
+	import Label from '$lib/components/ui/label/label.svelte';
+	import * as Select from '$lib/components/ui/select';
 	import { BaseN } from '$lib/core/baseN';
 	import { copyText } from '$lib/core/copy-to-clipboard';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { EllipsisVertical, Clipboard, Album, Copy, X } from '@lucide/svelte';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
-	import * as Select from '$lib/components/ui/select';
 	import { toPascalCase } from '$lib/core/string-utils';
-	import Label from '$lib/components/ui/label/label.svelte';
-	import * as InputGroup from '$lib/components/ui/input-group/index.js';
 
 	const base2 = new BaseN(2);
 	const base8 = new BaseN(8);
@@ -68,10 +69,10 @@
 	}
 </script>
 
-<div class="mb-4 flex h-screen">
-	<section class="flex-1 pr-4">
-		<header class="flex justify-between mb-6">
-			<h1 class="text-xl font-bold block">Base Number Conversion</h1>
+<div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<header class="mb-6 flex justify-between">
+			<h1 class="block text-xl font-bold">Base Number Conversion</h1>
 			<div class="flex items-center gap-4">
 				<ButtonGroup.Root>
 					<ButtonGroup.Root>
@@ -112,7 +113,7 @@
 		<div>
 			<Label for="base" class="mb-2">Base</Label>
 			<Select.Root type="single" name="baseType" bind:value={mode}>
-				<Select.Trigger class="w-full mb-6">
+				<Select.Trigger class="mb-6 w-full">
 					{toPascalCase(mode)}
 				</Select.Trigger>
 				<Select.Content>
@@ -146,9 +147,9 @@
 		</div>
 	</section>
 
-	<section class="flex-1 pl-4">
-		<header class="flex justify-between mb-6">
-			<h2 class="text-xl font-bold block">Output</h2>
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<header class="mb-6 flex justify-between">
+			<h2 class="block text-xl font-bold">Output</h2>
 
 			<ButtonGroup.Root>
 				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy as JSON</Button>

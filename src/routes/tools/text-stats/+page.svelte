@@ -1,21 +1,22 @@
 <script lang="ts">
+	import { ArrowUpRightIcon, Clipboard, FileTextIcon, Trash2 } from '@lucide/svelte';
+
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
-	import { copyText } from '$lib/core/copy-to-clipboard';
-	import { Button } from '$lib/components/ui/button/index.js';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
-	import { Trash2, Clipboard, FileTextIcon, ArrowUpRightIcon } from '@lucide/svelte';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import * as Empty from '$lib/components/ui/empty/index.js';
 	import * as Select from '$lib/components/ui/select';
+	import { copyText } from '$lib/core/copy-to-clipboard';
 	import {
+		calculateReadingTimeInMins,
+		calculateSizeInKB,
+		calculateWordDistribution,
 		countCharacters,
 		countLines,
-		countWords,
 		countParagraphs,
-		calculateWordDistribution,
-		calculateSizeInKB,
-		calculateReadingTimeInMins,
+		countWords,
 		sampleText
 	} from '$lib/core/word-counter';
-	import * as Empty from '$lib/components/ui/empty/index.js';
 
 	let input = $state('');
 	let characterOutput = $derived(countCharacters(input));
@@ -31,7 +32,6 @@
 	}
 
 	function copyOutput() {
-		// copy as JSON
 		copyText(
 			JSON.stringify({
 				input,
@@ -74,10 +74,10 @@
 	</article>
 {/snippet}
 
-<div class="mb-4 flex h-screen">
-	<section class="flex-1 pr-4">
-		<header class="flex justify-between mb-6">
-			<h1 class="text-xl font-bold block">Text Statistics</h1>
+<div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<header class="mb-6 flex justify-between">
+			<h1 class="block text-xl font-bold">Text Statistics</h1>
 
 			<div class="flex items-center gap-2">
 				<Select.Root type="single" name="favoriteFruit" bind:value={language}>
@@ -107,19 +107,19 @@
 				</ButtonGroup.Root>
 			</div>
 		</header>
-		<CodeEditor class="h-[500px]!" language="text" bind:value={input} />
+		<CodeEditor class="flex-1" language="text" bind:value={input} />
 	</section>
 
-	<section class="flex-1 pl-4">
-		<header class="flex justify-between mb-6">
-			<h2 class="text-xl font-bold block">Output</h2>
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<header class="mb-6 flex justify-between">
+			<h2 class="block text-xl font-bold">Output</h2>
 
 			<ButtonGroup.Root>
 				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy JSON output</Button>
 			</ButtonGroup.Root>
 		</header>
 
-		<div class="flex gap-4 flex-wrap mb-6">
+		<div class="mb-6 flex flex-wrap gap-4">
 			{@render statsBox('Lines', `${lineOutput}`)}
 			{@render statsBox('Characters', `${characterOutput}`)}
 			{@render statsBox('Words', `${wordOutput}`)}
@@ -128,7 +128,7 @@
 			{@render statsBox('Total size', `${sizeInKBOutput.toFixed(3)} KB`)}
 		</div>
 
-		<h2 class="text-xl font-bold mb-4">Word Distribution</h2>
+		<h2 class="mb-4 text-xl font-bold">Word Distribution</h2>
 
 		{#if wordDistributionOutput.size === 0}
 			<Empty.Root class="border border-solid border-gray-300">
@@ -155,15 +155,15 @@
 			</Empty.Root>
 		{:else}
 			<div
-				class="border border-solid border-gray-300 rounded p-4 min-h-[300px] max-h-[500px] overflow-y-scroll"
+				class="min-h-[300px] flex-1 overflow-y-scroll rounded border border-solid border-gray-300 p-4"
 			>
 				{#each [...wordDistributionOutput.entries()].sort((a, b) => b[1] - a[1]) as [word, count]}
-					<div class="flex justify-between mb-2">
-						<div class="font-mono bg-gray-200 rounded border border-solid border-gray-300 px-2">
+					<div class="mb-2 flex justify-between">
+						<div class="rounded border border-solid border-gray-300 bg-gray-200 px-2 font-mono">
 							{word}
 						</div>
 						<div>
-							<span class="inline-block h-4 bg-blue-500 rounded" style="width: {count * 10}px;"
+							<span class="inline-block h-4 rounded bg-blue-500" style="width: {count * 10}px;"
 							></span>
 
 							x{count}

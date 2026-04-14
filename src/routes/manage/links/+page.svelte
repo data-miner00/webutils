@@ -1,16 +1,17 @@
 <script lang="ts">
-	import { defaultLinks, STORE_NAME, type Link } from '$lib/core/links';
-	import { onMount } from 'svelte';
-	import LinkComponent from '$lib/components/custom/link/link.svelte';
-	import * as InputGroup from '$lib/components/ui/input-group/index.js';
 	import { Plus, SearchIcon } from '@lucide/svelte';
+	import { onMount } from 'svelte';
+
+	import LinkComponent from '$lib/components/custom/link/link.svelte';
+	import * as AlertDialog from '$lib/components/ui/alert-dialog/index.js';
 	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import * as Dialog from '$lib/components/ui/dialog/index.js';
+	import * as InputGroup from '$lib/components/ui/input-group/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { db, initializeDatabase } from '$lib/core/Database';
 	import { IndexedDBRepository } from '$lib/core/IndexedDbRepository';
-	import * as AlertDialog from '$lib/components/ui/alert-dialog/index.js';
+	import { type Link, STORE_NAME, defaultLinks } from '$lib/core/links';
 
 	let links = $state<Link[]>([]);
 	let searchQuery = $state('');
@@ -140,113 +141,115 @@
 	</AlertDialog.Content>
 </AlertDialog.Root>
 
-<div class="flex gap-4 items-center mb-5">
-	<InputGroup.Root>
-		<InputGroup.Input
-			bind:value={searchQuery}
-			placeholder="Search..."
-			onkeyup={goToFirstMatchInNewTab}
-		/>
-		<InputGroup.Addon>
-			<SearchIcon />
-		</InputGroup.Addon>
-
-		{#if searchQuery}
-			<InputGroup.Addon align="inline-end">
-				<InputGroup.Button>{filteredLinks.length} results</InputGroup.Button>
+<div class="px-4 py-6">
+	<div class="mb-5 flex items-center gap-4">
+		<InputGroup.Root>
+			<InputGroup.Input
+				bind:value={searchQuery}
+				placeholder="Search..."
+				onkeyup={goToFirstMatchInNewTab}
+			/>
+			<InputGroup.Addon>
+				<SearchIcon />
 			</InputGroup.Addon>
-		{/if}
-	</InputGroup.Root>
 
-	<Dialog.Root bind:open={isDialogOpen}>
-		<form>
-			<Dialog.Trigger
-				class={buttonVariants({ variant: 'default' })}
-				onclick={() => (isEditMode = false)}
-			>
-				<Plus />
-				Add Link
-			</Dialog.Trigger>
-			<Dialog.Content class="sm:max-w-[425px]">
-				<Dialog.Header>
-					<Dialog.Title>{isEditMode ? 'Edit Link' : 'Add New Link'}</Dialog.Title>
-					<Dialog.Description>
-						{isEditMode
-							? "Edit the details for the link. Click save when you're done."
-							: "Fill in the details for the new link. Click save when you're done."}
-					</Dialog.Description>
-				</Dialog.Header>
-				<div class="grid gap-4">
-					<div class="grid gap-3">
-						<Label for="title">Title</Label>
-						<Input
-							id="title"
-							name="title"
-							placeholder="e.g. Google Search"
-							bind:value={inputLink.title}
-						/>
-					</div>
-					<div class="grid gap-3">
-						<Label for="category">Category</Label>
-						<Input
-							id="category"
-							name="category"
-							placeholder="e.g. Tools"
-							bind:value={inputLink.category}
-						/>
-					</div>
-					<div class="grid gap-3">
-						<Label for="url">Url</Label>
-						<Input
-							id="url"
-							name="url"
-							placeholder="e.g. https://google.com"
-							bind:value={inputLink.url}
-						/>
-					</div>
-				</div>
-				<Dialog.Footer>
-					<Dialog.Close class={buttonVariants({ variant: 'outline' })}>Cancel</Dialog.Close>
-					<Button type="submit" onclick={() => (isEditMode ? updateLink() : addLinkToDb())}
-						>Save</Button
-					>
-				</Dialog.Footer>
-			</Dialog.Content>
-		</form>
-	</Dialog.Root>
-</div>
+			{#if searchQuery}
+				<InputGroup.Addon align="inline-end">
+					<InputGroup.Button>{filteredLinks.length} results</InputGroup.Button>
+				</InputGroup.Addon>
+			{/if}
+		</InputGroup.Root>
 
-<div
-	class="mb-6 w-full overflow-x-scroll flex gap-2 items-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
->
-	<Button
-		size="sm"
-		variant={selectedCategory === 'All' ? 'default' : 'secondary'}
-		onclick={() => (selectedCategory = 'All')}
-		class="cursor-pointer">All</Button
+		<Dialog.Root bind:open={isDialogOpen}>
+			<form>
+				<Dialog.Trigger
+					class={buttonVariants({ variant: 'default' })}
+					onclick={() => (isEditMode = false)}
+				>
+					<Plus />
+					Add Link
+				</Dialog.Trigger>
+				<Dialog.Content class="sm:max-w-[425px]">
+					<Dialog.Header>
+						<Dialog.Title>{isEditMode ? 'Edit Link' : 'Add New Link'}</Dialog.Title>
+						<Dialog.Description>
+							{isEditMode
+								? "Edit the details for the link. Click save when you're done."
+								: "Fill in the details for the new link. Click save when you're done."}
+						</Dialog.Description>
+					</Dialog.Header>
+					<div class="grid gap-4">
+						<div class="grid gap-3">
+							<Label for="title">Title</Label>
+							<Input
+								id="title"
+								name="title"
+								placeholder="e.g. Google Search"
+								bind:value={inputLink.title}
+							/>
+						</div>
+						<div class="grid gap-3">
+							<Label for="category">Category</Label>
+							<Input
+								id="category"
+								name="category"
+								placeholder="e.g. Tools"
+								bind:value={inputLink.category}
+							/>
+						</div>
+						<div class="grid gap-3">
+							<Label for="url">Url</Label>
+							<Input
+								id="url"
+								name="url"
+								placeholder="e.g. https://google.com"
+								bind:value={inputLink.url}
+							/>
+						</div>
+					</div>
+					<Dialog.Footer>
+						<Dialog.Close class={buttonVariants({ variant: 'outline' })}>Cancel</Dialog.Close>
+						<Button type="submit" onclick={() => (isEditMode ? updateLink() : addLinkToDb())}
+							>Save</Button
+						>
+					</Dialog.Footer>
+				</Dialog.Content>
+			</form>
+		</Dialog.Root>
+	</div>
+
+	<div
+		class="mb-6 flex w-full items-center gap-2 overflow-x-scroll [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 	>
-
-	{#each categories as category}
 		<Button
 			size="sm"
-			variant={selectedCategory === category ? 'default' : 'secondary'}
-			onclick={() => (selectedCategory = category)}
-			class="cursor-pointer">{category}</Button
+			variant={selectedCategory === 'All' ? 'default' : 'secondary'}
+			onclick={() => (selectedCategory = 'All')}
+			class="cursor-pointer">All</Button
 		>
-	{/each}
-</div>
 
-<div class="flex gap-4 flex-wrap">
-	{#each filteredLinks as link}
-		<LinkComponent
-			url={link.url}
-			title={link.title}
-			language={link.language}
-			onClickEdit={() => openEditDialog(link)}
-			onClickDelete={() => {
-				linkToDelete = link;
-				isDeleteDialogOpen = true;
-			}}
-		/>
-	{/each}
+		{#each categories as category}
+			<Button
+				size="sm"
+				variant={selectedCategory === category ? 'default' : 'secondary'}
+				onclick={() => (selectedCategory = category)}
+				class="cursor-pointer">{category}</Button
+			>
+		{/each}
+	</div>
+
+	<div class="flex flex-wrap gap-4">
+		{#each filteredLinks as link}
+			<LinkComponent
+				url={link.url}
+				title={link.title}
+				language={link.language}
+				onClickEdit={() => openEditDialog(link)}
+				onClickDelete={() => {
+					linkToDelete = link;
+					isDeleteDialogOpen = true;
+				}}
+			/>
+		{/each}
+	</div>
 </div>

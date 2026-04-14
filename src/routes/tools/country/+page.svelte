@@ -22,29 +22,32 @@
 	}
 </script>
 
-<header class="mb-6 flex justify-between">
-	<h1 class="block text-xl font-bold">Countries</h1>
-	<div class="flex items-center gap-4">
-		<ButtonGroup.Root>
-			<Button variant="outline" onclick={downloadCountriesJson}><Download /> Download JSON</Button>
-			<ReferencesSheet
-				references={[
-					{
-						title: 'CountryCode.org',
-						url: 'https://countrycode.org/'
-					},
-					{
-						title: 'ISO 3166 Country Codes - ISO.org',
-						url: 'https://www.iso.org/iso-3166-country-codes.html'
-					},
-					{
-						title: 'Flag Match',
-						url: 'https://flagmatch.com/'
-					}
-				]}
-			/>
-		</ButtonGroup.Root>
-	</div>
-</header>
+<div class="px-4 py-6">
+	<header class="mb-6 flex justify-between">
+		<h1 class="block text-xl font-bold">Countries</h1>
+		<div class="flex items-center gap-4">
+			<ButtonGroup.Root>
+				<Button variant="outline" onclick={downloadCountriesJson}><Download /> Download JSON</Button
+				>
+				<ReferencesSheet
+					references={[
+						{
+							title: 'CountryCode.org',
+							url: 'https://countrycode.org/'
+						},
+						{
+							title: 'ISO 3166 Country Codes - ISO.org',
+							url: 'https://www.iso.org/iso-3166-country-codes.html'
+						},
+						{
+							title: 'Flag Match',
+							url: 'https://flagmatch.com/'
+						}
+					]}
+				/>
+			</ButtonGroup.Root>
+		</div>
+	</header>
 
-<DataTable data={countries} {columns} />
+	<DataTable data={countries} {columns} />
+</div>
