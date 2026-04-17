@@ -6,15 +6,47 @@
 	import { Album, Clipboard, Download, EllipsisVertical, Trash2 } from '@lucide/svelte';
 
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
+	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
+	import * as Select from '$lib/components/ui/select';
 	import { Switch } from '$lib/components/ui/switch/index.js';
 	import { example1, example2, example3 } from '$lib/core/qr-code';
 
-	let smartMode = $state(true);
+	type ErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H';
+
+	let errorCorrectionLevel = $state<ErrorCorrectionLevel>('H');
 	let input = $state('');
+	let errorCorrectionLabel = $derived(
+		(() => {
+			switch (errorCorrectionLevel) {
+				case 'L':
+					return 'Low (7%)';
+				case 'M':
+					return 'Medium (15%)';
+				case 'Q':
+					return 'Quartile (25%)';
+				case 'H':
+					return 'High (30%)';
+			}
+		})()
+	);
+	let internalErrorCorrectionLevel = $derived(
+		(() => {
+			switch (errorCorrectionLevel) {
+				case 'L':
+					return QRCode.CorrectLevel.L;
+				case 'M':
+					return QRCode.CorrectLevel.M;
+				case 'Q':
+					return QRCode.CorrectLevel.Q;
+				case 'H':
+					return QRCode.CorrectLevel.H;
+			}
+		})()
+	);
 
 	function clearInput() {
 		input = '';
@@ -24,14 +56,16 @@
 	let isLoaded = $state(false);
 	const size = 200;
 
-	function generateQRCode() {
+	function generateQRCode(initialInput = 'hello') {
+		console.log('Generating QR code with error correction level:', errorCorrectionLevel);
+		document.getElementById('qrcode')!.innerHTML = '';
 		qrcode = new QRCode('qrcode', {
-			text: 'hello',
+			text: initialInput,
 			width: size,
 			height: size,
 			colorDark: '#000000',
 			colorLight: '#ffffff',
-			correctLevel: QRCode.CorrectLevel.H
+			correctLevel: internalErrorCorrectionLevel
 		});
 	}
 
@@ -41,6 +75,12 @@
 		}
 		if (isLoaded && input) {
 			qrcode.makeCode(input);
+		}
+	});
+
+	$effect(() => {
+		if (errorCorrectionLevel) {
+			generateQRCode();
 		}
 	});
 
@@ -70,10 +110,20 @@
 		<header class="mb-6 flex justify-between">
 			<h1 class="block text-xl font-bold">QR Code</h1>
 			<div class="flex items-center gap-4">
-				<!-- <div class="flex items-center space-x-2">
-					<Switch bind:checked={smartMode} />
-					<Label for="smart-mode">Smart Mode</Label>
-				</div> -->
+				<Select.Root type="single" name="imageFormat" bind:value={errorCorrectionLevel}>
+					<Select.Trigger>
+						{errorCorrectionLabel}
+					</Select.Trigger>
+					<Select.Content>
+						<Select.Group>
+							<Select.Label>Error Correction</Select.Label>
+							<Select.Item value="L" label="Low (7%)">Low (7%)</Select.Item>
+							<Select.Item value="M" label="Medium (15%)">Medium (15%)</Select.Item>
+							<Select.Item value="Q" label="Quartile (25%)">Quartile (25%)</Select.Item>
+							<Select.Item value="H" label="High (30%)">High (30%)</Select.Item>
+						</Select.Group>
+					</Select.Content>
+				</Select.Root>
 				<ButtonGroup.Root>
 					<ButtonGroup.Root>
 						<Button variant="outline" onclick={() => (input = example1)}>Example 1</Button>
@@ -115,6 +165,22 @@
 
 			<ButtonGroup.Root>
 				<Button variant="outline" onclick={downloadQRCode}><Download /> Download QR Code</Button>
+				<ReferencesSheet
+					references={[
+						{
+							title: 'Online QR Code Generator',
+							url: 'https://online-qr-generator.com'
+						},
+						{
+							title: 'MEQR',
+							url: 'https://me-qr.com'
+						},
+						{
+							title: 'QR.io',
+							url: 'https://qr.io/'
+						}
+					]}
+				/>
 			</ButtonGroup.Root>
 		</header>
 		<div class="flex flex-1 items-center justify-center overflow-hidden border border-gray-300 p-4">
