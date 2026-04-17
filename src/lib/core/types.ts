@@ -9,3 +9,13 @@ export interface IRepository<T extends Entity> {
 	update(id: string, item: Partial<T>): Promise<T>;
 	delete(id: string): Promise<void>;
 }
+
+export type UserProfile = {
+	username?: string;
+	avatarImage?: string;
+	firstName?: string;
+	lastName?: string;
+	websiteUrl?: string;
+	bio?: string;
+	email?: string;
+};
