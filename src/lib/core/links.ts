@@ -1,4 +1,5 @@
 import type { Entity } from './types';
+import usefulLinks from './useful-links.json';
 
 export type Link = {
 	category: string;
@@ -11,66 +12,17 @@ export type Link = {
 	createdAt: string;
 } & Entity;
 
-const today = new Date();
+const today = new Date().toISOString();
 
-export const defaultLinks: Link[] = [
-	{
+export const defaultLinks: Link[] = [];
+
+for (const link of usefulLinks) {
+	defaultLinks.push({
+		...link,
 		id: crypto.randomUUID(),
-		title: 'ChatGPT',
-		category: 'Tools',
-		url: 'https://chatgpt.com',
-		createdAt: today.toISOString()
-	},
-	{
-		id: crypto.randomUUID(),
-		title: 'GitHub',
-		category: 'Social',
-		url: 'https://github.com/',
-		createdAt: today.toISOString()
-	},
-	{
-		id: crypto.randomUUID(),
-		title: 'YouTube',
-		category: 'Social',
-		url: 'https://youtube.com/',
-		createdAt: today.toISOString()
-	},
-	{
-		id: crypto.randomUUID(),
-		title: 'Wikipedia',
-		category: 'Articles',
-		url: 'https://wikipedia.org/',
-		createdAt: today.toISOString()
-	},
-	{
-		id: crypto.randomUUID(),
-		title: 'Hackernews',
-		category: 'Articles',
-		url: 'https://news.ycombinator.com/',
-		createdAt: today.toISOString()
-	},
-	{
-		id: crypto.randomUUID(),
-		title: 'Gmail',
-		category: 'Tools',
-		url: 'https://mail.google.com/',
-		createdAt: today.toISOString()
-	},
-	{
-		id: crypto.randomUUID(),
-		title: 'Regex101',
-		category: 'Tools',
-		url: 'https://regex101.com/',
-		createdAt: today.toISOString()
-	},
-	{
-		id: crypto.randomUUID(),
-		title: 'Diff Checker',
-		category: 'Tools',
-		url: 'https://www.diffchecker.com/',
-		createdAt: today.toISOString()
-	}
-];
+		createdAt: today
+	});
+}
 
 /**
  * Extract domain from a URL. Regex implementation: `:\/\/([^\/\n]+)`

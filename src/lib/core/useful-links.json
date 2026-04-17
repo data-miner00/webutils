@@ -1,0 +1,176 @@
+[
+	{
+		"title": "ChatGPT",
+		"category": "Tools",
+		"url": "https://chatgpt.com",
+		"language": "en"
+	},
+	{
+		"title": "GitHub",
+		"category": "Development",
+		"url": "https://github.com",
+		"language": "en"
+	},
+	{
+		"title": "Stack Overflow",
+		"category": "Development",
+		"url": "https://stackoverflow.com",
+		"language": "en"
+	},
+	{
+		"title": "MDN Web Docs",
+		"category": "Documentation",
+		"url": "https://developer.mozilla.org",
+		"language": "en"
+	},
+	{
+		"title": "True DevTools",
+		"category": "Tools",
+		"url": "https://truedevtools.com",
+		"language": "en"
+	},
+	{
+		"title": "Jam Dev Tools",
+		"category": "Tools",
+		"url": "https://jam.dev/utilities",
+		"language": "en"
+	},
+	{
+		"title": "YouTube",
+		"category": "Social",
+		"url": "https://www.youtube.com",
+		"language": "en"
+	},
+	{
+		"title": "Wikipedia",
+		"category": "Education",
+		"url": "https://www.wikipedia.org",
+		"language": "en"
+	},
+	{
+		"title": "Hacker News",
+		"category": "News",
+		"url": "https://news.ycombinator.com/",
+		"language": "en"
+	},
+	{
+		"title": "Regex101",
+		"category": "Tools",
+		"url": "https://regex101.com",
+		"language": "en"
+	},
+	{
+		"title": "Diff Checker",
+		"category": "Tools",
+		"url": "https://www.diffchecker.com",
+		"language": "en"
+	},
+	{
+		"title": "DNS Checker",
+		"category": "Tools",
+		"url": "https://www.dnschecker.org",
+		"language": "en"
+	},
+	{
+		"title": "w3schools",
+		"category": "Education",
+		"url": "https://www.w3schools.com",
+		"language": "en"
+	},
+	{
+		"title": "Retool Tools",
+		"category": "Tools",
+		"url": "https://retool.com/utilities",
+		"language": "en"
+	},
+	{
+		"title": "DeveloperToolsKit",
+		"category": "Tools",
+		"url": "https://developertoolskit.com/",
+		"language": "en"
+	},
+	{
+		"title": "I Love PDF",
+		"category": "Tools",
+		"url": "https://www.ilovepdf.com/",
+		"language": "en"
+	},
+	{
+		"title": "Freeformatter.com",
+		"category": "Tools",
+		"url": "https://www.freeformatter.com",
+		"language": "en"
+	},
+	{
+		"title": "Crontab Guru",
+		"category": "Tools",
+		"url": "https://crontab.guru",
+		"language": "en"
+	},
+	{
+		"title": "Pomofocus",
+		"category": "Tools",
+		"url": "https://pomofocus.io",
+		"language": "en"
+	},
+	{
+		"title": "SAML Toolkits",
+		"category": "Tools",
+		"url": "https://samltool.io",
+		"language": "en"
+	},
+	{
+		"title": "Windy",
+		"category": "Tools",
+		"url": "https://www.windy.com",
+		"language": "en"
+	},
+	{
+		"title": "Excalidraw",
+		"category": "Tools",
+		"url": "https://excalidraw.com",
+		"language": "en"
+	},
+	{
+		"title": "OmniTools",
+		"category": "Tools",
+		"url": "https://omnitools.app/",
+		"language": "en"
+	},
+	{
+		"title": "AI 设计导航",
+		"category": "Tools",
+		"url": "https://aiiiii.com.cn/dev",
+		"language": "zh"
+	},
+	{
+		"title": "高手工具",
+		"category": "Tools",
+		"url": "https://c.p2hp.com",
+		"language": "zh"
+	},
+	{
+		"title": "Toptal Utilities",
+		"category": "Tools",
+		"url": "https://www.toptal.com/utilities-tools",
+		"language": "en"
+	},
+	{
+		"title": "SEOptimer's Free SEO Tools ",
+		"category": "Tools",
+		"url": "https://www.seoptimer.com/free-tools",
+		"language": "en"
+	},
+	{
+		"title": "Online Tools",
+		"category": "Tools",
+		"url": "https://emn178.github.io/online-tools/",
+		"language": "en"
+	},
+	{
+		"title": "程序员宝盒",
+		"category": "Tools",
+		"url": "https://www.baoboxs.com/",
+		"language": "zh"
+	}
+]
