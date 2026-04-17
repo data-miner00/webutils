@@ -1,136 +1,108 @@
-reorganize this
+## Features
 
-## Implemented
+### Text Processing
 
-- generate random/lorem ipsum text
-- generate UUID
-- trailing space remover
-- text compare
-- Text case converter
-- Startswith, endswith, contains, isnumeric, isalpha, isalnum, islower, isupper
-- JWT decoder
-- Hash generator
-- Image to Base64
-- Base64 to Image
-- Sort a list
-- Color converter (HEX, RGB, HSL, CMYK, HSV)
-- QR Code generator
-- Clock
-- Search engine
-- Emoji/Flag emoji picker
-- Markdown to HTML
-- Preview Markdown
-- Preview HTML/CSS
-- JSON formatter/validator
-- Word count & Reading mins
-- XML formatter/validator
-- Number base converter (binary, octal, decimal, hexadecimal)
-- Localhost ping, open, copy
-- Minify/Beautify (JavaScript, CSS, HTML)
-- Symbol list copier
-- PWA offline
-- Show IP address and location
-- Time zone converter
+- [ ] Lorem Ipsum generator
+- [ ] Leading space remover
+- [ ] Trailing space remover
+- [ ] Text compare diff
+- [ ] String Operations (Text case converter)
+- [ ] Sort a list
+- [ ] Word count & Reading mins
+- [ ] Remove empty lines
+- [ ] Remove indentation
 
-## Partially Implemented
+### Data Formatters and Validators
 
-- Luhn algorithm
-- Unit converter
-- Timer
-- notes
-- todos
-- containerize with Docker
-- CTRL + P to bring up command pallete
-  - Able to search
-  - Search if link goto link in new tab
-- Drawing Canvas
+- [ ] JSON formatter/validator
+- [ ] XML formatter/validator
+- [ ] Markdown to HTML
+- [ ] Preview Markdown
+- [ ] Preview HTML/CSS
+- [ ] Minify/Beautify (JavaScript, CSS, HTML)
+- [ ] SQL formatter
+- [ ] CSS validator
+- [ ] HTML validator
 
-## Not Implemented
+### Generators
 
-- Internet Search History
-- Countdown (beep sound)
-- Factorial
-- Fibonacci sequence
-- Fun - IsPalindrome, Anagram, Pangram, Acronym, FizzBuzz, Roman Numerals
-- General web URL navigation tool
-- Simple API tester
-- Implement One Time Pad encryption and decryption
-- PDF Utils
-- Video utils
-- Audio utils
-- Prime number checker
-- Password generator
-- Encrypted Password vault
-- Encryption/Decryption (Caesar cipher, Vigenère cipher, AES)
-- Code to Image
-- Sudoku solver/generator
-- Calculator (Symbolab)
-- Dark/light mode
-- Screen record to GIF
-- Video recorder
-- Text to speech
-- Email/Phone validator
-- Internet speed test/online indicator
-- Date calculator (add/subtract days, weeks, months, years)
-- News aggregator (low priority)
-- Weather app (low priority)
-- Currency converter (low priority)
-- ChatGPT
-- Translation tool
-- Chinese calendar
-- Morse code
-- Show user agent details
-- Ascii art generator
-- interactive map
-- Menger Sponge
-- Mandelbrot Set explorer
-- Screenshot
-- i18n
-- action history stack (click can repeat action)
-- Roulette Wheel
-- plugin system (확장 프로그램)
-- Games
-  - Sudoku
-  - Kakuro
-  - Mahjong
+- [ ] UUID generator
+- [ ] QR Code generator
+- [ ] Secure Password Generator
+- [ ] Fibonacci sequence
+- [ ] Factorial
+- [ ] Sudoku solver/generator
 
-## Links
+### Converters
 
-- https://dnschecker.org/
-- https://www.w3schools.com/
-- https://developer.mozilla.org/en-US/
-- https://css-tricks.com/
-- https://nihongodera.com/
-- https://www.epochconverter.com/
-- https://emn178.github.io/online-tools/
-- https://retool.com/utilities
-- https://developertoolskit.com/
-- https://www.youtube.com/watch?v=VEmJpJVtiG8
-- https://www.timeanddate.com/
-- https://platform.openai.com/tokenizer
-- https://regex101.com/
-- https://www.ilovepdf.com/
-- https://www.freeformatter.com/
-- https://www.baoboxs.com/
-- https://aiiiii.com.cn/dev
-- https://c.p2hp.com/?ref=aiiiii.com.cn
-- https://truedevtools.com
-- https://barcode.tec-it.com/en/QRCode
-- https://www.codeit.kr/articles/productivityTools
-- https://tool.p2hp.com/tool-format-json
-- https://omnitools.app/
-- Crontab.guru
-- https://devutils.com/
-- https://jam.dev/utilities
-- https://www.toptal.com/utilities-tools
-- https://webutils.io/tool/ascii-art-generator
-- pomofocus.io
-- https://www.seoptimer.com/free-tools
-- https://quickref.me/
-- https://tailwindcss.com/docs/colors
-- samltool.io
-- windy.com
-- excalidraw.com
-- sitemap xml
-- og image
-- https://svgtopng.com/
+- [ ] Color converter (HEX, RGB, HSL, CMYK, HSV)
+- [ ] Number base converter (binary, octal, decimal, hexadecimal)
+- [ ] Unit converter
+- [ ] Roman to Integer & vice versa
+- [ ] Morse code
+- [ ] Date calculator (add/subtract days, weeks, months, years)
+- [ ] Time zone converter
+- [ ] Currency converter (low priority)
+- [ ] URL encoder/decoder
+
+### Security and Encryption
+
+- [ ] JWT decoder
+- [ ] Hash generator
+- [ ] One Time Pad encrypt and decrypt
+- [ ] Encryption/Decryption (Caesar cipher, Vigenère cipher, AES)
+- [ ] Encrypted Password Vault
+- [ ] Card number validator
+
+### Media and Creative Tools
+
+- [ ] Image to Base64
+- [ ] Base64 to Image
+- [ ] Drawing Canvas
+- [ ] Video utils
+- [ ] Audio utils
+- [ ] Screen record to GIF
+- [ ] Video recorder
+- [ ] Text to speech
+- [ ] Take screenshot
+
+### Utilities
+
+- [ ] World Clock list
+- [ ] Internet quick search
+- [ ] Emoji/Flag emoji picker
+- [ ] Unicode symbol list
+- [ ] Show IP address and location
+- [ ] Localhost ping, open, copy
+- [ ] Simple Phone/Email validator
+
+### Productivity Tools
+
+- [ ] Simple TODO list
+- [ ] Simple Timer (beep sound)
+- [ ] Simple Notepad
+- [ ] Web URL collection
+- [ ] Stopwatch
+
+### Development Tools
+
+- [ ] Regex tester
+- [ ] API request tester
+- [ ] HTTP status code lookup
+- [ ] JSON schema validator
+- [ ] Git diff viewer
+- [ ] Code syntax highlighter
+- [ ] Package.json analyzer
+- [ ] Dependency tree viewer
+- [ ] Environment variable manager
+- [ ] Log file analyzer
+- [ ] Plugin System
+
+### Fun and Miscellaneous
+
+- [ ] AI Chat
+- [ ] News aggregator (low priority)
+- [ ] Weather app (low priority)
+- [ ] Games
+- [ ] Translation tool
+- [ ] Lunar calendar
