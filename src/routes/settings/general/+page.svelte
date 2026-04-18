@@ -1,28 +1,22 @@
 <script lang="ts">
-	import InfoIcon from '@lucide/svelte/icons/info';
 	import { mode, setMode } from 'mode-watcher';
 	import { onMount } from 'svelte';
-	import { toast } from 'svelte-sonner';
 
-	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import * as InputGroup from '$lib/components/ui/input-group/index.js';
 	import * as Label from '$lib/components/ui/label/index.js';
 	import * as Select from '$lib/components/ui/select/index.js';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
-	import { Spinner } from '$lib/components/ui/spinner/index.js';
 	import { Switch } from '$lib/components/ui/switch/index.js';
-	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
 
-	let settings = $state({});
-
-	let isEnableLoggings = $state(false);
+	let isEnableLoggings = $state(localStorage.getItem('betaFeaturesEnabled') === 'true');
 
 	onMount(async () => {
 		value = mode.current;
 	});
 
-	let isSaving = $state(false);
+	$effect(() => {
+		localStorage.setItem('betaFeaturesEnabled', isEnableLoggings.toString());
+	});
 
 	const themes = [
 		{ value: 'light', label: 'Light' },
@@ -86,25 +80,19 @@
 				</Select.Content>
 			</Select.Root>
 		</div>
-
-		<!-- <Button size="sm" disabled={isSaving}>
-			{#if isSaving}
-				<Spinner />
-			{/if}
-			{isSaving ? 'Submitting...' : 'Submit'}
-		</Button> -->
 	</div>
 
 	<Separator class="my-6 max-w-sm" />
 
-	<h2 class="mb-1 text-lg font-semibold">Monitoring</h2>
+	<h2 class="mb-1 text-lg font-semibold">Beta Features</h2>
 	<p class="text-muted-foreground mb-4 max-w-sm text-sm">
-		Manage your application's logging and monitoring preferences.
+		Manage your application's beta features and experimental functionalities. Enable or disable
+		features that are in development or testing phase.
 	</p>
 
 	<div class="flex items-center gap-3">
-		<Switch id="is-censored" bind:checked={isEnableLoggings} />
-		<Label.Root for="is-censored">Enable Loggings</Label.Root>
+		<Switch id="beta-features" bind:checked={isEnableLoggings} />
+		<Label.Root for="beta-features">Enable Beta Features</Label.Root>
 	</div>
 
 	<Separator class="my-6 max-w-sm" />

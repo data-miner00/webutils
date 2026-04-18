@@ -212,6 +212,7 @@
 				title: 'Discussion',
 				url: '#',
 				icon: MessagesSquare,
+				isBeta: true,
 				items: [
 					{
 						title: 'Draw',
