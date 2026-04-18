@@ -1,10 +1,12 @@
 <script lang="ts">
-	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
-	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import { House } from '@lucide/svelte';
 	import ChevronRightIcon from '@lucide/svelte/icons/chevron-right';
+
 	import { page } from '$app/state';
 	import Badge from '$lib/components/ui/badge/badge.svelte';
+	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
+	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+
 	let {
 		items
 	}: {
@@ -60,12 +62,11 @@
 								{#each item.items ?? [] as subItem (subItem.title)}
 									{#if subItem.isEnabled !== false}
 										<Sidebar.MenuSubItem>
-											<Sidebar.MenuSubButton>
+											<Sidebar.MenuSubButton isActive={page.url.pathname === subItem.url}>
 												{#snippet child({ props })}
 													<a
 														href={subItem.url}
 														{...props}
-														class:active={page.url.pathname === subItem.url}
 														aria-current={page.url.pathname === subItem.url}
 													>
 														<span>{subItem.title}</span>
@@ -86,9 +87,3 @@
 		{/each}
 	</Sidebar.Menu>
 </Sidebar.Group>
-
-<style>
-	.active {
-		background-color: #eee;
-	}
-</style>

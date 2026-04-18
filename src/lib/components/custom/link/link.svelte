@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { Settings, Trash2 } from '@lucide/svelte';
+
 	import { Button } from '$lib/components/ui/button';
 	import { extractDomain } from '$lib/core/links';
-	import { Settings, Trash2 } from '@lucide/svelte';
 
 	type Props = {
 		url: string;
@@ -20,12 +21,12 @@
 </script>
 
 <a
-	class="flex px-4 py-2 h-20 rounded-lg bg-gray-50 items-center relative"
+	class="relative flex h-20 items-center rounded-lg bg-gray-50 px-4 py-2 dark:bg-gray-900"
 	href={url}
 	target="_blank"
 >
 	<div>
-		<div class="w-6 h-6 rounded-full flex items-center">
+		<div class="flex h-6 w-6 items-center rounded-full">
 			<img
 				class="block"
 				src={`https://www.google.com/s2/favicons?sz=32&domain_url=${url}`}
@@ -35,10 +36,10 @@
 	</div>
 	<div class="ml-4 w-[200px]">
 		<p>{title}</p>
-		<p class="text-xs text-muted-foreground lowercase">{domain} · {language || 'En'}</p>
+		<p class="text-muted-foreground text-xs lowercase">{domain} · {language || 'En'}</p>
 	</div>
 
-	<div class="flex gap-2 ml-auto">
+	<div class="ml-auto flex gap-2">
 		{#if onClickEdit}
 			<Button
 				onclick={(e) => {

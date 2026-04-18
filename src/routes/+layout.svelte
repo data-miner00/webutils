@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { ModeWatcher } from 'mode-watcher';
+
 	import favicon from '$lib/assets/favicon.svg';
 	import AppSidebar from '$lib/components/custom/app-sidebar/app-sidebar.svelte';
 	import CommandPanel from '$lib/components/custom/command-panel/command-panel.svelte';
@@ -52,6 +54,7 @@
 
 <Toaster position="top-center" />
 <CommandPanel bind:isCommandOpen />
+<ModeWatcher />
 
 <Sidebar.Provider>
 	<AppSidebar />
