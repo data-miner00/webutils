@@ -27,7 +27,7 @@
 	const savedEmail = localStorage.getItem('settings_email') || 'me@gmail.com';
 	const savedAvatarUrl = localStorage.getItem('settings_avatarUrl') || 'notexist.jpg';
 	const savedCompanyName = localStorage.getItem('settings_companyName') || 'Acme Inc.';
-	const data = {
+	const data = $state({
 		user: {
 			name: savedUsername,
 			email: savedEmail,
@@ -333,7 +333,13 @@
 				]
 			}
 		]
-	};
+	});
+
+	function toggleCollapsible() {
+		for (let i = 0; i < data.navMain.length; i++) {
+			data.navMain[i].isActive = !data.navMain[i].isActive;
+		}
+	}
 
 	let {
 		ref = $bindable(null),
@@ -347,7 +353,7 @@
 		<TeamSwitcher teams={data.teams} />
 	</Sidebar.Header>
 	<Sidebar.Content>
-		<NavMain items={data.navMain} />
+		<NavMain items={data.navMain} {toggleCollapsible} />
 	</Sidebar.Content>
 	<Sidebar.Footer>
 		<NavUser user={data.user} />

@@ -1,14 +1,16 @@
 <script lang="ts">
-	import { House } from '@lucide/svelte';
+	import { ChevronsDownUpIcon, House } from '@lucide/svelte';
 	import ChevronRightIcon from '@lucide/svelte/icons/chevron-right';
 
 	import { page } from '$app/state';
 	import Badge from '$lib/components/ui/badge/badge.svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 
 	let {
-		items
+		items,
+		toggleCollapsible
 	}: {
 		items: {
 			title: string;
@@ -25,13 +27,19 @@
 				isBeta?: boolean;
 			}[];
 		}[];
+		toggleCollapsible: () => void;
 	} = $props();
 
 	let isBetaEnabled = $state(localStorage.getItem('betaFeaturesEnabled') === 'true');
 </script>
 
 <Sidebar.Group>
-	<Sidebar.GroupLabel>Platform</Sidebar.GroupLabel>
+	<Sidebar.GroupLabel class="flex items-center justify-between">
+		<div>Platform</div>
+		<Button variant="ghost" size="icon-sm" onclick={toggleCollapsible}>
+			<ChevronsDownUpIcon size="12" />
+		</Button>
+	</Sidebar.GroupLabel>
 	<Sidebar.Menu>
 		<Sidebar.MenuItem>
 			<Sidebar.MenuButton>
