@@ -20,6 +20,7 @@
 		ListIcon,
 		LockIcon,
 		QrCode,
+		RefreshCcw,
 		Ruler,
 		Settings2Icon,
 		ShieldCheck,
@@ -28,7 +29,6 @@
 		SquareAsterisk,
 		TimerIcon
 	} from '@lucide/svelte';
-	import CalculatorIcon from '@lucide/svelte/icons/calculator';
 	import CalendarIcon from '@lucide/svelte/icons/calendar';
 	import SmileIcon from '@lucide/svelte/icons/smile';
 	import type { Component } from 'svelte';
@@ -84,10 +84,10 @@
 					}
 				},
 				{
-					title: 'Calculator',
-					icon: CalculatorIcon,
+					title: 'Reload Page',
+					icon: RefreshCcw,
 					onSelect() {
-						// nothing yet
+						window.location.reload();
 					}
 				}
 			]
