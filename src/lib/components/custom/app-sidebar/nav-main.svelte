@@ -22,7 +22,7 @@
 				title: string;
 				url: string;
 				badge?: string;
-				isEnabled?: boolean;
+				isBeta?: boolean;
 			}[];
 		}[];
 	} = $props();
@@ -64,7 +64,7 @@
 							<Collapsible.Content>
 								<Sidebar.MenuSub>
 									{#each item.items ?? [] as subItem (subItem.title)}
-										{#if subItem.isEnabled !== false}
+										{#if (subItem.isBeta && isBetaEnabled) || !subItem.isBeta}
 											<Sidebar.MenuSubItem>
 												<Sidebar.MenuSubButton isActive={page.url.pathname === subItem.url}>
 													{#snippet child({ props })}

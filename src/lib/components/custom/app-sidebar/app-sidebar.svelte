@@ -4,8 +4,6 @@
 		Code,
 		FileCodeCorner,
 		ImageIcon,
-		ListIcon,
-		LockIcon,
 		MessageCircleCode,
 		MessagesSquare,
 		Palette,
@@ -13,19 +11,15 @@
 	} from '@lucide/svelte';
 	import AudioWaveformIcon from '@lucide/svelte/icons/audio-waveform';
 	import BotIcon from '@lucide/svelte/icons/bot';
-	import ChartPieIcon from '@lucide/svelte/icons/chart-pie';
 	import CommandIcon from '@lucide/svelte/icons/command';
 	import FrameIcon from '@lucide/svelte/icons/frame';
 	import GalleryVerticalEndIcon from '@lucide/svelte/icons/gallery-vertical-end';
-	import MapIcon from '@lucide/svelte/icons/map';
-	import Settings2Icon from '@lucide/svelte/icons/settings-2';
 	import SquareTerminalIcon from '@lucide/svelte/icons/square-terminal';
 	import type { ComponentProps } from 'svelte';
 
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 
 	import NavMain from './nav-main.svelte';
-	import NavProjects from './nav-projects.svelte';
 	import NavUser from './nav-user.svelte';
 	import TeamSwitcher from './team-switcher.svelte';
 
@@ -95,7 +89,7 @@
 					{
 						title: 'Regex Tester',
 						url: '/tools/regex',
-						isEnabled: false
+						isBeta: true
 					}
 					// {
 					// 	title: 'Password Generator',
@@ -165,7 +159,8 @@
 					{
 						title: 'Verify',
 						url: '/tools/verify',
-						badge: 'Beta'
+						badge: 'Beta',
+						isBeta: true
 					},
 					{
 						title: 'Caesar Cipher',
@@ -312,38 +307,30 @@
 						url: '/tools/http-code'
 					}
 				]
-			}
-		],
-		projects: [
-			{
-				name: 'Notes',
-				url: '/manage/notes',
-				icon: FrameIcon
 			},
 			{
-				name: 'Links',
-				url: '/manage/links',
-				icon: ChartPieIcon
-			},
-			{
-				name: 'Kanban',
+				title: 'Management',
 				url: '#',
-				icon: MapIcon
-			},
-			{
-				name: 'Secrets',
-				url: '/manage/secrets',
-				icon: LockIcon
-			},
-			{
-				name: 'Todo List',
-				url: '/manage/todo',
-				icon: ListIcon
-			},
-			{
-				name: 'Settings',
-				url: '/settings',
-				icon: Settings2Icon
+				icon: FrameIcon,
+				items: [
+					{ title: 'Notes', url: '/manage/notes' },
+					{
+						title: 'Links',
+						url: '/manage/links'
+					},
+					{
+						title: 'Secrets',
+						url: '/manage/secrets'
+					},
+					{
+						title: 'Todo List',
+						url: '/manage/todo'
+					}
+					// {
+					// 	name: 'Kanban',
+					// 	url: '#',
+					// },
+				]
 			}
 		]
 	};
@@ -361,7 +348,6 @@
 	</Sidebar.Header>
 	<Sidebar.Content>
 		<NavMain items={data.navMain} />
-		<NavProjects projects={data.projects} />
 	</Sidebar.Content>
 	<Sidebar.Footer>
 		<NavUser user={data.user} />
