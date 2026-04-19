@@ -3,16 +3,16 @@
 </script>
 
 <script lang="ts">
-	import { Album, Clipboard, Download, EllipsisVertical, Trash2 } from '@lucide/svelte';
+	import { Album, Download, EllipsisVertical, Trash2 } from '@lucide/svelte';
+	import { toast } from 'svelte-sonner';
 
-	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
 	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
+	import * as InputGroup from '$lib/components/ui/input-group';
+	import * as Label from '$lib/components/ui/label/index.js';
 	import * as Select from '$lib/components/ui/select';
-	import { Switch } from '$lib/components/ui/switch/index.js';
 	import { example1, example2, example3 } from '$lib/core/qr-code';
 
 	type ErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H';
@@ -93,6 +93,8 @@
 			document.body.appendChild(link);
 			link.click();
 			document.body.removeChild(link);
+
+			toast.success('QR code downloaded successfully!');
 		}
 	}
 </script>
@@ -105,11 +107,15 @@
 	></script>
 </svelte:head>
 
-<div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
-	<section class="flex flex-1 flex-col overflow-hidden">
-		<header class="mb-6 flex justify-between">
-			<h1 class="block text-xl font-bold">QR Code</h1>
-			<div class="flex items-center gap-4">
+<div class="mx-auto mt-10 max-w-xl">
+	<header class="mb-20">
+		<h1 class="block text-center text-xl font-bold">Simple QR Code Generator</h1>
+		<p class="text-muted-foreground text-center">Enter text below to generate a QR code.</p>
+	</header>
+
+	<div class="flex flex-col gap-6 rounded-lg border border-solid border-gray-300 p-8">
+		<div class="flex justify-end">
+			<div class="flex items-center gap-2">
 				<Select.Root type="single" name="imageFormat" bind:value={errorCorrectionLevel}>
 					<Select.Trigger>
 						{errorCorrectionLabel}
@@ -126,11 +132,11 @@
 				</Select.Root>
 				<ButtonGroup.Root>
 					<ButtonGroup.Root>
-						<Button variant="outline" onclick={() => (input = example1)}>Example 1</Button>
+						<Button variant="outline" onclick={() => (input = example1)}>Http Url Example</Button>
 						<DropdownMenu.Root>
 							<DropdownMenu.Trigger>
 								{#snippet child({ props })}
-									<Button {...props} variant="outline" aria-label="More Options">
+									<Button {...props} variant="outline" aria-label="More examples">
 										<EllipsisVertical />
 									</Button>
 								{/snippet}
@@ -139,52 +145,59 @@
 								<DropdownMenu.Group>
 									<DropdownMenu.Item onclick={() => (input = example2)}>
 										<Album />
-										Example 2
+										Random UUID Example
 									</DropdownMenu.Item>
 									<DropdownMenu.Item onclick={() => (input = example3)}>
 										<Album />
-										Example 3
+										Text Example
 									</DropdownMenu.Item>
 								</DropdownMenu.Group>
 							</DropdownMenu.Content>
 						</DropdownMenu.Root>
+						<ReferencesSheet
+							references={[
+								{
+									title: 'Online QR Code Generator',
+									url: 'https://online-qr-generator.com'
+								},
+								{
+									title: 'MEQR',
+									url: 'https://me-qr.com'
+								},
+								{
+									title: 'QR.io',
+									url: 'https://qr.io/'
+								}
+							]}
+						/>
 					</ButtonGroup.Root>
 					<ButtonGroup.Root>
 						<Button size="icon" variant="destructive" onclick={clearInput}><Trash2 /></Button>
 					</ButtonGroup.Root>
 				</ButtonGroup.Root>
 			</div>
-		</header>
-
-		<CodeEditor class="flex-1 overflow-hidden" language="text" bind:value={input} />
-	</section>
-
-	<section class="flex flex-1 flex-col overflow-hidden">
-		<header class="mb-6 flex justify-between">
-			<h2 class="block text-xl font-bold">Output</h2>
-
-			<ButtonGroup.Root>
-				<Button variant="outline" onclick={downloadQRCode}><Download /> Download QR Code</Button>
-				<ReferencesSheet
-					references={[
-						{
-							title: 'Online QR Code Generator',
-							url: 'https://online-qr-generator.com'
-						},
-						{
-							title: 'MEQR',
-							url: 'https://me-qr.com'
-						},
-						{
-							title: 'QR.io',
-							url: 'https://qr.io/'
-						}
-					]}
-				/>
-			</ButtonGroup.Root>
-		</header>
-		<div class="flex flex-1 items-center justify-center overflow-hidden border border-gray-300 p-4">
-			<div id="qrcode"></div>
 		</div>
-	</section>
+
+		<InputGroup.Root>
+			<InputGroup.Input
+				id="qr-input"
+				placeholder="Enter text to generate QR code"
+				bind:value={input}
+			/>
+			<InputGroup.Addon align="block-start">
+				<Label.Root for="qr-input" class="text-foreground">Input</Label.Root>
+			</InputGroup.Addon>
+		</InputGroup.Root>
+
+		<dir class="border-ring/50 flex flex-col gap-4 rounded-lg border border-solid p-3 pb-12">
+			<p class="text-sm">Output</p>
+
+			<div class="mx-auto" id="qrcode"></div>
+		</dir>
+		<ButtonGroup.Root class="ml-auto">
+			<Button onclick={downloadQRCode}>
+				<Download /> Download QR Code
+			</Button>
+		</ButtonGroup.Root>
+	</div>
 </div>
