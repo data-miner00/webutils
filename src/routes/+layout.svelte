@@ -4,7 +4,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import AppSidebar from '$lib/components/custom/app-sidebar/app-sidebar.svelte';
 	import CommandPanel from '$lib/components/custom/command-panel/command-panel.svelte';
-	import Header from '$lib/components/custom/shared/header.svelte';
+	import SearchDialog from '$lib/components/custom/search/search-dialog.svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import { Toaster } from '$lib/components/ui/sonner';
 
@@ -12,14 +12,10 @@
 
 	let { children } = $props();
 	let isCommandOpen = $state(false);
+	let isDialogOpen = $state(false);
 
 	function fetchImage(id: number): string {
 		return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-	}
-
-	function focusSearch() {
-		const searchInput = document.getElementById('search-input');
-		searchInput?.focus();
 	}
 
 	function onKeyDown(event: KeyboardEvent) {
@@ -29,7 +25,7 @@
 			case 'k':
 				if (event.ctrlKey) {
 					event.preventDefault();
-					focusSearch();
+					isDialogOpen = true;
 				}
 				break;
 			case 'j':
@@ -54,6 +50,7 @@
 
 <Toaster position="top-center" />
 <CommandPanel bind:isCommandOpen />
+<SearchDialog bind:isDialogOpen />
 <ModeWatcher />
 
 <Sidebar.Provider>
