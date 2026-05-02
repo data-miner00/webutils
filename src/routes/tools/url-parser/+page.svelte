@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { Copy } from '@lucide/svelte';
-	import { Album, Clipboard, Download, EllipsisVertical, Trash2 } from '@lucide/svelte';
+	import { Album, Clipboard, EllipsisVertical, Trash2 } from '@lucide/svelte';
 	import { toast } from 'svelte-sonner';
 
-	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import * as InputGroup from '$lib/components/ui/input-group';
+	import * as Label from '$lib/components/ui/label/index.js';
 	import { copyText } from '$lib/core/copy-to-clipboard';
 
 	let input = $state('');
@@ -51,11 +52,15 @@
 	}
 </script>
 
-<div class="grid h-screen grid-cols-2 gap-4 px-4 py-6">
-	<section class="flex flex-1 flex-col overflow-hidden">
-		<header class="mb-6 flex justify-between">
-			<h1 class="block text-xl font-bold">URL Parser</h1>
-			<div class="flex items-center gap-4">
+<div class="mx-auto mt-10 max-w-xl">
+	<header class="mb-20">
+		<h1 class="block text-center text-xl font-bold">URL Parser</h1>
+		<p class="text-muted-foreground text-center">Enter a valid URL below to be parsed.</p>
+	</header>
+
+	<div class="flex flex-col gap-6 rounded-lg border border-solid border-gray-300 p-8">
+		<div class="flex justify-end">
+			<div class="flex items-center gap-2">
 				<ButtonGroup.Root>
 					<ButtonGroup.Root>
 						<Button variant="outline" onclick={() => (input = examples[0].url)}>Example 1</Button>
@@ -88,89 +93,87 @@
 					</ButtonGroup.Root>
 				</ButtonGroup.Root>
 			</div>
-		</header>
-		<CodeEditor class="flex-1 overflow-hidden" language="text" bind:value={input} />
-	</section>
+		</div>
 
-	<section class="flex-1 pl-4">
-		<header class="mb-6 flex justify-between">
-			<h2 class="block text-xl font-bold">Output</h2>
+		<InputGroup.Root>
+			<InputGroup.Input id="url" placeholder="Enter URL" bind:value={input} />
+			<InputGroup.Addon align="block-start">
+				<Label.Root for="url" class="text-foreground">Input</Label.Root>
+			</InputGroup.Addon>
+		</InputGroup.Root>
 
-			<ButtonGroup.Root>
-				<Button variant="outline" onclick={copyAsJson}><Clipboard /> Copy as JSON</Button>
-			</ButtonGroup.Root>
-		</header>
+		<div class="rounded border border-gray-300">
+			<div class="max-w-full overflow-x-auto border-b border-solid border-gray-300 p-4">
+				<div class="text-xs text-gray-700">Protocol</div>
 
-		{#if parsedUrl}
-			<div>
-				<div
-					class="h-20 max-w-full overflow-x-auto border border-b-0 border-solid border-gray-300 p-4"
-				>
-					<div class="text-xs text-gray-700">Protocol</div>
+				{#if parsedUrl?.protocol}
 					<div>
 						{parsedUrl.protocol}
 						<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.protocol)}
 							><Copy /></Button
 						>
 					</div>
-				</div>
-				<div
-					class="h-20 max-w-full overflow-x-auto border border-b-0 border-solid border-gray-300 p-4"
-				>
-					<div class="text-xs text-gray-700">Host</div>
+				{:else}
+					<div class="text-gray-500">No protocol</div>
+				{/if}
+			</div>
+			<div class="max-w-full overflow-x-auto border-b border-solid border-gray-300 p-4">
+				<div class="text-xs text-gray-700">Host</div>
+				{#if parsedUrl?.host}
 					<div>
 						{parsedUrl.host}
 						<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.host)}
 							><Copy /></Button
 						>
 					</div>
-				</div>
-				<div
-					class="h-20 max-w-full overflow-x-auto border border-b-0 border-solid border-gray-300 p-4"
-				>
-					<div class="text-xs text-gray-700">Pathname</div>
-					{#if parsedUrl.pathname}
-						<div>
-							{parsedUrl.pathname}
-							<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.pathname)}
-								><Copy /></Button
-							>
-						</div>
-					{:else}
-						<div class="text-gray-500">No pathname</div>
-					{/if}
-				</div>
-				<div
-					class="h-20 max-w-full overflow-x-auto border border-b-0 border-solid border-gray-300 p-4"
-				>
-					<div class="text-xs text-gray-700">Search Params</div>
-					{#if parsedUrl.search}
-						<div>
-							{parsedUrl.search}
-							<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.search)}
-								><Copy /></Button
-							>
-						</div>
-					{:else}
-						<div class="text-gray-500">No params</div>
-					{/if}
-				</div>
-				<div class="h-20 max-w-full overflow-x-auto border border-solid border-gray-300 p-4">
-					<div class="text-xs text-gray-700">Hash</div>
-					{#if parsedUrl.hash}
-						<div>
-							{parsedUrl.hash}
-							<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.hash)}
-								><Copy /></Button
-							>
-						</div>
-					{:else}
-						<div class="text-gray-500">No hash</div>
-					{/if}
-				</div>
+				{:else}
+					<div class="text-gray-500">No host</div>
+				{/if}
 			</div>
-		{:else}
-			<div class="text-gray-500">Enter a valid URL to see the parsed components.</div>
-		{/if}
-	</section>
+			<div class="max-w-full overflow-x-auto border-b border-solid border-gray-300 p-4">
+				<div class="text-xs text-gray-700">Pathname</div>
+				{#if parsedUrl?.pathname}
+					<div>
+						{parsedUrl.pathname}
+						<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.pathname)}
+							><Copy /></Button
+						>
+					</div>
+				{:else}
+					<div class="text-gray-500">No pathname</div>
+				{/if}
+			</div>
+			<div class="max-w-full overflow-x-auto border-b border-solid border-gray-300 p-4">
+				<div class="text-xs text-gray-700">Search Params</div>
+				{#if parsedUrl?.search}
+					<div>
+						{parsedUrl.search}
+
+						<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.search)}
+							><Copy /></Button
+						>
+					</div>
+				{:else}
+					<div class="text-gray-500">No params</div>
+				{/if}
+			</div>
+			<div class="max-w-full overflow-x-auto p-4">
+				<div class="text-xs text-gray-700">Hash</div>
+				{#if parsedUrl?.hash}
+					<div>
+						{parsedUrl.hash}
+						<Button variant="ghost" size="sm" onclick={() => copyText(parsedUrl!.hash)}
+							><Copy /></Button
+						>
+					</div>
+				{:else}
+					<div class="text-gray-500">No hash</div>
+				{/if}
+			</div>
+		</div>
+
+		<ButtonGroup.Root class="ml-auto">
+			<Button onclick={copyAsJson} disabled={!parsedUrl}><Clipboard /> Copy as JSON</Button>
+		</ButtonGroup.Root>
+	</div>
 </div>
