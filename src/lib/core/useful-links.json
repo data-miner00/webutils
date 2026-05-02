@@ -172,5 +172,23 @@
 		"category": "Tools",
 		"url": "https://www.baoboxs.com/",
 		"language": "zh"
+	},
+	{
+		"title": "Imagitool",
+		"category": "Tools",
+		"url": "https://imagitool.com/",
+		"language": "en"
+	},
+	{
+		"title": "Tiny-Helper",
+		"category": "Tools",
+		"url": "https://tiny-helpers.dev/",
+		"language": "en"
+	},
+	{
+		"title": "RandomKeygen",
+		"category": "Tools",
+		"url": "https://randomkeygen.com/",
+		"language": "en"
 	}
 ]
