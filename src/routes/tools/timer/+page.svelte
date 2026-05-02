@@ -1,65 +1,148 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
+
 	import Button from '$lib/components/ui/button/button.svelte';
-	import { Settings } from '@lucide/svelte';
 
-	// initial duration in minutes
-	const DEFAULT_MINUTES = 15;
+	let mode = $state('timer');
 
-	let initialMinutes: number = DEFAULT_MINUTES;
-	let remainingSeconds: number = initialMinutes * 60;
-	let timerId: number | null = null;
-	let running = false;
+	// Timer variables
+	let initialHours = $state(0);
+	let initialMinutes = $state(15);
+	let initialSeconds = $state(0);
+	let remainingSeconds = $derived(initialHours * 3600 + initialMinutes * 60 + initialSeconds);
+	let countdownSeconds = $state(0);
+	let timerId = $state<number | null>(null);
+	let timerRunning = $state(false);
+
+	// Stopwatch variables
+	let elapsedSeconds = $state(0);
+	let stopwatchId = $state<number | null>(null);
+	let stopwatchRunning = $state(false);
 
 	function formatTime(seconds: number) {
-		const m = Math.floor(seconds / 60);
+		const h = Math.floor(seconds / 3600);
+		const m = Math.floor((seconds % 3600) / 60);
 		const s = seconds % 60;
-		return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+		if (h > 0) {
+			return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+		} else {
+			return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+		}
 	}
 
-	function start() {
-		if (running) return;
-		if (remainingSeconds <= 0) remainingSeconds = initialMinutes * 60;
-		running = true;
+	function startTimer() {
+		if (timerRunning) return;
+		countdownSeconds = remainingSeconds;
+		if (countdownSeconds <= 0) countdownSeconds = remainingSeconds;
+		timerRunning = true;
 		timerId = window.setInterval(() => {
-			if (remainingSeconds > 0) {
-				remainingSeconds -= 1;
+			if (countdownSeconds > 0) {
+				countdownSeconds -= 1;
 			}
-			if (remainingSeconds <= 0) {
-				pause();
+			if (countdownSeconds <= 0) {
+				pauseTimer();
 			}
-		}, 1000) as unknown as number;
+		}, 1000);
 	}
 
-	function pause() {
-		running = false;
+	function pauseTimer() {
+		timerRunning = false;
 		if (timerId !== null) {
 			clearInterval(timerId);
 			timerId = null;
 		}
 	}
 
-	function reset() {
-		pause();
-		remainingSeconds = initialMinutes * 60;
+	function resetTimer() {
+		pauseTimer();
+		countdownSeconds = remainingSeconds;
+	}
+
+	function startStopwatch() {
+		if (stopwatchRunning) return;
+		stopwatchRunning = true;
+		stopwatchId = window.setInterval(() => {
+			elapsedSeconds += 1;
+		}, 1000);
+	}
+
+	function stopStopwatch() {
+		stopwatchRunning = false;
+		if (stopwatchId !== null) {
+			clearInterval(stopwatchId);
+			stopwatchId = null;
+		}
+	}
+
+	function resetStopwatch() {
+		stopStopwatch();
+		elapsedSeconds = 0;
 	}
 
 	onDestroy(() => {
-		pause();
+		pauseTimer();
+		stopStopwatch();
 	});
 </script>
 
-<article class="flex flex-col p-4 text-center w-fit mx-auto my-48">
-	<div class="flex justify-between">
-		<div>Timer</div>
-		<Button variant="ghost">
-			<Settings />
-		</Button>
+<article class="mx-auto my-24 flex w-fit flex-col p-4 text-center">
+	<div class="mb-4 flex justify-center gap-2">
+		<Button variant={mode === 'timer' ? 'default' : 'outline'} onclick={() => (mode = 'timer')}
+			>Timer</Button
+		>
+		<Button
+			variant={mode === 'stopwatch' ? 'default' : 'outline'}
+			onclick={() => (mode = 'stopwatch')}>Stopwatch</Button
+		>
 	</div>
-	<div class="text-9xl font-black mb-4">{formatTime(remainingSeconds)}</div>
-	<div class="flex gap-1">
-		<Button onclick={start} disabled={running}>Start</Button>
-		<Button variant="outline" onclick={pause} disabled={!running}>Pause</Button>
-		<Button variant="ghost" onclick={reset}>Reset</Button>
-	</div>
+
+	{#if mode === 'timer'}
+		{#if !timerRunning}
+			<div class="mb-4 flex justify-center gap-2">
+				<label>
+					<span class="text-sm">Hours</span>
+					<input
+						type="number"
+						min="0"
+						max="23"
+						bind:value={initialHours}
+						class="w-16 rounded border text-center"
+					/>
+				</label>
+				<label>
+					<span class="text-sm">Minutes</span>
+					<input
+						type="number"
+						min="0"
+						max="59"
+						bind:value={initialMinutes}
+						class="w-16 rounded border text-center"
+					/>
+				</label>
+				<label>
+					<span class="text-sm">Seconds</span>
+					<input
+						type="number"
+						min="0"
+						max="59"
+						bind:value={initialSeconds}
+						class="w-16 rounded border text-center"
+					/>
+				</label>
+			</div>
+		{/if}
+		<div class="mb-4 text-9xl font-black">{formatTime(countdownSeconds)}</div>
+		<div class="flex justify-center gap-1">
+			<Button onclick={startTimer} disabled={timerRunning}>Start</Button>
+			<Button variant="outline" onclick={pauseTimer} disabled={!timerRunning}>Pause</Button>
+			<Button variant="ghost" onclick={resetTimer}>Reset</Button>
+		</div>
+	{:else}
+		<div class="mb-4 text-9xl font-black">{formatTime(elapsedSeconds)}</div>
+		<div class="flex justify-center gap-1">
+			<Button onclick={startStopwatch} disabled={stopwatchRunning}>Start</Button>
+			<Button variant="outline" onclick={stopStopwatch} disabled={!stopwatchRunning}>Stop</Button>
+			<Button variant="ghost" onclick={resetStopwatch}>Reset</Button>
+		</div>
+	{/if}
 </article>
