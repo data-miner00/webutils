@@ -57,13 +57,11 @@
 <Sidebar.Provider>
 	<AppSidebar />
 
-	<Sidebar.Inset>
-		<main class="relative flex w-full flex-col">
-			<!-- <Header /> -->
-			<div class="flex-1">
-				{@render children()}
-			</div>
-		</main>
+	<Sidebar.Inset class="relative flex w-full flex-col">
+		<!-- <Header /> -->
+		<div class="flex-1">
+			{@render children()}
+		</div>
 	</Sidebar.Inset>
 	<AppSidebarRight />
 </Sidebar.Provider>
