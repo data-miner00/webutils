@@ -2,6 +2,7 @@
 	import { ModeWatcher } from 'mode-watcher';
 
 	import favicon from '$lib/assets/favicon.svg';
+	import AppSidebarRight from '$lib/components/custom/app-sidebar-right/app-sidebar-right.svelte';
 	import AppSidebar from '$lib/components/custom/app-sidebar/app-sidebar.svelte';
 	import CommandPanel from '$lib/components/custom/command-panel/command-panel.svelte';
 	import SearchDialog from '$lib/components/custom/search/search-dialog.svelte';
@@ -56,12 +57,15 @@
 <Sidebar.Provider>
 	<AppSidebar />
 
-	<main class="relative flex w-full flex-col">
-		<!-- <Header /> -->
-		<div class="flex-1">
-			{@render children()}
-		</div>
-	</main>
+	<Sidebar.Inset>
+		<main class="relative flex w-full flex-col">
+			<!-- <Header /> -->
+			<div class="flex-1">
+				{@render children()}
+			</div>
+		</main>
+	</Sidebar.Inset>
+	<AppSidebarRight />
 </Sidebar.Provider>
 
 <!--
