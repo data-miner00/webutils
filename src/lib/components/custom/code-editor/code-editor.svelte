@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as monaco from 'monaco-editor';
 	import { onMount } from 'svelte';
+
 	import './fixMonacoEditor';
 
 	interface ICodeEditorProps {
@@ -53,7 +54,8 @@
 			scrollbar: {
 				horizontalScrollbarSize: 8,
 				verticalScrollbarSize: 8
-			}
+			},
+			renderWhitespace: 'boundary'
 		});
 
 		if (readonly) {
@@ -85,5 +87,5 @@
 
 <div
 	bind:this={editorRef}
-	class={`border border-solid border-gray-300 h-full min-h-[250px] max-h-screen ${className}`}
+	class={`h-full max-h-screen min-h-[250px] border border-solid border-gray-300 ${className}`}
 ></div>
