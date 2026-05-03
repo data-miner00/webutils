@@ -1,13 +1,11 @@
 <script lang="ts">
 	import InfoIcon from '@lucide/svelte/icons/info';
-	import { onMount } from 'svelte';
 	import { toast } from 'svelte-sonner';
 
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
+	import { Button } from '$lib/components/ui/button';
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
 	import * as Label from '$lib/components/ui/label/index.js';
-	import { Spinner } from '$lib/components/ui/spinner/index.js';
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
 	import type { UserProfile } from '$lib/core/types';
 
@@ -20,27 +18,15 @@
 		bio: localStorage.getItem('settings_bio') || ''
 	});
 
-	let isSaving = $state(false);
+	function saveProfile() {
+		localStorage.setItem('settings_avatarUrl', profile.avatarImage || '');
+		localStorage.setItem('settings_username', profile.username || 'User');
+		localStorage.setItem('settings_firstName', profile.firstName || '');
+		localStorage.setItem('settings_lastName', profile.lastName || '');
+		localStorage.setItem('settings_email', profile.email || '');
+		localStorage.setItem('settings_bio', profile.bio || '');
 
-	async function saveProfile() {
-		isSaving = true;
-
-		const request = await fetch('https://localhost:7146/api/v1/UserProfile', {
-			method: 'PATCH',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(profile)
-		});
-
-		if (request.ok) {
-			toast.success('Profile updated successfully!');
-		} else {
-			const error = await request.json();
-			toast.error(`Failed to update profile: ${error.errorMessage}`);
-		}
-
-		isSaving = false;
+		toast.success('Profile updated successfully');
 	}
 </script>
 
@@ -116,11 +102,12 @@
 			</InputGroup.Addon>
 		</InputGroup.Root>
 
-		<Button size="sm" variant="outline" disabled={isSaving} onclick={saveProfile}>
-			{#if isSaving}
-				<Spinner />
-			{/if}
-			{isSaving ? 'Submitting...' : 'Submit'}
-		</Button>
+		<InputGroup.Root>
+			<InputGroup.Input id="avatar" placeholder="https://" bind:value={profile.avatarImage} />
+			<InputGroup.Addon align="block-start">
+				<Label.Root for="avatar" class="text-foreground">Avatar</Label.Root>
+			</InputGroup.Addon>
+		</InputGroup.Root>
+		<Button size="sm" variant="outline" onclick={saveProfile}>Save</Button>
 	</div>
 </section>
