@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { mode, setMode } from 'mode-watcher';
 	import { onMount } from 'svelte';
+	import { toast } from 'svelte-sonner';
 
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as Label from '$lib/components/ui/label/index.js';
@@ -8,14 +9,15 @@
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import { Switch } from '$lib/components/ui/switch/index.js';
 
-	let isEnableLoggings = $state(localStorage.getItem('betaFeaturesEnabled') === 'true');
+	let isEnableBetaFeatures = $state(localStorage.getItem('betaFeaturesEnabled') === 'true');
 
 	onMount(async () => {
 		value = mode.current;
 	});
 
 	$effect(() => {
-		localStorage.setItem('betaFeaturesEnabled', isEnableLoggings.toString());
+		localStorage.setItem('betaFeaturesEnabled', isEnableBetaFeatures.toString());
+		toast.success(`Successfully ${isEnableBetaFeatures ? 'enabled' : 'disabled'} beta features.`);
 	});
 
 	const themes = [
@@ -91,7 +93,7 @@
 	</p>
 
 	<div class="flex items-center gap-3">
-		<Switch id="beta-features" bind:checked={isEnableLoggings} />
+		<Switch id="beta-features" bind:checked={isEnableBetaFeatures} />
 		<Label.Root for="beta-features">Enable Beta Features</Label.Root>
 	</div>
 
