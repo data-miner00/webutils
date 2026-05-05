@@ -1,18 +1,34 @@
 <script lang="ts">
-	import BadgeCheckIcon from '@lucide/svelte/icons/badge-check';
-	import BellIcon from '@lucide/svelte/icons/bell';
+	import { ClipboardIcon, Eye, EyeClosed, RefreshCcw, Wifi, WifiOff } from '@lucide/svelte';
 	import ChevronsUpDownIcon from '@lucide/svelte/icons/chevrons-up-down';
-	import CreditCardIcon from '@lucide/svelte/icons/credit-card';
-	import LogOutIcon from '@lucide/svelte/icons/log-out';
-	import SparklesIcon from '@lucide/svelte/icons/sparkles';
+	import { onMount } from 'svelte';
+	import { toast } from 'svelte-sonner';
 
-	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import { useSidebar } from '$lib/components/ui/sidebar/index.js';
+	import { copyText } from '$lib/core/copy-to-clipboard';
+	import { type IpInfo, fetchIpInfo } from '$lib/core/ip-address';
 
-	let { user }: { user: { name: string; email: string; avatar: string } } = $props();
 	const sidebar = useSidebar();
+
+	let isOnline = $state(true);
+	let ipState = $state<IpInfo>();
+	let showIp = $state(true);
+
+	onMount(() => {
+		fetchIpInfo().then((info) => (ipState = info));
+	});
+
+	function forceRefreshIp() {
+		fetchIpInfo(true).then((info) => {
+			ipState = info;
+			toast.success('IP successfully refreshed.');
+		});
+	}
+
+	window.addEventListener('online', () => (isOnline = true));
+	window.addEventListener('offline', () => (isOnline = false));
 </script>
 
 <Sidebar.Menu>
@@ -25,13 +41,18 @@
 						size="lg"
 						class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
 					>
-						<Avatar.Root class="size-8 rounded-lg">
-							<Avatar.Image src={user.avatar} alt={user.name} />
-							<Avatar.Fallback class="rounded-lg">CN</Avatar.Fallback>
-						</Avatar.Root>
+						<div>
+							<div title={isOnline ? 'Connected to internet' : 'Not connected'}>
+								{#if isOnline}
+									<Wifi size={20} />
+								{:else}
+									<WifiOff size={20} />
+								{/if}
+							</div>
+						</div>
 						<div class="grid flex-1 text-start text-sm leading-tight">
-							<span class="truncate font-medium">{user.name}</span>
-							<span class="truncate text-xs">{user.email}</span>
+							<span class="truncate font-medium">{ipState?.city}, {ipState?.country}</span>
+							<span class="truncate text-xs">{showIp ? ipState?.ip : '******'}</span>
 						</div>
 						<ChevronsUpDownIcon class="ms-auto size-4" />
 					</Sidebar.MenuButton>
@@ -45,42 +66,50 @@
 			>
 				<DropdownMenu.Label class="p-0 font-normal">
 					<div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
-						<Avatar.Root class="size-8 rounded-lg">
-							<Avatar.Image src={user.avatar} alt={user.name} />
-							<Avatar.Fallback class="rounded-lg">CN</Avatar.Fallback>
-						</Avatar.Root>
-						<div class="grid flex-1 text-start text-sm leading-tight">
-							<span class="truncate font-medium">{user.name}</span>
-							<span class="truncate text-xs">{user.email}</span>
+						<div>
+							<div title={isOnline ? 'Connected to internet' : 'Not connected'}>
+								{#if isOnline}
+									<Wifi size={20} />
+								{:else}
+									<WifiOff size={20} />
+								{/if}
+							</div>
 						</div>
+						<div class="grid flex-1 text-start text-sm leading-tight">
+							<span class="truncate font-medium">{ipState?.city}, {ipState?.country}</span>
+							<span class="truncate text-xs">{showIp ? ipState?.ip : '******'}</span>
+						</div>
+						<ChevronsUpDownIcon class="ms-auto size-4" />
 					</div>
 				</DropdownMenu.Label>
 				<DropdownMenu.Separator />
 				<DropdownMenu.Group>
-					<DropdownMenu.Item>
-						<SparklesIcon />
-						Upgrade to Pro
+					<DropdownMenu.Item onclick={() => copyText(ipState?.ip || '0.0.0.0')}>
+						<ClipboardIcon />
+						Copy IP Address
 					</DropdownMenu.Item>
 				</DropdownMenu.Group>
 				<DropdownMenu.Separator />
 				<DropdownMenu.Group>
-					<DropdownMenu.Item>
-						<BadgeCheckIcon />
-						Account
+					<DropdownMenu.Item aria-label="Hide/Show IP" onclick={() => (showIp = !showIp)}>
+						{#if !showIp}
+							<Eye /> Show IP Address
+						{:else}
+							<EyeClosed /> Hide IP Address
+						{/if}
 					</DropdownMenu.Item>
 					<DropdownMenu.Item>
-						<CreditCardIcon />
-						Billing
-					</DropdownMenu.Item>
-					<DropdownMenu.Item>
-						<BellIcon />
-						Notifications
+						{#if false}
+							<Eye /> Mask IP Address
+						{:else}
+							<EyeClosed /> Unmask IP Address
+						{/if}
 					</DropdownMenu.Item>
 				</DropdownMenu.Group>
 				<DropdownMenu.Separator />
-				<DropdownMenu.Item>
-					<LogOutIcon />
-					Log out
+				<DropdownMenu.Item aria-label="Refresh IP" onclick={forceRefreshIp}>
+					<RefreshCcw />
+					Force Refresh
 				</DropdownMenu.Item>
 			</DropdownMenu.Content>
 		</DropdownMenu.Root>

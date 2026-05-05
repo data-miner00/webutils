@@ -8,13 +8,7 @@
 	import DatePicker from './date-picker.svelte';
 	import NavUser from './nav-user.svelte';
 
-	// This is sample data.
 	const data = {
-		user: {
-			name: 'shadcn',
-			email: 'm@example.com',
-			avatar: '/avatars/shadcn.jpg'
-		},
 		calendars: [
 			{
 				name: 'My Calendars',
@@ -40,7 +34,7 @@
 	{...restProps}
 >
 	<Sidebar.Header class="border-sidebar-border h-16 border-b">
-		<NavUser user={data.user} />
+		<NavUser />
 	</Sidebar.Header>
 	<Sidebar.Content>
 		<DatePicker />
