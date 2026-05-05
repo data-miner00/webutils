@@ -12,14 +12,12 @@
 		<a href="/settings/profile" class:underline={page.url.pathname === '/settings/profile'}
 			>Profile Related</a
 		>
-		<a href="/settings/layout" class:underline={page.url.pathname === '/settings/general'}
-			>Layout Management</a
-		>
+		<a href="/settings/home" class:underline={page.url.pathname === '/settings/home'}>Home Page</a>
 		<a href="/settings/security" class:underline={page.url.pathname === '/settings/general'}
-			>Security Settings</a
+			>Entertainment</a
 		>
 		<a href="/settings/privacy" class:underline={page.url.pathname === '/settings/general'}
-			>Privacy Policy</a
+			>Monitoring</a
 		>
 	</aside>
 
