@@ -6,7 +6,9 @@
 	const randomId = 'a' + crypto.randomUUID();
 </script>
 
-<article class="flex flex-col rounded-md border border-solid border-gray-200 bg-gray-50 p-4">
+<article
+	class="flex flex-col rounded-md border border-solid border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-950"
+>
 	<div class="mb-2 flex items-center justify-between">
 		<div class=" text-lg">{title}</div>
 		<Button size="sm" {@attach (node: HTMLElement) => clickToCopy(node, '#' + randomId)}
@@ -14,7 +16,7 @@
 		>
 	</div>
 	<div
-		class="mb-2 min-h-10 flex-1 rounded border border-solid border-gray-300 bg-white p-2 text-sm wrap-break-word"
+		class="mb-2 min-h-10 flex-1 rounded border border-solid border-gray-300 bg-white p-2 text-sm wrap-break-word dark:border-gray-600 dark:bg-black"
 		id={randomId}
 	>
 		{value}

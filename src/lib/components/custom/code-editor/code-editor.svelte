@@ -21,7 +21,9 @@
 	let editorRef: HTMLDivElement;
 	let editor: monaco.editor.IStandaloneCodeEditor;
 
-	let theme = $state<'light' | 'dark'>('light');
+	let theme = $state<'light' | 'dark'>(
+		localStorage.getItem('mode-watcher-mode') as 'light' | 'dark'
+	);
 	let wordWrap = $derived<'on' | 'off'>(language == 'text' ? 'on' : 'off');
 
 	onMount(() => {
