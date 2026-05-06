@@ -36,7 +36,7 @@
 
 <section class="mt-6">
 	<div class="grid w-full max-w-sm gap-4">
-		<Avatar.Root>
+		<Avatar.Root class="h-16 w-16">
 			<Avatar.Image src={profile.avatarImage} alt={`@${profile.username}`} />
 			<Avatar.Fallback
 				>{profile.firstName?.charAt(0) || 'C'}{profile.lastName?.charAt(0) || 'N'}</Avatar.Fallback

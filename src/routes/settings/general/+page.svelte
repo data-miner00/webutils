@@ -1,39 +1,31 @@
 <script lang="ts">
-	import { mode, setMode } from 'mode-watcher';
-	import { onMount } from 'svelte';
-	import { toast } from 'svelte-sonner';
+	import { type SystemModeValue } from 'mode-watcher';
 
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as Label from '$lib/components/ui/label/index.js';
 	import * as Select from '$lib/components/ui/select/index.js';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import { Switch } from '$lib/components/ui/switch/index.js';
-
-	let isEnableBetaFeatures = $state(localStorage.getItem('betaFeaturesEnabled') === 'true');
-
-	onMount(async () => {
-		value = mode.current;
-	});
-
-	$effect(() => {
-		localStorage.setItem('betaFeaturesEnabled', isEnableBetaFeatures.toString());
-		toast.success(`Successfully ${isEnableBetaFeatures ? 'enabled' : 'disabled'} beta features.`);
-	});
-
-	const themes = [
-		{ value: 'light', label: 'Light' },
-		{ value: 'dark', label: 'Dark' },
-		{ value: 'system', label: 'System' }
-	];
-
-	let value = $state<'light' | 'dark'>();
+	import { availableLanguages, themes } from '$lib/constants';
+	import { appState, setIsEnableBetaFeatures, setLanguage, setTheme } from '$lib/states.svelte';
+	import { type Language } from '$lib/types';
 
 	const triggerContent = $derived(
-		themes.find((f) => f.value === mode.current)?.label ?? 'Select theme'
+		themes.find((f) => f.value === tempTheme)?.label ?? 'Select theme'
 	);
-	const availableLanguages = [{ value: 'en', label: 'English' }];
-	let locale = $state({ current: 'en' });
-	const triggerLanguageContent = $state('Select language');
+
+	let tempBetaEnabled = $state(appState.isEnableBetaFeatures);
+	let tempTheme = $state<SystemModeValue>(appState.theme);
+	let tempLang = $state<Language>(appState.language);
+	const triggerLanguageContent = $derived(
+		availableLanguages.find((x) => x.value === tempLang)?.label || 'Select language'
+	);
+
+	function saveChanges() {
+		setLanguage(tempLang);
+		setTheme(tempTheme === undefined ? 'system' : tempTheme);
+		setIsEnableBetaFeatures(tempBetaEnabled);
+	}
 </script>
 
 <h1 class="text-2xl font-bold">General Settings</h1>
@@ -44,12 +36,7 @@
 	<div class="grid w-full max-w-sm gap-4">
 		<div>
 			<Label.Root for="theme" class="text-foreground mb-3">Theme</Label.Root>
-			<Select.Root
-				type="single"
-				name="theme"
-				bind:value
-				onValueChange={(value) => setMode(value as 'light' | 'dark' | 'system')}
-			>
+			<Select.Root type="single" name="theme" bind:value={tempTheme}>
 				<Select.Trigger class="w-full">
 					{triggerContent}
 				</Select.Trigger>
@@ -67,7 +54,7 @@
 
 		<div>
 			<Label.Root for="language" class="text-foreground mb-3">Language</Label.Root>
-			<Select.Root type="single" name="language" bind:value={locale.current}>
+			<Select.Root type="single" name="language" bind:value={tempLang}>
 				<Select.Trigger class="w-full">
 					{triggerLanguageContent}
 				</Select.Trigger>
@@ -93,7 +80,7 @@
 	</p>
 
 	<div class="flex items-center gap-3">
-		<Switch id="beta-features" bind:checked={isEnableBetaFeatures} />
+		<Switch id="beta-features" bind:checked={tempBetaEnabled} />
 		<Label.Root for="beta-features">Enable Beta Features</Label.Root>
 	</div>
 
@@ -105,6 +92,6 @@
 	</p>
 
 	<div class="grid w-full max-w-sm gap-4">
-		<Button size="sm" variant="outline">Download all as Zip</Button>
+		<Button size="sm" variant="outline" onclick={saveChanges}>Save Changes</Button>
 	</div>
 </section>
