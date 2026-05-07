@@ -4,6 +4,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import AppSidebarRight from '$lib/components/custom/app-sidebar-right/app-sidebar-right.svelte';
 	import AppSidebar from '$lib/components/custom/app-sidebar/app-sidebar.svelte';
+	import ClipboardHistory from '$lib/components/custom/clipboard/clipboard-history.svelte';
 	import CommandPanel from '$lib/components/custom/command-panel/command-panel.svelte';
 	import SearchDialog from '$lib/components/custom/search/search-dialog.svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
@@ -14,6 +15,7 @@
 	let { children } = $props();
 	let isCommandOpen = $state(false);
 	let isDialogOpen = $state(false);
+	let isClipboardOpen = $state(false);
 
 	function fetchImage(id: number): string {
 		return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
@@ -50,15 +52,15 @@
 </svelte:head>
 
 <Toaster position="top-center" />
-<CommandPanel bind:isCommandOpen />
+<CommandPanel bind:isCommandOpen bind:isClipboardOpen />
 <SearchDialog bind:isDialogOpen />
+<ClipboardHistory bind:isOpen={isClipboardOpen} />
 <ModeWatcher />
 
 <Sidebar.Provider>
 	<AppSidebar />
 
 	<Sidebar.Inset class="relative flex w-full flex-col">
-		<!-- <Header /> -->
 		<div class="flex-1">
 			{@render children()}
 		</div>

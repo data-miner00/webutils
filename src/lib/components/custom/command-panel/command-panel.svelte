@@ -7,6 +7,7 @@
 		CaseSensitive,
 		ChevronsLeftRightEllipsis,
 		CircleCheck,
+		ClipboardIcon,
 		Clock10,
 		Clock10Icon,
 		CodeIcon,
@@ -38,9 +39,10 @@
 
 	type Props = {
 		isCommandOpen: boolean;
+		isClipboardOpen: boolean;
 	};
 
-	let { isCommandOpen = $bindable(false) }: Props = $props();
+	let { isCommandOpen = $bindable(false), isClipboardOpen = $bindable(false) }: Props = $props();
 
 	function gotoPage(path: string) {
 		goto(path);
@@ -88,6 +90,14 @@
 					icon: RefreshCcw,
 					onSelect() {
 						window.location.reload();
+					}
+				},
+				{
+					title: 'Open Clipboard History',
+					icon: ClipboardIcon,
+					onSelect() {
+						isClipboardOpen = true;
+						isCommandOpen = false;
 					}
 				}
 			]

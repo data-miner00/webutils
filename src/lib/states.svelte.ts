@@ -7,12 +7,17 @@ export type AppState = {
 	theme: SystemModeValue;
 	isEnableBetaFeatures: boolean;
 	language: Language;
+
+	clipboardHistory: string[];
+	clipboardHistoryMaxItems: number;
 };
 
 export let appState = $state<AppState>({
 	theme: mode.current,
 	isEnableBetaFeatures: localStorage.getItem(IsBetaFeaturesEnabledKey) === 'true',
-	language: (localStorage.getItem(LanguageKey) as Language) || 'en'
+	language: (localStorage.getItem(LanguageKey) as Language) || 'en',
+	clipboardHistory: [],
+	clipboardHistoryMaxItems: 10
 });
 
 export function setLanguage(language: Language) {
@@ -28,4 +33,11 @@ export function setTheme(theme: 'dark' | 'light' | 'system') {
 export function setIsEnableBetaFeatures(isEnabled: boolean) {
 	localStorage.setItem(IsBetaFeaturesEnabledKey, String(isEnabled));
 	appState.isEnableBetaFeatures = isEnabled;
+}
+
+export function enqueueClipboardHistory(text: string) {
+	appState.clipboardHistory.push(text);
+	if (appState.clipboardHistory.length > appState.clipboardHistoryMaxItems) {
+		appState.clipboardHistory.shift();
+	}
 }

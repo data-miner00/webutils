@@ -1,5 +1,7 @@
 import { toast } from 'svelte-sonner';
 
+import { enqueueClipboardHistory } from '$lib/states.svelte';
+
 export function clickToCopy(node: HTMLElement, target?: string) {
 	async function copyText() {
 		let text = target ? (document.querySelector(target)! as any).innerText : node.innerText;
@@ -8,6 +10,7 @@ export function clickToCopy(node: HTMLElement, target?: string) {
 
 		try {
 			await navigator.clipboard.writeText(text);
+			enqueueClipboardHistory(text);
 
 			toast.success('Copied to clipboard', {
 				description: date.toUTCString(),
@@ -39,6 +42,7 @@ export async function copyText(text: string) {
 
 	try {
 		await navigator.clipboard.writeText(text);
+		enqueueClipboardHistory(text);
 
 		toast.success('Copied to clipboard', {
 			description: date.toUTCString(),
