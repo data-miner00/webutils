@@ -33,66 +33,68 @@
 	// Todo: implement history mechanism
 </script>
 
-<div class="mb-4 flex gap-2">
-	<InputGroup.Root class="flex-1">
-		<InputGroup.Input
-			placeholder="Search emojis..."
-			name="search"
-			required
-			bind:value={searchTerm}
+<section class="p-4">
+	<div class="mb-4 flex gap-2">
+		<InputGroup.Root class="flex-1">
+			<InputGroup.Input
+				placeholder="Search emojis..."
+				name="search"
+				required
+				bind:value={searchTerm}
+			/>
+
+			{#if searchTerm}
+				<InputGroup.Addon align="inline-end">
+					<InputGroup.Button variant="ghost" onclick={() => (searchTerm = '')}
+						><X /></InputGroup.Button
+					>
+				</InputGroup.Addon>
+			{/if}
+		</InputGroup.Root>
+
+		<ReferencesSheet
+			references={[
+				{
+					title: 'Emojibase',
+					url: 'https://emojibase.dev/'
+				},
+				{
+					title: 'Emojipedia',
+					url: 'https://emojipedia.org/'
+				}
+			]}
 		/>
+	</div>
 
-		{#if searchTerm}
-			<InputGroup.Addon align="inline-end">
-				<InputGroup.Button variant="ghost" onclick={() => (searchTerm = '')}
-					><X /></InputGroup.Button
-				>
-			</InputGroup.Addon>
-		{/if}
-	</InputGroup.Root>
-
-	<ReferencesSheet
-		references={[
-			{
-				title: 'Emojibase',
-				url: 'https://emojibase.dev/'
-			},
-			{
-				title: 'Emojipedia',
-				url: 'https://emojipedia.org/'
-			}
-		]}
-	/>
-</div>
-
-<div
-	class="mb-6 flex w-full items-center gap-2 overflow-x-scroll [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
->
-	<Button
-		size="sm"
-		variant={selectedCategory === 'All' ? 'default' : 'secondary'}
-		onclick={() => (selectedCategory = 'All')}
-		class="cursor-pointer">All</Button
+	<div
+		class="mb-6 flex w-full items-center gap-2 overflow-x-scroll [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 	>
-
-	{#each categories as category}
 		<Button
 			size="sm"
-			variant={selectedCategory === category ? 'default' : 'secondary'}
-			onclick={() => (selectedCategory = category)}
-			class="cursor-pointer">{category}</Button
+			variant={selectedCategory === 'All' ? 'default' : 'secondary'}
+			onclick={() => (selectedCategory = 'All')}
+			class="cursor-pointer">All</Button
 		>
-	{/each}
-</div>
 
-<div class="grid grid-cols-8 gap-2 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-16">
-	{#each filteredEmojis as emoji}
-		<button
-			class="flex cursor-pointer items-center justify-center rounded-lg bg-gray-100 p-2 hover:bg-gray-200"
-			{@attach (node) => clickToCopy(node)}
-			title={emoji.metadata}
-		>
-			{emoji.emoji}
-		</button>
-	{/each}
-</div>
+		{#each categories as category}
+			<Button
+				size="sm"
+				variant={selectedCategory === category ? 'default' : 'secondary'}
+				onclick={() => (selectedCategory = category)}
+				class="cursor-pointer">{category}</Button
+			>
+		{/each}
+	</div>
+
+	<div class="grid grid-cols-8 gap-2 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-16">
+		{#each filteredEmojis as emoji}
+			<button
+				class="dark:hover:bg-sidebar-primary flex cursor-pointer items-center justify-center rounded-lg bg-gray-100 p-2 hover:bg-gray-200 dark:bg-gray-900"
+				{@attach (node) => clickToCopy(node)}
+				title={emoji.metadata}
+			>
+				{emoji.emoji}
+			</button>
+		{/each}
+	</div>
+</section>

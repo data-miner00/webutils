@@ -48,7 +48,7 @@
 	<div class="grid grid-cols-8 gap-2 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-16">
 		{#each filteredUnicode as unicode}
 			<button
-				class="flex cursor-pointer items-center justify-center rounded-lg bg-gray-100 p-2 hover:bg-gray-200"
+				class="dark:hover:bg-sidebar-primary flex cursor-pointer items-center justify-center rounded-lg bg-gray-100 p-2 hover:bg-gray-200 dark:bg-gray-900"
 				{@attach (node) => clickToCopy(node)}
 				title={unicode.description}
 			>
