@@ -1,13 +1,21 @@
 <script lang="ts">
 	import { type SystemModeValue } from 'mode-watcher';
+	import { toast } from 'svelte-sonner';
 
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { Input } from '$lib/components/ui/input';
 	import * as Label from '$lib/components/ui/label/index.js';
 	import * as Select from '$lib/components/ui/select/index.js';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import { Switch } from '$lib/components/ui/switch/index.js';
 	import { availableLanguages, themes } from '$lib/constants';
-	import { appState, setIsEnableBetaFeatures, setLanguage, setTheme } from '$lib/states.svelte';
+	import {
+		appState,
+		setClipboardHistoryMaxItems,
+		setIsEnableBetaFeatures,
+		setLanguage,
+		setTheme
+	} from '$lib/states.svelte';
 	import { type Language } from '$lib/types';
 
 	const triggerContent = $derived(
@@ -17,6 +25,7 @@
 	let tempBetaEnabled = $state(appState.isEnableBetaFeatures);
 	let tempTheme = $state<SystemModeValue>(appState.theme);
 	let tempLang = $state<Language>(appState.language);
+	let tempClipboardCount = $state<number>(appState.clipboardHistoryMaxItems);
 	const triggerLanguageContent = $derived(
 		availableLanguages.find((x) => x.value === tempLang)?.label || 'Select language'
 	);
@@ -25,6 +34,9 @@
 		setLanguage(tempLang);
 		setTheme(tempTheme === undefined ? 'system' : tempTheme);
 		setIsEnableBetaFeatures(tempBetaEnabled);
+		setClipboardHistoryMaxItems(tempClipboardCount);
+
+		toast.success('Settings saved successfully!');
 	}
 </script>
 
@@ -32,8 +44,8 @@
 
 <p>Explore application preferences and settings suited for your use case.</p>
 
-<section class="mt-6">
-	<div class="grid w-full max-w-sm gap-4">
+<section class="mt-6 max-w-sm">
+	<div class="grid w-full gap-4">
 		<div>
 			<Label.Root for="theme" class="text-foreground mb-3">Theme</Label.Root>
 			<Select.Root type="single" name="theme" bind:value={tempTheme}>
@@ -71,10 +83,10 @@
 		</div>
 	</div>
 
-	<Separator class="my-6 max-w-sm" />
+	<Separator class="my-6" />
 
 	<h2 class="mb-1 text-lg font-semibold">Beta Features</h2>
-	<p class="text-muted-foreground mb-4 max-w-sm text-sm">
+	<p class="text-muted-foreground mb-4 text-sm">
 		Manage your application's beta features and experimental functionalities. Enable or disable
 		features that are in development or testing phase.
 	</p>
@@ -84,14 +96,32 @@
 		<Label.Root for="beta-features">Enable Beta Features</Label.Root>
 	</div>
 
-	<Separator class="my-6 max-w-sm" />
+	<Separator class="my-6 " />
 
-	<h2 class="mb-1 text-lg font-semibold">Data Management</h2>
-	<p class="text-muted-foreground mb-4 max-w-sm text-sm">
-		Manage your application's data storage and backup preferences.
+	<h2 class="mb-1 text-lg font-semibold">Clipboard</h2>
+	<p class="text-muted-foreground mb-4 text-sm">
+		Manage your clipboard settings that might be helpful when using the app.
 	</p>
 
-	<div class="grid w-full max-w-sm gap-4">
+	<div class="mb-6 flex items-center gap-3">
+		<Switch id="clipboard-history" bind:checked={tempBetaEnabled} />
+		<Label.Root for="clipboard-history">Enable Clipboard History</Label.Root>
+	</div>
+
+	<Label.Root class="mb-3" for="port">History Count</Label.Root>
+	<Input
+		name="clipboard-count"
+		placeholder="e.g. 30"
+		min={1}
+		max={30}
+		bind:value={tempClipboardCount}
+		type="number"
+		class="mb-4"
+	/>
+
+	<Separator class="my-6 " />
+
+	<div class="grid w-full gap-4">
 		<Button size="sm" variant="outline" onclick={saveChanges}>Save Changes</Button>
 	</div>
 </section>

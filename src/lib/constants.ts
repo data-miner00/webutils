@@ -2,6 +2,8 @@ import type { AvailableLanguages } from './types';
 
 export const IsBetaFeaturesEnabledKey = 'betaFeaturesEnabled';
 export const LanguageKey = 'language';
+
+export const ClipboardHistoryMaxItemsKey = 'clipboardHistoryMaxItems';
 export const themes = [
 	{ value: 'light', label: 'Light' },
 	{ value: 'dark', label: 'Dark' },

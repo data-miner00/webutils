@@ -1,6 +1,6 @@
 import { type SystemModeValue, mode, setMode } from 'mode-watcher';
 
-import { IsBetaFeaturesEnabledKey, LanguageKey } from './constants';
+import { ClipboardHistoryMaxItemsKey, IsBetaFeaturesEnabledKey, LanguageKey } from './constants';
 import type { Language } from './types';
 
 export type AppState = {
@@ -17,7 +17,7 @@ export let appState = $state<AppState>({
 	isEnableBetaFeatures: localStorage.getItem(IsBetaFeaturesEnabledKey) === 'true',
 	language: (localStorage.getItem(LanguageKey) as Language) || 'en',
 	clipboardHistory: [],
-	clipboardHistoryMaxItems: 10
+	clipboardHistoryMaxItems: parseInt(localStorage.getItem(ClipboardHistoryMaxItemsKey) || '10')
 });
 
 export function setLanguage(language: Language) {
@@ -39,5 +39,13 @@ export function enqueueClipboardHistory(text: string) {
 	appState.clipboardHistory.push(text);
 	if (appState.clipboardHistory.length > appState.clipboardHistoryMaxItems) {
 		appState.clipboardHistory.shift();
+	}
+}
+
+export function setClipboardHistoryMaxItems(maxItems: number) {
+	appState.clipboardHistoryMaxItems = maxItems;
+	localStorage.setItem(ClipboardHistoryMaxItemsKey, String(maxItems));
+	if (appState.clipboardHistory.length > maxItems) {
+		appState.clipboardHistory = appState.clipboardHistory.slice(-maxItems);
 	}
 }
