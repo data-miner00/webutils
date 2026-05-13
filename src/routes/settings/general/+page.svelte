@@ -13,6 +13,7 @@
 		appState,
 		setClipboardHistoryMaxItems,
 		setIsEnableBetaFeatures,
+		setIsEnableClipboardHistory,
 		setLanguage,
 		setTheme
 	} from '$lib/states.svelte';
@@ -30,11 +31,14 @@
 		availableLanguages.find((x) => x.value === tempLang)?.label || 'Select language'
 	);
 
+	let tempClipboardEnabled = $state(appState.isEnableClipboardHistory);
+
 	function saveChanges() {
 		setLanguage(tempLang);
 		setTheme(tempTheme === undefined ? 'system' : tempTheme);
 		setIsEnableBetaFeatures(tempBetaEnabled);
 		setClipboardHistoryMaxItems(tempClipboardCount);
+		setIsEnableClipboardHistory(tempClipboardEnabled);
 
 		toast.success('Settings saved successfully!');
 	}
@@ -104,7 +108,7 @@
 	</p>
 
 	<div class="mb-6 flex items-center gap-3">
-		<Switch id="clipboard-history" bind:checked={tempBetaEnabled} />
+		<Switch id="clipboard-history" bind:checked={tempClipboardEnabled} />
 		<Label.Root for="clipboard-history">Enable Clipboard History</Label.Root>
 	</div>
 

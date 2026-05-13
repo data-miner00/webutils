@@ -4,6 +4,7 @@ export const IsBetaFeaturesEnabledKey = 'betaFeaturesEnabled';
 export const LanguageKey = 'language';
 
 export const ClipboardHistoryMaxItemsKey = 'clipboardHistoryMaxItems';
+export const IsEnableClipboardHistoryKey = 'isEnableClipboardHistory';
 export const themes = [
 	{ value: 'light', label: 'Light' },
 	{ value: 'dark', label: 'Dark' },

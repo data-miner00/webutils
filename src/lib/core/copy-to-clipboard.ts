@@ -1,6 +1,6 @@
 import { toast } from 'svelte-sonner';
 
-import { enqueueClipboardHistory } from '$lib/states.svelte';
+import { appState, enqueueClipboardHistory } from '$lib/states.svelte';
 
 export function clickToCopy(node: HTMLElement, target?: string) {
 	async function copyText() {
@@ -10,7 +10,9 @@ export function clickToCopy(node: HTMLElement, target?: string) {
 
 		try {
 			await navigator.clipboard.writeText(text);
-			enqueueClipboardHistory(text);
+			if (appState.isEnableClipboardHistory) {
+				enqueueClipboardHistory(text);
+			}
 
 			toast.success('Copied to clipboard', {
 				description: date.toUTCString(),
@@ -42,7 +44,9 @@ export async function copyText(text: string) {
 
 	try {
 		await navigator.clipboard.writeText(text);
-		enqueueClipboardHistory(text);
+		if (appState.isEnableClipboardHistory) {
+			enqueueClipboardHistory(text);
+		}
 
 		toast.success('Copied to clipboard', {
 			description: date.toUTCString(),

@@ -36,6 +36,7 @@
 
 	import { goto } from '$app/navigation';
 	import * as Command from '$lib/components/ui/command/index.js';
+	import { appState } from '$lib/states.svelte';
 
 	type Props = {
 		isCommandOpen: boolean;
@@ -90,14 +91,6 @@
 					icon: RefreshCcw,
 					onSelect() {
 						window.location.reload();
-					}
-				},
-				{
-					title: 'Open Clipboard History',
-					icon: ClipboardIcon,
-					onSelect() {
-						isClipboardOpen = true;
-						isCommandOpen = false;
 					}
 				}
 			]
@@ -511,6 +504,17 @@
 			]
 		}
 	];
+
+	if (appState.isEnableClipboardHistory) {
+		commandSections[0].items.push({
+			title: 'Open Clipboard History',
+			icon: ClipboardIcon,
+			onSelect() {
+				isClipboardOpen = true;
+				isCommandOpen = false;
+			}
+		});
+	}
 </script>
 
 <Command.Dialog bind:open={isCommandOpen}>
