@@ -15,7 +15,9 @@
 		firstName: localStorage.getItem('settings_firstName') || '',
 		lastName: localStorage.getItem('settings_lastName') || '',
 		email: localStorage.getItem('settings_email') || '',
-		bio: localStorage.getItem('settings_bio') || ''
+		bio: localStorage.getItem('settings_bio') || '',
+		companyName: localStorage.getItem('settings_companyName') || '',
+		websiteUrl: localStorage.getItem('settings_websiteUrl') || ''
 	});
 
 	function saveProfile() {
@@ -25,6 +27,8 @@
 		localStorage.setItem('settings_lastName', profile.lastName || '');
 		localStorage.setItem('settings_email', profile.email || '');
 		localStorage.setItem('settings_bio', profile.bio || '');
+		localStorage.setItem('settings_companyName', profile.companyName || '');
+		localStorage.setItem('settings_websiteUrl', profile.websiteUrl || '');
 
 		toast.success('Profile updated successfully');
 	}
@@ -106,6 +110,17 @@
 			<InputGroup.Input id="avatar" placeholder="https://" bind:value={profile.avatarImage} />
 			<InputGroup.Addon align="block-start">
 				<Label.Root for="avatar" class="text-foreground">Avatar</Label.Root>
+			</InputGroup.Addon>
+		</InputGroup.Root>
+
+		<InputGroup.Root>
+			<InputGroup.Input
+				id="companyName"
+				placeholder="Company Name"
+				bind:value={profile.companyName}
+			/>
+			<InputGroup.Addon align="block-start">
+				<Label.Root for="companyName" class="text-foreground">Company Name</Label.Root>
 			</InputGroup.Addon>
 		</InputGroup.Root>
 		<Button size="sm" variant="outline" onclick={saveProfile}>Save</Button>

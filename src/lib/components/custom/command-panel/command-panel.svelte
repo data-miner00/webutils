@@ -14,6 +14,7 @@
 		DiffIcon,
 		EarthIcon,
 		FrameIcon,
+		HouseIcon,
 		type IconProps,
 		ImageIcon,
 		Link,
@@ -28,7 +29,8 @@
 		ShieldEllipsis,
 		SpaceIcon,
 		SquareAsterisk,
-		TimerIcon
+		TimerIcon,
+		UserRoundPenIcon
 	} from '@lucide/svelte';
 	import CalendarIcon from '@lucide/svelte/icons/calendar';
 	import SmileIcon from '@lucide/svelte/icons/smile';
@@ -91,6 +93,32 @@
 					icon: RefreshCcw,
 					onSelect() {
 						window.location.reload();
+					}
+				}
+			]
+		},
+		{
+			heading: 'Settings',
+			items: [
+				{
+					title: 'General Settings',
+					icon: Settings2Icon,
+					onSelect() {
+						gotoPage('/settings/general');
+					}
+				},
+				{
+					title: 'Profile',
+					icon: UserRoundPenIcon,
+					onSelect() {
+						gotoPage('/settings/profile');
+					}
+				},
+				{
+					title: 'Home Page',
+					icon: HouseIcon,
+					onSelect() {
+						gotoPage('/settings/home');
 					}
 				}
 			]

@@ -14,6 +14,7 @@
 		setClipboardHistoryMaxItems,
 		setIsEnableBetaFeatures,
 		setIsEnableClipboardHistory,
+		setIsEnablePokemonEasterEgg,
 		setLanguage,
 		setTheme
 	} from '$lib/states.svelte';
@@ -32,6 +33,7 @@
 	);
 
 	let tempClipboardEnabled = $state(appState.isEnableClipboardHistory);
+	let tempPokemonEasterEggEnabled = $state(appState.isEnablePokemonEasterEgg);
 
 	function saveChanges() {
 		setLanguage(tempLang);
@@ -39,7 +41,7 @@
 		setIsEnableBetaFeatures(tempBetaEnabled);
 		setClipboardHistoryMaxItems(tempClipboardCount);
 		setIsEnableClipboardHistory(tempClipboardEnabled);
-
+		setIsEnablePokemonEasterEgg(tempPokemonEasterEggEnabled);
 		toast.success('Settings saved successfully!');
 	}
 </script>
@@ -84,6 +86,11 @@
 					</Select.Group>
 				</Select.Content>
 			</Select.Root>
+		</div>
+
+		<div class="mb-6 flex items-center gap-3">
+			<Switch id="pokemon-easter-egg" bind:checked={tempPokemonEasterEggEnabled} />
+			<Label.Root for="pokemon-easter-egg">Enable Pokemon Easter Egg</Label.Root>
 		</div>
 	</div>
 

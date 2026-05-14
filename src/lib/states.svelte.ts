@@ -16,6 +16,7 @@ export type AppState = {
 	clipboardHistory: string[];
 	clipboardHistoryMaxItems: number;
 	isEnableClipboardHistory: boolean;
+	isEnablePokemonEasterEgg: boolean;
 };
 
 export let appState = $state<AppState>({
@@ -24,7 +25,8 @@ export let appState = $state<AppState>({
 	language: (localStorage.getItem(LanguageKey) as Language) || 'en',
 	clipboardHistory: [],
 	clipboardHistoryMaxItems: parseInt(localStorage.getItem(ClipboardHistoryMaxItemsKey) || '10'),
-	isEnableClipboardHistory: localStorage.getItem(IsEnableClipboardHistoryKey) === 'true'
+	isEnableClipboardHistory: localStorage.getItem(IsEnableClipboardHistoryKey) === 'true',
+	isEnablePokemonEasterEgg: localStorage.getItem('isEnablePokemonEasterEgg') === 'true'
 });
 
 export function setLanguage(language: Language) {
@@ -60,4 +62,9 @@ export function setClipboardHistoryMaxItems(maxItems: number) {
 export function setIsEnableClipboardHistory(isEnabled: boolean) {
 	appState.isEnableClipboardHistory = isEnabled;
 	localStorage.setItem(IsEnableClipboardHistoryKey, String(isEnabled));
+}
+
+export function setIsEnablePokemonEasterEgg(isEnabled: boolean) {
+	appState.isEnablePokemonEasterEgg = isEnabled;
+	localStorage.setItem('isEnablePokemonEasterEgg', String(isEnabled));
 }

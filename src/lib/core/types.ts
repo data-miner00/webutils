@@ -18,4 +18,6 @@ export type UserProfile = {
 	websiteUrl?: string;
 	bio?: string;
 	email?: string;
+	companyName?: string;
+	website?: string;
 };

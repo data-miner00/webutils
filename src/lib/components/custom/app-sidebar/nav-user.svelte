@@ -1,15 +1,15 @@
 <script lang="ts">
-	import BadgeCheckIcon from '@lucide/svelte/icons/badge-check';
-	import BellIcon from '@lucide/svelte/icons/bell';
+	import { HouseIcon, Mail, Settings2Icon, UserRoundPenIcon } from '@lucide/svelte';
 	import ChevronsUpDownIcon from '@lucide/svelte/icons/chevrons-up-down';
-	import CreditCardIcon from '@lucide/svelte/icons/credit-card';
 	import LogOutIcon from '@lucide/svelte/icons/log-out';
+
+	import { goto } from '$app/navigation';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import { useSidebar } from '$lib/components/ui/sidebar/index.js';
 	import { getEmailProviderUrlFromEmail } from '$lib/core/email';
-	import { Mail } from '@lucide/svelte';
+
 	let {
 		user
 	}: {
@@ -24,6 +24,18 @@
 	let emailProviderUrl = $derived(
 		getEmailProviderUrlFromEmail(user.email) || 'https://mail.google.com/'
 	);
+
+	function gotoGeneralSettings() {
+		goto('/settings/general');
+	}
+
+	function gotoProfileSettings() {
+		goto('/settings/profile');
+	}
+
+	function gotoHomePageSettings() {
+		goto('/settings/home');
+	}
 </script>
 
 <Sidebar.Menu>
@@ -77,7 +89,7 @@
 						<a
 							href={emailProviderUrl}
 							target="_blank"
-							class="flex w-full h-full items-center gap-2"
+							class="flex h-full w-full items-center gap-2"
 						>
 							<Mail />
 							<div>Email Inbox</div>
@@ -86,17 +98,17 @@
 				</DropdownMenu.Group>
 				<DropdownMenu.Separator />
 				<DropdownMenu.Group>
-					<DropdownMenu.Item>
-						<BadgeCheckIcon />
-						<a href="/settings">Account</a>
+					<DropdownMenu.Item onSelect={gotoGeneralSettings}>
+						<Settings2Icon />
+						General
 					</DropdownMenu.Item>
-					<DropdownMenu.Item>
-						<CreditCardIcon />
-						Billing
+					<DropdownMenu.Item onSelect={gotoProfileSettings}>
+						<UserRoundPenIcon />
+						Profile
 					</DropdownMenu.Item>
-					<DropdownMenu.Item>
-						<BellIcon />
-						Notifications
+					<DropdownMenu.Item onSelect={gotoHomePageSettings}>
+						<HouseIcon />
+						Home Settings
 					</DropdownMenu.Item>
 				</DropdownMenu.Group>
 				<DropdownMenu.Separator />
