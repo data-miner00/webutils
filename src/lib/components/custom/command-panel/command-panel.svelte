@@ -536,22 +536,5 @@
 				<Command.Separator />
 			{/if}
 		{/each}
-		<!-- <Command.Group heading="Settings">
-			<Command.Item>
-				<UserIcon class="me-2 size-4" />
-				<span>Profile</span>
-				<Command.Shortcut>⌘P</Command.Shortcut>
-			</Command.Item>
-			<Command.Item>
-				<CreditCardIcon class="me-2 size-4" />
-				<span>Billing</span>
-				<Command.Shortcut>⌘B</Command.Shortcut>
-			</Command.Item>
-			<Command.Item onSelect={onSelectSettings}>
-				<SettingsIcon class="me-2 size-4" />
-				<span>Settings</span>
-				<Command.Shortcut>⌘S</Command.Shortcut>
-			</Command.Item>
-		</Command.Group> -->
 	</Command.List>
 </Command.Dialog>

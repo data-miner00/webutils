@@ -91,10 +91,6 @@
 						url: '/tools/regex',
 						isBeta: true
 					}
-					// {
-					// 	title: 'Password Generator',
-					// 	url: '/tools/password-generator'
-					// }
 				]
 			},
 			{
@@ -313,7 +309,7 @@
 				url: '#',
 				icon: FrameIcon,
 				items: [
-					{ title: 'Notes', url: '/manage/notes' },
+					{ title: 'Notes', url: '/manage/notes', isBeta: true, badge: 'Beta' },
 					{
 						title: 'Links',
 						url: '/manage/links'
@@ -324,12 +320,10 @@
 					},
 					{
 						title: 'Todo List',
-						url: '/manage/todo'
+						url: '/manage/todo',
+						badge: 'Beta',
+						isBeta: true
 					}
-					// {
-					// 	name: 'Kanban',
-					// 	url: '#',
-					// },
 				]
 			}
 		]
