@@ -85,11 +85,6 @@
 					{
 						title: 'Base Converter',
 						url: '/tools/baseN'
-					},
-					{
-						title: 'Regex Tester',
-						url: '/tools/regex',
-						isBeta: true
 					}
 				]
 			},
