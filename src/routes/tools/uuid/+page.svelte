@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { Album, ArrowBigRight, Clipboard, EllipsisVertical, RotateCcw, X } from '@lucide/svelte';
+	import { Album, ArrowBigDown, Clipboard, EllipsisVertical, RotateCcw, X } from '@lucide/svelte';
 	import { toast } from 'svelte-sonner';
 
-	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
 	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -11,6 +10,7 @@
 	import Input from '$lib/components/ui/input/input.svelte';
 	import { Label } from '$lib/components/ui/label';
 	import * as Select from '$lib/components/ui/select';
+	import { Textarea } from '$lib/components/ui/textarea/index.js';
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import {
 		type UUIDVersion,
@@ -78,48 +78,69 @@
 	}
 </script>
 
-<div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
-	<section class="flex flex-1 flex-col overflow-hidden">
-		<header class="mb-6 flex justify-between">
-			<h1 class="block text-xl font-bold">UUID Generator</h1>
-			<div class="flex items-center gap-4">
+<div class="mx-auto mt-10 max-w-xl">
+	<header class="mb-20">
+		<h1 class="block text-center text-xl font-bold">UUID Generator</h1>
+		<p class="text-muted-foreground text-center">
+			Generate UUIDs of different versions with customizable options.
+		</p>
+	</header>
+
+	<div class="flex flex-col gap-6 rounded-lg border border-solid border-gray-300 p-8">
+		<div class="flex items-center justify-end gap-4">
+			<ButtonGroup.Root>
 				<ButtonGroup.Root>
-					<ButtonGroup.Root>
-						<Button variant="outline" onclick={loadExample1}>Example 1</Button>
-						<DropdownMenu.Root>
-							<DropdownMenu.Trigger>
-								{#snippet child({ props })}
-									<Button {...props} variant="outline" aria-label="More Options">
-										<EllipsisVertical />
-									</Button>
-								{/snippet}
-							</DropdownMenu.Trigger>
-							<DropdownMenu.Content align="end" class="w-52">
-								<DropdownMenu.Group>
-									<DropdownMenu.Item onclick={loadExample2}>
-										<Album />
-										Example 2
-									</DropdownMenu.Item>
-									<DropdownMenu.Item onclick={loadExample3}>
-										<Album />
-										Example 3
-									</DropdownMenu.Item><DropdownMenu.Item onclick={loadExample4}>
-										<Album />
-										Example 4
-									</DropdownMenu.Item>
-								</DropdownMenu.Group>
-							</DropdownMenu.Content>
-						</DropdownMenu.Root>
-					</ButtonGroup.Root>
-					<ButtonGroup.Root>
-						<Button size="icon" variant="outline" onclick={clearInput}><RotateCcw /></Button>
-					</ButtonGroup.Root>
-					<ButtonGroup.Root>
-						<Button size="icon" onclick={generate}><ArrowBigRight /></Button>
-					</ButtonGroup.Root>
+					<Button variant="outline" onclick={loadExample1}>Example V1</Button>
+					<DropdownMenu.Root>
+						<DropdownMenu.Trigger>
+							{#snippet child({ props })}
+								<Button {...props} variant="outline" aria-label="More Options">
+									<EllipsisVertical />
+								</Button>
+							{/snippet}
+						</DropdownMenu.Trigger>
+						<DropdownMenu.Content align="end" class="w-52">
+							<DropdownMenu.Group>
+								<DropdownMenu.Item onclick={loadExample3}>
+									<Album />
+									Example V3
+								</DropdownMenu.Item>
+								<DropdownMenu.Item onclick={loadExample2}>
+									<Album />
+									Example V4
+								</DropdownMenu.Item>
+								<DropdownMenu.Item onclick={loadExample4}>
+									<Album />
+									Example V5
+								</DropdownMenu.Item>
+							</DropdownMenu.Group>
+						</DropdownMenu.Content>
+					</DropdownMenu.Root>
 				</ButtonGroup.Root>
-			</div>
-		</header>
+				<ButtonGroup.Root>
+					<Button size="icon" variant="outline" onclick={clearInput}><RotateCcw /></Button>
+				</ButtonGroup.Root>
+
+				<ButtonGroup.Root>
+					<ReferencesSheet
+						references={[
+							{
+								title: 'Online UUID Generator',
+								url: 'https://www.uuidgenerator.net'
+							},
+							{
+								title: 'UUID - MDN Web Docs',
+								url: 'https://developer.mozilla.org/en-US/docs/Glossary/UUID'
+							},
+							{
+								title: 'TIL: 8 versions of UUID and when to use them',
+								url: 'https://ntietz.com/blog/til-uses-for-the-different-uuid-versions/'
+							}
+						]}
+					/>
+				</ButtonGroup.Root>
+			</ButtonGroup.Root>
+		</div>
 
 		<div>
 			<div class="mb-4">
@@ -181,33 +202,19 @@
 				</div>
 			{/if}
 		</div>
-	</section>
 
-	<section class="flex flex-1 flex-col overflow-hidden">
-		<header class="mb-6 flex justify-between">
-			<h2 class="block text-xl font-bold">Output</h2>
+		<ButtonGroup.Root class="mx-auto">
+			<Button onclick={generate}><ArrowBigDown /> Generate</Button>
+		</ButtonGroup.Root>
 
-			<ButtonGroup.Root>
-				<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy output</Button>
+		<Textarea
+			rows={10}
+			disabled
+			placeholder="Generated UUID will appear here."
+			value={output}
+			readonly
+		/>
 
-				<ReferencesSheet
-					references={[
-						{
-							title: 'Online UUID Generator',
-							url: 'https://www.uuidgenerator.net'
-						},
-						{
-							title: 'UUID - MDN Web Docs',
-							url: 'https://developer.mozilla.org/en-US/docs/Glossary/UUID'
-						},
-						{
-							title: 'TIL: 8 versions of UUID and when to use them',
-							url: 'https://ntietz.com/blog/til-uses-for-the-different-uuid-versions/'
-						}
-					]}
-				/>
-			</ButtonGroup.Root>
-		</header>
-		<CodeEditor class="flex-1" language="text" value={output} readonly />
-	</section>
+		<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy output</Button>
+	</div>
 </div>
