@@ -6,6 +6,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Select from '$lib/components/ui/select';
+	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import { exampleSql, formatSql } from '$lib/core/format-sql';
 
@@ -38,10 +39,13 @@
 	}
 </script>
 
-<div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
-	<section class="flex flex-1 flex-col overflow-hidden">
-		<header class="mb-6 flex justify-between">
-			<h1 class="block text-xl font-bold">Format SQL</h1>
+<div class="h-full grid-cols-2 gap-4 px-4 py-6 md:grid">
+	<section class="mb-6 flex flex-1 flex-col overflow-hidden md:mb-0">
+		<header class="mb-6 justify-between md:flex">
+			<div class="mb-4 flex items-center gap-4 md:mb-0">
+				<Sidebar.Trigger class="md:hidden" />
+				<h1 class="block text-xl font-bold">Format SQL</h1>
+			</div>
 			<div class="flex items-center gap-4">
 				<Select.Root type="single" name="indentSize" bind:value={indentSize}>
 					<Select.Trigger>
