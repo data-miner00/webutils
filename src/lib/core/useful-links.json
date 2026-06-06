@@ -196,5 +196,47 @@
 		"category": "Tools",
 		"url": "https://ippure.com/en/",
 		"language": "en"
+	},
+	{
+		"title": "10015.io",
+		"category": "Tools",
+		"url": "https://10015.io/",
+		"language": "en"
+	},
+	{
+		"title": "Online JSON Tools",
+		"category": "Tools",
+		"url": "https://onlinejsontools.com/",
+		"language": "en"
+	},
+	{
+		"title": "Code Beautify",
+		"category": "Tools",
+		"url": "https://codebeautify.org/",
+		"language": "en"
+	},
+	{
+		"title": "JSON Formatter & Validator",
+		"category": "Tools",
+		"url": "https://jsonformatter.curiousconcept.com/",
+		"language": "en"
+	},
+	{
+		"title": "Everyday Tools",
+		"category": "Tools",
+		"url": "https://everydayutils.com/",
+		"language": "en"
+	},
+	{
+		"title": "JSON Editor Online",
+		"category": "Tools",
+		"url": "https://jsoneditoronline.org/",
+		"language": "en"
+	},
+	{
+		"title": "JSON Schema Validator",
+		"category": "Tools",
+		"url": "https://www.jsonschemavalidator.net/",
+		"language": "en"
 	}
 ]
