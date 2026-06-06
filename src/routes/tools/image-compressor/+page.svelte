@@ -84,7 +84,7 @@
 <div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
 	<section class="flex flex-1 flex-col overflow-hidden">
 		<header class="mb-6 flex justify-between">
-			<h1 class="block text-xl font-bold">Convert Image Format</h1>
+			<h1 class="block text-xl font-bold">Compress Image</h1>
 			<div class="flex items-center gap-4">
 				<Select.Root type="single" name="imageFormat" bind:value={compressionLevel}>
 					<Select.Trigger>
