@@ -1,16 +1,13 @@
 <script lang="ts">
-	import { getLocalTimeZone, today } from '@internationalized/date';
+	import { CircleAlertIcon } from '@lucide/svelte';
 	import { onMount } from 'svelte';
 
 	import LinkComponent from '$lib/components/custom/link/link.svelte';
 	import Localhost from '$lib/components/custom/localhost/localhost.svelte';
-	import Timer from '$lib/components/custom/timer/timer.svelte';
-	import { Calendar } from '$lib/components/ui/calendar/index.js';
+	import * as Alert from '$lib/components/ui/alert/index.js';
 	import { db, initializeDatabase } from '$lib/core/Database';
 	import { IndexedDBRepository } from '$lib/core/IndexedDbRepository';
 	import { type Link, STORE_NAME, defaultLinks } from '$lib/core/links';
-
-	let value = $state(today(getLocalTimeZone()));
 
 	let links = $state<Link[]>([]);
 	const MAX_LINKS_COUNT = 8;
@@ -34,18 +31,13 @@
 </script>
 
 <div class="h-full px-4 py-6">
-	<!-- <div>
-		<Calendar
-			type="single"
-			bind:value
-			class="w-fit rounded-md border shadow-sm"
-			captionLayout="dropdown"
-		/>
-
-		<div class="my-2"></div>
-
-		<Timer />
-	</div> -->
+	<Alert.Root class="mb-5">
+		<CircleAlertIcon />
+		<Alert.Title>Alpha Release</Alert.Title>
+		<Alert.Description
+			>A lot of features are still in development. Please report any issues you encounter.</Alert.Description
+		>
+	</Alert.Root>
 
 	<div>
 		<h2 class="mb-4 text-xl font-bold">Links</h2>
