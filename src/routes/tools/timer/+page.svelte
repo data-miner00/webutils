@@ -4,8 +4,7 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Label } from '$lib/components/ui/label/index.js';
 	import * as NativeSelect from '$lib/components/ui/native-select/index.js';
-
-	let mode = $state('timer');
+	import * as Tabs from '$lib/components/ui/tabs/index.js';
 
 	// Timer variables
 	let initialHours = $state(0);
@@ -87,52 +86,57 @@
 	});
 </script>
 
-<article class="mx-auto my-24 flex w-fit flex-col p-4 text-center">
-	<div class="mb-4 flex justify-center gap-2">
-		<Button variant={mode === 'timer' ? 'default' : 'outline'} onclick={() => (mode = 'timer')}
-			>Timer</Button
-		>
-		<Button
-			variant={mode === 'stopwatch' ? 'default' : 'outline'}
-			onclick={() => (mode = 'stopwatch')}>Stopwatch</Button
-		>
-	</div>
-
-	{#if mode === 'timer'}
-		{#if !timerRunning}
-			<div class="mb-4 flex justify-center gap-2">
-				<Label for="hours">Hours</Label>
-				<NativeSelect.Root id="hours" name="hours" bind:value={initialHours}>
-					{#each Array.from({ length: 24 }, (_, i) => i) as hour}
-						<NativeSelect.Option value={hour}>{hour}</NativeSelect.Option>
-					{/each}
-				</NativeSelect.Root>
-				<Label for="minutes">Minutes</Label>
-				<NativeSelect.Root id="minutes" name="minutes" bind:value={initialMinutes}>
-					{#each Array.from({ length: 60 }, (_, i) => i) as minute}
-						<NativeSelect.Option value={minute}>{minute}</NativeSelect.Option>
-					{/each}
-				</NativeSelect.Root>
-				<Label for="seconds">Seconds</Label>
-				<NativeSelect.Root id="seconds" name="seconds" bind:value={initialSeconds}>
-					{#each Array.from({ length: 60 }, (_, i) => i) as second}
-						<NativeSelect.Option value={second}>{second}</NativeSelect.Option>
-					{/each}
-				</NativeSelect.Root>
+<div class="relative h-full p-6">
+	<Tabs.Root value="timer">
+		<Tabs.List>
+			<Tabs.Trigger value="timer">Timer</Tabs.Trigger>
+			<Tabs.Trigger value="stopwatch">Stopwatch</Tabs.Trigger>
+		</Tabs.List>
+		<Tabs.Content value="timer" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+			{#if !timerRunning}
+				<div class="mb-4 flex justify-center gap-2">
+					<NativeSelect.Root id="hours" name="hours" bind:value={initialHours}>
+						{#each Array.from({ length: 24 }, (_, i) => i) as hour}
+							<NativeSelect.Option value={hour}>{hour}</NativeSelect.Option>
+						{/each}
+					</NativeSelect.Root>
+					<Label for="hours">Hours</Label>
+					<NativeSelect.Root id="minutes" name="minutes" bind:value={initialMinutes}>
+						{#each Array.from({ length: 60 }, (_, i) => i) as minute}
+							<NativeSelect.Option value={minute}>{minute}</NativeSelect.Option>
+						{/each}
+					</NativeSelect.Root>
+					<Label for="minutes">Minutes</Label>
+					<NativeSelect.Root id="seconds" name="seconds" bind:value={initialSeconds}>
+						{#each Array.from({ length: 60 }, (_, i) => i) as second}
+							<NativeSelect.Option value={second}>{second}</NativeSelect.Option>
+						{/each}
+					</NativeSelect.Root>
+					<Label for="seconds">Seconds</Label>
+				</div>
+			{/if}
+			<div class="mb-4 text-center text-9xl font-bold">{formatTime(countdownSeconds)}</div>
+			<div class="flex justify-center gap-1">
+				<Button onclick={startTimer} disabled={timerRunning}>Start</Button>
+				<Button variant="outline" onclick={pauseTimer} disabled={!timerRunning}>Pause</Button>
+				<Button variant="ghost" onclick={resetTimer}>Reset</Button>
 			</div>
-		{/if}
-		<div class="mb-4 text-9xl font-black">{formatTime(countdownSeconds)}</div>
-		<div class="flex justify-center gap-1">
-			<Button onclick={startTimer} disabled={timerRunning}>Start</Button>
-			<Button variant="outline" onclick={pauseTimer} disabled={!timerRunning}>Pause</Button>
-			<Button variant="ghost" onclick={resetTimer}>Reset</Button>
-		</div>
-	{:else}
-		<div class="mb-4 text-9xl font-black">{formatTime(elapsedSeconds)}</div>
-		<div class="flex justify-center gap-1">
-			<Button onclick={startStopwatch} disabled={stopwatchRunning}>Start</Button>
-			<Button variant="outline" onclick={stopStopwatch} disabled={!stopwatchRunning}>Stop</Button>
-			<Button variant="ghost" onclick={resetStopwatch}>Reset</Button>
-		</div>
-	{/if}
-</article>
+		</Tabs.Content>
+		<Tabs.Content
+			value="stopwatch"
+			class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+		>
+			<div class="mb-4 text-center text-9xl font-bold">{formatTime(elapsedSeconds)}</div>
+			<div class="flex justify-center gap-1">
+				<Button onclick={startStopwatch} disabled={stopwatchRunning}>Start</Button>
+				<Button variant="outline" onclick={stopStopwatch} disabled={!stopwatchRunning}>Stop</Button>
+				<Button variant="ghost" onclick={resetStopwatch}>Reset</Button>
+			</div>
+		</Tabs.Content>
+	</Tabs.Root>
+</div>
+
+<!-- Setting 1: Select or Input for timer duration (hours, minutes, seconds)
+Setting 2: Display format (HH:MM:SS or MM:SS)
+
+Fix 1: The timer cannot resume after being paused -->
