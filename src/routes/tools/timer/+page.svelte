@@ -2,6 +2,8 @@
 	import { onDestroy } from 'svelte';
 
 	import Button from '$lib/components/ui/button/button.svelte';
+	import { Label } from '$lib/components/ui/label/index.js';
+	import * as NativeSelect from '$lib/components/ui/native-select/index.js';
 
 	let mode = $state('timer');
 
@@ -99,36 +101,24 @@
 	{#if mode === 'timer'}
 		{#if !timerRunning}
 			<div class="mb-4 flex justify-center gap-2">
-				<label>
-					<span class="text-sm">Hours</span>
-					<input
-						type="number"
-						min="0"
-						max="23"
-						bind:value={initialHours}
-						class="w-16 rounded border text-center"
-					/>
-				</label>
-				<label>
-					<span class="text-sm">Minutes</span>
-					<input
-						type="number"
-						min="0"
-						max="59"
-						bind:value={initialMinutes}
-						class="w-16 rounded border text-center"
-					/>
-				</label>
-				<label>
-					<span class="text-sm">Seconds</span>
-					<input
-						type="number"
-						min="0"
-						max="59"
-						bind:value={initialSeconds}
-						class="w-16 rounded border text-center"
-					/>
-				</label>
+				<Label for="hours">Hours</Label>
+				<NativeSelect.Root id="hours" name="hours" bind:value={initialHours}>
+					{#each Array.from({ length: 24 }, (_, i) => i) as hour}
+						<NativeSelect.Option value={hour}>{hour}</NativeSelect.Option>
+					{/each}
+				</NativeSelect.Root>
+				<Label for="minutes">Minutes</Label>
+				<NativeSelect.Root id="minutes" name="minutes" bind:value={initialMinutes}>
+					{#each Array.from({ length: 60 }, (_, i) => i) as minute}
+						<NativeSelect.Option value={minute}>{minute}</NativeSelect.Option>
+					{/each}
+				</NativeSelect.Root>
+				<Label for="seconds">Seconds</Label>
+				<NativeSelect.Root id="seconds" name="seconds" bind:value={initialSeconds}>
+					{#each Array.from({ length: 60 }, (_, i) => i) as second}
+						<NativeSelect.Option value={second}>{second}</NativeSelect.Option>
+					{/each}
+				</NativeSelect.Root>
 			</div>
 		{/if}
 		<div class="mb-4 text-9xl font-black">{formatTime(countdownSeconds)}</div>
