@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PauseIcon, PlayIcon, RefreshCwIcon, SquareIcon } from '@lucide/svelte';
 	import { onDestroy } from 'svelte';
 
 	import Button from '$lib/components/ui/button/button.svelte';
@@ -117,9 +118,11 @@
 			{/if}
 			<div class="mb-4 text-center text-9xl font-bold">{formatTime(countdownSeconds)}</div>
 			<div class="flex justify-center gap-1">
-				<Button onclick={startTimer} disabled={timerRunning}>Start</Button>
-				<Button variant="outline" onclick={pauseTimer} disabled={!timerRunning}>Pause</Button>
-				<Button variant="ghost" onclick={resetTimer}>Reset</Button>
+				<Button onclick={startTimer} disabled={timerRunning}><PlayIcon /> Start</Button>
+				<Button variant="outline" onclick={pauseTimer} disabled={!timerRunning}
+					><PauseIcon /> Pause</Button
+				>
+				<Button variant="ghost" onclick={resetTimer}><RefreshCwIcon /> Reset</Button>
 			</div>
 		</Tabs.Content>
 		<Tabs.Content
@@ -128,9 +131,11 @@
 		>
 			<div class="mb-4 text-center text-9xl font-bold">{formatTime(elapsedSeconds)}</div>
 			<div class="flex justify-center gap-1">
-				<Button onclick={startStopwatch} disabled={stopwatchRunning}>Start</Button>
-				<Button variant="outline" onclick={stopStopwatch} disabled={!stopwatchRunning}>Stop</Button>
-				<Button variant="ghost" onclick={resetStopwatch}>Reset</Button>
+				<Button onclick={startStopwatch} disabled={stopwatchRunning}><PlayIcon /> Start</Button>
+				<Button variant="outline" onclick={stopStopwatch} disabled={!stopwatchRunning}
+					><SquareIcon /> Stop</Button
+				>
+				<Button variant="ghost" onclick={resetStopwatch}><RefreshCwIcon /> Reset</Button>
 			</div>
 		</Tabs.Content>
 	</Tabs.Root>
