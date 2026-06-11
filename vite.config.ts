@@ -1,7 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
-import wasm from 'vite-plugin-wasm';
 import { defineConfig } from 'vitest/config';
 
 const MEGABYTES = 1024 * 1024;
@@ -10,7 +9,6 @@ export default defineConfig({
 	plugins: [
 		tailwindcss(),
 		sveltekit(),
-		wasm(),
 		VitePWA({
 			registerType: 'autoUpdate',
 			workbox: {
@@ -34,10 +32,5 @@ export default defineConfig({
 			$lib: 'src/lib'
 		},
 		globals: true
-	},
-	server: {
-		fs: {
-			allow: ['rust-pkg/pkg/']
-		}
 	}
 });

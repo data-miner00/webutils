@@ -25,13 +25,19 @@ npm run build
 Building Docker image.
 
 ```
-docker build . -t webutils
+docker build -t webutils:latest .
 ```
 
 Or use docker-compose.
 
 ```
 docker-compose up -d
+```
+
+Or rebuild for dev.
+
+```
+docker-compose up -d --build
 ```
 
 ## Credits

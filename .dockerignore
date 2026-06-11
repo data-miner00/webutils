@@ -3,7 +3,3 @@ build
 .svelte-kit
 .vscode
 tests
-
-# Rust
-pkg
-target
