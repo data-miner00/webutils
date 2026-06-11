@@ -14,9 +14,10 @@
 	});
 
 	const years = Array.from({ length: 100 }, (_, i) => now.getFullYear() - 50 + i);
-	let selectedYear = $state(now.getFullYear());
-	let selectedDisplayLayout = $state('year');
 
+	let selectedYear = $state(now.getFullYear());
+
+	// Do I still need this?
 	const displayLayout = [
 		{ label: 'Year', value: 'year' },
 		{ label: 'Month', value: 'month' },
@@ -25,28 +26,19 @@
 	];
 </script>
 
+<!-- TODO: Show year progress: today/days left -->
+
 <div class="px-4 py-6">
 	<Label class="mb-2">Select a year</Label>
 	<NativeSelect.Root bind:value={selectedYear}>
 		{#each years as year}
-			<NativeSelect.Option value={year}>{year}</NativeSelect.Option>
-		{/each}
-	</NativeSelect.Root>
-
-	<Label class="my-2">Display</Label>
-	<NativeSelect.Root bind:value={selectedDisplayLayout}>
-		{#each displayLayout as layout}
-			<NativeSelect.Option value={layout.value}>{layout.label}</NativeSelect.Option>
+			<NativeSelect.Option value={year} onclick={() => (value = new CalendarDate(year, 1, 1))}>
+				{year}
+			</NativeSelect.Option>
 		{/each}
 	</NativeSelect.Root>
 
 	<div>
-		<Calendar
-			bind:value
-			type="single"
-			class="w-fit rounded-md border shadow-sm "
-			captionLayout="dropdown"
-			numberOfMonths={12}
-		/>
+		<Calendar bind:value type="single" class="w-fit" captionLayout="label" numberOfMonths={12} />
 	</div>
 </div>
