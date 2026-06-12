@@ -339,7 +339,7 @@
 					title: 'Remove Empty Lines',
 					icon: SpaceIcon,
 					onSelect() {
-						gotoPage('/tools/remove-empty-lines');
+						gotoPage('/tools/empty-line-remover');
 					}
 				}
 			]
@@ -373,6 +373,13 @@
 					icon: ShieldEllipsis,
 					onSelect() {
 						gotoPage('/tools/caesar');
+					}
+				},
+				{
+					title: 'Morse Code Translator',
+					icon: ShieldEllipsis,
+					onSelect() {
+						gotoPage('/tools/morse-code');
 					}
 				}
 			]

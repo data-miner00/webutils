@@ -156,6 +156,14 @@
 					{
 						title: 'Caesar Cipher',
 						url: '/tools/caesar'
+					},
+					{
+						title: 'Morse Code Translator',
+						url: '/tools/morse-code'
+					},
+					{
+						title: 'Vigenère Cipher',
+						url: '/tools/vigenere'
 					}
 				]
 			},
