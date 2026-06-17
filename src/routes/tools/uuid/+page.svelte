@@ -90,7 +90,7 @@
 		<div class="flex items-center justify-end gap-4">
 			<ButtonGroup.Root>
 				<ButtonGroup.Root>
-					<Button variant="outline" onclick={loadExample1}>Example V1</Button>
+					<Button variant="outline" onclick={loadExample1}>UUID V1</Button>
 					<DropdownMenu.Root>
 						<DropdownMenu.Trigger>
 							{#snippet child({ props })}
@@ -103,15 +103,15 @@
 							<DropdownMenu.Group>
 								<DropdownMenu.Item onclick={loadExample3}>
 									<Album />
-									Example V3
+									UUID V3
 								</DropdownMenu.Item>
 								<DropdownMenu.Item onclick={loadExample2}>
 									<Album />
-									Example V4
+									UUID V4
 								</DropdownMenu.Item>
 								<DropdownMenu.Item onclick={loadExample4}>
 									<Album />
-									Example V5
+									UUID V5
 								</DropdownMenu.Item>
 							</DropdownMenu.Group>
 						</DropdownMenu.Content>
