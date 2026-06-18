@@ -7,10 +7,10 @@
 		MessageCircleCode,
 		MessagesSquare,
 		Palette,
+		ScanSearchIcon,
 		ShieldEllipsis
 	} from '@lucide/svelte';
 	import AudioWaveformIcon from '@lucide/svelte/icons/audio-waveform';
-	import BotIcon from '@lucide/svelte/icons/bot';
 	import CommandIcon from '@lucide/svelte/icons/command';
 	import FrameIcon from '@lucide/svelte/icons/frame';
 	import GalleryVerticalEndIcon from '@lucide/svelte/icons/gallery-vertical-end';
@@ -283,7 +283,7 @@
 			{
 				title: 'Lookup',
 				url: '#',
-				icon: BotIcon,
+				icon: ScanSearchIcon,
 				items: [
 					{ title: 'Clock', url: '/tools/clock' },
 					{
