@@ -42,6 +42,9 @@
 				countdownSeconds -= 1;
 			}
 			if (countdownSeconds <= 0) {
+				for (let i = 0; i < 3; i++) {
+					setTimeout(() => beep(), i * 500);
+				}
 				pauseTimer();
 			}
 		}, 1000);
@@ -79,6 +82,28 @@
 	function resetStopwatch() {
 		stopStopwatch();
 		elapsedSeconds = 0;
+	}
+
+	// @ts-ignore
+	const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+	function beep(duration = 200, frequency = 440, volume = 10) {
+		// Create nodes
+		const oscillator = audioCtx.createOscillator();
+		const gainNode = audioCtx.createGain();
+
+		// Connect nodes to speakers
+		oscillator.connect(gainNode);
+		gainNode.connect(audioCtx.destination);
+
+		// Configure settings
+		oscillator.type = 'sine'; // Choices: 'sine', 'square', 'sawtooth', 'triangle'
+		oscillator.frequency.value = frequency; // Frequency in Hz (440 is the 'A' note)
+		gainNode.gain.value = volume * 0.01; // Scale volume down
+
+		// Start and auto-stop
+		oscillator.start(audioCtx.currentTime);
+		oscillator.stop(audioCtx.currentTime + duration / 1000);
 	}
 
 	onDestroy(() => {
