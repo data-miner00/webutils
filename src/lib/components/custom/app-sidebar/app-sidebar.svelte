@@ -17,6 +17,7 @@
 	import SquareTerminalIcon from '@lucide/svelte/icons/square-terminal';
 	import type { ComponentProps } from 'svelte';
 
+	import * as Kbd from '$lib/components/ui/kbd/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 
 	import NavMain from './nav-main.svelte';
@@ -353,6 +354,9 @@
 		<NavMain items={data.navMain} {toggleCollapsible} />
 	</Sidebar.Content>
 	<Sidebar.Footer>
+		<div class="text-muted-foreground ml-2 text-sm">
+			<Kbd.Kbd>Ctrl</Kbd.Kbd> + <Kbd.Kbd>K</Kbd.Kbd> to search internet
+		</div>
 		<NavUser user={data.user} />
 	</Sidebar.Footer>
 	<Sidebar.Rail />
