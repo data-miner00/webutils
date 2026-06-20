@@ -21,3 +21,9 @@ export const availableLanguages: AvailableLanguages = [
 	{ value: 'es', label: 'Español' },
 	{ value: 'fr', label: 'Français' }
 ];
+
+export const SearchEngineStorageKey = 'searchEngine';
+
+export const IsLinkEnabledStorageKey = 'homepageLink';
+export const IsWebSearchEnabledStorageKey = 'homepageWebSearch';
+export const LinkCountStorageKey = 'homepageLinkCount';

@@ -8,9 +8,9 @@
 	import { db, initializeDatabase } from '$lib/core/Database';
 	import { IndexedDBRepository } from '$lib/core/IndexedDbRepository';
 	import { type Link, STORE_NAME, defaultLinks } from '$lib/core/links';
+	import { appState } from '$lib/states.svelte';
 
 	let links = $state<Link[]>([]);
-	const MAX_LINKS_COUNT = 8;
 
 	onMount(async () => {
 		if (!db.isDbInitialized) {
@@ -18,7 +18,7 @@
 		}
 
 		const repository = new IndexedDBRepository<Link>(db, STORE_NAME);
-		links = await repository.getAll(MAX_LINKS_COUNT);
+		links = await repository.getAll(appState.homeLinkCount);
 
 		if (!links.length) {
 			links = defaultLinks;

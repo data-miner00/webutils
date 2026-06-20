@@ -7,23 +7,30 @@
 	import * as Select from '$lib/components/ui/select/index.js';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import { Switch } from '$lib/components/ui/switch/index.js';
+	import {
+		IsLinkEnabledStorageKey,
+		IsWebSearchEnabledStorageKey,
+		LinkCountStorageKey,
+		SearchEngineStorageKey
+	} from '$lib/constants';
 	import { searchEngines } from '$lib/core/search-engine';
+	import {
+		setHomeLinkDisplayCount,
+		setIsEnableHomeLink,
+		setIsEnableHomeWebSearch
+	} from '$lib/states.svelte';
 
-	const isLinkEnabledStorageKey = 'homepageLink';
-	const isWebSearchEnabledStorageKey = 'homepageWebSearch';
-	const linkCountStorageKey = 'homepageLinkCount';
-
-	let isLinkEnabled = $state(localStorage.getItem(isLinkEnabledStorageKey) === 'true');
-	let isWebSearchEnabled = $state(localStorage.getItem(isWebSearchEnabledStorageKey) === 'true');
-	let linkCount = $state(Number(localStorage.getItem(linkCountStorageKey) || '8'));
+	let isLinkEnabled = $state(localStorage.getItem(IsLinkEnabledStorageKey) === 'true');
+	let isWebSearchEnabled = $state(localStorage.getItem(IsWebSearchEnabledStorageKey) === 'true');
+	let linkCount = $state(Number(localStorage.getItem(LinkCountStorageKey) || '8'));
 
 	let searchEngineInput = $state('');
 
 	function saveChanges() {
-		localStorage.setItem('searchEngine', searchEngineInput);
-		localStorage.setItem(isLinkEnabledStorageKey, JSON.stringify(isLinkEnabled));
-		localStorage.setItem(isWebSearchEnabledStorageKey, JSON.stringify(isWebSearchEnabled));
-		localStorage.setItem(linkCountStorageKey, JSON.stringify(linkCount));
+		localStorage.setItem(SearchEngineStorageKey, searchEngineInput);
+		setIsEnableHomeLink(isLinkEnabled);
+		setIsEnableHomeWebSearch(isWebSearchEnabled);
+		setHomeLinkDisplayCount(linkCount);
 
 		toast.success('Settings updated successfully');
 	}

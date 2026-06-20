@@ -4,7 +4,10 @@ import {
 	ClipboardHistoryMaxItemsKey,
 	IsBetaFeaturesEnabledKey,
 	IsEnableClipboardHistoryKey,
-	LanguageKey
+	IsLinkEnabledStorageKey,
+	IsWebSearchEnabledStorageKey,
+	LanguageKey,
+	LinkCountStorageKey
 } from './constants';
 import type { Language } from './types';
 
@@ -17,6 +20,10 @@ export type AppState = {
 	clipboardHistoryMaxItems: number;
 	isEnableClipboardHistory: boolean;
 	isEnablePokemonEasterEgg: boolean;
+
+	isHomeLinkEnabled: boolean;
+	isHomeWebSearchEnabled: boolean;
+	homeLinkCount: number;
 };
 
 export let appState = $state<AppState>({
@@ -24,9 +31,14 @@ export let appState = $state<AppState>({
 	isEnableBetaFeatures: localStorage.getItem(IsBetaFeaturesEnabledKey) === 'true',
 	language: (localStorage.getItem(LanguageKey) as Language) || 'en',
 	clipboardHistory: [],
-	clipboardHistoryMaxItems: parseInt(localStorage.getItem(ClipboardHistoryMaxItemsKey) || '10'),
+	clipboardHistoryMaxItems: Number.parseInt(
+		localStorage.getItem(ClipboardHistoryMaxItemsKey) || '10'
+	),
 	isEnableClipboardHistory: localStorage.getItem(IsEnableClipboardHistoryKey) === 'true',
-	isEnablePokemonEasterEgg: localStorage.getItem('isEnablePokemonEasterEgg') === 'true'
+	isEnablePokemonEasterEgg: localStorage.getItem('isEnablePokemonEasterEgg') === 'true',
+	isHomeLinkEnabled: localStorage.getItem(IsLinkEnabledStorageKey) === 'true',
+	isHomeWebSearchEnabled: localStorage.getItem(IsWebSearchEnabledStorageKey) === 'true',
+	homeLinkCount: Number.parseInt(localStorage.getItem(LinkCountStorageKey) || '8')
 });
 
 export function setLanguage(language: Language) {
@@ -67,4 +79,19 @@ export function setIsEnableClipboardHistory(isEnabled: boolean) {
 export function setIsEnablePokemonEasterEgg(isEnabled: boolean) {
 	appState.isEnablePokemonEasterEgg = isEnabled;
 	localStorage.setItem('isEnablePokemonEasterEgg', String(isEnabled));
+}
+
+export function setIsEnableHomeLink(isEnabled: boolean) {
+	appState.isHomeLinkEnabled = isEnabled;
+	localStorage.setItem(IsLinkEnabledStorageKey, String(isEnabled));
+}
+
+export function setIsEnableHomeWebSearch(isEnabled: boolean) {
+	appState.isHomeWebSearchEnabled = isEnabled;
+	localStorage.setItem(IsWebSearchEnabledStorageKey, String(isEnabled));
+}
+
+export function setHomeLinkDisplayCount(count: number) {
+	appState.homeLinkCount = count;
+	localStorage.setItem(LinkCountStorageKey, String(count));
 }
