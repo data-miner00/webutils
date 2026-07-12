@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Download from '@lucide/svelte/icons/download';
 
 	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
@@ -22,26 +22,28 @@
 	}
 </script>
 
-<header class="mb-6 flex justify-between">
-	<h1 class="block text-xl font-bold">Http Codes</h1>
-	<div class="flex items-center gap-4">
-		<ButtonGroup.Root>
-			<Button variant="outline" onclick={downloadJson}><Download /> Download JSON</Button>
+<div class="px-4 py-6">
+	<header class="mb-6 flex justify-between">
+		<h1 class="block text-xl font-bold">Http Codes</h1>
+		<div class="flex items-center gap-4">
+			<ButtonGroup.Root>
+				<Button variant="outline" onclick={downloadJson}><Download /> Download JSON</Button>
 
-			<ReferencesSheet
-				references={[
-					{
-						title: 'List of HTTP status codes',
-						url: 'https://en.wikipedia.org/wiki/List_of_HTTP_status_codes'
-					},
-					{
-						title: 'Hypertext Transfer Protocol (HTTP) Status Code Registry',
-						url: 'https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml'
-					}
-				]}
-			/>
-		</ButtonGroup.Root>
-	</div>
-</header>
+				<ReferencesSheet
+					references={[
+						{
+							title: 'List of HTTP status codes',
+							url: 'https://en.wikipedia.org/wiki/List_of_HTTP_status_codes'
+						},
+						{
+							title: 'Hypertext Transfer Protocol (HTTP) Status Code Registry',
+							url: 'https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml'
+						}
+					]}
+				/>
+			</ButtonGroup.Root>
+		</div>
+	</header>
 
-<DataTable data={httpCodes} {columns} />
+	<DataTable data={httpCodes} {columns} />
+</div>
