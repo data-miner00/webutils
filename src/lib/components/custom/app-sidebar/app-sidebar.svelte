@@ -344,6 +344,8 @@
 		collapsible = 'icon',
 		...restProps
 	}: ComponentProps<typeof Sidebar.Root> = $props();
+
+	const sidebar = Sidebar.useSidebar();
 </script>
 
 <Sidebar.Root {collapsible} {...restProps}>
@@ -354,9 +356,11 @@
 		<NavMain items={data.navMain} {toggleCollapsible} />
 	</Sidebar.Content>
 	<Sidebar.Footer>
-		<div class="text-muted-foreground ml-2 text-sm">
-			<Kbd.Kbd>Ctrl</Kbd.Kbd> + <Kbd.Kbd>K</Kbd.Kbd> to search internet
-		</div>
+		{#if sidebar.open}
+			<div class="text-muted-foreground ml-2 text-sm">
+				<Kbd.Kbd>Ctrl</Kbd.Kbd> + <Kbd.Kbd>K</Kbd.Kbd> to search internet
+			</div>
+		{/if}
 		<NavUser user={data.user} />
 	</Sidebar.Footer>
 	<Sidebar.Rail />
