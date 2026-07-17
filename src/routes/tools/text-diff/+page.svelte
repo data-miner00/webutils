@@ -61,7 +61,7 @@
 	});
 </script>
 
-<div class="grid h-full grid-cols-2 gap-4 px-4 py-6">
+<div class="grid h-screen grid-cols-2 gap-4 px-4 py-6">
 	<section class="flex flex-1 flex-col overflow-hidden">
 		<header class="mb-6 flex justify-between">
 			<h2 class="block text-xl font-bold">Original</h2>
