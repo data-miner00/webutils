@@ -111,11 +111,6 @@
 						Home Settings
 					</DropdownMenu.Item>
 				</DropdownMenu.Group>
-				<DropdownMenu.Separator />
-				<DropdownMenu.Item>
-					<LogOutIcon />
-					Log out
-				</DropdownMenu.Item>
 			</DropdownMenu.Content>
 		</DropdownMenu.Root>
 	</Sidebar.MenuItem>

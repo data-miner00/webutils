@@ -13,12 +13,6 @@
 			>Profile Related</a
 		>
 		<a href="/settings/home" class:underline={page.url.pathname === '/settings/home'}>Home Page</a>
-		<a href="/settings/security" class:underline={page.url.pathname === '/settings/general'}
-			>Entertainment</a
-		>
-		<a href="/settings/privacy" class:underline={page.url.pathname === '/settings/general'}
-			>Monitoring</a
-		>
 	</aside>
 
 	<div class="flex flex-1 flex-col gap-4 p-4 pt-0">

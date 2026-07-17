@@ -10,8 +10,6 @@
 		ScanSearchIcon,
 		ShieldEllipsis
 	} from '@lucide/svelte';
-	import AudioWaveformIcon from '@lucide/svelte/icons/audio-waveform';
-	import CommandIcon from '@lucide/svelte/icons/command';
 	import FrameIcon from '@lucide/svelte/icons/frame';
 	import GalleryVerticalEndIcon from '@lucide/svelte/icons/gallery-vertical-end';
 	import SquareTerminalIcon from '@lucide/svelte/icons/square-terminal';
@@ -22,7 +20,6 @@
 
 	import NavMain from './nav-main.svelte';
 	import NavUser from './nav-user.svelte';
-	import TeamSwitcher from './team-switcher.svelte';
 
 	const savedUsername = localStorage.getItem('settings_username') || 'User';
 	const savedEmail = localStorage.getItem('settings_email') || 'me@gmail.com';
@@ -34,23 +31,6 @@
 			email: savedEmail,
 			avatar: savedAvatarUrl
 		},
-		teams: [
-			{
-				name: savedCompanyName,
-				logo: GalleryVerticalEndIcon,
-				plan: 'Enterprise'
-			},
-			{
-				name: savedCompanyName,
-				logo: AudioWaveformIcon,
-				plan: 'Startup'
-			},
-			{
-				name: savedCompanyName,
-				logo: CommandIcon,
-				plan: 'Free'
-			}
-		],
 		navMain: [
 			{
 				title: 'General',
@@ -350,7 +330,24 @@
 
 <Sidebar.Root {collapsible} {...restProps}>
 	<Sidebar.Header>
-		<TeamSwitcher teams={data.teams} />
+		<Sidebar.Menu>
+			<Sidebar.MenuItem>
+				<Sidebar.MenuButton
+					size="lg"
+					class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+				>
+					<div
+						class="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg"
+					>
+						<GalleryVerticalEndIcon class="size-4" />
+					</div>
+					<div class="grid flex-1 text-start text-sm leading-tight">
+						<span class="truncate font-medium">{savedCompanyName}</span>
+						<span class="truncate text-xs italic">Bonjour</span>
+					</div>
+				</Sidebar.MenuButton>
+			</Sidebar.MenuItem>
+		</Sidebar.Menu>
 	</Sidebar.Header>
 	<Sidebar.Content>
 		<NavMain items={data.navMain} {toggleCollapsible} />
