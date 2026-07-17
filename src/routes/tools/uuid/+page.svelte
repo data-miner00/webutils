@@ -67,13 +67,6 @@
 	}
 
 	function generate() {
-		if (version === '3' || version === '5') {
-			if (!namespace || !name) {
-				toast.error('Namespace and Name are required for version 3 and 5 UUIDs.');
-				return;
-			}
-		}
-
 		output = generateUUID({ quantity, version, namespace, name }).join('\n');
 	}
 </script>

@@ -159,7 +159,7 @@
 				<Label for="binaryOutput" class="mb-2">Binary</Label>
 
 				<InputGroup.Root class="mb-6">
-					<InputGroup.Input value={output.decimalToBinary} readonly />
+					<InputGroup.Input value={output.decimalToBinary} disabled />
 					<InputGroup.Addon align="inline-end">
 						<InputGroup.Button
 							aria-label="Copy"
@@ -177,7 +177,7 @@
 				<Label for="octalOutput" class="mb-2">Octal</Label>
 
 				<InputGroup.Root class="mb-6">
-					<InputGroup.Input value={output.decimalToOctal} readonly />
+					<InputGroup.Input value={output.decimalToOctal} disabled />
 					<InputGroup.Addon align="inline-end">
 						<InputGroup.Button
 							aria-label="Copy"
@@ -194,7 +194,7 @@
 			<div>
 				<Label for="decimalOutput" class="mb-2">Decimal</Label>
 				<InputGroup.Root class="mb-6">
-					<InputGroup.Input value={decimalInput} readonly />
+					<InputGroup.Input value={decimalInput} disabled />
 					<InputGroup.Addon align="inline-end">
 						<InputGroup.Button
 							aria-label="Copy"
@@ -211,7 +211,7 @@
 			<div>
 				<Label for="hexadecimalOutput" class="mb-2">Hexadecimal</Label>
 				<InputGroup.Root class="mb-6">
-					<InputGroup.Input value={output.decimalToHexadecimal} readonly />
+					<InputGroup.Input value={output.decimalToHexadecimal} disabled />
 					<InputGroup.Addon align="inline-end">
 						<InputGroup.Button
 							aria-label="Copy"
@@ -228,7 +228,7 @@
 			<div>
 				<Label for="base32Output" class="mb-2">Base32</Label>
 				<InputGroup.Root class="mb-6">
-					<InputGroup.Input value={output.decimalToBase32} readonly />
+					<InputGroup.Input value={output.decimalToBase32} disabled />
 					<InputGroup.Addon align="inline-end">
 						<InputGroup.Button
 							aria-label="Copy"
