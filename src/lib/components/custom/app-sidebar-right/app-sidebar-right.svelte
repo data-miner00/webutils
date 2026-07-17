@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CalendarIcon, PencilIcon } from '@lucide/svelte';
+	import { ArrowUpIcon, CalendarIcon, PencilIcon } from '@lucide/svelte';
 	import type { ComponentProps } from 'svelte';
 
 	import { goto } from '$app/navigation';
@@ -37,6 +37,12 @@
 	</Sidebar.Content>
 	<Sidebar.Footer>
 		<Sidebar.Menu>
+			<Sidebar.MenuItem>
+				<Sidebar.MenuButton onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+					<ArrowUpIcon />
+					<span>Scroll to Top</span>
+				</Sidebar.MenuButton>
+			</Sidebar.MenuItem>
 			<Sidebar.MenuItem>
 				<Sidebar.MenuButton>
 					<PencilIcon />
