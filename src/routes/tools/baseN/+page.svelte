@@ -1,71 +1,95 @@
 <script lang="ts">
-	import { Album, ArrowBigDown, Clipboard, Copy, EllipsisVertical, X } from '@lucide/svelte';
+	import { Clipboard, Copy, X } from '@lucide/svelte';
 
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
 	import Label from '$lib/components/ui/label/label.svelte';
 	import * as Select from '$lib/components/ui/select';
 	import { BaseN } from '$lib/core/baseN';
 	import { copyText } from '$lib/core/copy-to-clipboard';
-	import { toPascalCase } from '$lib/core/string-utils';
+
+	type Mode = 'binary' | 'octal' | 'decimal' | 'hexadecimal' | 'base32';
 
 	const base2 = new BaseN(2);
 	const base8 = new BaseN(8);
 	const base16 = new BaseN(16);
 	const base32 = new BaseN(32);
 
+	const allModes: Mode[] = ['binary', 'octal', 'decimal', 'hexadecimal', 'base32'];
+
+	const modeLabels: Record<Mode, string> = {
+		binary: 'Binary',
+		octal: 'Octal',
+		decimal: 'Decimal',
+		hexadecimal: 'Hexadecimal',
+		base32: 'Base32'
+	};
+
+	const exampleLabels: Record<Mode, string> = {
+		binary: 'Binary',
+		octal: 'Octal',
+		decimal: 'Decimal',
+		hexadecimal: 'Hex',
+		base32: 'Base32'
+	};
+
+	const examples: Record<Mode, string> = {
+		binary: '1001',
+		octal: '154',
+		decimal: '1234',
+		hexadecimal: '1A3F',
+		base32: 'JBS1F3DP'
+	};
+
 	let input = $state('1001');
-	let mode = $state<'binary' | 'octal' | 'decimal' | 'hexadecimal' | 'base32'>('binary');
-	let decimalInput = $derived(
-		!input
-			? 0
-			: mode === 'binary'
-				? base2.decode(input)
-				: mode === 'octal'
-					? base8.decode(input)
-					: mode === 'decimal'
-						? Number(input)
-						: mode === 'hexadecimal'
-							? base16.decode(input)
-							: base32.decode(input)
+	let mode = $state<Mode>('binary');
+
+	function decodeInput(value: string, currentMode: Mode): number | null {
+		if (!value) return 0;
+		try {
+			switch (currentMode) {
+				case 'binary':
+					return base2.decode(value);
+				case 'octal':
+					return base8.decode(value);
+				case 'decimal':
+					if (!/^\d+$/.test(value)) throw new Error('Invalid decimal number');
+					return Number(value);
+				case 'hexadecimal':
+					return base16.decode(value);
+				case 'base32':
+					return base32.decode(value);
+			}
+		} catch {
+			return null;
+		}
+	}
+
+	let decimalInput = $derived(decodeInput(input, mode));
+	let isValid = $derived(decimalInput !== null);
+
+	let output = $derived<Record<Mode, string>>(
+		decimalInput === null
+			? { binary: '', octal: '', decimal: '', hexadecimal: '', base32: '' }
+			: {
+					binary: base2.encode(decimalInput),
+					octal: base8.encode(decimalInput),
+					decimal: decimalInput.toString(),
+					hexadecimal: base16.encode(decimalInput),
+					base32: base32.encode(decimalInput)
+				}
 	);
 
-	let output = $derived({
-		decimalToBinary: base2.encode(Number(decimalInput)),
-		decimalToOctal: base8.encode(Number(decimalInput)),
-		decimalToHexadecimal: base16.encode(Number(decimalInput)),
-		decimalToBase32: base32.encode(Number(decimalInput))
-	});
+	let visibleOutputModes = $derived(allModes.filter((m) => m !== mode));
 
 	function copyOutput() {
-		copyText(JSON.stringify(output, null, 2));
+		if (isValid) copyText(JSON.stringify(output, null, 2));
 	}
 
-	function loadBinaryExample() {
-		input = '1001';
-		mode = 'binary';
-	}
-
-	function loadOctalExample() {
-		input = '154';
-		mode = 'octal';
-	}
-
-	function loadDecimalExample() {
-		input = '1234';
-		mode = 'decimal';
-	}
-
-	function loadHexadecimalExample() {
-		input = '1A3F';
-		mode = 'hexadecimal';
-	}
-
-	function loadBase32Example() {
-		input = 'JBS1F3DP';
-		mode = 'base32';
+	function loadExample(exampleMode: Mode) {
+		input = examples[exampleMode];
+		mode = exampleMode;
 	}
 </script>
 
@@ -75,176 +99,84 @@
 		<p class="text-muted-foreground text-center">Convert numbers between different bases.</p>
 	</header>
 
-	<div class="flex flex-col gap-6">
-		<div class="flex justify-end">
-			<div class="flex items-center gap-2">
-				<ButtonGroup.Root>
-					<ButtonGroup.Root>
-						<Button variant="outline" onclick={loadBinaryExample}>Binary Example</Button>
-						<DropdownMenu.Root>
-							<DropdownMenu.Trigger>
-								{#snippet child({ props })}
-									<Button {...props} variant="outline" aria-label="More Options">
-										<EllipsisVertical />
-									</Button>
-								{/snippet}
-							</DropdownMenu.Trigger>
-							<DropdownMenu.Content align="end" class="w-52">
-								<DropdownMenu.Group>
-									<DropdownMenu.Item onclick={loadOctalExample}>
-										<Album />
-										Octal Example
-									</DropdownMenu.Item>
-									<DropdownMenu.Item onclick={loadDecimalExample}>
-										<Album />
-										Decimal Example
-									</DropdownMenu.Item>
-									<DropdownMenu.Item onclick={loadHexadecimalExample}>
-										<Album />
-										Hexadecimal Example
-									</DropdownMenu.Item>
-									<DropdownMenu.Item onclick={loadBase32Example}>
-										<Album />
-										Base32 Example
-									</DropdownMenu.Item>
-								</DropdownMenu.Group>
-							</DropdownMenu.Content>
-						</DropdownMenu.Root>
-					</ButtonGroup.Root>
-				</ButtonGroup.Root>
-			</div>
-		</div>
-		<div>
-			<Label for="base" class="mb-2">Base</Label>
-			<Select.Root type="single" name="baseType" bind:value={mode}>
-				<Select.Trigger class="mb-6 w-full">
-					{toPascalCase(mode)}
-				</Select.Trigger>
-				<Select.Content>
-					<Select.Group>
-						<Select.Label>Base</Select.Label>
-						<Select.Item value="binary" label="Binary">Binary</Select.Item>
-						<Select.Item value="octal" label="Octal">Octal</Select.Item>
-						<Select.Item value="decimal" label="Decimal">Decimal</Select.Item>
-						<Select.Item value="hexadecimal" label="Hexadecimal">Hexadecimal</Select.Item>
-						<Select.Item value="base32" label="Base32">Base32</Select.Item>
-					</Select.Group>
-				</Select.Content>
-			</Select.Root>
+	<div class="bg-background border-border w-full rounded-lg border p-6 shadow-sm">
+		<header class="mb-4 flex flex-wrap items-center justify-between gap-2">
+			<ButtonGroup.Root>
+				{#each allModes as mode (mode)}
+					<Button variant="ghost" size="sm" onclick={() => loadExample(mode)}>
+						{exampleLabels[mode]}
+					</Button>
+				{/each}
+			</ButtonGroup.Root>
+			<Button variant="outline" size="sm" onclick={copyOutput} disabled={!isValid}>
+				<Clipboard /> Copy JSON
+			</Button>
+		</header>
 
+		<div class="mb-6">
 			<Label for="inputNumber" class="mb-2">Input Number</Label>
-			<InputGroup.Root>
-				<InputGroup.Input id="inputNumber" bind:value={input} />
-				{#if input}
-					<InputGroup.Addon align="inline-end">
-						<InputGroup.Button
-							aria-label="Clear"
-							title="Clear input"
-							size="icon-xs"
-							onclick={() => (input = '')}
-						>
-							<X />
-						</InputGroup.Button>
-					</InputGroup.Addon>
-				{/if}
-			</InputGroup.Root>
+			<div class="flex items-center gap-3">
+				<Select.Root type="single" name="baseType" bind:value={mode}>
+					<Select.Trigger class="w-40 shrink-0">
+						{modeLabels[mode]}
+					</Select.Trigger>
+					<Select.Content>
+						<Select.Group>
+							<Select.Label>Base</Select.Label>
+							{#each allModes as mode (mode)}
+								<Select.Item value={mode} label={modeLabels[mode]}>{modeLabels[mode]}</Select.Item>
+							{/each}
+						</Select.Group>
+					</Select.Content>
+				</Select.Root>
+
+				<div class="flex-1">
+					<InputGroup.Root>
+						<InputGroup.Input id="inputNumber" bind:value={input} aria-invalid={!isValid} />
+						{#if input}
+							<InputGroup.Addon align="inline-end">
+								<InputGroup.Button
+									aria-label="Clear"
+									title="Clear input"
+									size="icon-xs"
+									onclick={() => (input = '')}
+								>
+									<X />
+								</InputGroup.Button>
+							</InputGroup.Addon>
+						{/if}
+					</InputGroup.Root>
+				</div>
+			</div>
+			{#if !isValid}
+				<p class="text-destructive mt-2 text-sm">
+					"{input}" is not a valid {modeLabels[mode]} number.
+				</p>
+			{/if}
 		</div>
 
-		<div class="mx-auto">
-			<ArrowBigDown />
-		</div>
-
-		<div class="flex grid-cols-2 flex-col gap-2 md:grid">
-			<div>
-				<Label for="binaryOutput" class="mb-2">Binary</Label>
-
-				<InputGroup.Root class="mb-6">
-					<InputGroup.Input value={output.decimalToBinary} disabled />
-					<InputGroup.Addon align="inline-end">
-						<InputGroup.Button
-							aria-label="Copy"
-							title="Copy"
-							size="icon-xs"
-							onclick={() => copyText(output.decimalToBinary)}
-						>
-							<Copy />
-						</InputGroup.Button>
-					</InputGroup.Addon>
-				</InputGroup.Root>
-			</div>
-
-			<div>
-				<Label for="octalOutput" class="mb-2">Octal</Label>
-
-				<InputGroup.Root class="mb-6">
-					<InputGroup.Input value={output.decimalToOctal} disabled />
-					<InputGroup.Addon align="inline-end">
-						<InputGroup.Button
-							aria-label="Copy"
-							title="Copy"
-							size="icon-xs"
-							onclick={() => copyText(output.decimalToOctal)}
-						>
-							<Copy />
-						</InputGroup.Button>
-					</InputGroup.Addon>
-				</InputGroup.Root>
-			</div>
-
-			<div>
-				<Label for="decimalOutput" class="mb-2">Decimal</Label>
-				<InputGroup.Root class="mb-6">
-					<InputGroup.Input value={decimalInput} disabled />
-					<InputGroup.Addon align="inline-end">
-						<InputGroup.Button
-							aria-label="Copy"
-							title="Copy"
-							size="icon-xs"
-							onclick={() => copyText(decimalInput.toString())}
-						>
-							<Copy />
-						</InputGroup.Button>
-					</InputGroup.Addon>
-				</InputGroup.Root>
-			</div>
-
-			<div>
-				<Label for="hexadecimalOutput" class="mb-2">Hexadecimal</Label>
-				<InputGroup.Root class="mb-6">
-					<InputGroup.Input value={output.decimalToHexadecimal} disabled />
-					<InputGroup.Addon align="inline-end">
-						<InputGroup.Button
-							aria-label="Copy"
-							title="Copy"
-							size="icon-xs"
-							onclick={() => copyText(output.decimalToHexadecimal)}
-						>
-							<Copy />
-						</InputGroup.Button>
-					</InputGroup.Addon>
-				</InputGroup.Root>
-			</div>
-
-			<div>
-				<Label for="base32Output" class="mb-2">Base32</Label>
-				<InputGroup.Root class="mb-6">
-					<InputGroup.Input value={output.decimalToBase32} disabled />
-					<InputGroup.Addon align="inline-end">
-						<InputGroup.Button
-							aria-label="Copy"
-							title="Copy"
-							size="icon-xs"
-							onclick={() => copyText(output.decimalToBase32)}
-						>
-							<Copy />
-						</InputGroup.Button>
-					</InputGroup.Addon>
-				</InputGroup.Root>
+		<div class="border-border border-t pt-6">
+			<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+				{#each visibleOutputModes as mode (mode)}
+					<div>
+						<Label class="mb-2">{modeLabels[mode]}</Label>
+						<InputGroup.Root>
+							<InputGroup.Input value={output[mode]} placeholder="—" disabled />
+							<InputGroup.Addon align="inline-end">
+								<InputGroup.Button
+									aria-label="Copy"
+									title="Copy"
+									size="icon-xs"
+									disabled={!output[mode]}
+									onclick={() => copyText(output[mode])}
+								>
+									<Copy />
+								</InputGroup.Button>
+							</InputGroup.Addon>
+						</InputGroup.Root>
+					</div>
+				{/each}
 			</div>
 		</div>
-
-		<ButtonGroup.Root class="ml-auto">
-			<Button variant="outline" onclick={copyOutput}><Clipboard /> Copy as JSON</Button>
-		</ButtonGroup.Root>
 	</div>
 </div>
