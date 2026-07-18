@@ -9,8 +9,10 @@
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
+	import * as Select from '$lib/components/ui/select';
 	import { db, initializeDatabase } from '$lib/core/Database';
 	import { IndexedDBRepository } from '$lib/core/IndexedDbRepository';
+	import { selectLanguageMap } from '$lib/core/languages';
 	import { type Link, STORE_NAME, defaultLinks } from '$lib/core/links';
 
 	let links = $state<Link[]>([]);
@@ -55,6 +57,7 @@
 			inputLink.title = '';
 			inputLink.category = '';
 			inputLink.url = '';
+			inputLink.language = 'en';
 		}
 	});
 
@@ -117,6 +120,11 @@
 
 	let isDeleteDialogOpen = $state(false);
 	let linkToDelete = $state<Link | null>(null);
+
+	let languageTriggerContent = $derived.by(() => {
+		const selectedLang = selectLanguageMap.find((lang) => lang.value === inputLink.language);
+		return selectedLang ? selectedLang.label : 'Select Language';
+	});
 </script>
 
 <AlertDialog.Root bind:open={isDeleteDialogOpen}>
@@ -205,6 +213,25 @@
 								placeholder="e.g. https://google.com"
 								bind:value={inputLink.url}
 							/>
+						</div>
+						<div class="grid gap-3">
+							<Label for="language">Language</Label>
+
+							<Select.Root type="single" name="language" bind:value={inputLink.language}>
+								<Select.Trigger class="w-full">
+									{languageTriggerContent}
+								</Select.Trigger>
+								<Select.Content>
+									<Select.Group>
+										<Select.Label>Languages</Select.Label>
+										{#each selectLanguageMap as lang (lang.value)}
+											<Select.Item value={lang.value} label={lang.label}>
+												{lang.label}
+											</Select.Item>
+										{/each}
+									</Select.Group>
+								</Select.Content>
+							</Select.Root>
 						</div>
 					</div>
 					<Dialog.Footer>
