@@ -285,6 +285,10 @@
 					{
 						title: 'HTTP Code',
 						url: '/tools/http-code'
+					},
+					{
+						title: 'Weather',
+						url: '/tools/weather'
 					}
 				]
 			},

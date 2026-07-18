@@ -4,8 +4,23 @@ import {
 	convertFarenheitToCelcius,
 	convertFarenheitToKelvin,
 	convertKelvinToCelcius,
-	convertKelvinToFarenheit
+	convertKelvinToFarenheit,
+	describeWeatherCode
 } from '$lib/core/weather';
+
+describe('describeWeatherCode', () => {
+	it('describes known WMO weather codes', () => {
+		expect(describeWeatherCode(0)).toBe('Clear sky');
+		expect(describeWeatherCode(3)).toBe('Overcast');
+		expect(describeWeatherCode(61)).toBe('Slight rain');
+		expect(describeWeatherCode(95)).toBe('Thunderstorm');
+	});
+
+	it('falls back to "Unknown" for unrecognized codes', () => {
+		expect(describeWeatherCode(-1)).toBe('Unknown');
+		expect(describeWeatherCode(9999)).toBe('Unknown');
+	});
+});
 
 describe('weather conversions', () => {
 	describe('convertCelciusToFarenheit', () => {
