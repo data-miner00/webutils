@@ -64,6 +64,10 @@
 						url: '/tools/timestamp'
 					},
 					{
+						title: 'Date & Time Calculator',
+						url: '/tools/date-difference'
+					},
+					{
 						title: 'Base Converter',
 						url: '/tools/baseN'
 					}
