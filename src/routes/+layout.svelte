@@ -5,7 +5,7 @@
 	import AppSidebarRight from '$lib/components/custom/app-sidebar-right/app-sidebar-right.svelte';
 	import AppSidebar from '$lib/components/custom/app-sidebar/app-sidebar.svelte';
 	import ClipboardHistory from '$lib/components/custom/clipboard/clipboard-history.svelte';
-	import CommandPanel from '$lib/components/custom/command-panel/command-panel.svelte';
+	import CommandPalette from '$lib/components/custom/command-palette/command-palette.svelte';
 	import SearchDialog from '$lib/components/custom/search/search-dialog.svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import { Toaster } from '$lib/components/ui/sonner';
@@ -52,7 +52,7 @@
 </svelte:head>
 
 <Toaster position="top-center" />
-<CommandPanel bind:isCommandOpen bind:isClipboardOpen />
+<CommandPalette bind:isCommandOpen bind:isClipboardOpen />
 <SearchDialog bind:isDialogOpen />
 <ClipboardHistory bind:isOpen={isClipboardOpen} />
 <ModeWatcher />
