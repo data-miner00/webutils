@@ -27,3 +27,6 @@ export const SearchEngineStorageKey = 'searchEngine';
 export const IsLinkEnabledStorageKey = 'homepageLink';
 export const IsWebSearchEnabledStorageKey = 'homepageWebSearch';
 export const LinkCountStorageKey = 'homepageLinkCount';
+
+export const HomeRecentToolsKey = 'homeRecentTools';
+export const HomeFavoriteToolsKey = 'homeFavoriteTools';

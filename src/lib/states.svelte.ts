@@ -2,6 +2,8 @@ import { type SystemModeValue, mode, setMode } from 'mode-watcher';
 
 import {
 	ClipboardHistoryMaxItemsKey,
+	HomeFavoriteToolsKey,
+	HomeRecentToolsKey,
 	IsBetaFeaturesEnabledKey,
 	IsEnableClipboardHistoryKey,
 	IsLinkEnabledStorageKey,
@@ -9,7 +11,17 @@ import {
 	LanguageKey,
 	LinkCountStorageKey
 } from './constants';
+import { toggleFavorite, upsertRecent } from './core/tools';
 import type { Language } from './types';
+
+function readStoredList(key: string): string[] {
+	try {
+		const raw = localStorage.getItem(key);
+		return raw ? JSON.parse(raw) : [];
+	} catch {
+		return [];
+	}
+}
 
 export type AppState = {
 	theme: SystemModeValue;
@@ -24,6 +36,9 @@ export type AppState = {
 	isHomeLinkEnabled: boolean;
 	isHomeWebSearchEnabled: boolean;
 	homeLinkCount: number;
+
+	recentTools: string[];
+	favoriteTools: string[];
 };
 
 export let appState = $state<AppState>({
@@ -38,7 +53,10 @@ export let appState = $state<AppState>({
 	isEnablePokemonEasterEgg: localStorage.getItem('isEnablePokemonEasterEgg') === 'true',
 	isHomeLinkEnabled: localStorage.getItem(IsLinkEnabledStorageKey) === 'true',
 	isHomeWebSearchEnabled: localStorage.getItem(IsWebSearchEnabledStorageKey) === 'true',
-	homeLinkCount: Number.parseInt(localStorage.getItem(LinkCountStorageKey) || '8')
+	homeLinkCount: Number.parseInt(localStorage.getItem(LinkCountStorageKey) || '8'),
+
+	recentTools: readStoredList(HomeRecentToolsKey),
+	favoriteTools: readStoredList(HomeFavoriteToolsKey)
 });
 
 export function setLanguage(language: Language) {
@@ -94,4 +112,14 @@ export function setIsEnableHomeWebSearch(isEnabled: boolean) {
 export function setHomeLinkDisplayCount(count: number) {
 	appState.homeLinkCount = count;
 	localStorage.setItem(LinkCountStorageKey, String(count));
+}
+
+export function recordRecentTool(url: string) {
+	appState.recentTools = upsertRecent(appState.recentTools, url);
+	localStorage.setItem(HomeRecentToolsKey, JSON.stringify(appState.recentTools));
+}
+
+export function toggleFavoriteTool(url: string) {
+	appState.favoriteTools = toggleFavorite(appState.favoriteTools, url);
+	localStorage.setItem(HomeFavoriteToolsKey, JSON.stringify(appState.favoriteTools));
 }
