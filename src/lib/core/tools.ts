@@ -5,62 +5,78 @@ export type Tool = {
 };
 
 export const tools: Tool[] = [
-	{ title: 'QR Code', url: '/tools/qr-code', category: 'General' },
-	{ title: 'Unit Conversion', url: '/tools/conversion', category: 'General' },
-	{ title: 'Timer / Stopwatch', url: '/tools/timer', category: 'General' },
+	{ title: 'QR Code Generator', url: '/tools/qr-code-generator', category: 'General' },
+	{ title: 'Unit Converter', url: '/tools/unit-converter', category: 'General' },
+	{ title: 'Timer & Stopwatch', url: '/tools/timer-stopwatch', category: 'General' },
 	{ title: 'URL Parser', url: '/tools/url-parser', category: 'General' },
 	{ title: 'UUID Generator', url: '/tools/uuid', category: 'General' },
-	{ title: 'Timestamp', url: '/tools/timestamp', category: 'General' },
-	{ title: 'Base Converter', url: '/tools/baseN', category: 'General' },
+	{ title: 'Timestamp Converter', url: '/tools/timestamp-converter', category: 'General' },
+	{ title: 'Base Converter', url: '/tools/base-converter', category: 'General' },
 
 	{ title: 'Base64 Image Converter', url: '/tools/base64-image', category: 'Image' },
-	{ title: 'Image Format Converter', url: '/tools/image-converter', category: 'Image' },
+	{
+		title: 'Image Format Converter',
+		url: '/tools/image-format-converter',
+		category: 'Image'
+	},
 	{ title: 'Image Resizer', url: '/tools/image-resizer', category: 'Image' },
 	{ title: 'Image Compressor', url: '/tools/image-compressor', category: 'Image' },
 
-	{ title: 'Leading Space', url: '/tools/leading-space', category: 'Code Review' },
-	{ title: 'Trailing Space', url: '/tools/trailing-space', category: 'Code Review' },
+	{ title: 'Leading Space Remover', url: '/tools/leading-space-remover', category: 'Code Review' },
+	{
+		title: 'Trailing Space Remover',
+		url: '/tools/trailing-space-remover',
+		category: 'Code Review'
+	},
 	{ title: 'Text Diff', url: '/tools/text-diff', category: 'Code Review' },
 	{ title: 'Empty Line Remover', url: '/tools/empty-line-remover', category: 'Code Review' },
 
 	{ title: 'JWT Debugger', url: '/tools/jwt-debugger', category: 'Security & Auth' },
-	{ title: 'Certificate Decoder', url: '/tools/certificate', category: 'Security & Auth' },
-	{ title: 'Verify', url: '/tools/verify', category: 'Security & Auth' },
-	{ title: 'Caesar Cipher', url: '/tools/caesar', category: 'Security & Auth' },
+	{
+		title: 'Certificate Decoder',
+		url: '/tools/certificate-decoder',
+		category: 'Security & Auth'
+	},
+	{
+		title: 'Card & Email Validator',
+		url: '/tools/card-email-validator',
+		category: 'Security & Auth'
+	},
+	{ title: 'Caesar Cipher', url: '/tools/caesar-cipher', category: 'Security & Auth' },
 	{ title: 'Morse Code Translator', url: '/tools/morse-code', category: 'Security & Auth' },
-	{ title: 'Vigenère Cipher', url: '/tools/vigenere', category: 'Security & Auth' },
+	{ title: 'Vigenère Cipher', url: '/tools/vigenere-cipher', category: 'Security & Auth' },
 
-	{ title: 'String Transform', url: '/tools/strings', category: 'Text' },
+	{ title: 'String Transform', url: '/tools/string-transform', category: 'Text' },
 	{ title: 'Text Stats', url: '/tools/text-stats', category: 'Text' },
-	{ title: 'Hash String', url: '/tools/hash', category: 'Text' },
+	{ title: 'Hash Generator', url: '/tools/hash-generator', category: 'Text' },
 	{ title: 'Unicode to Hex', url: '/tools/unicode-hex', category: 'Text' },
 	{ title: 'Sort list', url: '/tools/sort-list', category: 'Text' },
-	{ title: 'Base64', url: '/tools/base64', category: 'Text' },
-	{ title: 'Newline Escape', url: '/tools/newline-escaper', category: 'Text' },
+	{ title: 'Base64 Encoder/Decoder', url: '/tools/base64-encoder-decoder', category: 'Text' },
+	{ title: 'Newline Escaper', url: '/tools/newline-escaper', category: 'Text' },
 
-	{ title: 'Draw', url: '/tools/draw', category: 'Discussion' },
+	{ title: 'Whiteboard', url: '/tools/whiteboard', category: 'Discussion' },
 
-	{ title: 'CSS Formatter', url: '/tools/css', category: 'Web' },
+	{ title: 'CSS Formatter', url: '/tools/css-formatter', category: 'Web' },
 	{ title: 'HTML Viewer', url: '/tools/html-viewer', category: 'Web' },
-	{ title: 'HTML Formatter', url: '/tools/html', category: 'Web' },
-	{ title: 'JavaScript Formatter', url: '/tools/js', category: 'Web' },
-	{ title: 'JSON Formatter', url: '/tools/json', category: 'Web' },
+	{ title: 'HTML Formatter', url: '/tools/html-formatter', category: 'Web' },
+	{ title: 'JavaScript Formatter', url: '/tools/js-formatter', category: 'Web' },
+	{ title: 'JSON Formatter', url: '/tools/json-formatter', category: 'Web' },
 	{ title: 'Markdown Viewer', url: '/tools/markdown-viewer', category: 'Web' },
-	{ title: 'SQL Formatter', url: '/tools/sql', category: 'Web' },
-	{ title: 'YAML to JSON', url: '/tools/yaml', category: 'Web' },
-	{ title: 'XML Converter', url: '/tools/xml', category: 'Web' },
+	{ title: 'SQL Formatter', url: '/tools/sql-formatter', category: 'Web' },
+	{ title: 'YAML to JSON Converter', url: '/tools/yaml-to-json', category: 'Web' },
+	{ title: 'JSON to XML Converter', url: '/tools/json-to-xml', category: 'Web' },
 
-	{ title: 'Lorem Ipsum', url: '/tools/lorem', category: 'Design' },
+	{ title: 'Lorem Ipsum Generator', url: '/tools/lorem-ipsum-generator', category: 'Design' },
 	{ title: 'Color Converter', url: '/tools/color-converter', category: 'Design' },
 
-	{ title: 'Localhost', url: '/tools/localhost', category: 'Development' },
+	{ title: 'Localhost Manager', url: '/tools/localhost-manager', category: 'Development' },
 
-	{ title: 'Clock', url: '/tools/clock', category: 'Lookup' },
-	{ title: 'Emoji', url: '/tools/emoji', category: 'Lookup' },
-	{ title: 'Unicode', url: '/tools/unicode', category: 'Lookup' },
-	{ title: 'Country', url: '/tools/country', category: 'Lookup' },
+	{ title: 'World Clock', url: '/tools/world-clock', category: 'Lookup' },
+	{ title: 'Emoji Picker', url: '/tools/emoji-picker', category: 'Lookup' },
+	{ title: 'Unicode Lookup', url: '/tools/unicode-lookup', category: 'Lookup' },
+	{ title: 'Country Lookup', url: '/tools/country-lookup', category: 'Lookup' },
 	{ title: 'Calendar', url: '/tools/calendar', category: 'Lookup' },
-	{ title: 'HTTP Code', url: '/tools/http-code', category: 'Lookup' },
+	{ title: 'HTTP Status Code Lookup', url: '/tools/http-status-codes', category: 'Lookup' },
 	{ title: 'Weather', url: '/tools/weather', category: 'Lookup' }
 ];
 

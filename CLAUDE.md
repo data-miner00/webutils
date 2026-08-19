@@ -47,11 +47,12 @@ Docker: `docker build -t webutils:latest .`, or `docker-compose up -d` (`--build
 
 webutils is a SvelteKit 5 app built with `@sveltejs/adapter-static` — it ships as a static, client-only site (see `svelte.config.js`) and registers as a PWA via `vite-plugin-pwa` (`vite.config.ts`). There is no backend; all tools run in the browser.
 
-**Tool pages** live at `src/routes/tools/<tool-name>/+page.svelte`, one per utility (base64, jwt-debugger, uuid, hash, json, etc.). Adding a new tool route is not enough to expose it — it must also be added manually to the `navMain` array in `src/lib/components/custom/app-sidebar/app-sidebar.svelte` (title + `/tools/<name>` url) to appear in navigation/search.
+**Tool pages** live at `src/routes/tools/<tool-name>/+page.svelte`, one per utility (base64-encoder-decoder, jwt-debugger, uuid, hash-generator, json-formatter, etc.). Adding a new tool route is not enough to expose it — it must also be added manually to the `navMain` array in `src/lib/components/custom/app-sidebar/app-sidebar.svelte` (title + `/tools/<name>` url) to appear in navigation/search.
 
 **Business logic is separated from UI**: pure logic for each tool lives in `src/lib/core/<name>.ts` (e.g. `base64.ts`, `jwt.ts`, `hashing.ts`, `format-json.ts`), independent of Svelte. `+page.svelte` files import and call into these. Unit tests in `tests/lib/*.spec.ts` mirror the core files 1:1 and test the logic directly (not the components) via vitest's `node` environment project (see `vite.config.ts`).
 
 **Components**:
+
 - `src/lib/components/ui` — shadcn-svelte generated primitives (config/aliases in `components.json`, base color `neutral`, styles in `src/routes/layout.css`). Treat as generated; prefer regenerating/extending via shadcn-svelte conventions over hand-editing internals.
 - `src/lib/components/custom` — app-specific composed components (app-sidebar, command-panel, code-editor, clipboard, timer, references, localhost, search, etc.).
 

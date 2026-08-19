@@ -78,14 +78,14 @@
 					title: 'Search Emoji',
 					icon: SmileIcon,
 					onSelect() {
-						gotoPage('/tools/emoji');
+						gotoPage('/tools/emoji-picker');
 					}
 				},
 				{
 					title: 'Clock',
 					icon: Clock10,
 					onSelect() {
-						gotoPage('/tools/clock');
+						gotoPage('/tools/world-clock');
 					}
 				},
 				{
@@ -127,24 +127,24 @@
 			heading: 'General',
 			items: [
 				{
-					title: 'QR Code',
+					title: 'QR Code Generator',
 					icon: QrCode,
 					onSelect() {
-						gotoPage('/tools/qr-code');
+						gotoPage('/tools/qr-code-generator');
 					}
 				},
 				{
-					title: 'Unit Conversion',
+					title: 'Unit Converter',
 					icon: Ruler,
 					onSelect() {
-						gotoPage('/tools/conversion');
+						gotoPage('/tools/unit-converter');
 					}
 				},
 				{
 					title: 'Timer & Stopwatch',
 					icon: TimerIcon,
 					onSelect() {
-						gotoPage('/tools/timer');
+						gotoPage('/tools/timer-stopwatch');
 					}
 				},
 				{
@@ -162,24 +162,24 @@
 					}
 				},
 				{
-					title: 'Timestamp',
+					title: 'Timestamp Converter',
 					icon: Clock10,
 					onSelect() {
-						gotoPage('/tools/timestamp');
+						gotoPage('/tools/timestamp-converter');
 					}
 				},
 				{
 					title: 'Base Converter',
 					icon: BinaryIcon,
 					onSelect() {
-						gotoPage('/tools/baseN');
+						gotoPage('/tools/base-converter');
 					}
 				},
 				{
-					title: 'Localhost',
+					title: 'Localhost Manager',
 					icon: CodeIcon,
 					onSelect() {
-						gotoPage('/tools/localhost');
+						gotoPage('/tools/localhost-manager');
 					}
 				}
 			]
@@ -231,28 +231,28 @@
 					title: 'World Clock & Time',
 					icon: Clock10Icon,
 					onSelect() {
-						gotoPage('/tools/clock');
+						gotoPage('/tools/world-clock');
 					}
 				},
 				{
 					title: 'Search Emoji',
 					icon: SmileIcon,
 					onSelect() {
-						gotoPage('/tools/emoji');
+						gotoPage('/tools/emoji-picker');
 					}
 				},
 				{
 					title: 'Unicode List',
 					icon: AsteriskIcon,
 					onSelect() {
-						gotoPage('/tools/unicode');
+						gotoPage('/tools/unicode-lookup');
 					}
 				},
 				{
 					title: 'Country',
 					icon: EarthIcon,
 					onSelect() {
-						gotoPage('/tools/country');
+						gotoPage('/tools/country-lookup');
 					}
 				},
 				{
@@ -263,10 +263,10 @@
 					}
 				},
 				{
-					title: 'HTTP Codes',
+					title: 'HTTP Status Code Lookup',
 					icon: ChevronsLeftRightEllipsis,
 					onSelect() {
-						gotoPage('/tools/http-code');
+						gotoPage('/tools/http-status-codes');
 					}
 				}
 			]
@@ -285,7 +285,7 @@
 					title: 'Image Format Converter',
 					icon: ImageIcon,
 					onSelect() {
-						gotoPage('/tools/image-converter');
+						gotoPage('/tools/image-format-converter');
 					}
 				},
 				{
@@ -315,17 +315,17 @@
 			heading: 'Code Review',
 			items: [
 				{
-					title: 'Leading Space',
+					title: 'Leading Space Remover',
 					icon: SpaceIcon,
 					onSelect() {
-						gotoPage('/tools/leading-space');
+						gotoPage('/tools/leading-space-remover');
 					}
 				},
 				{
-					title: 'Trailing Space',
+					title: 'Trailing Space Remover',
 					icon: SpaceIcon,
 					onSelect() {
-						gotoPage('/tools/trailing-space');
+						gotoPage('/tools/trailing-space-remover');
 					}
 				},
 				{
@@ -358,21 +358,21 @@
 					title: 'Certificate Decoder',
 					icon: ShieldCheck,
 					onSelect() {
-						gotoPage('/tools/certificate');
+						gotoPage('/tools/certificate-decoder');
 					}
 				},
 				{
-					title: 'Verify',
+					title: 'Card & Email Validator',
 					icon: CircleCheck,
 					onSelect() {
-						gotoPage('/tools/verify');
+						gotoPage('/tools/card-email-validator');
 					}
 				},
 				{
 					title: 'Caesar Cipher',
 					icon: ShieldEllipsis,
 					onSelect() {
-						gotoPage('/tools/caesar');
+						gotoPage('/tools/caesar-cipher');
 					}
 				},
 				{
@@ -391,7 +391,7 @@
 					title: 'Transformation',
 					icon: CaseSensitive,
 					onSelect() {
-						gotoPage('/tools/strings');
+						gotoPage('/tools/string-transform');
 					}
 				},
 				{
@@ -402,10 +402,10 @@
 					}
 				},
 				{
-					title: 'Hashing',
+					title: 'Hash Generator',
 					icon: CaseSensitive,
 					onSelect() {
-						gotoPage('/tools/hash');
+						gotoPage('/tools/hash-generator');
 					}
 				},
 				{
@@ -424,14 +424,14 @@
 					}
 				},
 				{
-					title: 'Base64',
+					title: 'Base64 Encoder/Decoder',
 					icon: CaseSensitive,
 					onSelect() {
-						gotoPage('/tools/base64');
+						gotoPage('/tools/base64-encoder-decoder');
 					}
 				},
 				{
-					title: 'Newline Escape',
+					title: 'Newline Escaper',
 					icon: CaseSensitive,
 					onSelect() {
 						gotoPage('/tools/newline-escaper');
@@ -443,10 +443,10 @@
 			heading: 'Discussion',
 			items: [
 				{
-					title: 'Draw',
+					title: 'Whiteboard',
 					icon: Brush,
 					onSelect() {
-						gotoPage('/tools/draw');
+						gotoPage('/tools/whiteboard');
 					}
 				}
 			]
@@ -458,7 +458,7 @@
 					title: 'CSS Formatter',
 					icon: CodeIcon,
 					onSelect() {
-						gotoPage('/tools/css');
+						gotoPage('/tools/css-formatter');
 					}
 				},
 				{
@@ -472,21 +472,21 @@
 					title: 'HTML Formatter',
 					icon: CodeIcon,
 					onSelect() {
-						gotoPage('/tools/html');
+						gotoPage('/tools/html-formatter');
 					}
 				},
 				{
 					title: 'JavaScript Formatter',
 					icon: CodeIcon,
 					onSelect() {
-						gotoPage('/tools/js');
+						gotoPage('/tools/js-formatter');
 					}
 				},
 				{
 					title: 'JSON Formatter',
 					icon: CodeIcon,
 					onSelect() {
-						gotoPage('/tools/json');
+						gotoPage('/tools/json-formatter');
 					}
 				},
 				{
@@ -500,21 +500,21 @@
 					title: 'SQL Formatter',
 					icon: CodeIcon,
 					onSelect() {
-						gotoPage('/tools/sql');
+						gotoPage('/tools/sql-formatter');
 					}
 				},
 				{
-					title: 'YAML to JSON',
+					title: 'YAML to JSON Converter',
 					icon: CodeIcon,
 					onSelect() {
-						gotoPage('/tools/yaml');
+						gotoPage('/tools/yaml-to-json');
 					}
 				},
 				{
-					title: 'XML Converter',
+					title: 'JSON to XML Converter',
 					icon: CodeIcon,
 					onSelect() {
-						gotoPage('/tools/xml');
+						gotoPage('/tools/json-to-xml');
 					}
 				}
 			]
@@ -523,10 +523,10 @@
 			heading: 'Design',
 			items: [
 				{
-					title: 'Lorem Ipsum',
+					title: 'Lorem Ipsum Generator',
 					icon: FrameIcon,
 					onSelect() {
-						gotoPage('/tools/lorem');
+						gotoPage('/tools/lorem-ipsum-generator');
 					}
 				},
 				{

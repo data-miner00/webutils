@@ -39,17 +39,17 @@
 				isActive: false,
 				items: [
 					{
-						title: 'QR Code',
-						url: '/tools/qr-code'
+						title: 'QR Code Generator',
+						url: '/tools/qr-code-generator'
 					},
 					{
-						title: 'Unit Conversion',
-						url: '/tools/conversion',
+						title: 'Unit Converter',
+						url: '/tools/unit-converter',
 						badge: 'Beta'
 					},
 					{
-						title: 'Timer / Stopwatch',
-						url: '/tools/timer'
+						title: 'Timer & Stopwatch',
+						url: '/tools/timer-stopwatch'
 					},
 					{
 						title: 'URL Parser',
@@ -60,12 +60,12 @@
 						url: '/tools/uuid'
 					},
 					{
-						title: 'Timestamp',
-						url: '/tools/timestamp'
+						title: 'Timestamp Converter',
+						url: '/tools/timestamp-converter'
 					},
 					{
 						title: 'Base Converter',
-						url: '/tools/baseN'
+						url: '/tools/base-converter'
 					}
 				]
 			},
@@ -80,7 +80,7 @@
 					},
 					{
 						title: 'Image Format Converter',
-						url: '/tools/image-converter'
+						url: '/tools/image-format-converter'
 					},
 					{
 						title: 'Image Resizer',
@@ -98,12 +98,12 @@
 				icon: MessageCircleCode,
 				items: [
 					{
-						title: 'Leading Space',
-						url: '/tools/leading-space'
+						title: 'Leading Space Remover',
+						url: '/tools/leading-space-remover'
 					},
 					{
-						title: 'Trailing Space',
-						url: '/tools/trailing-space'
+						title: 'Trailing Space Remover',
+						url: '/tools/trailing-space-remover'
 					},
 					{
 						title: 'Text Diff',
@@ -126,17 +126,17 @@
 					},
 					{
 						title: 'Certificate Decoder',
-						url: '/tools/certificate'
+						url: '/tools/certificate-decoder'
 					},
 					{
-						title: 'Verify',
-						url: '/tools/verify',
+						title: 'Card & Email Validator',
+						url: '/tools/card-email-validator',
 						badge: 'Beta',
 						isBeta: true
 					},
 					{
 						title: 'Caesar Cipher',
-						url: '/tools/caesar'
+						url: '/tools/caesar-cipher'
 					},
 					{
 						title: 'Morse Code Translator',
@@ -144,7 +144,7 @@
 					},
 					{
 						title: 'Vigenère Cipher',
-						url: '/tools/vigenere'
+						url: '/tools/vigenere-cipher'
 					}
 				]
 			},
@@ -155,15 +155,15 @@
 				items: [
 					{
 						title: 'String Transform',
-						url: '/tools/strings'
+						url: '/tools/string-transform'
 					},
 					{
 						title: 'Text Stats',
 						url: '/tools/text-stats'
 					},
 					{
-						title: 'Hash String',
-						url: '/tools/hash'
+						title: 'Hash Generator',
+						url: '/tools/hash-generator'
 					},
 					{
 						title: 'Unicode to Hex',
@@ -174,11 +174,11 @@
 						url: '/tools/sort-list'
 					},
 					{
-						title: 'Base64',
-						url: '/tools/base64'
+						title: 'Base64 Encoder/Decoder',
+						url: '/tools/base64-encoder-decoder'
 					},
 					{
-						title: 'Newline Escape',
+						title: 'Newline Escaper',
 						url: '/tools/newline-escaper'
 					}
 				]
@@ -190,8 +190,8 @@
 				isBeta: true,
 				items: [
 					{
-						title: 'Draw',
-						url: '/tools/draw',
+						title: 'Whiteboard',
+						url: '/tools/whiteboard',
 						badge: 'Beta'
 					}
 				]
@@ -203,7 +203,7 @@
 				items: [
 					{
 						title: 'CSS Formatter',
-						url: '/tools/css'
+						url: '/tools/css-formatter'
 					},
 					{
 						title: 'HTML Viewer',
@@ -211,15 +211,15 @@
 					},
 					{
 						title: 'HTML Formatter',
-						url: '/tools/html'
+						url: '/tools/html-formatter'
 					},
 					{
 						title: 'JavaScript Formatter',
-						url: '/tools/js'
+						url: '/tools/js-formatter'
 					},
 					{
 						title: 'JSON Formatter',
-						url: '/tools/json'
+						url: '/tools/json-formatter'
 					},
 					{
 						title: 'Markdown Viewer',
@@ -227,15 +227,15 @@
 					},
 					{
 						title: 'SQL Formatter',
-						url: '/tools/sql'
+						url: '/tools/sql-formatter'
 					},
 					{
-						title: 'YAML to JSON',
-						url: '/tools/yaml'
+						title: 'YAML to JSON Converter',
+						url: '/tools/yaml-to-json'
 					},
 					{
-						title: 'XML Converter',
-						url: '/tools/xml'
+						title: 'JSON to XML Converter',
+						url: '/tools/json-to-xml'
 					}
 				]
 			},
@@ -245,8 +245,8 @@
 				icon: Palette,
 				items: [
 					{
-						title: 'Lorem Ipsum',
-						url: '/tools/lorem'
+						title: 'Lorem Ipsum Generator',
+						url: '/tools/lorem-ipsum-generator'
 					},
 					{
 						title: 'Color Converter',
@@ -258,33 +258,33 @@
 				title: 'Development',
 				url: '#',
 				icon: Code,
-				items: [{ title: 'Localhost', url: '/tools/localhost' }]
+				items: [{ title: 'Localhost Manager', url: '/tools/localhost-manager' }]
 			},
 			{
 				title: 'Lookup',
 				url: '#',
 				icon: ScanSearchIcon,
 				items: [
-					{ title: 'Clock', url: '/tools/clock' },
+					{ title: 'World Clock', url: '/tools/world-clock' },
 					{
-						title: 'Emoji',
-						url: '/tools/emoji'
+						title: 'Emoji Picker',
+						url: '/tools/emoji-picker'
 					},
 					{
-						title: 'Unicode',
-						url: '/tools/unicode'
+						title: 'Unicode Lookup',
+						url: '/tools/unicode-lookup'
 					},
 					{
-						title: 'Country',
-						url: '/tools/country'
+						title: 'Country Lookup',
+						url: '/tools/country-lookup'
 					},
 					{
 						title: 'Calendar',
 						url: '/tools/calendar'
 					},
 					{
-						title: 'HTTP Code',
-						url: '/tools/http-code'
+						title: 'HTTP Status Code Lookup',
+						url: '/tools/http-status-codes'
 					},
 					{
 						title: 'Weather',
