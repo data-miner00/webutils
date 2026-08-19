@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { X } from '@lucide/svelte';
+
 	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
-	import Input from '$lib/components/ui/input/input.svelte';
-	import { clickToCopy } from '$lib/core/copy-to-clipboard';
+	import * as InputGroup from '$lib/components/ui/input-group/index.js';
+	import * as Kbd from '$lib/components/ui/kbd/index.js';
+	import { clickToCopy, copyText } from '$lib/core/copy-to-clipboard';
 	import { unicodes } from '$lib/core/unicode';
 
 	let searchTerm = $state('');
@@ -15,6 +18,12 @@
 				u.description.toLowerCase().includes(searchTerm.toLowerCase())
 		)
 	);
+
+	function handleSearchKeydown(event: KeyboardEvent) {
+		if (event.key === 'Enter' && filteredUnicode.length > 0) {
+			copyText(filteredUnicode[0].char);
+		}
+	}
 </script>
 
 <div class="px-4 py-6">
@@ -43,7 +52,27 @@
 		/>
 	</div>
 
-	<Input autofocus placeholder="Search unicode..." bind:value={searchTerm} class="mb-4 w-full" />
+	<InputGroup.Root class="mb-4">
+		<InputGroup.Input
+			placeholder="Search unicode..."
+			name="search"
+			autofocus
+			bind:value={searchTerm}
+			onkeydown={handleSearchKeydown}
+		/>
+
+		{#if searchTerm}
+			<InputGroup.Addon align="inline-end">
+				<InputGroup.Button variant="ghost" onclick={() => (searchTerm = '')}
+					><X /></InputGroup.Button
+				>
+			</InputGroup.Addon>
+		{/if}
+
+		<InputGroup.Addon align="block-end" class="border-t">
+			Press <Kbd.Kbd>Enter</Kbd.Kbd> to copy the first result
+		</InputGroup.Addon>
+	</InputGroup.Root>
 
 	<div class="grid grid-cols-8 gap-2 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-16">
 		{#each filteredUnicode as unicode}

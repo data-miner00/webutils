@@ -4,7 +4,8 @@
 	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
-	import { clickToCopy } from '$lib/core/copy-to-clipboard';
+	import * as Kbd from '$lib/components/ui/kbd/index.js';
+	import { clickToCopy, copyText } from '$lib/core/copy-to-clipboard';
 	import { emojis } from '$lib/core/emoji';
 
 	let searchTerm = $state('');
@@ -30,6 +31,12 @@
 		return emojis.filter((emoji) => emoji.category === category);
 	}
 
+	function handleSearchKeydown(event: KeyboardEvent) {
+		if (event.key === 'Enter' && filteredEmojis.length > 0) {
+			copyText(filteredEmojis[0].emoji);
+		}
+	}
+
 	// Todo: implement history mechanism
 </script>
 
@@ -42,6 +49,7 @@
 				required
 				autofocus
 				bind:value={searchTerm}
+				onkeydown={handleSearchKeydown}
 			/>
 
 			{#if searchTerm}
@@ -51,6 +59,10 @@
 					>
 				</InputGroup.Addon>
 			{/if}
+
+			<InputGroup.Addon align="block-end" class="border-t">
+				Press <Kbd.Kbd>Enter</Kbd.Kbd> to copy the first result
+			</InputGroup.Addon>
 		</InputGroup.Root>
 
 		<ReferencesSheet
