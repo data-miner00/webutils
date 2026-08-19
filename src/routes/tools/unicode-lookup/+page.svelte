@@ -43,7 +43,7 @@
 		/>
 	</div>
 
-	<Input placeholder="Search unicode..." bind:value={searchTerm} class="mb-4 w-full" />
+	<Input autofocus placeholder="Search unicode..." bind:value={searchTerm} class="mb-4 w-full" />
 
 	<div class="grid grid-cols-8 gap-2 sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-16">
 		{#each filteredUnicode as unicode}

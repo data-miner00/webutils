@@ -40,6 +40,7 @@
 				placeholder="Search emojis..."
 				name="search"
 				required
+				autofocus
 				bind:value={searchTerm}
 			/>
 
