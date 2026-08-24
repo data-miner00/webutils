@@ -18,7 +18,7 @@
 		}
 
 		const repository = new IndexedDBRepository<Link>(db, STORE_NAME);
-		links = await repository.getAll(appState.homeLinkCount);
+		links = await repository.getAll();
 
 		if (!links.length) {
 			links = defaultLinks;
