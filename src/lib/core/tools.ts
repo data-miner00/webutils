@@ -4,81 +4,100 @@ export type Tool = {
 	category: string;
 };
 
-export const tools: Tool[] = [
-	{ title: 'QR Code Generator', url: '/tools/qr-code-generator', category: 'General' },
-	{ title: 'Unit Converter', url: '/tools/unit-converter', category: 'General' },
-	{ title: 'Timer & Stopwatch', url: '/tools/timer-stopwatch', category: 'General' },
-	{ title: 'URL Parser', url: '/tools/url-parser', category: 'General' },
-	{ title: 'UUID Generator', url: '/tools/uuid', category: 'General' },
-	{ title: 'Timestamp Converter', url: '/tools/timestamp-converter', category: 'General' },
-	{ title: 'Base Converter', url: '/tools/base-converter', category: 'General' },
+type ToolEntry = Omit<Tool, 'category'>;
 
-	{ title: 'Base64 Image Converter', url: '/tools/base64-image', category: 'Image' },
-	{
-		title: 'Image Format Converter',
-		url: '/tools/image-format-converter',
-		category: 'Image'
-	},
-	{ title: 'Image Resizer', url: '/tools/image-resizer', category: 'Image' },
-	{ title: 'Image Compressor', url: '/tools/image-compressor', category: 'Image' },
-
-	{ title: 'Leading Space Remover', url: '/tools/leading-space-remover', category: 'Code Review' },
-	{
-		title: 'Trailing Space Remover',
-		url: '/tools/trailing-space-remover',
-		category: 'Code Review'
-	},
-	{ title: 'Text Diff', url: '/tools/text-diff', category: 'Code Review' },
-	{ title: 'Empty Line Remover', url: '/tools/empty-line-remover', category: 'Code Review' },
-
-	{ title: 'JWT Debugger', url: '/tools/jwt-debugger', category: 'Security & Auth' },
-	{
-		title: 'Certificate Decoder',
-		url: '/tools/certificate-decoder',
-		category: 'Security & Auth'
-	},
-	{
-		title: 'Card & Email Validator',
-		url: '/tools/card-email-validator',
-		category: 'Security & Auth'
-	},
-	{ title: 'Caesar Cipher', url: '/tools/caesar-cipher', category: 'Security & Auth' },
-	{ title: 'Morse Code Translator', url: '/tools/morse-code', category: 'Security & Auth' },
-	{ title: 'Vigenère Cipher', url: '/tools/vigenere-cipher', category: 'Security & Auth' },
-
-	{ title: 'String Transform', url: '/tools/string-transform', category: 'Text' },
-	{ title: 'Text Stats', url: '/tools/text-stats', category: 'Text' },
-	{ title: 'Hash Generator', url: '/tools/hash-generator', category: 'Text' },
-	{ title: 'Unicode to Hex', url: '/tools/unicode-hex', category: 'Text' },
-	{ title: 'Sort list', url: '/tools/sort-list', category: 'Text' },
-	{ title: 'Base64 Encoder/Decoder', url: '/tools/base64-encoder-decoder', category: 'Text' },
-	{ title: 'Newline Escaper', url: '/tools/newline-escaper', category: 'Text' },
-
-	{ title: 'Whiteboard', url: '/tools/whiteboard', category: 'Discussion' },
-
-	{ title: 'CSS Formatter', url: '/tools/css-formatter', category: 'Web' },
-	{ title: 'HTML Viewer', url: '/tools/html-viewer', category: 'Web' },
-	{ title: 'HTML Formatter', url: '/tools/html-formatter', category: 'Web' },
-	{ title: 'JavaScript Formatter', url: '/tools/js-formatter', category: 'Web' },
-	{ title: 'JSON Formatter', url: '/tools/json-formatter', category: 'Web' },
-	{ title: 'Markdown Viewer', url: '/tools/markdown-viewer', category: 'Web' },
-	{ title: 'SQL Formatter', url: '/tools/sql-formatter', category: 'Web' },
-	{ title: 'YAML to JSON Converter', url: '/tools/yaml-to-json', category: 'Web' },
-	{ title: 'JSON to XML Converter', url: '/tools/json-to-xml', category: 'Web' },
-
-	{ title: 'Lorem Ipsum Generator', url: '/tools/lorem-ipsum-generator', category: 'Design' },
-	{ title: 'Color Converter', url: '/tools/color-converter', category: 'Design' },
-
-	{ title: 'Localhost Manager', url: '/tools/localhost-manager', category: 'Development' },
-
-	{ title: 'World Clock', url: '/tools/world-clock', category: 'Lookup' },
-	{ title: 'Emoji Picker', url: '/tools/emoji-picker', category: 'Lookup' },
-	{ title: 'Unicode Lookup', url: '/tools/unicode-lookup', category: 'Lookup' },
-	{ title: 'Country Lookup', url: '/tools/country-lookup', category: 'Lookup' },
-	{ title: 'Calendar', url: '/tools/calendar', category: 'Lookup' },
-	{ title: 'HTTP Status Code Lookup', url: '/tools/http-status-codes', category: 'Lookup' },
-	{ title: 'Weather', url: '/tools/weather', category: 'Lookup' }
+const generalTools: ToolEntry[] = [
+	{ title: 'QR Code Generator', url: '/tools/qr-code-generator' },
+	{ title: 'Unit Converter', url: '/tools/unit-converter' },
+	{ title: 'Timer & Stopwatch', url: '/tools/timer-stopwatch' },
+	{ title: 'URL Parser', url: '/tools/url-parser' },
+	{ title: 'UUID Generator', url: '/tools/uuid' },
+	{ title: 'Timestamp Converter', url: '/tools/timestamp-converter' },
+	{ title: 'Base Converter', url: '/tools/base-converter' }
 ];
+
+const imageTools: ToolEntry[] = [
+	{ title: 'Base64 Image Converter', url: '/tools/base64-image' },
+	{ title: 'Image Format Converter', url: '/tools/image-format-converter' },
+	{ title: 'Image Resizer', url: '/tools/image-resizer' },
+	{ title: 'Image Compressor', url: '/tools/image-compressor' }
+];
+
+const codeReviewTools: ToolEntry[] = [
+	{ title: 'Leading Space Remover', url: '/tools/leading-space-remover' },
+	{ title: 'Trailing Space Remover', url: '/tools/trailing-space-remover' },
+	{ title: 'Text Diff', url: '/tools/text-diff' },
+	{ title: 'Empty Line Remover', url: '/tools/empty-line-remover' }
+];
+
+const securityTools: ToolEntry[] = [
+	{ title: 'JWT Debugger', url: '/tools/jwt-debugger' },
+	{ title: 'Certificate Decoder', url: '/tools/certificate-decoder' },
+	{ title: 'Card & Email Validator', url: '/tools/card-email-validator' },
+	{ title: 'Caesar Cipher', url: '/tools/caesar-cipher' },
+	{ title: 'Morse Code Translator', url: '/tools/morse-code' },
+	{ title: 'Vigenère Cipher', url: '/tools/vigenere-cipher' }
+];
+
+const textTools: ToolEntry[] = [
+	{ title: 'String Transform', url: '/tools/string-transform' },
+	{ title: 'Text Stats', url: '/tools/text-stats' },
+	{ title: 'Hash Generator', url: '/tools/hash-generator' },
+	{ title: 'Unicode to Hex', url: '/tools/unicode-hex' },
+	{ title: 'Sort list', url: '/tools/sort-list' },
+	{ title: 'Base64 Encoder/Decoder', url: '/tools/base64-encoder-decoder' },
+	{ title: 'Newline Escaper', url: '/tools/newline-escaper' }
+];
+
+const discussionTools: ToolEntry[] = [{ title: 'Whiteboard', url: '/tools/whiteboard' }];
+
+const webTools: ToolEntry[] = [
+	{ title: 'CSS Formatter', url: '/tools/css-formatter' },
+	{ title: 'HTML Viewer', url: '/tools/html-viewer' },
+	{ title: 'HTML Formatter', url: '/tools/html-formatter' },
+	{ title: 'JavaScript Formatter', url: '/tools/js-formatter' },
+	{ title: 'JSON Formatter', url: '/tools/json-formatter' },
+	{ title: 'Markdown Viewer', url: '/tools/markdown-viewer' },
+	{ title: 'SQL Formatter', url: '/tools/sql-formatter' },
+	{ title: 'YAML to JSON Converter', url: '/tools/yaml-to-json' },
+	{ title: 'JSON to XML Converter', url: '/tools/json-to-xml' }
+];
+
+const designTools: ToolEntry[] = [
+	{ title: 'Lorem Ipsum Generator', url: '/tools/lorem-ipsum-generator' },
+	{ title: 'Color Converter', url: '/tools/color-converter' }
+];
+
+const developmentTools: ToolEntry[] = [
+	{ title: 'Localhost Manager', url: '/tools/localhost-manager' }
+];
+
+const lookupTools: ToolEntry[] = [
+	{ title: 'World Clock', url: '/tools/world-clock' },
+	{ title: 'Emoji Picker', url: '/tools/emoji-picker' },
+	{ title: 'Unicode Lookup', url: '/tools/unicode-lookup' },
+	{ title: 'Country Lookup', url: '/tools/country-lookup' },
+	{ title: 'Calendar', url: '/tools/calendar' },
+	{ title: 'HTTP Status Code Lookup', url: '/tools/http-status-codes' },
+	{ title: 'Weather', url: '/tools/weather' }
+];
+
+const categorizedTools: [string, ToolEntry[]][] = [
+	['General', generalTools],
+	['Image', imageTools],
+	['Code Review', codeReviewTools],
+	['Security & Auth', securityTools],
+	['Text', textTools],
+	['Discussion', discussionTools],
+	['Web', webTools],
+	['Design', designTools],
+	['Development', developmentTools],
+	['Lookup', lookupTools]
+];
+
+export const tools: Tool[] = categorizedTools.flatMap(([category, entries]) =>
+	entries.map((entry) => ({ ...entry, category }))
+);
 
 export function searchTools(query: string, list: Tool[] = tools): Tool[] {
 	const normalized = query.trim().toLowerCase();
