@@ -238,5 +238,17 @@
 		"category": "Tools",
 		"url": "https://www.jsonschemavalidator.net/",
 		"language": "en"
+	},
+	{
+		"title": "Calculator.net",
+		"category": "Tools",
+		"url": "https://www.calculator.net/",
+		"language": "en"
+	},
+	{
+		"title": "DevTools Daily",
+		"category": "Tools",
+		"url": "https://www.devtoolsdaily.com/",
+		"language": "en"
 	}
 ]

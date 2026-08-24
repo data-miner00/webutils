@@ -10,6 +10,7 @@
 		ClipboardIcon,
 		Clock10,
 		Clock10Icon,
+		CloudIcon,
 		CodeIcon,
 		DiffIcon,
 		EarthIcon,
@@ -181,6 +182,13 @@
 					onSelect() {
 						gotoPage('/tools/localhost-manager');
 					}
+				},
+				{
+					title: 'Date & Time Calculator',
+					icon: CalendarDays,
+					onSelect() {
+						gotoPage('/tools/date-difference');
+					}
 				}
 			]
 		},
@@ -267,6 +275,13 @@
 					icon: ChevronsLeftRightEllipsis,
 					onSelect() {
 						gotoPage('/tools/http-status-codes');
+					}
+				},
+				{
+					title: 'Weather',
+					icon: CloudIcon,
+					onSelect() {
+						gotoPage('/tools/weather');
 					}
 				}
 			]
