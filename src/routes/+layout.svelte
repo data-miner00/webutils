@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { ModeWatcher } from 'mode-watcher';
 
+	import { afterNavigate } from '$app/navigation';
 	import favicon from '$lib/assets/favicon.svg';
 	import AppSidebarRight from '$lib/components/custom/app-sidebar-right/app-sidebar-right.svelte';
 	import AppSidebar from '$lib/components/custom/app-sidebar/app-sidebar.svelte';
@@ -9,8 +10,17 @@
 	import SearchDialog from '$lib/components/custom/search/search-dialog.svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import { Toaster } from '$lib/components/ui/sonner';
+	import { findToolByUrl } from '$lib/core/tools';
+	import { recordRecentTool } from '$lib/states.svelte';
 
 	import './layout.css';
+
+	afterNavigate(({ to }) => {
+		const path = to?.url.pathname;
+		if (path && findToolByUrl(path)) {
+			recordRecentTool(path);
+		}
+	});
 
 	let { children } = $props();
 	let isCommandOpen = $state(false);
