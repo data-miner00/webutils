@@ -5,12 +5,13 @@
 	import LinkComponent from '$lib/components/custom/link/link.svelte';
 	import ToolCard from '$lib/components/custom/tool-card/tool-card.svelte';
 	import * as Alert from '$lib/components/ui/alert/index.js';
+	import { Button } from '$lib/components/ui/button';
 	import * as InputGroup from '$lib/components/ui/input-group';
 	import { db, initializeDatabase } from '$lib/core/Database';
 	import { IndexedDBRepository } from '$lib/core/IndexedDbRepository';
 	import { type Link, STORE_NAME, defaultLinks } from '$lib/core/links';
 	import { findToolByUrl, searchTools } from '$lib/core/tools';
-	import { appState, toggleFavoriteTool } from '$lib/states.svelte';
+	import { appState, clearRecentTools, toggleFavoriteTool } from '$lib/states.svelte';
 
 	let links = $state<Link[]>([]);
 	let query = $state('');
@@ -102,7 +103,12 @@
 		</div>
 
 		<div class="mb-5">
-			<h2 class="mb-4 text-xl font-bold">Recent</h2>
+			<div class="mb-4 flex items-center gap-3">
+				<h2 class="text-xl font-bold">Recent</h2>
+				{#if recentTools.length}
+					<Button size="sm" variant="ghost" onclick={clearRecentTools}>Clear</Button>
+				{/if}
+			</div>
 			{#if recentTools.length}
 				<div class="flex flex-wrap gap-4">
 					{#each recentTools as tool (tool.url)}
