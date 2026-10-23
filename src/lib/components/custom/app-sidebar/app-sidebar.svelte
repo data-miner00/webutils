@@ -218,6 +218,10 @@
 						url: '/tools/html-formatter'
 					},
 					{
+						title: 'HTML to document.write',
+						url: '/tools/html-to-document-write'
+					},
+					{
 						title: 'JavaScript Formatter',
 						url: '/tools/js-formatter'
 					},

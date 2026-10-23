@@ -55,6 +55,7 @@ const webTools: ToolEntry[] = [
 	{ title: 'CSS Formatter', url: '/tools/css-formatter' },
 	{ title: 'HTML Viewer', url: '/tools/html-viewer' },
 	{ title: 'HTML Formatter', url: '/tools/html-formatter' },
+	{ title: 'HTML to document.write', url: '/tools/html-to-document-write' },
 	{ title: 'JavaScript Formatter', url: '/tools/js-formatter' },
 	{ title: 'JSON Formatter', url: '/tools/json-formatter' },
 	{ title: 'Markdown Viewer', url: '/tools/markdown-viewer' },

@@ -491,6 +491,13 @@
 					}
 				},
 				{
+					title: 'HTML to document.write',
+					icon: CodeIcon,
+					onSelect() {
+						gotoPage('/tools/html-to-document-write');
+					}
+				},
+				{
 					title: 'JavaScript Formatter',
 					icon: CodeIcon,
 					onSelect() {
