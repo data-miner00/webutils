@@ -1,4 +1,4 @@
-import { type WifiConfig, toWifiConnectionString } from '$lib/core/qr-code';
+import { type WifiConfig, toTelUri, toWifiConnectionString } from '$lib/core/qr-code';
 
 describe('toWifiConnectionString', () => {
 	const base: WifiConfig = {
@@ -40,5 +40,19 @@ describe('toWifiConnectionString', () => {
 		expect(toWifiConnectionString({ ...base, ssid: 'Café Wi-Fi 5G' })).toBe(
 			'WIFI:T:WPA;S:Café Wi-Fi 5G;P:secret;;'
 		);
+	});
+});
+
+describe('toTelUri', () => {
+	it('should prefix the number with tel:', () => {
+		expect(toTelUri('+60123456789')).toBe('tel:+60123456789');
+	});
+
+	it('should strip whitespace', () => {
+		expect(toTelUri(' +1 202 555 0100 ')).toBe('tel:+12025550100');
+	});
+
+	it('should keep visual separators', () => {
+		expect(toTelUri('(202) 555-0100')).toBe('tel:(202)555-0100');
 	});
 });

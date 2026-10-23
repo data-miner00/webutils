@@ -37,3 +37,10 @@ export function toWifiConnectionString({ ssid, security, password, hidden }: Wif
 
 	return result + ';';
 }
+
+export const telExample = '+1 202 555 0100';
+
+// RFC 3966 does not allow whitespace inside a tel: URI
+export function toTelUri(phoneNumber: string): string {
+	return `tel:${phoneNumber.replace(/\s/g, '')}`;
+}

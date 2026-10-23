@@ -10,6 +10,7 @@
 		EllipsisVertical,
 		Eye,
 		EyeOff,
+		Phone,
 		Trash2,
 		Wifi
 	} from '@lucide/svelte';
@@ -31,6 +32,8 @@
 		example1,
 		example2,
 		example3,
+		telExample,
+		toTelUri,
 		toWifiConnectionString,
 		wifiExample
 	} from '$lib/core/qr-code';
@@ -49,8 +52,10 @@
 	let input = $state('');
 	let wifi = $state<WifiConfig>({ ...emptyWifi });
 	let isPasswordVisible = $state(false);
+	let phoneNumber = $state('');
 	let wifiConnectionString = $derived(wifi.ssid ? toWifiConnectionString(wifi) : '');
-	let payload = $derived(mode === 'wifi' ? wifiConnectionString : input);
+	let telUri = $derived(phoneNumber.trim() ? toTelUri(phoneNumber) : '');
+	let payload = $derived(mode === 'wifi' ? wifiConnectionString : mode === 'tel' ? telUri : input);
 	let errorCorrectionLabel = $derived(
 		(() => {
 			switch (errorCorrectionLevel) {
@@ -83,6 +88,8 @@
 	function clearInput() {
 		if (mode === 'wifi') {
 			wifi = { ...emptyWifi };
+		} else if (mode === 'tel') {
+			phoneNumber = '';
 		} else {
 			input = '';
 		}
@@ -136,7 +143,7 @@
 	<header class="mb-20">
 		<h1 class="block text-center text-xl font-bold">Simple QR Code Generator</h1>
 		<p class="text-muted-foreground text-center">
-			Enter text or Wi-Fi details below to generate a QR code.
+			Enter text, Wi-Fi details or a phone number below to generate a QR code.
 		</p>
 	</header>
 
@@ -144,6 +151,7 @@
 		<Tabs.List>
 			<Tabs.Trigger value="text">Text</Tabs.Trigger>
 			<Tabs.Trigger value="wifi"><Wifi /> Wi-Fi</Tabs.Trigger>
+			<Tabs.Trigger value="tel"><Phone /> Tel</Tabs.Trigger>
 		</Tabs.List>
 
 		<div class="flex justify-end">
@@ -167,6 +175,10 @@
 						{#if mode === 'wifi'}
 							<Button variant="outline" onclick={() => (wifi = { ...wifiExample })}>
 								Wi-Fi Example
+							</Button>
+						{:else if mode === 'tel'}
+							<Button variant="outline" onclick={() => (phoneNumber = telExample)}>
+								Phone Example
 							</Button>
 						{:else}
 							<Button variant="outline" onclick={() => (input = example1)}>Http Url Example</Button>
@@ -209,6 +221,10 @@
 								{
 									title: 'ZXing Wi-Fi Network Config Format',
 									url: 'https://github.com/zxing/zxing/wiki/Barcode-Contents#wi-fi-network-config-android-ios-11'
+								},
+								{
+									title: 'RFC 3966: The tel URI for Telephone Numbers',
+									url: 'https://www.rfc-editor.org/rfc/rfc3966'
 								}
 							]}
 						/>
@@ -316,6 +332,21 @@
 					>
 						<Copy />
 					</InputGroup.Button>
+				</InputGroup.Addon>
+			</InputGroup.Root>
+		</Tabs.Content>
+
+		<Tabs.Content value="tel">
+			<InputGroup.Root>
+				<InputGroup.Input
+					id="tel-input"
+					type="tel"
+					placeholder="e.g. +1 202 555 0100"
+					autocomplete="off"
+					bind:value={phoneNumber}
+				/>
+				<InputGroup.Addon align="block-start">
+					<Label.Root for="tel-input" class="text-foreground">Phone Number</Label.Root>
 				</InputGroup.Addon>
 			</InputGroup.Root>
 		</Tabs.Content>
