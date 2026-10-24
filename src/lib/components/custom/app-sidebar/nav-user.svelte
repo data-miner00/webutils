@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { HouseIcon, Mail, SettingsIcon, UserRoundPenIcon } from '@lucide/svelte';
 	import ChevronsUpDownIcon from '@lucide/svelte/icons/chevrons-up-down';
-	import LogOutIcon from '@lucide/svelte/icons/log-out';
 
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
@@ -26,15 +26,15 @@
 	);
 
 	function gotoGeneralSettings() {
-		goto('/settings/general');
+		goto(resolve('/settings/general'));
 	}
 
 	function gotoProfileSettings() {
-		goto('/settings/profile');
+		goto(resolve('/settings/profile'));
 	}
 
 	function gotoHomePageSettings() {
-		goto('/settings/home');
+		goto(resolve('/settings/home'));
 	}
 </script>
 
@@ -66,6 +66,7 @@
 				align="end"
 				sideOffset={4}
 			>
+				<!-- eslint-disable svelte/no-navigation-without-resolve -- external mail provider URL -->
 				<DropdownMenu.Label class="p-0 font-normal">
 					<a
 						class="flex items-center gap-2 px-1 py-1.5 text-start text-sm"
@@ -96,6 +97,7 @@
 						</a>
 					</DropdownMenu.Item>
 				</DropdownMenu.Group>
+				<!-- eslint-enable svelte/no-navigation-without-resolve -->
 				<DropdownMenu.Separator />
 				<DropdownMenu.Group>
 					<DropdownMenu.Item onSelect={gotoGeneralSettings}>

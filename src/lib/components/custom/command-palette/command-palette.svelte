@@ -38,6 +38,7 @@
 	import type { Component } from 'svelte';
 
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import * as Command from '$lib/components/ui/command/index.js';
 	import { appState } from '$lib/states.svelte';
 
@@ -48,8 +49,8 @@
 
 	let { isCommandOpen = $bindable(false), isClipboardOpen = $bindable(false) }: Props = $props();
 
-	function gotoPage(path: string) {
-		goto(path);
+	function gotoPage(...args: Parameters<typeof resolve>) {
+		goto(resolve(...args));
 		isCommandOpen = false;
 	}
 
