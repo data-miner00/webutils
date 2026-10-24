@@ -56,7 +56,7 @@
 	type CommandItem = {
 		onSelect: () => void;
 		title: string;
-		icon: Component<IconProps, {}, ''>;
+		icon: Component<IconProps>;
 	};
 
 	type CommandSection = {
