@@ -15,6 +15,8 @@
 	} from '$lib/constants';
 	import { searchEngines } from '$lib/core/search-engine';
 	import {
+		appState,
+		clearRecentTools,
 		setHomeLinkDisplayCount,
 		setIsEnableHomeLink,
 		setIsEnableHomeWebSearch
@@ -33,6 +35,11 @@
 		setHomeLinkDisplayCount(linkCount);
 
 		toast.success('Settings updated successfully');
+	}
+
+	function clearRecent() {
+		clearRecentTools();
+		toast.success('Recent tools cleared');
 	}
 </script>
 
@@ -97,5 +104,23 @@
 
 	<div class="grid w-full gap-4">
 		<Button size="sm" variant="outline" onclick={saveChanges}>Save Changes</Button>
+	</div>
+
+	<Separator class="my-6" />
+
+	<h2 class="mb-1 text-lg font-semibold">Recent Tools</h2>
+	<p class="text-muted-foreground mb-4 max-w-sm text-sm">
+		Recently visited tools shown at the home page. Clearing takes effect immediately.
+	</p>
+
+	<div class="grid w-full gap-4">
+		<Button
+			size="sm"
+			variant="outline"
+			disabled={!appState.recentTools.length}
+			onclick={clearRecent}
+		>
+			Clear Recent Tools
+		</Button>
 	</div>
 </section>

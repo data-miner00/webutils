@@ -83,7 +83,7 @@
 	});
 
 	$effect(() => {
-		monaco.editor.setModelLanguage(monaco.editor.getModels()[0], language);
+		monaco.editor.setModelLanguage(editor.getModel()!, language);
 	});
 </script>
 

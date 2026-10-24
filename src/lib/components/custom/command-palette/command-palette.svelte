@@ -25,7 +25,7 @@
 		QrCode,
 		RefreshCcw,
 		Ruler,
-		Settings2Icon,
+		SettingsIcon,
 		ShieldCheck,
 		ShieldEllipsis,
 		SpaceIcon,
@@ -38,6 +38,7 @@
 	import type { Component } from 'svelte';
 
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import * as Command from '$lib/components/ui/command/index.js';
 	import { appState } from '$lib/states.svelte';
 
@@ -48,15 +49,15 @@
 
 	let { isCommandOpen = $bindable(false), isClipboardOpen = $bindable(false) }: Props = $props();
 
-	function gotoPage(path: string) {
-		goto(path);
+	function gotoPage(...args: Parameters<typeof resolve>) {
+		goto(resolve(...args));
 		isCommandOpen = false;
 	}
 
 	type CommandItem = {
 		onSelect: () => void;
 		title: string;
-		icon: Component<IconProps, {}, ''>;
+		icon: Component<IconProps>;
 	};
 
 	type CommandSection = {
@@ -103,7 +104,7 @@
 			items: [
 				{
 					title: 'General Settings',
-					icon: Settings2Icon,
+					icon: SettingsIcon,
 					onSelect() {
 						gotoPage('/settings/general');
 					}
@@ -221,13 +222,6 @@
 					icon: ListIcon,
 					onSelect() {
 						gotoPage('/manage/todo');
-					}
-				},
-				{
-					title: 'Settings',
-					icon: Settings2Icon,
-					onSelect() {
-						gotoPage('/settings');
 					}
 				}
 			]
@@ -491,6 +485,13 @@
 					}
 				},
 				{
+					title: 'HTML to document.write',
+					icon: CodeIcon,
+					onSelect() {
+						gotoPage('/tools/html-to-document-write');
+					}
+				},
+				{
 					title: 'JavaScript Formatter',
 					icon: CodeIcon,
 					onSelect() {
@@ -572,9 +573,9 @@
 	<Command.List>
 		<Command.Empty>No results found.</Command.Empty>
 
-		{#each commandSections as section, index}
+		{#each commandSections as section, index (section.heading)}
 			<Command.Group heading={section.heading}>
-				{#each section.items as item}
+				{#each section.items as item (item.title)}
 					<Command.Item onSelect={item.onSelect}>
 						<item.icon class="me-2 size-4" />
 						<span>{item.title}</span>
