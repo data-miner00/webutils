@@ -572,9 +572,9 @@
 	<Command.List>
 		<Command.Empty>No results found.</Command.Empty>
 
-		{#each commandSections as section, index}
+		{#each commandSections as section, index (section.heading)}
 			<Command.Group heading={section.heading}>
-				{#each section.items as item}
+				{#each section.items as item (item.title)}
 					<Command.Item onSelect={item.onSelect}>
 						<item.icon class="me-2 size-4" />
 						<span>{item.title}</span>
