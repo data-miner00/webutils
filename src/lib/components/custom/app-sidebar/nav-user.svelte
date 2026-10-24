@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { HouseIcon, Mail, Settings2Icon, UserRoundPenIcon } from '@lucide/svelte';
+	import { HouseIcon, Mail, SettingsIcon, UserRoundPenIcon } from '@lucide/svelte';
 	import ChevronsUpDownIcon from '@lucide/svelte/icons/chevrons-up-down';
 	import LogOutIcon from '@lucide/svelte/icons/log-out';
 
@@ -99,7 +99,7 @@
 				<DropdownMenu.Separator />
 				<DropdownMenu.Group>
 					<DropdownMenu.Item onSelect={gotoGeneralSettings}>
-						<Settings2Icon />
+						<SettingsIcon />
 						General
 					</DropdownMenu.Item>
 					<DropdownMenu.Item onSelect={gotoProfileSettings}>

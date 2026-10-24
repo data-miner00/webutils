@@ -25,7 +25,7 @@
 		QrCode,
 		RefreshCcw,
 		Ruler,
-		Settings2Icon,
+		SettingsIcon,
 		ShieldCheck,
 		ShieldEllipsis,
 		SpaceIcon,
@@ -103,7 +103,7 @@
 			items: [
 				{
 					title: 'General Settings',
-					icon: Settings2Icon,
+					icon: SettingsIcon,
 					onSelect() {
 						gotoPage('/settings/general');
 					}
@@ -221,13 +221,6 @@
 					icon: ListIcon,
 					onSelect() {
 						gotoPage('/manage/todo');
-					}
-				},
-				{
-					title: 'Settings',
-					icon: Settings2Icon,
-					onSelect() {
-						gotoPage('/settings');
 					}
 				}
 			]
