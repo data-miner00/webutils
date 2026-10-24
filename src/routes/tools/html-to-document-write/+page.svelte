@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { Album, Clipboard, EllipsisVertical, Trash2 } from '@lucide/svelte';
+	import { Album, Clipboard, EllipsisVertical, SlidersHorizontal, Trash2 } from '@lucide/svelte';
 
 	import CodeEditor from '$lib/components/custom/code-editor/code-editor.svelte';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
-	import * as Select from '$lib/components/ui/select';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import { copyText } from '$lib/core/copy-to-clipboard';
 	import {
@@ -44,45 +43,14 @@
 </script>
 
 <div class="h-full grid-cols-2 gap-4 px-4 py-6 md:grid">
-	<section class="mb-6 flex flex-1 flex-col overflow-hidden md:mb-0">
-		<header class="mb-6 justify-between md:flex">
-			<div class="mb-4 flex items-center gap-4 md:mb-0">
+	<!-- Header layout follows the column's width, which the sidebar narrows at md and up -->
+	<section class="@container mb-6 flex flex-1 flex-col overflow-hidden md:mb-0">
+		<header class="mb-6 justify-between @lg:flex">
+			<div class="mb-4 flex items-center gap-4 @lg:mb-0">
 				<Sidebar.Trigger class="md:hidden" />
 				<h1 class="block text-xl font-bold">HTML to document.write</h1>
 			</div>
-			<div class="flex flex-wrap items-center gap-4">
-				<Select.Root type="single" name="method" bind:value={method}>
-					<Select.Trigger class="font-mono">
-						document.{method}
-					</Select.Trigger>
-					<Select.Content>
-						<Select.Group>
-							<Select.Label>Method</Select.Label>
-							<Select.Item value="write" label="document.write" class="font-mono">
-								document.write
-							</Select.Item>
-							<Select.Item value="writeln" label="document.writeln" class="font-mono">
-								document.writeln
-							</Select.Item>
-						</Select.Group>
-					</Select.Content>
-				</Select.Root>
-				<Select.Root type="single" name="quote" bind:value={quote}>
-					<Select.Trigger>
-						{quoteLabels[quote]}
-					</Select.Trigger>
-					<Select.Content>
-						<Select.Group>
-							<Select.Label>Quotes</Select.Label>
-							<Select.Item value="single" label={quoteLabels.single}>
-								{quoteLabels.single}
-							</Select.Item>
-							<Select.Item value="double" label={quoteLabels.double}>
-								{quoteLabels.double}
-							</Select.Item>
-						</Select.Group>
-					</Select.Content>
-				</Select.Root>
+			<div class="flex items-center gap-4">
 				<ButtonGroup.Root>
 					<ButtonGroup.Root>
 						<Button variant="outline" onclick={loadExample1}>Example 1</Button>
@@ -100,6 +68,48 @@
 										<Album />
 										Example 2
 									</DropdownMenu.Item>
+								</DropdownMenu.Group>
+							</DropdownMenu.Content>
+						</DropdownMenu.Root>
+					</ButtonGroup.Root>
+					<ButtonGroup.Root>
+						<DropdownMenu.Root>
+							<DropdownMenu.Trigger>
+								{#snippet child({ props })}
+									<Button
+										{...props}
+										size="icon"
+										variant="outline"
+										aria-label="Output options"
+										title="Output options"
+									>
+										<SlidersHorizontal />
+									</Button>
+								{/snippet}
+							</DropdownMenu.Trigger>
+							<DropdownMenu.Content align="end" class="w-52">
+								<DropdownMenu.Group>
+									<DropdownMenu.Label>Method</DropdownMenu.Label>
+									<DropdownMenu.RadioGroup bind:value={method}>
+										<DropdownMenu.RadioItem value="write" class="font-mono">
+											document.write
+										</DropdownMenu.RadioItem>
+										<DropdownMenu.RadioItem value="writeln" class="font-mono">
+											document.writeln
+										</DropdownMenu.RadioItem>
+									</DropdownMenu.RadioGroup>
+								</DropdownMenu.Group>
+								<DropdownMenu.Separator />
+								<DropdownMenu.Group>
+									<DropdownMenu.Label>Quotes</DropdownMenu.Label>
+									<DropdownMenu.RadioGroup bind:value={quote}>
+										<DropdownMenu.RadioItem value="single">
+											{quoteLabels.single}
+										</DropdownMenu.RadioItem>
+										<DropdownMenu.RadioItem value="double">
+											{quoteLabels.double}
+										</DropdownMenu.RadioItem>
+									</DropdownMenu.RadioGroup>
 								</DropdownMenu.Group>
 							</DropdownMenu.Content>
 						</DropdownMenu.Root>

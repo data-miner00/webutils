@@ -139,7 +139,7 @@
 	></script>
 </svelte:head>
 
-<div class="mx-auto mt-10 max-w-xl">
+<div class="mx-auto my-10 max-w-xl">
 	<header class="mb-20">
 		<h1 class="block text-center text-xl font-bold">Simple QR Code Generator</h1>
 		<p class="text-muted-foreground text-center">
