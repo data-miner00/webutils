@@ -3,6 +3,7 @@
 		AsteriskIcon,
 		BinaryIcon,
 		Brush,
+		CalendarClock,
 		CalendarDays,
 		CaseSensitive,
 		ChevronsLeftRightEllipsis,
@@ -189,6 +190,13 @@
 					icon: CodeIcon,
 					onSelect() {
 						gotoPage('/tools/localhost-manager');
+					}
+				},
+				{
+					title: 'Cron Expression Parser',
+					icon: CalendarClock,
+					onSelect() {
+						gotoPage('/tools/cron-expression');
 					}
 				},
 				{

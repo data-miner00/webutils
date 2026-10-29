@@ -70,7 +70,8 @@ const designTools: ToolEntry[] = [
 ];
 
 const developmentTools: ToolEntry[] = [
-	{ title: 'Localhost Manager', url: '/tools/localhost-manager' }
+	{ title: 'Localhost Manager', url: '/tools/localhost-manager' },
+	{ title: 'Cron Expression Parser', url: '/tools/cron-expression' }
 ];
 
 const lookupTools: ToolEntry[] = [

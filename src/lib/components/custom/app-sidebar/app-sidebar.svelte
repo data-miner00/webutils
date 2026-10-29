@@ -266,7 +266,10 @@
 				title: 'Development',
 				url: '#',
 				icon: Code,
-				items: [{ title: 'Localhost Manager', url: '/tools/localhost-manager' }]
+				items: [
+					{ title: 'Localhost Manager', url: '/tools/localhost-manager' },
+					{ title: 'Cron Expression Parser', url: '/tools/cron-expression' }
+				]
 			},
 			{
 				title: 'Lookup',
