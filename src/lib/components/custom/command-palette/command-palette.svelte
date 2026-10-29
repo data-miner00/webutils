@@ -70,6 +70,13 @@
 			heading: 'Suggestions',
 			items: [
 				{
+					title: 'Home',
+					icon: HouseIcon,
+					onSelect() {
+						gotoPage('/');
+					}
+				},
+				{
 					title: 'Calendar',
 					icon: CalendarIcon,
 					onSelect() {
