@@ -286,9 +286,12 @@
 				<InputGroup.Root>
 					<InputGroup.Input
 						id="wifi-password"
-						type={isPasswordVisible ? 'text' : 'password'}
+						class={isPasswordVisible ? '' : '[-webkit-text-security:disc]'}
 						placeholder="Network password"
 						autocomplete="off"
+						autocapitalize="off"
+						autocorrect="off"
+						spellcheck="false"
 						bind:value={wifi.password}
 					/>
 					<InputGroup.Addon align="block-start">
