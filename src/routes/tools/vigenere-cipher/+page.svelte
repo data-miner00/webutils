@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { Album, ArrowBigDown, Clipboard, EllipsisVertical, RotateCcw, X } from '@lucide/svelte';
-	import { toast } from 'svelte-sonner';
 
 	import ReferencesSheet from '$lib/components/custom/references/references-sheet.svelte';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
-	import Input from '$lib/components/ui/input/input.svelte';
 	import { Label } from '$lib/components/ui/label';
 	import * as Select from '$lib/components/ui/select';
 	import { Textarea } from '$lib/components/ui/textarea/index.js';
@@ -18,12 +16,12 @@
 	let key = $state('');
 	let mode = $state<'encrypt' | 'decrypt'>('encrypt');
 	let output = $state('');
+	let isKeyLengthValid = $derived(key.length === input.length);
+	let isKeyLengthError = $derived(key.length > 0 && !isKeyLengthValid);
+	let canGenerate = $derived(input.length > 0 && isKeyLengthValid);
 
 	function generate() {
-		if (input.length !== key.length) {
-			toast.error('Input and key must be of the same length.');
-			return;
-		}
+		if (!canGenerate) return;
 
 		if (mode === 'encrypt') {
 			output = vigenereCipher(input, key);
@@ -130,7 +128,13 @@
 			<div class="mb-4">
 				<Label for="input" class="mb-3 font-bold">Input</Label>
 				<InputGroup.Root>
-					<InputGroup.Input placeholder="Input" name="input" required bind:value={input} />
+					<InputGroup.Input
+						id="input"
+						placeholder="Input"
+						name="input"
+						required
+						bind:value={input}
+					/>
 					<InputGroup.Addon align="inline-end">
 						<InputGroup.Button variant="ghost" onclick={() => (input = '')}><X /></InputGroup.Button
 						>
@@ -140,16 +144,30 @@
 			<div class="mb-4">
 				<Label for="key" class="mb-3 font-bold">Key</Label>
 				<InputGroup.Root>
-					<InputGroup.Input placeholder="Key" name="key" required bind:value={key} />
+					<InputGroup.Input
+						id="key"
+						placeholder="Key"
+						name="key"
+						required
+						aria-invalid={isKeyLengthError}
+						aria-describedby="key-length-hint"
+						bind:value={key}
+					/>
 					<InputGroup.Addon align="inline-end">
 						<InputGroup.Button variant="ghost" onclick={() => (key = '')}><X /></InputGroup.Button>
 					</InputGroup.Addon>
 				</InputGroup.Root>
+				<p
+					id="key-length-hint"
+					class="mt-2 text-sm {isKeyLengthError ? 'text-destructive' : 'text-muted-foreground'}"
+				>
+					Must be the same length as the input ({key.length}/{input.length})
+				</p>
 			</div>
 		</div>
 
 		<ButtonGroup.Root class="mx-auto">
-			<Button onclick={generate}><ArrowBigDown /> Generate</Button>
+			<Button disabled={!canGenerate} onclick={generate}><ArrowBigDown /> Generate</Button>
 		</ButtonGroup.Root>
 
 		<Textarea rows={10} disabled placeholder="Output will appear here." value={output} readonly />

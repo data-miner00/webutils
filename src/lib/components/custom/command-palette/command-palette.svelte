@@ -405,6 +405,13 @@
 					onSelect() {
 						gotoPage('/tools/morse-code');
 					}
+				},
+				{
+					title: 'Vigenère Cipher',
+					icon: ShieldEllipsis,
+					onSelect() {
+						gotoPage('/tools/vigenere-cipher');
+					}
 				}
 			]
 		},
