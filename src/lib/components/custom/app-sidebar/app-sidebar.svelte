@@ -184,6 +184,10 @@
 					{
 						title: 'Newline Escaper',
 						url: '/tools/newline-escaper'
+					},
+					{
+						title: 'Braille Translator',
+						url: '/tools/braille-translator'
 					}
 				]
 			},

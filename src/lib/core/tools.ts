@@ -46,7 +46,8 @@ const textTools: ToolEntry[] = [
 	{ title: 'Unicode to Hex', url: '/tools/unicode-hex' },
 	{ title: 'Sort list', url: '/tools/sort-list' },
 	{ title: 'Base64 Encoder/Decoder', url: '/tools/base64-encoder-decoder' },
-	{ title: 'Newline Escaper', url: '/tools/newline-escaper' }
+	{ title: 'Newline Escaper', url: '/tools/newline-escaper' },
+	{ title: 'Braille Translator', url: '/tools/braille-translator' }
 ];
 
 const discussionTools: ToolEntry[] = [{ title: 'Whiteboard', url: '/tools/whiteboard' }];

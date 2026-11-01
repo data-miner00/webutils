@@ -460,6 +460,13 @@
 					onSelect() {
 						gotoPage('/tools/newline-escaper');
 					}
+				},
+				{
+					title: 'Braille Translator',
+					icon: CaseSensitive,
+					onSelect() {
+						gotoPage('/tools/braille-translator');
+					}
 				}
 			]
 		},
