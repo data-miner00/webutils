@@ -32,7 +32,7 @@
 		"@types/crypto-js": "^4.2.2",
 		"@types/js-beautify": "^1.14.3",
 		"@types/node": "^22",
-		"bits-ui": "^2.18.1",
+		"bits-ui": "^2.20.2",
 		"buffer": "^6.0.3",
 		"clsx": "^2.1.1",
 		"color": "^5.0.3",
