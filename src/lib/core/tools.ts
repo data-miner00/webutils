@@ -20,7 +20,8 @@ const imageTools: ToolEntry[] = [
 	{ title: 'Base64 Image Converter', url: '/tools/base64-image' },
 	{ title: 'Image Format Converter', url: '/tools/image-format-converter' },
 	{ title: 'Image Resizer', url: '/tools/image-resizer' },
-	{ title: 'Image Compressor', url: '/tools/image-compressor' }
+	{ title: 'Image Compressor', url: '/tools/image-compressor' },
+	{ title: 'Image Dither', url: '/tools/image-dither' }
 ];
 
 const codeReviewTools: ToolEntry[] = [

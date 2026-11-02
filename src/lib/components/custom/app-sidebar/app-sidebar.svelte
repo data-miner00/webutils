@@ -93,6 +93,10 @@
 					{
 						title: 'Image Compressor',
 						url: '/tools/image-compressor'
+					},
+					{
+						title: 'Image Dither',
+						url: '/tools/image-dither'
 					}
 				]
 			},

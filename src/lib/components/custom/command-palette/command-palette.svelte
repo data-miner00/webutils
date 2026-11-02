@@ -327,6 +327,13 @@
 					}
 				},
 				{
+					title: 'Image Dither',
+					icon: ImageIcon,
+					onSelect() {
+						gotoPage('/tools/image-dither');
+					}
+				},
+				{
 					title: 'Calendar',
 					icon: CalendarDays,
 					onSelect() {
