@@ -93,6 +93,10 @@
 					{
 						title: 'Image Compressor',
 						url: '/tools/image-compressor'
+					},
+					{
+						title: 'Image Dither',
+						url: '/tools/image-dither'
 					}
 				]
 			},
@@ -182,8 +186,16 @@
 						url: '/tools/base64-encoder-decoder'
 					},
 					{
+						title: 'URL Encoder/Decoder',
+						url: '/tools/url-encoder-decoder'
+					},
+					{
 						title: 'Newline Escaper',
 						url: '/tools/newline-escaper'
+					},
+					{
+						title: 'Braille Translator',
+						url: '/tools/braille-translator'
 					}
 				]
 			},
@@ -216,6 +228,10 @@
 					{
 						title: 'HTML Formatter',
 						url: '/tools/html-formatter'
+					},
+					{
+						title: 'HTML to document.write',
+						url: '/tools/html-to-document-write'
 					},
 					{
 						title: 'JavaScript Formatter',
@@ -262,7 +278,10 @@
 				title: 'Development',
 				url: '#',
 				icon: Code,
-				items: [{ title: 'Localhost Manager', url: '/tools/localhost-manager' }]
+				items: [
+					{ title: 'Localhost Manager', url: '/tools/localhost-manager' },
+					{ title: 'Cron Expression Parser', url: '/tools/cron-expression' }
+				]
 			},
 			{
 				title: 'Lookup',

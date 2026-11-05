@@ -20,7 +20,8 @@ const imageTools: ToolEntry[] = [
 	{ title: 'Base64 Image Converter', url: '/tools/base64-image' },
 	{ title: 'Image Format Converter', url: '/tools/image-format-converter' },
 	{ title: 'Image Resizer', url: '/tools/image-resizer' },
-	{ title: 'Image Compressor', url: '/tools/image-compressor' }
+	{ title: 'Image Compressor', url: '/tools/image-compressor' },
+	{ title: 'Image Dither', url: '/tools/image-dither' }
 ];
 
 const codeReviewTools: ToolEntry[] = [
@@ -46,7 +47,9 @@ const textTools: ToolEntry[] = [
 	{ title: 'Unicode to Hex', url: '/tools/unicode-hex' },
 	{ title: 'Sort list', url: '/tools/sort-list' },
 	{ title: 'Base64 Encoder/Decoder', url: '/tools/base64-encoder-decoder' },
-	{ title: 'Newline Escaper', url: '/tools/newline-escaper' }
+	{ title: 'URL Encoder/Decoder', url: '/tools/url-encoder-decoder' },
+	{ title: 'Newline Escaper', url: '/tools/newline-escaper' },
+	{ title: 'Braille Translator', url: '/tools/braille-translator' }
 ];
 
 const discussionTools: ToolEntry[] = [{ title: 'Whiteboard', url: '/tools/whiteboard' }];
@@ -55,6 +58,7 @@ const webTools: ToolEntry[] = [
 	{ title: 'CSS Formatter', url: '/tools/css-formatter' },
 	{ title: 'HTML Viewer', url: '/tools/html-viewer' },
 	{ title: 'HTML Formatter', url: '/tools/html-formatter' },
+	{ title: 'HTML to document.write', url: '/tools/html-to-document-write' },
 	{ title: 'JavaScript Formatter', url: '/tools/js-formatter' },
 	{ title: 'JSON Formatter', url: '/tools/json-formatter' },
 	{ title: 'Markdown Viewer', url: '/tools/markdown-viewer' },
@@ -69,7 +73,8 @@ const designTools: ToolEntry[] = [
 ];
 
 const developmentTools: ToolEntry[] = [
-	{ title: 'Localhost Manager', url: '/tools/localhost-manager' }
+	{ title: 'Localhost Manager', url: '/tools/localhost-manager' },
+	{ title: 'Cron Expression Parser', url: '/tools/cron-expression' }
 ];
 
 const lookupTools: ToolEntry[] = [
