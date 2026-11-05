@@ -469,6 +469,13 @@
 					}
 				},
 				{
+					title: 'URL Encoder/Decoder',
+					icon: CaseSensitive,
+					onSelect() {
+						gotoPage('/tools/url-encoder-decoder');
+					}
+				},
+				{
 					title: 'Newline Escaper',
 					icon: CaseSensitive,
 					onSelect() {

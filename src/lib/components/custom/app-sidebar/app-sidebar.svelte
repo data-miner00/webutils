@@ -186,6 +186,10 @@
 						url: '/tools/base64-encoder-decoder'
 					},
 					{
+						title: 'URL Encoder/Decoder',
+						url: '/tools/url-encoder-decoder'
+					},
+					{
 						title: 'Newline Escaper',
 						url: '/tools/newline-escaper'
 					},
