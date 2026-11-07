@@ -109,7 +109,12 @@
 			</div>
 
 			<Label for="input" class="mb-3 font-bold">Input</Label>
-			<Textarea rows={10} name="input" placeholder="Enter text or Morse code here." value={input} />
+			<Textarea
+				rows={10}
+				name="input"
+				placeholder="Enter text or Morse code here."
+				bind:value={input}
+			/>
 		</div>
 
 		<div>

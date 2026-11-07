@@ -119,6 +119,11 @@ export function recordRecentTool(url: string) {
 	localStorage.setItem(HomeRecentToolsKey, JSON.stringify(appState.recentTools));
 }
 
+export function clearRecentTools() {
+	appState.recentTools = [];
+	localStorage.removeItem(HomeRecentToolsKey);
+}
+
 export function toggleFavoriteTool(url: string) {
 	appState.favoriteTools = toggleFavorite(appState.favoriteTools, url);
 	localStorage.setItem(HomeFavoriteToolsKey, JSON.stringify(appState.favoriteTools));

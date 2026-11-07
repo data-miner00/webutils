@@ -3,6 +3,7 @@
 	import type { ComponentProps } from 'svelte';
 
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 
 	import DatePicker from './date-picker.svelte';
@@ -25,7 +26,7 @@
 		<DatePicker />
 		<Sidebar.Menu class="px-2">
 			<Sidebar.MenuItem>
-				<Sidebar.MenuButton onclick={() => goto('/tools/calendar')}>
+				<Sidebar.MenuButton onclick={() => goto(resolve('/tools/calendar'))}>
 					<CalendarIcon />
 					<span>View Calendar</span>
 				</Sidebar.MenuButton>

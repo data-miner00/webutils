@@ -21,7 +21,7 @@
 </script>
 
 <a
-	class="relative flex h-20 items-center rounded-lg bg-gray-50 px-4 py-2 dark:bg-gray-900"
+	class="relative flex h-20 max-w-full items-center rounded-lg bg-gray-50 px-4 py-2 dark:bg-gray-900"
 	href={url}
 	target="_blank"
 >
@@ -34,8 +34,8 @@
 			/>
 		</div>
 	</div>
-	<div class="ml-4 w-[200px]">
-		<p>{title}</p>
+	<div class="ml-4 w-[200px] min-w-0 grow">
+		<p class="line-clamp-2" {title}>{title}</p>
 		<p class="text-muted-foreground text-xs lowercase">{domain} · {language || 'En'}</p>
 	</div>
 
